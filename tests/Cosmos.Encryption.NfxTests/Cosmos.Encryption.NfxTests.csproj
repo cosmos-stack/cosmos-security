@@ -74,7 +74,9 @@
     <Compile Include="Symmetric\AesTests.cs" />
     <Compile Include="Symmetric\DesTests.cs" />
     <Compile Include="Symmetric\Rc4Tests.cs" />
+    <Compile Include="Symmetric\RcxTests.cs" />
     <Compile Include="Symmetric\TripleDesTests.cs" />
+    <Compile Include="Symmetric\XxteaTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Cosmos.Encryption\Cosmos.Encryption.csproj">
