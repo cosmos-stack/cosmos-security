@@ -9,16 +9,26 @@ namespace Cosmos.Encryption.Tests.Symmetric
     public class XxteaTests
     {
         [Fact]
-        public void Encrypt()
+        public void XXTEATest()
         {
             var s = XXTEAEncryptionProvider.Encrypt("AlexLEWIS", "alexinea");
-            Assert.Equal("ToAB58U3JHH24EIEWhqSIA==", s);
+            var o = XXTEAEncryptionProvider.Decrypt(s, "alexinea");
+            Assert.Equal("AlexLEWIS", o);
         }
 
         [Fact]
-        public void Decrypt()
+        public void XTEATest()
         {
-            var o = XXTEAEncryptionProvider.Decrypt("ToAB58U3JHH24EIEWhqSIA==", "alexinea");
+            var s = XTEAEncryptionProvider.Encrypt("AlexLEWISAlexLEWISAlexLEWISAlexLEWISAlexLEWISAlexLEWISAlexLEWIS", "alexineaalexinea");
+            var o = XTEAEncryptionProvider.Decrypt(s, "alexineaalexinea");
+            Assert.Equal("AlexLEWISAlexLEWISAlexLEWISAlexLEWISAlexLEWISAlexLEWISAlexLEWIS", o);
+        }
+
+        [Fact]
+        public void TEATest()
+        {
+            var s = TEAEncryptionProvider.Encrypt("AlexLEWIS", "alexinea");
+            var o = TEAEncryptionProvider.Decrypt(s, "alexinea");
             Assert.Equal("AlexLEWIS", o);
         }
     }
