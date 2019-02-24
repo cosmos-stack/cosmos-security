@@ -20,7 +20,7 @@ Install-Package Cosmos.Encryption
 - DES/TripleDES
 - RC4
 - RCX/ThreeRCX
-- XXTEA
+- TEA/XTEA/XXTEA
 - DSA
 - RSA
 - CRC16/32

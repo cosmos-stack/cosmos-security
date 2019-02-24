@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using Cosmos.Encryption.Abstractions;
 
@@ -134,17 +133,17 @@ namespace Cosmos.Encryption.Symmetric
         private static byte[] FixKey(byte[] key)
         {
             if (key.Length == 16) return key;
-            byte[] fixedkey = new byte[16];
+            byte[] fixedKey = new byte[16];
             if (key.Length < 16)
             {
-                key.CopyTo(fixedkey, 0);
+                key.CopyTo(fixedKey, 0);
             }
             else
             {
-                Array.Copy(key, 0, fixedkey, 0, 16);
+                Array.Copy(key, 0, fixedKey, 0, 16);
             }
 
-            return fixedkey;
+            return fixedKey;
         }
 
         private static uint[] ToUInt32Array(byte[] data, bool includeLength)
