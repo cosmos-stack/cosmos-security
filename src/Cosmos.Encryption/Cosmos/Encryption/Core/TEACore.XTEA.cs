@@ -1,8 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 
-namespace Cosmos.Encryption.Core.Internals
+namespace Cosmos.Encryption.Core
 {
     // ReSharper disable once IdentifierTypo
     // ReSharper disable once InconsistentNaming

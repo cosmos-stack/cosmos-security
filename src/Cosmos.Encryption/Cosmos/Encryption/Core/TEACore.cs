@@ -8,7 +8,7 @@ using System.Text;
  *      MIT
  */
 
-namespace Cosmos.Encryption.Core.Internals
+namespace Cosmos.Encryption.Core
 {
     internal class TeaCore
     {

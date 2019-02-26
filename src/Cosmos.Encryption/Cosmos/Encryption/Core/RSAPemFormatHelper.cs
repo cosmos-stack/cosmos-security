@@ -9,6 +9,7 @@ using Cosmos.Encryption.Core.Internals.Extensions;
 
 namespace Cosmos.Encryption.Core
 {
+    // ReSharper disable once InconsistentNaming
     public static class RSAPemFormatHelper
     {
         /// <summary>

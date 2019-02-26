@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using Cosmos.Encryption.Abstractions;
+using Cosmos.Encryption.Core;
 using Cosmos.Encryption.Core.Internals;
 
 namespace Cosmos.Encryption.Symmetric
