@@ -15,11 +15,13 @@ Install-Package Cosmos.Encryption
 - MD4
 - MD5
 - SHA1/256/384/512
+- SM3
 - HMAC
 - AES
 - DES/TripleDES
 - RC4
 - RCX/ThreeRCX
+- SM4
 - TEA/XTEA/XXTEA
 - DSA
 - RSA
@@ -78,5 +80,7 @@ People or projects that have made a great contribbution to this project:
 - [xxtea/xxtea-dotnet](https://github.com/xxtea/xxtea-dotnet)
 
 # License
+
+Member project of [COSMOS LOOPS PROGRAMME](https://github.com/cosmos-loops).
 
 [Apache 2.0 License](/LICENSE)
