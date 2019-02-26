@@ -16,12 +16,12 @@ namespace Cosmos.Encryption
     public static class MD5HashingProvider
     {
         /// <summary>
-        /// MD5 encrypt method, default encrypt string is 32 bits.
+        /// MD5 hashing method, default encrypt string is 32 bits.
         /// </summary>
         /// <param name="data">The string of encrypt.</param>
         /// <param name="bits">Encrypt string bits number,only 16,32,64.</param>
         /// <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
-        /// <returns>Encrypt string.</returns>
+        /// <returns>Hashed string.</returns>
         public static string Signature(string data, MD5BitTypes bits = MD5BitTypes.L32, Encoding encoding = null)
         {
             Checker.Data(data);

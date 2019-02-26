@@ -12,7 +12,7 @@ namespace Cosmos.Encryption.Hash
         /// <summary>
         /// SM3 hashing method.
         /// </summary>
-        /// <param name="data">The string of encrypt.</param>
+        /// <param name="data">The string need to hash.</param>
         /// <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
         /// <returns>Hashed string.</returns>
         public static string Signature(string data, Encoding encoding = null)
@@ -27,7 +27,7 @@ namespace Cosmos.Encryption.Hash
         /// Verify 
         /// </summary>
         /// <param name="comparison"></param>
-        /// <param name="data">The string of encrypt.</param>
+        /// <param name="data">The string need to hash.</param>
         /// <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
         /// <returns></returns>
         public static bool Verify(string comparison, string data, Encoding encoding = null)

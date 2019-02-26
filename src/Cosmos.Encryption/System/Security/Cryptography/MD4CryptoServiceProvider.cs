@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 
-// ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption
+namespace System.Security.Cryptography
 {
     // ReSharper disable InconsistentNaming
     public sealed class MD4CryptoServiceProvider : HashAlgorithm
