@@ -15,7 +15,7 @@ namespace Cosmos.Encryption.Core
     public abstract class SHAHashingBase
     {
         /// <summary>
-        /// SHAHashingBase encryption algoritm core.
+        /// SHAHashingBase hash algorithm core.
         /// </summary>
         /// <param name="data"></param>
         /// <param name="encoding"></param>
@@ -41,6 +41,25 @@ namespace Cosmos.Encryption.Core
                 }
 
                 return sbStr.ToString();
+            }
+        }
+
+        /// <summary>
+        /// SHAHashingBase hash algorithm core.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        protected static byte[] Encrypt<T>(byte[] data) where T : HashAlgorithm, new()
+        {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            using (HashAlgorithm hash = new T())
+            {
+                return hash.ComputeHash(data);
             }
         }
     }
