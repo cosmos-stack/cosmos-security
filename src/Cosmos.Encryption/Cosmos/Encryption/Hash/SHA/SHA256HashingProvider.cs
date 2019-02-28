@@ -1,6 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using Cosmos.Encryption.Core;
+using Cosmos.Encryption.Core.Internals.Extensions;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption
@@ -19,19 +20,31 @@ namespace Cosmos.Encryption
         /// SHA256 encrypt method
         /// </summary>
         /// <param name="data">The string to be encrypted,not null.</param>
+        /// <param name="isIncludeHyphen"></param>
         /// <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+        /// <param name="isUpper"></param>
         /// <returns>The encrypted string.</returns>
-        public static string Signature(string data, Encoding encoding = null)
-            => Encrypt<SHA256CryptoServiceProvider>(data, encoding);
+        public static string Signature(string data, bool isUpper = true, bool isIncludeHyphen = false, Encoding encoding = null)
+            => Encrypt<SHA256CryptoServiceProvider>(data, encoding).ToFixUpperCase(isUpper).ToFixHyphenChar(isIncludeHyphen);
+
+        /// <summary>
+        /// SHA256 hashing method
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static byte[] Signature(byte[] data)
+            => Encrypt<SHA256CryptoServiceProvider>(data);
 
         /// <summary>
         /// Verify 
         /// </summary>
         /// <param name="comparison"></param>
         /// <param name="data">The string to be encrypted,not null.</param>
+        /// <param name="isIncludeHyphen"></param>
         /// <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+        /// <param name="isUpper"></param>
         /// <returns></returns>
-        public static bool Verify(string comparison, string data, Encoding encoding = null)
-            => comparison == Signature(data, encoding);
+        public static bool Verify(string comparison, string data, bool isUpper = true, bool isIncludeHyphen = false, Encoding encoding = null)
+            => comparison == Signature(data, isUpper, isIncludeHyphen, encoding);
     }
 }
