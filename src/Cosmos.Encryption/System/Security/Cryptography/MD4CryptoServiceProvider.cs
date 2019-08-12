@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace System.Security.Cryptography
 {
+    /// <summary>
+    /// MD4 Crypto Service Provider
+    /// </summary>
     // ReSharper disable InconsistentNaming
     public sealed class MD4CryptoServiceProvider : HashAlgorithm
     {
@@ -14,12 +17,18 @@ namespace System.Security.Cryptography
         private uint[] _x;
         private int _bytesProcessed;
 
+        /// <summary>
+        /// Create a new instance of <see cref="MD4CryptoServiceProvider"/>
+        /// </summary>
         public MD4CryptoServiceProvider()
         {
             _x = new uint[16];
             Initialize();
         }
 
+        /// <summary>
+        /// Initialize
+        /// </summary>
         public override void Initialize()
         {
             _a = 0x67452301;

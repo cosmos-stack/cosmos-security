@@ -10,8 +10,16 @@ namespace Cosmos.Encryption.Asymmetric
     /// <summary>
     /// SM2 encryption provider. BUG: THERE ARE SEVERAL BUG HERE, DO NOT USE THIS PROVIDER NOW!
     /// </summary>
+    // ReSharper disable once InconsistentNaming
     public static class SM2EncryptionProvider
     {
+        /// <summary>
+        /// Signature
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="userId"></param>
+        /// <param name="privateKey"></param>
+        /// <returns></returns>
         public static byte[] Signature(byte[] data, byte[] userId, byte[] privateKey)
         {
             if (privateKey == null || privateKey.Length == 0)
@@ -43,6 +51,15 @@ namespace Cosmos.Encryption.Asymmetric
             return sign.GetEncoded();
         }
 
+
+        /// <summary>
+        /// Verify
+        /// </summary>
+        /// <param name="signedData"></param>
+        /// <param name="data"></param>
+        /// <param name="userId"></param>
+        /// <param name="publicKey"></param>
+        /// <returns></returns>
         public static bool Verify(byte[] signedData, byte[] data, byte[] userId, byte[] publicKey)
         {
             if (publicKey == null || publicKey.Length == 0)
@@ -75,6 +92,12 @@ namespace Cosmos.Encryption.Asymmetric
             return Equals(sm2Result.r, sm2Result.R);
         }
 
+        /// <summary>
+        /// Encrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="publicKey"></param>
+        /// <returns></returns>
         public static byte[] Encrypt(byte[] data, byte[] publicKey)
         {
             if (publicKey == null || publicKey.Length == 0)
@@ -107,6 +130,12 @@ namespace Cosmos.Encryption.Asymmetric
             return bos.ToArray();
         }
 
+        /// <summary>
+        /// Decrypt
+        /// </summary>
+        /// <param name="encryptedData"></param>
+        /// <param name="privateKey"></param>
+        /// <returns></returns>
         public static byte[] Decrypt(byte[] encryptedData, byte[] privateKey)
         {
             if (privateKey == null || privateKey.Length == 0)

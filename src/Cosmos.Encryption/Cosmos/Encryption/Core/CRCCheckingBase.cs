@@ -3,6 +3,11 @@ using Cosmos.Encryption.Abstractions;
 
 namespace Cosmos.Encryption.Core
 {
+    /// <summary>
+    /// CRCCheckingBase
+    /// </summary>
+    /// <typeparam name="T1"></typeparam>
+    /// <typeparam name="T2"></typeparam>
     // ReSharper disable InconsistentNaming
     public abstract class CRCCheckingBase<T1, T2>
         where T1 : struct

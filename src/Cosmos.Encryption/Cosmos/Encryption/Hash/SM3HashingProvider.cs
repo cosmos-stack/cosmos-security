@@ -5,6 +5,9 @@ using Cosmos.Encryption.Core.Internals;
 
 namespace Cosmos.Encryption.Hash
 {
+    /// <summary>
+    /// SM3 hashing provider
+    /// </summary>
     // ReSharper disable once InconsistentNaming
     public static class SM3HashingProvider
     {

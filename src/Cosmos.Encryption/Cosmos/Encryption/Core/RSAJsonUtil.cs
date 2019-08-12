@@ -5,6 +5,9 @@ using Cosmos.Encryption.Core.Internals.Extensions;
 
 namespace Cosmos.Encryption.Core
 {
+    /// <summary>
+    /// RSAJsonUtil
+    /// </summary>
     // ReSharper disable once InconsistentNaming
     public class RSAJsonUtil : RSABase
     {

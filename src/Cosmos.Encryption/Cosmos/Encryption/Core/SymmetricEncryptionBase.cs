@@ -7,13 +7,13 @@ using Cosmos.Encryption.Core.Internals;
 namespace Cosmos.Encryption.Core
 {
     /// <summary>
-    /// Abstrace Symmetric/SymmetricEncyptionBase encryption.
+    /// Abstrace Symmetric/SymmetricEncryptionBase encryption.
     /// Reference: Seay Xu
     ///     https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Symmetric/XES.cs
     ///  Editor: AlexLEWIS
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public abstract class SymmetricEncyptionBase
+    public abstract class SymmetricEncryptionBase
     {
         /// <summary>
         /// 用于整理获得真实 key / iv 的方法

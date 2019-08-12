@@ -15,9 +15,22 @@ namespace Cosmos.Encryption.Core
     // ReSharper disable  IdentifierTypo
     public class RSAPkcs8Util : RSABase
     {
+        /// <summary>
+        /// RSAPkcs8Util
+        /// </summary>
+        /// <param name="publicKey"></param>
+        /// <param name="privateKey"></param>
+        /// <param name="keySize"></param>
         public RSAPkcs8Util(string publicKey, string privateKey = null, int keySize = 2048)
             : this(Encoding.UTF8, publicKey, privateKey, keySize) { }
 
+        /// <summary>
+        /// RSAPkcs8Util
+        /// </summary>
+        /// <param name="dataEncoding"></param>
+        /// <param name="publicKey"></param>
+        /// <param name="privateKey"></param>
+        /// <param name="keySize"></param>
         public RSAPkcs8Util(Encoding dataEncoding, string publicKey, string privateKey = null, int keySize = 2048)
         {
             if (string.IsNullOrEmpty(privateKey) && string.IsNullOrEmpty(publicKey))

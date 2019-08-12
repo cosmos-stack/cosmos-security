@@ -10,6 +10,9 @@ using System.Text;
 
 namespace Cosmos.Encryption.Core
 {
+    /// <summary>
+    /// RSABase
+    /// </summary>
     // ReSharper disable once InconsistentNaming
     public abstract class RSABase
     {

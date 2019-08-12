@@ -14,10 +14,14 @@ namespace Cosmos.Encryption
     ///     https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Symmetric/DES.cs
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public sealed class DESEncryptionProvider : SymmetricEncyptionBase, ISymmetricEncyption
+    public sealed class DESEncryptionProvider : SymmetricEncryptionBase, ISymmetricEncryption
     {
         private DESEncryptionProvider() { }
 
+        /// <summary>
+        /// Create a new instance of <see cref="DESKey"/>
+        /// </summary>
+        /// <returns></returns>
         public static DESKey CreateKey()
         {
             return new DESKey

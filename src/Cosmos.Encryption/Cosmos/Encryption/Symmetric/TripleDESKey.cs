@@ -2,16 +2,19 @@
 
 namespace Cosmos.Encryption
 {
+    /// <summary>
+    /// Triple des key
+    /// </summary>
     // ReSharper disable once InconsistentNaming
     public class TripleDESKey
     {
         /// <summary>
-        /// ase key
+        /// Des key
         /// </summary>
         public string Key { get; set; }
 
         /// <summary>
-        /// ase IV
+        /// Des IV
         /// </summary>
         // ReSharper disable once InconsistentNaming
         public string IV { get; set; }

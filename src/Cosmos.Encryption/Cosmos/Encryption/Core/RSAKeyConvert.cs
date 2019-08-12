@@ -16,6 +16,9 @@ using Org.BouncyCastle.Security;
 
 namespace Cosmos.Encryption.Core
 {
+    /// <summary>
+    /// RSAKeyConvert
+    /// </summary>
     // ReSharper disable once InconsistentNaming
     public static class RSAKeyConvert
     {

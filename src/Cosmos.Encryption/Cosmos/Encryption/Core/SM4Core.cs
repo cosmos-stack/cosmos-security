@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace Cosmos.Encryption.Core
 {
+    /// <summary>
+    /// SM4 core
+    /// </summary>
     // ReSharper disable InconsistentNaming
     public class SM4Core
     {
@@ -36,6 +39,9 @@ namespace Cosmos.Encryption.Core
             sk[(31 - i)] = t;
         }
 
+        /// <summary>
+        /// Sbox table
+        /// </summary>
         public byte[] SboxTable = new byte[]
         {
             (byte) 0xd6, (byte) 0x90, (byte) 0xe9, (byte) 0xfe,
@@ -79,8 +85,14 @@ namespace Cosmos.Encryption.Core
             (byte) 0xee, 0x5f, 0x3e, (byte) 0xd7, (byte) 0xcb, 0x39, 0x48
         };
 
+        /// <summary>
+        /// Gets FK
+        /// </summary>
         public uint[] FK = { 0xa3b1bac6, 0x56aa3350, 0x677d9197, 0xb27022dc };
 
+        /// <summary>
+        /// Gets CK
+        /// </summary>
         public uint[] CK =
         {
             0x00070e15, 0x1c232a31, 0x383f464d, 0x545b6269,
@@ -202,12 +214,22 @@ namespace Cosmos.Encryption.Core
             return ret;
         }
 
+        /// <summary>
+        /// SM4 SetKey ENC
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="key"></param>
         public void sm4_setkey_enc(SM4Context ctx, byte[] key)
         {
             ctx.Mode = SM4_ENCRYPT;
             sm4_setkey(ctx.SK, key);
         }
 
+        /// <summary>
+        /// SM4 SetKey DEC
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="key"></param>
         public void sm4_setkey_dec(SM4Context ctx, byte[] key)
         {
             int i = 0;
@@ -219,6 +241,12 @@ namespace Cosmos.Encryption.Core
             }
         }
 
+        /// <summary>
+        /// SM4 Crypt ECB
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public byte[] sm4_crypt_ecb(SM4Context ctx, byte[] input)
         {
             if ((ctx.IsPadding) && (ctx.Mode == SM4_ENCRYPT))
@@ -247,6 +275,13 @@ namespace Cosmos.Encryption.Core
             return bous;
         }
 
+        /// <summary>
+        /// SM4 Crypt CBC
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="iv"></param>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public byte[] sm4_crypt_cbc(SM4Context ctx, byte[] iv, byte[] input)
         {
             if (ctx.IsPadding && ctx.Mode == SM4_ENCRYPT)

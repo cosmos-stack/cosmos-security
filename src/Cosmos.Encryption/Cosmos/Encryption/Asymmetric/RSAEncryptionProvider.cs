@@ -223,6 +223,17 @@ namespace Cosmos.Encryption
             }
         }
 
+        /// <summary>
+        /// Signature as string
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="publicKey"></param>
+        /// <param name="hashAlgorithmName"></param>
+        /// <param name="padding"></param>
+        /// <param name="encoding"></param>
+        /// <param name="sizeType"></param>
+        /// <param name="keyType"></param>
+        /// <returns></returns>
         public static string SignatureAsString(
             string data,
             string publicKey,
@@ -266,6 +277,17 @@ namespace Cosmos.Encryption
             }
         }
 
+        /// <summary>
+        /// Signature as byte[]
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="publicKey"></param>
+        /// <param name="hashAlgorithmName"></param>
+        /// <param name="padding"></param>
+        /// <param name="encoding"></param>
+        /// <param name="sizeType"></param>
+        /// <param name="keyType"></param>
+        /// <returns></returns>
         public static byte[] Signature(
             string data,
             string publicKey,
@@ -309,6 +331,18 @@ namespace Cosmos.Encryption
             }
         }
 
+        /// <summary>
+        /// Verify
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="publicKey"></param>
+        /// <param name="signature"></param>
+        /// <param name="hashAlgorithmName"></param>
+        /// <param name="padding"></param>
+        /// <param name="encoding"></param>
+        /// <param name="sizeType"></param>
+        /// <param name="keyType"></param>
+        /// <returns></returns>
         public static bool Verify(
             string data,
             string publicKey,

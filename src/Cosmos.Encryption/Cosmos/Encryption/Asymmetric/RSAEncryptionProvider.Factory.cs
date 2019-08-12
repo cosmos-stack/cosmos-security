@@ -17,6 +17,13 @@ namespace Cosmos.Encryption
     // ReSharper disable once InconsistentNaming
     public static partial class RSAEncryptionProvider
     {
+        /// <summary>
+        /// Create a new <see cref="RSAKey"/>
+        /// </summary>
+        /// <param name="size"></param>
+        /// <param name="keyType"></param>
+        /// <param name="format"></param>
+        /// <returns></returns>
         public static RSAKey CreateKey(RSAKeySizeTypes size = RSAKeySizeTypes.R2048, RSAKeyTypes keyType = RSAKeyTypes.XML, bool format = false)
         {
             switch (keyType)
@@ -38,6 +45,11 @@ namespace Cosmos.Encryption
             }
         }
 
+        /// <summary>
+        /// Create a new instance of <see cref="RSA"/> from xml key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static RSA CreateFromXmlKey(string key)
         {
             if (string.IsNullOrWhiteSpace(key))
@@ -50,6 +62,11 @@ namespace Cosmos.Encryption
             return rsa;
         }
 
+        /// <summary>
+        /// Create a new instance of <see cref="RSA"/> from json key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static RSA CreateFromJsonKey(string key)
         {
             Checker.Key(key);
@@ -59,6 +76,11 @@ namespace Cosmos.Encryption
             return rsa;
         }
 
+        /// <summary>
+        /// Create a new instance of <see cref="RSA"/> from Pkcs1 public key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static RSA CreateFromPkcs1PublicKey(string key)
         {
             Checker.Key(key);
@@ -68,6 +90,11 @@ namespace Cosmos.Encryption
             return rsa;
         }
 
+        /// <summary>
+        /// Create a new instance of <see cref="RSA"/> from Pkcs1 private key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static RSA CreateFromPkcs1PrivateKey(string key)
         {
             Checker.Key(key);
@@ -77,6 +104,11 @@ namespace Cosmos.Encryption
             return rsa;
         }
 
+        /// <summary>
+        /// Create a new instance of <see cref="RSA"/> from Pkcs8 public key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static RSA CreateFromPkcs8PublicKey(string key)
         {
             Checker.Key(key);
@@ -86,6 +118,11 @@ namespace Cosmos.Encryption
             return rsa;
         }
 
+        /// <summary>
+        /// Create a new instance of <see cref="RSA"/> from Pkcs8 private key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static RSA CreateFromPkcs8PrivateKey(string key)
         {
             var rsa = RSA.Create();

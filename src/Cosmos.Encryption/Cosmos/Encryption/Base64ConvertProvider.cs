@@ -10,6 +10,9 @@ using Cosmos.Encryption.Core.Internals;
 
 namespace Cosmos.Encryption
 {
+    /// <summary>
+    /// Base64 convert provider
+    /// </summary>
     public static class Base64ConvertProvider
     {
         // ReSharper disable once UnusedMember.Local
