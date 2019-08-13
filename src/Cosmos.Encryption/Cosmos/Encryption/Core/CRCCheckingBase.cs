@@ -13,6 +13,14 @@ namespace Cosmos.Encryption.Core
         where T1 : struct
         where T2 : struct
     {
+        /// <summary>
+        /// Compute
+        /// </summary>
+        /// <param name="buf"></param>
+        /// <param name="offset"></param>
+        /// <param name="count"></param>
+        /// <typeparam name="TCRC"></typeparam>
+        /// <returns></returns>
         protected static T1 Compute<TCRC>(byte[] buf, int offset = 0, int count = -1)
             where TCRC : class, ICRC<TCRC, T1, T2>, new()
         {
@@ -21,6 +29,13 @@ namespace Cosmos.Encryption.Core
             return crc.Value;
         }
 
+        /// <summary>
+        /// Compute
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="count"></param>
+        /// <typeparam name="TCRC"></typeparam>
+        /// <returns></returns>
         protected static T1 Compute<TCRC>(Stream stream, int count = -1)
             where TCRC : class, ICRC<TCRC, T1, T2>, new()
         {
@@ -29,6 +44,14 @@ namespace Cosmos.Encryption.Core
             return crc.Value;
         }
 
+        /// <summary>
+        /// Compute
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="position"></param>
+        /// <param name="count"></param>
+        /// <typeparam name="TCRC"></typeparam>
+        /// <returns></returns>
         protected static T1 Compute<TCRC>(Stream stream, long position = -1, int count = -1)
             where TCRC : class, ICRC<TCRC, T1, T2>, new()
         {

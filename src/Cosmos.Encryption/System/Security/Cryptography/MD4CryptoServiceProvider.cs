@@ -39,11 +39,21 @@ namespace System.Security.Cryptography
             _bytesProcessed = 0;
         }
 
+        /// <summary>
+        /// Hash code
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="offset"></param>
+        /// <param name="length"></param>
         protected override void HashCore(byte[] array, int offset, int length)
         {
             ProcessMessage(Bytes(array, offset, length));
         }
 
+        /// <summary>
+        /// Hash final
+        /// </summary>
+        /// <returns></returns>
         protected override byte[] HashFinal()
         {
             try

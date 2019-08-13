@@ -3,7 +3,8 @@ using System.Text;
 using Cosmos.Encryption.Core;
 using Cosmos.Encryption.Core.Internals;
 
-namespace Cosmos.Encryption.Hash
+// ReSharper disable once CheckNamespace
+namespace Cosmos.Encryption
 {
     /// <summary>
     /// SM3 hashing provider

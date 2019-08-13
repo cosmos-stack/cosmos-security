@@ -15,22 +15,42 @@ namespace Cosmos.Encryption
     // ReSharper disable once InconsistentNaming
     public sealed class CRC16 : ICRC<CRC16, ushort, short>
     {
+        /// <summary>
+        /// Value
+        /// </summary>
         public ushort Value { get; set; } = CRC16CheckingProvider.Seed;
         // ReSharper disable once InconsistentNaming
         private ushort[] CRCTable { get; } = CRCTableGenerator.GenerationCRC16Table();
 
+        /// <summary>
+        /// Reset
+        /// </summary>
+        /// <returns></returns>
         public CRC16 Reset()
         {
             Value = CRC16CheckingProvider.Seed;
             return this;
         }
 
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public CRC16 Update(short value)
         {
             Value = (ushort)((Value << 8) ^ CRCTable[(Value >> 8) ^ value]);
             return this;
         }
 
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="offset"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public CRC16 Update(byte[] buffer, int offset = 0, int count = -1)
         {
             Checker.Buffer(buffer);
@@ -50,6 +70,12 @@ namespace Cosmos.Encryption
             return this;
         }
 
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
         public CRC16 Update(Stream stream, long count = -1)
         {
             Checker.Stream(stream);

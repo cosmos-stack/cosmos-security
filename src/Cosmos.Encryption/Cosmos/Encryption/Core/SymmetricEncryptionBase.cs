@@ -42,6 +42,14 @@ namespace Cosmos.Encryption.Core
                 return rfcOriginStringData.GetBytes(len);
             };
 
+        /// <summary>
+        /// Nice encryption code
+        /// </summary>
+        /// <typeparam name="TCryptoServiceProvider"></typeparam>
+        /// <param name="sourceBytes"></param>
+        /// <param name="keyBytes"></param>
+        /// <param name="ivBytes"></param>
+        /// <returns></returns>
         protected static byte[] NiceEncryptCore<TCryptoServiceProvider>(byte[] sourceBytes, byte[] keyBytes, byte[] ivBytes)
             where TCryptoServiceProvider : SymmetricAlgorithm, new()
         {
@@ -61,6 +69,14 @@ namespace Cosmos.Encryption.Core
             }
         }
 
+        /// <summary>
+        /// Nice decryption core
+        /// </summary>
+        /// <typeparam name="TCryptoServiceProvider"></typeparam>
+        /// <param name="encryptBytes"></param>
+        /// <param name="keyBytes"></param>
+        /// <param name="ivBytes"></param>
+        /// <returns></returns>
         protected static byte[] NiceDecryptCore<TCryptoServiceProvider>(byte[] encryptBytes, byte[] keyBytes, byte[] ivBytes)
             where TCryptoServiceProvider : SymmetricAlgorithm, new()
         {

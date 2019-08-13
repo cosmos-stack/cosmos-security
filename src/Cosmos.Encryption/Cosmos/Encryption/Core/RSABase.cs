@@ -16,8 +16,19 @@ namespace Cosmos.Encryption.Core
     // ReSharper disable once InconsistentNaming
     public abstract class RSABase
     {
+        /// <summary>
+        /// Private rsa
+        /// </summary>
         public System.Security.Cryptography.RSA PrivateRsa;
+
+        /// <summary>
+        /// Public rsa
+        /// </summary>
         public System.Security.Cryptography.RSA PublicRsa;
+
+        /// <summary>
+        /// Data encoding
+        /// </summary>
         public Encoding DataEncoding;
 
         /// <summary>

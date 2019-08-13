@@ -11,6 +11,9 @@ using Cosmos.Encryption.Core.Internals.Extensions;
 
 namespace Cosmos.Encryption.Core
 {
+    /// <summary>
+    /// RSAPkcs8Util
+    /// </summary>
     // ReSharper disable once InconsistentNaming
     // ReSharper disable  IdentifierTypo
     public class RSAPkcs8Util : RSABase

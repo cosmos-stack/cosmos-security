@@ -14,7 +14,14 @@ namespace Cosmos.Encryption.Core
     // ReSharper disable InconsistentNaming
     public class SM4Core
     {
+        /// <summary>
+        /// SM4 ENCRYPT
+        /// </summary>
         public const int SM4_ENCRYPT = 1;
+
+        /// <summary>
+        /// SM4 DECRYPT
+        /// </summary>
         public const int SM4_DECRYPT = 0;
 
         private long GET_ULONG_BE(byte[] b, int i) =>

@@ -6,6 +6,9 @@ using Cosmos.Encryption.Core.Internals.Extensions;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption
 {
+    /// <summary>
+    /// MD4 Hashing provider
+    /// </summary>
     // ReSharper disable once InconsistentNaming
     public static class MD4HashingProvider
     {

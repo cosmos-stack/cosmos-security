@@ -11,6 +11,9 @@ using Cosmos.Encryption.Core.Internals.Extensions;
 
 namespace Cosmos.Encryption.Core
 {
+    /// <summary>
+    /// RSA Xml util
+    /// </summary>
     // ReSharper disable once InconsistentNaming
     public class RSAXmlUtil : RSABase
     {

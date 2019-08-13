@@ -18,6 +18,9 @@ using Cosmos.Encryption.Core.Internals;
 
 namespace Cosmos.Encryption.Symmetric
 {
+    /// <summary>
+    /// XXTEA encryption provider
+    /// </summary>
     // ReSharper disable once IdentifierTypo
     // ReSharper disable once InconsistentNaming
     public sealed class XXTEAEncryptionProvider : ISymmetricEncryption

@@ -1,0 +1,3602 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cosmos.Encryption</name>
+    </assembly>
+    <members>
+        <member name="T:Cosmos.Encryption.Abstractions.ICRC`3">
+            <summary>
+            Interface for CRC
+            </summary>
+            <typeparam name="TCRC"></typeparam>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+        </member>
+        <member name="P:Cosmos.Encryption.Abstractions.ICRC`3.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Abstractions.ICRC`3.Reset">
+            <summary>
+            Reset
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Abstractions.ICRC`3.Update(`2)">
+            <summary>
+            Update
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Abstractions.ICRC`3.Update(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Update
+            </summary>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Abstractions.ICRC`3.Update(System.IO.Stream,System.Int64)">
+            <summary>
+            Update
+            </summary>
+            <param name="stream"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Abstractions.IEncryptionAlgorithm">
+            <summary>
+            Interface for encryption algorithm
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Abstractions.IEncryptionAlgorithm.Encrypt(System.String)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="plainText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Abstractions.IEncryptionAlgorithm.Decrypt(System.String)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="cipher"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Abstractions.ISymmetricEncryption">
+            <summary>
+            Interface for symmetric encryption
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.Algorithms.AutoKey">
+            <summary>
+            AutoKey encryption algorithm
+            for more info, please view:
+                https://www.codeproject.com/Articles/63432/Classical-Encryption-Techniques
+            Author: Omar-Salem
+                https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/AutoKey.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.AutoKey.#ctor(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.Algorithms.AutoKey"/>
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.AutoKey.Encrypt(System.String)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="plainText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.AutoKey.Decrypt(System.String)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="cipher"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Algorithms.Ceaser">
+            <summary>
+            Ceaser encryption algorithm
+            for more info, please view:
+                https://www.codeproject.com/Articles/63432/Classical-Encryption-Techniques
+            Author: Omar-Salem
+                https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/Ceaser.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.Ceaser.#ctor(System.Int32)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.Algorithms.Ceaser"/>
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.Ceaser.Encrypt(System.String)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="plainText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.Ceaser.Decrypt(System.String)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="cipher"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Algorithms.Hill">
+            <summary>
+            Hill encryption algorithm
+            for more info, please view:
+                https://www.codeproject.com/Articles/63432/Classical-Encryption-Techniques
+            Author: Omar-Salem
+                https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/Hill.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.Hill.#ctor(System.Int32[0:,0:])">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.Algorithms.Hill"/>
+            </summary>
+            <param name="matrix"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.Hill.Encrypt(System.String)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="plainText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.Hill.Decrypt(System.String)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="cipher"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Algorithms.Monoalphabetic">
+            <summary>
+            Monoalphabetic encryption algorithm
+            for more info, please view:
+                https://www.codeproject.com/Articles/63432/Classical-Encryption-Techniques
+            Author: Omar-Salem
+                https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/Monoalphabetic.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.Monoalphabetic.#ctor">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.Algorithms.Monoalphabetic"/>
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.Monoalphabetic.Encrypt(System.String)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="plainText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.Monoalphabetic.Decrypt(System.String)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="cipher"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Algorithms.PlayFair">
+            <summary>
+            PlayFair encryption algorithm
+            for more info, please view:
+                https://www.codeproject.com/Articles/63432/Classical-Encryption-Techniques
+            Author: Omar-Salem
+                https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/PlayFair.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.PlayFair.#ctor(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.Algorithms.PlayFair"/>
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.PlayFair.Encrypt(System.String)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="plainText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.PlayFair.Decrypt(System.String)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="cipher"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Algorithms.RailFence">
+            <summary>
+            RailFence encryption algorithm
+            for more info, please view:
+                https://www.codeproject.com/Articles/63432/Classical-Encryption-Techniques
+            Author: Omar-Salem
+                https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/RailFence.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.RailFence.#ctor(System.Int32)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.Algorithms.RailFence"/>
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.RailFence.Encrypt(System.String)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="plainText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.RailFence.Decrypt(System.String)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="cipher"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Algorithms.RowTransposition">
+            <summary>
+            RowTransposition encryption algorithm
+            for more info, please view:
+                https://www.codeproject.com/Articles/63432/Classical-Encryption-Techniques
+            Author: Omar-Salem
+                https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/RowTransposition.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.RowTransposition.#ctor(System.Int32[])">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.Algorithms.RowTransposition"/>
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.RowTransposition.Encrypt(System.String)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="plainText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.RowTransposition.Decrypt(System.String)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="cipher"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Algorithms.Vigenere">
+            <summary>
+            Vigenere encryption algorithm
+            for more info, please view:
+                https://www.codeproject.com/Articles/63432/Classical-Encryption-Techniques
+            Author: Omar-Salem
+                https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/Vigenere.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.Vigenere.#ctor(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.Algorithms.Vigenere"/>
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.Vigenere.Encrypt(System.String)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="plainText"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Algorithms.Vigenere.Decrypt(System.String)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="cipher"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.DSAEncryptionProvider">
+            <summary>
+            Asymmetric/DSA encryption.
+            Reference: X-New-Life
+                https://github.com/NewLifeX/X/blob/master/NewLife.Core/Security/DSAHelper.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.DSAEncryptionProvider.CreateKey(System.Int32)">
+            <summary>
+            Create a new <see cref="T:Cosmos.Encryption.DSAKey"/>
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.DSAEncryptionProvider.Signature(System.Byte[],System.String)">
+            <summary>
+            Signature
+            </summary>
+            <param name="buffer"></param>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.DSAEncryptionProvider.Signature(System.Byte[],Cosmos.Encryption.DSAKey)">
+            <summary>
+            Signature
+            </summary>
+            <param name="buffer"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.DSAEncryptionProvider.Signature(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Signature
+            </summary>
+            <param name="data"></param>
+            <param name="privateKey"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.DSAEncryptionProvider.Signature(System.String,Cosmos.Encryption.DSAKey,System.Text.Encoding)">
+            <summary>
+            Signature
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.DSAEncryptionProvider.Verify(System.Byte[],System.String,System.Byte[])">
+            <summary>
+            Verify
+            </summary>
+            <param name="buffer"></param>
+            <param name="publicKey"></param>
+            <param name="rgbSignature"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.DSAEncryptionProvider.Verify(System.Byte[],Cosmos.Encryption.DSAKey,System.Byte[])">
+            <summary>
+            Verify
+            </summary>
+            <param name="buffer"></param>
+            <param name="key"></param>
+            <param name="rgbSignature"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.DSAKey">
+            <summary>
+            Dsa key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.DSAKey.PublicKey">
+            <summary>
+            Rsa public key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.DSAKey.PrivateKey">
+            <summary>
+            Rsa private key
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.RSAEncryptionProvider">
+            <summary>
+            Asymmetric/RSA encryption.
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Asymmetric/RSA.cs
+            Reference: myloveCc
+                https://github.com/myloveCc/NETCore.Encrypt/blob/master/src/NETCore.Encrypt/EncryptProvider.cs
+            </summary>
+            <summary>
+            Asymmetric/RSA encryption.
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Asymmetric/RSA.cs
+            Reference: myloveCc
+                https://github.com/myloveCc/NETCore.Encrypt/blob/master/src/NETCore.Encrypt/EncryptProvider.cs
+            </summary>
+            <summary>
+            Asymmetric/RSA encryption.
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Asymmetric/RSA.cs
+            Reference: myloveCc
+                https://github.com/myloveCc/NETCore.Encrypt/blob/master/src/NETCore.Encrypt/EncryptProvider.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.Encrypt(System.String,System.String,System.Security.Cryptography.RSAEncryptionPadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+            <summary>
+            Encrypt string data with xml/json format.
+            </summary>
+            <param name="data">The data to be encrypted.</param>
+            <param name="publicKey">The public key of xml format.</param>
+            <param name="padding"></param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <param name="sizeType"></param>
+            <param name="keyType"></param>
+            <returns>The encrypted data.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.Encrypt(System.Byte[],System.String,System.Security.Cryptography.RSAEncryptionPadding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+            <summary>
+            Encrypt byte[] data with xml/json format.
+            </summary>
+            <param name="dataBytes">The data to be encrypted.</param>
+            <param name="publicKey">The public key of xml format.</param>
+            <param name="sizeType"></param>
+            <param name="keyType"></param>
+            <param name="padding"></param>
+            <returns>The encrypted data.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.Decrypt(System.String,System.String,System.Security.Cryptography.RSAEncryptionPadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+            <summary>
+            Decrypt string data with xml/json format.
+            </summary>
+            <param name="data">The data to be encrypted.</param>
+            <param name="privateKey">The private key of xml format.</param>
+            <param name="padding"></param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <param name="sizeType"></param>
+            <param name="keyType"></param>
+            <returns>The decrypted data.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.Decrypt(System.Byte[],System.String,System.Security.Cryptography.RSAEncryptionPadding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+            <summary>
+            Decrypt byte[] data with xml/json format.
+            </summary>
+            <param name="dataBytes">The data to be encrypted.</param>
+            <param name="privateKey">The private key of xml format.</param>
+            <param name="padding"></param>
+            <param name="sizeType"></param>
+            <param name="keyType"></param>
+            <returns>The decrypted data.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.SignatureAsString(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+            <summary>
+            Signature as string
+            </summary>
+            <param name="data"></param>
+            <param name="publicKey"></param>
+            <param name="hashAlgorithmName"></param>
+            <param name="padding"></param>
+            <param name="encoding"></param>
+            <param name="sizeType"></param>
+            <param name="keyType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.Signature(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+            <summary>
+            Signature as byte[]
+            </summary>
+            <param name="data"></param>
+            <param name="publicKey"></param>
+            <param name="hashAlgorithmName"></param>
+            <param name="padding"></param>
+            <param name="encoding"></param>
+            <param name="sizeType"></param>
+            <param name="keyType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.Verify(System.String,System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+            <summary>
+            Verify
+            </summary>
+            <param name="data"></param>
+            <param name="publicKey"></param>
+            <param name="signature"></param>
+            <param name="hashAlgorithmName"></param>
+            <param name="padding"></param>
+            <param name="encoding"></param>
+            <param name="sizeType"></param>
+            <param name="keyType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreateKey(Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes,System.Boolean)">
+            <summary>
+            Create a new <see cref="T:Cosmos.Encryption.RSAKey"/>
+            </summary>
+            <param name="size"></param>
+            <param name="keyType"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreateFromXmlKey(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:System.Security.Cryptography.RSA"/> from xml key
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreateFromJsonKey(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:System.Security.Cryptography.RSA"/> from json key
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreateFromPkcs1PublicKey(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:System.Security.Cryptography.RSA"/> from Pkcs1 public key
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreateFromPkcs1PrivateKey(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:System.Security.Cryptography.RSA"/> from Pkcs1 private key
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreateFromPkcs8PublicKey(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:System.Security.Cryptography.RSA"/> from Pkcs8 public key
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreateFromPkcs8PrivateKey(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:System.Security.Cryptography.RSA"/> from Pkcs8 private key
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.GetPrivateKey(System.String,System.String)">
+            <summary>
+            Get private key of xml format from certificate file.
+            </summary>
+            <param name="certFile">The string path of certificate file.</param>
+            <param name="password">The string password of certificate file.</param>
+            <returns>String private key of xml format.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.GetPublicKey(System.String)">
+            <summary>
+            Get public key of xml format from certificate file.
+            </summary>
+            <param name="certFile">The string path of certificate file.</param>
+            <returns>String public key of xml format.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.GetHash(System.String,System.Byte[]@,System.Text.Encoding)">
+            <summary>
+            Get hash sign.
+            </summary>
+            <param name="data"></param>
+            <param name="hashing"></param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.GetHash(System.String,System.String@,System.Text.Encoding)">
+            <summary>
+            Get hash sign.
+            </summary>
+            <param name="data"></param>
+            <param name="hashing"></param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.GetHash(System.IO.FileStream,System.Byte[]@)">
+            <summary>
+            Get hash sign.
+            </summary>
+            <param name="fs"></param>
+            <param name="hashing"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.GetHash(System.IO.FileStream,System.String@)">
+            <summary>
+            Get hash sign.
+            </summary>
+            <param name="fs"></param>
+            <param name="hashing"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.RSAKey">
+            <summary>
+            RSA Key
+            Reference: myloveCc
+                https://github.com/myloveCc/NETCore.Encrypt/blob/master/src/NETCore.Encrypt/Internal/RSAKey.cs
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.RSAKey.PublicKey">
+            <summary>
+            Rsa public key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.RSAKey.PrivateKey">
+            <summary>
+            Rsa private key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.RSAKey.Exponent">
+            <summary>
+            Rsa public key Exponent
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.RSAKey.Modulus">
+            <summary>
+            Rsa public key Modulus
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.RSAKeySizeTypes">
+            <summary>
+            Rsa key size type
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.RSAKeySizeTypes.R1024">
+            <summary>
+            1024
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.RSAKeySizeTypes.R2048">
+            <summary>
+            2048
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.RSAKeySizeTypes.R3072">
+            <summary>
+            3072
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.RSAKeySizeTypes.R4096">
+            <summary>
+            4096
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.RSAKeyTypes">
+            <summary>
+            Rsa key types
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.RSAKeyTypes.XML">
+            <summary>
+            Xml
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.RSAKeyTypes.JSON">
+            <summary>
+            Json
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.RSAKeyTypes.Pkcs1">
+            <summary>
+            Pkcs1
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.RSAKeyTypes.Pkcs8">
+            <summary>
+            Pkcs8
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider">
+            <summary>
+            SM2 encryption provider. BUG: THERE ARE SEVERAL BUG HERE, DO NOT USE THIS PROVIDER NOW!
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.Signature(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Signature
+            </summary>
+            <param name="data"></param>
+            <param name="userId"></param>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.Verify(System.Byte[],System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Verify
+            </summary>
+            <param name="signedData"></param>
+            <param name="data"></param>
+            <param name="userId"></param>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.Encrypt(System.Byte[],System.Byte[])">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.Decrypt(System.Byte[],System.Byte[])">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="encryptedData"></param>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Base64ConvertProvider">
+            <summary>
+            Base64 convert provider
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Base64ConvertProvider.ToBase64String(System.Byte[])">
+            <summary>
+            Convert from bytes to base64 string
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Base64ConvertProvider.ToBase64String(System.String,System.Text.Encoding)">
+            <summary>
+            Base64 encode.
+            </summary>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns>The encrypted string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Base64ConvertProvider.FromBase64String(System.String,System.Text.Encoding)">
+            <summary>
+            Base64 decryption.
+            </summary>
+            <param name="data">The string to be decrypted,not null.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns>The decrypted string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Base64ConvertProvider.ToBase64UrlString(System.Byte[])">
+            <summary>
+            Convert from string to base64url string
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Base64ConvertProvider.ToBase64UrlString(System.String,System.Text.Encoding)">
+            <summary>
+            Convert from string to base64url string
+            </summary>
+            <param name="str"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Base64ConvertProvider.FromBase64UrlString(System.String)">
+            <summary>
+            Convert from base64url string to string
+            </summary>
+            <param name="base64UrlString"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Base64ConvertProvider.FromBase64UrlString(System.String,System.Text.Encoding)">
+            <summary>
+            Convert from base64url string to string
+            </summary>
+            <param name="base64UrlString"></param>
+            <param name="encoding"></param>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.CRCCheckingBase`2">
+            <summary>
+            CRCCheckingBase
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.CRCCheckingBase`2.Compute``1(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="buf"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+            <typeparam name="TCRC"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.CRCCheckingBase`2.Compute``1(System.IO.Stream,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="stream"></param>
+            <param name="count"></param>
+            <typeparam name="TCRC"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.CRCCheckingBase`2.Compute``1(System.IO.Stream,System.Int64,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="stream"></param>
+            <param name="position"></param>
+            <param name="count"></param>
+            <typeparam name="TCRC"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.HMACHashingBase">
+            <summary>
+            Abstrace HMACHashingBase encryption.
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Hash/HMACHashingBase/HMAC.cs
+            Editor: AlexLEWIS
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.HMACHashingBase.Encrypt``1(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            HMACHashingBase encryption algoritm core.
+            </summary>
+            <typeparam name="T">The <see cref="T:System.Security.Cryptography.HMACHashingBase"/> sub-class.</typeparam>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="key">Encryption key,not null.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns>The encrypted string.</returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.Internals.AlgorithmUtils">
+            <summary>
+            Algorithm Utils
+            Author: Omar-Salem
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Internals.AlgorithmUtils.GetAlphabetPositionFunc">
+            <summary>
+            Get alphabet position
+            Author: Omar-Salem
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Internals.AlgorithmUtils.Shift(System.String,System.String,Cosmos.Encryption.Core.Internals.EncryptionAlgorithmMode,System.Collections.Generic.Dictionary{System.Char,System.Int32})">
+            <summary>
+            Shift
+            Author: Omar-Salem
+            </summary>
+            <param name="token"></param>
+            <param name="key"></param>
+            <param name="mode"></param>
+            <param name="alphabetSortedDict"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Internals.Extensions.BytesAndStringExtensions.ToHexString(System.Byte[])">
+            <summary>
+            byte to hex string extension
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Internals.Extensions.BytesAndStringExtensions.ToBytes(System.String)">
+            <summary>
+            hex string to byte extension
+            </summary>
+            <param name="hex"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.Internals.Extensions.RSAKeyExtensions">
+            <summary>
+            Reference: myloveCc
+                https://github.com/myloveCc/NETCore.Encrypt/blob/master/src/NETCore.Encrypt/Extensions/Internal/RsaKeyExtensions.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Internals.Extensions.RSAKeyExtensions.FromJsonString(System.Security.Cryptography.RSA,System.String)">
+            <summary>
+            RSA导入key
+            </summary>
+            <param name="rsa">RSA实例<see cref="T:System.Security.Cryptography.RSA"/></param>
+            <param name="jsonString">RSA的Key序列化JSON字符串</param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Internals.Extensions.RSAKeyExtensions.ToJsonString(System.Security.Cryptography.RSA,System.Boolean)">
+            <summary>
+            获取RSA Key序列化Json
+            </summary>
+            <param name="rsa">RSA实例<see cref="T:System.Security.Cryptography.RSA"/></param>
+            <param name="includePrivateParameters">是否包含私钥</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Internals.Extensions.RSAKeyExtensions.FromLvccXmlString(System.Security.Cryptography.RSA,System.String)">
+            <summary>
+            RSA导入key
+            </summary>
+            <param name="rsa">RSA实例<see cref="T:System.Security.Cryptography.RSA"/></param>
+            <param name="xmlString">RSA的Key序列化XML字符串</param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Internals.Extensions.RSAKeyExtensions.ToLvccXmlString(System.Security.Cryptography.RSA,System.Boolean)">
+            <summary>
+            获取RSA Key序列化XML
+            </summary>
+            <param name="rsa">RSA实例<see cref="T:System.Security.Cryptography.RSA"/></param>
+            <param name="includePrivateParameters">是否包含私钥</param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.Internals.RandomStringGenerator">
+            <summary>
+            Random string generator
+            Author: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Util/Util.cs
+            Editor: AlexLEWIS
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.Internals.RSAParametersJson">
+            <summary>
+            Author:myloveCc
+                https://github.com/myloveCc/NETCore.Encrypt/blob/master/src/NETCore.Encrypt/Internal/RSAParametersJson.cs
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.MatrixClass">
+            <summary>
+            A copy from GitHub project:
+                https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Entities/MatrixClass.cs#L83:20
+            
+            Classes Contained:
+            	MatrixClass (version 1.1)
+            	MatrixClassException
+            	Fraction (Version 2.0)
+            	FractionException
+            Class name: MatrixClass
+            Version: 1.1
+            Class used: Fraction
+            Developed by: Syed Mehroz Alam
+            Email: smehrozalam@yahoo.com
+            URL: Programming Home "http://www.geocities.com/smehrozalam/"
+            
+            What's New in version 1.1
+            	*	Added DeterminentFast() method
+            	*	Added InverseFast() method
+            	*	renamed ConvertToString to (override) ToString()
+            	*	some minor bugs fixed
+            
+            Constructors:
+            	( Fraction[,] ):	takes 2D Fractions array	
+            	( int[,] ):	takes 2D integer array, convert them to fractions	
+            	( double[,] ):	takes 2D double array, convert them to fractions
+            	( int Rows, int Cols )	initializes the dimensions, indexers may be used 
+            							to set individual elements' values
+            
+            Properties:
+            	Rows: read only property to get the no. of rows in the current MatrixClass
+            	Cols: read only property to get the no. of columns in the current MatrixClass
+            
+            Indexers:
+            	[i,j] = used to set/get elements in the form of a Fraction object
+            
+            Public Methods (Description is given with respective methods' definitions)
+            	string ToString()
+            	MatrixClass Minor(MatrixClass, Row,Col)
+            	MultiplyRow( Row, Fraction )
+            	MultiplyRow( Row, integer )
+            	MultiplyRow( Row, double )
+            	AddRow( TargetRow, SecondRow, Multiple)
+            	InterchangeRow( Row1, Row2)
+            	MatrixClass Concatenate(MatrixClass1, MatrixClass2)
+            	Fraction Determinent()
+            	Fraction DeterminentFast()
+            	MatrixClass EchelonForm()
+            	MatrixClass ReducedEchelonForm()
+            	MatrixClass Inverse()
+            	MatrixClass InverseFast()
+            	MatrixClass Adjoint()
+            	MatrixClass Transpose()
+            	MatrixClass Duplicate()
+            	MatrixClass ScalarMatrixClass( Rows, Cols, K )
+            	MatrixClass IdentityMatrixClass( Rows, Cols )
+            	MatrixClass UnitMatrixClass(Rows, Cols)
+            	MatrixClass NullMatrixClass(Rows, Cols)
+            
+            Private Methods
+            	Fraction GetElement(int iRow, int iCol)
+            	SetElement(int iRow, int iCol, Fraction value)
+            	Negate(MatrixClass)
+            	Add(MatrixClass1, MatrixClass2)
+            	Multiply(MatrixClass1, MatrixClass2)
+            	Multiply(MatrixClass1, Fraction)
+            	Multiply(MatrixClass1, integer)
+            
+            Operators Overloaded Overloaded
+            	Unary: - (negate MatrixClass)
+            	Binary: 
+            		+,- for two matrices
+            		* for two matrices or one MatrixClass with integer or fraction or double
+            		/ for MatrixClass with integer or fraction or double
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.MatrixClass.m_iRows">
+            <summary>
+            Class attributes/members
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.#ctor(Cosmos.Encryption.Core.Fraction[0:,0:])">
+            <summary>
+            Constructors
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.Core.MatrixClass.Rows">
+            <summary>
+            Properites
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.Core.MatrixClass.Item(System.Int32,System.Int32)">
+            <summary>
+            Indexer
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.GetElement(System.Int32,System.Int32)">
+            <summary>
+            Internal functions for getting/setting values
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.ToString">
+            <summary>
+            The function returns the current MatrixClass object as a string
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.Minor(Cosmos.Encryption.Core.MatrixClass,System.Int32,System.Int32)">
+            <summary>
+            The function return the Minor of element[Row,Col] of a MatrixClass object 
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.MultiplyRow(System.Int32,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            The function multiplies the given row of the current MatrixClass object by a Fraction 
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.MultiplyRow(System.Int32,System.Int32)">
+            <summary>
+            The function multiplies the given row of the current MatrixClass object by an integer
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.MultiplyRow(System.Int32,System.Double)">
+            <summary>
+            The function multiplies the given row of the current MatrixClass object by a double
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.AddRow(System.Int32,System.Int32,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            The function adds two rows for current MatrixClass object
+            It performs the following calculation:
+            iTargetRow = iTargetRow + iMultiple*iSecondRow
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.InterchangeRow(System.Int32,System.Int32)">
+            <summary>
+            The function interchanges two rows of the current MatrixClass object
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.Concatenate(Cosmos.Encryption.Core.MatrixClass,Cosmos.Encryption.Core.MatrixClass)">
+            <summary>
+            The function concatenates the two given matrices column-wise
+            it can be helpful in a equation solver class where the augmented MatrixClass is obtained by concatenation
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.DeterminentFast">
+            <summary>
+            The function returns the determinent of the current MatrixClass object as Fraction
+            It computes the determinent by reducing the MatrixClass to reduced echelon form using row operations
+            The function is very fast and efficient but may raise overflow exceptions in some cases.
+            In such cases use the Determinent() function which computes determinent in the traditional 
+            manner(by using minors)
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.Determinent">
+            <summary>
+            The function returns the determinent of the current MatrixClass object as Fraction
+            It computes the determinent in the traditional way (i.e. using minors)
+            It can be much slower(due to recursion) if the given MatrixClass has order greater than 6
+            Try using DeterminentFast() function if the order of MatrixClass is greater than 6
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.Determinent(Cosmos.Encryption.Core.MatrixClass)">
+            <summary>
+            The helper function for the above Determinent() method
+            it calls itself recursively and computes determinent using minors
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.EchelonForm">
+            <summary>
+            The function returns the Echelon form of the current MatrixClass
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.ReducedEchelonForm">
+            <summary>
+            The function returns the reduced echelon form of the current MatrixClass
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.InverseFast">
+            <summary>
+            The function returns the inverse of the current MatrixClass using Reduced Echelon Form method
+            The function is very fast and efficient but may raise overflow exceptions in some cases.
+            In such cases use the Inverse() method which computes inverse in the traditional way(using adjoint).
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.Inverse">
+            <summary>
+            The function returns the inverse of the current MatrixClass in the traditional way(by adjoint method)
+            It can be much slower if the given MatrixClass has order greater than 6
+            Try using InverseFast() function if the order of MatrixClass is greater than 6
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.Adjoint(System.Int32)">
+            <summary>
+            The function returns the adjoint of the current MatrixClass
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.Transpose">
+            <summary>
+            The function returns the transpose of the current MatrixClass
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.Duplicate">
+            <summary>
+            The function duplicates the current MatrixClass object
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.ScalarMatrixClass(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            The function returns a Scalar MatrixClass of dimension ( Row x Col ) and scalar K
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.IdentityMatrixClass(System.Int32,System.Int32)">
+            <summary>
+            The function returns an identity MatrixClass of dimensions ( Row x Col )
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.UnitMatrixClass(System.Int32,System.Int32)">
+            <summary>
+            The function returns a Unit MatrixClass of dimension ( Row x Col )
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.NullMatrixClass(System.Int32,System.Int32)">
+            <summary>
+            The function returns a Null MatrixClass of dimension ( Row x Col )
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.op_UnaryNegation(Cosmos.Encryption.Core.MatrixClass)">
+            <summary>
+            Operators for the MatrixClass object
+            includes -(unary), and binary opertors such as +,-,*,/
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClass.Negate(Cosmos.Encryption.Core.MatrixClass)">
+            <summary>
+            Internal Fucntions for the above operators
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.MatrixClassException">
+            <summary>
+            Exception class for MatrixClass class, derived from System.Exception
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClassException.#ctor">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.Core.MatrixClassException"/>
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClassException.#ctor(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.Core.MatrixClassException"/>
+            </summary>
+            <param name="Message"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MatrixClassException.#ctor(System.String,System.Exception)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.Core.MatrixClassException"/>
+            </summary>
+            <param name="Message"></param>
+            <param name="InnerException"></param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Cosmos.Encryption.Core.Fraction" -->
+        <member name="F:Cosmos.Encryption.Core.Fraction.m_iNumerator">
+            <summary>
+            Class attributes/members
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.#ctor">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.Core.Fraction"/>
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.#ctor(System.Int64)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.Core.Fraction"/>
+            </summary>
+            <param name="iWholeNumber"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.#ctor(System.Double)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.Core.Fraction"/>
+            </summary>
+            <param name="dDecimalValue"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.#ctor(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.Core.Fraction"/>
+            </summary>
+            <param name="strValue"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.#ctor(System.Int64,System.Int64)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.Core.Fraction"/>
+            </summary>
+            <param name="iNumerator"></param>
+            <param name="iDenominator"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.Initialize(System.Int64,System.Int64)">
+            <summary>
+            Internal function for constructors
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.Core.Fraction.Denominator">
+            <summary>
+            Denominator
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.Core.Fraction.Numerator">
+            <summary>
+            Numerator
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.Core.Fraction.Value">
+            <summary>
+            Gets or sets value
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.ToDouble(Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            The function takes a Fraction object and returns its value as double
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.ToDouble">
+            <summary>
+            The function returns the current Fraction object as double
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.ToString">
+            <summary>
+            The function returns the current Fraction object as a string
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.ToFraction(System.String)">
+            <summary>
+            The function takes an string as an argument and returns its corresponding reduced fraction
+            the string can be an in the form of and integer, double or fraction.
+            e.g it can be like "123" or "123.321" or "123/456"
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.ToFraction(System.Double)">
+            <summary>
+            The function takes a floating point number as an argument 
+            and returns its corresponding reduced fraction
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.Duplicate">
+            <summary>
+            The function replicates current Fraction object
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.Inverse(Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            The function returns the inverse of a Fraction object
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_UnaryNegation(Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            Operators for the Fraction object
+            includes -(unary), and binary opertors such as +, -, *, /
+            also includes relational and logical operators such as ==, !=, &lt;, &gt;, &lt;=, &gt;=
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Addition(Cosmos.Encryption.Core.Fraction,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            +
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Addition(System.Int32,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            +
+            </summary>
+            <param name="iNo"></param>
+            <param name="frac1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Addition(Cosmos.Encryption.Core.Fraction,System.Int32)">
+            <summary>
+            +
+            </summary>
+            <param name="frac1"></param>
+            <param name="iNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Addition(System.Double,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            +
+            </summary>
+            <param name="dbl"></param>
+            <param name="frac1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Addition(Cosmos.Encryption.Core.Fraction,System.Double)">
+            <summary>
+            +
+            </summary>
+            <param name="frac1"></param>
+            <param name="dbl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Subtraction(Cosmos.Encryption.Core.Fraction,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            -
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Subtraction(System.Int32,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            -
+            </summary>
+            <param name="iNo"></param>
+            <param name="frac1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Subtraction(Cosmos.Encryption.Core.Fraction,System.Int32)">
+            <summary>
+            -
+            </summary>
+            <param name="frac1"></param>
+            <param name="iNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Subtraction(System.Double,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            -
+            </summary>
+            <param name="dbl"></param>
+            <param name="frac1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Subtraction(Cosmos.Encryption.Core.Fraction,System.Double)">
+            <summary>
+            -
+            </summary>
+            <param name="frac1"></param>
+            <param name="dbl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Multiply(Cosmos.Encryption.Core.Fraction,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            *
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Multiply(System.Int32,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            *
+            </summary>
+            <param name="iNo"></param>
+            <param name="frac1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Multiply(Cosmos.Encryption.Core.Fraction,System.Int32)">
+            <summary>
+            *
+            </summary>
+            <param name="frac1"></param>
+            <param name="iNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Multiply(System.Double,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            *
+            </summary>
+            <param name="dbl"></param>
+            <param name="frac1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Multiply(Cosmos.Encryption.Core.Fraction,System.Double)">
+            <summary>
+            *
+            </summary>
+            <param name="frac1"></param>
+            <param name="dbl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Division(Cosmos.Encryption.Core.Fraction,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            /
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Division(System.Int32,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            /
+            </summary>
+            <param name="iNo"></param>
+            <param name="frac1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Division(Cosmos.Encryption.Core.Fraction,System.Int32)">
+            <summary>
+            /
+            </summary>
+            <param name="frac1"></param>
+            <param name="iNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Division(System.Double,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            /
+            </summary>
+            <param name="dbl"></param>
+            <param name="frac1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Division(Cosmos.Encryption.Core.Fraction,System.Double)">
+            <summary>
+            /
+            </summary>
+            <param name="frac1"></param>
+            <param name="dbl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Equality(Cosmos.Encryption.Core.Fraction,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            ==
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Inequality(Cosmos.Encryption.Core.Fraction,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            !=
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Equality(Cosmos.Encryption.Core.Fraction,System.Int32)">
+            <summary>
+            ==
+            </summary>
+            <param name="frac1"></param>
+            <param name="iNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Inequality(Cosmos.Encryption.Core.Fraction,System.Int32)">
+            <summary>
+            !=
+            </summary>
+            <param name="frac1"></param>
+            <param name="iNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Equality(Cosmos.Encryption.Core.Fraction,System.Double)">
+            <summary>
+            ==
+            </summary>
+            <param name="frac1"></param>
+            <param name="dbl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_Inequality(Cosmos.Encryption.Core.Fraction,System.Double)">
+            <summary>
+            !=
+            </summary>
+            <param name="frac1"></param>
+            <param name="dbl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_LessThan(Cosmos.Encryption.Core.Fraction,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            &lt;
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_GreaterThan(Cosmos.Encryption.Core.Fraction,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            &gt;
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_LessThanOrEqual(Cosmos.Encryption.Core.Fraction,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            &lt;=
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.op_GreaterThanOrEqual(Cosmos.Encryption.Core.Fraction,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            &gt;=
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.Equals(System.Object)">
+            <summary>
+            checks whether two fractions are equal
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.GetHashCode">
+            <summary>
+            returns a hash code for this fraction
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.Negate(Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            internal function for negation
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.Add(Cosmos.Encryption.Core.Fraction,Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            internal functions for binary operations
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.GCD(System.Int64,System.Int64)">
+            <summary>
+            The function returns GCD of two numbers (used for reducing a Fraction)
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.Fraction.ReduceFraction(Cosmos.Encryption.Core.Fraction)">
+            <summary>
+            The function reduces(simplifies) a Fraction object by dividing both its numerator 
+            and denominator by their GCD
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.FractionException">
+            <summary>
+            Exception class for Fraction, derived from System.Exception
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.RSABase">
+            <summary>
+            RSABase
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSABase.Encrypt(System.String,System.Security.Cryptography.RSAEncryptionPadding)">
+            <summary>
+            RSA public key encryption
+            </summary>
+            <param name="data">Need to encrypt data</param>
+            <param name="padding">Padding algorithm</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSABase.Encrypt(System.Byte[],System.Security.Cryptography.RSAEncryptionPadding)">
+            <summary>
+            RSA public key encryption
+            </summary>
+            <param name="dataBytes">Need to encrypt data</param>
+            <param name="padding">Padding algorithm</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSABase.Decrypt(System.String,System.Security.Cryptography.RSAEncryptionPadding)">
+            <summary>
+            RSA private key is decrypted
+            </summary>
+            <param name="data">Need to decrypt the data</param>
+            <param name="padding">Padding algorithm</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSABase.Decrypt(System.Byte[],System.Security.Cryptography.RSAEncryptionPadding)">
+            <summary>
+            RSA private key is decrypted
+            </summary>
+            <param name="dataBytes">Need to decrypt the data</param>
+            <param name="padding">Padding algorithm</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSABase.SignData(System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+            <summary>
+            Use private key for data signing
+            </summary>
+            <param name="data">Need to sign data</param>
+            <param name="hashAlgorithmName">Signed hash algorithm name</param>
+            <param name="padding">Signature padding algorithm</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSABase.SignDataGetBytes(System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+            <summary>
+            Use private key for data signing
+            </summary>
+            <param name="data">Need to sign data</param>
+            <param name="hashAlgorithmName">Signed hash algorithm name</param>
+            <param name="padding">Signature padding algorithm</param>
+            <returns>Sign bytes</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSABase.VerifyData(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+            <summary>
+            Use public key to verify data signature
+            </summary>
+            <param name="data">Need to verify the signature data</param>
+            <param name="sign">sign</param>
+            <param name="hashAlgorithmName">Signed hash algorithm name</param>
+            <param name="padding">Signature padding algorithm</param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.RSAJsonUtil">
+            <summary>
+            RSAJsonUtil
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAJsonUtil.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            RSA encryption
+            SHA256 hash algorithm to use the key length of at least 2048
+            </summary>
+            <param name="keySize">Key length in bits:</param>
+            <param name="privateKey">private Key</param>
+            <param name="publicKey">public Key</param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAJsonUtil.#ctor(System.Text.Encoding,System.String,System.String,System.Int32)">
+            <summary>
+            RSA encryption
+            SHA256 hash algorithm to use the key length of at least 2048
+            </summary>
+            <param name="dataEncoding">Data coding</param>
+            <param name="keySize">Key length in bits:</param>
+            <param name="privateKey">private Key</param>
+            <param name="publicKey">public Key</param>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.RSAKeyConvert">
+            <summary>
+            RSAKeyConvert
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAKeyConvert.PublicKeyPemToXml(System.String)">
+            <summary>
+            Public Key Convert pem->xml
+            </summary>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAKeyConvert.PublicKeyXmlToPem(System.String)">
+            <summary>
+            Public Key Convert xml->pem
+            </summary>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAKeyConvert.PrivateKeyPkcs1ToXml(System.String)">
+            <summary>
+            Private Key Convert Pkcs1->xml
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAKeyConvert.PrivateKeyXmlToPkcs1(System.String)">
+            <summary>
+            Private Key Convert xml->Pkcs1
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAKeyConvert.PrivateKeyPkcs8ToXml(System.String)">
+            <summary>
+            Private Key Convert Pkcs8->xml
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAKeyConvert.PrivateKeyXmlToPkcs8(System.String)">
+            <summary>
+            Private Key Convert xml->Pkcs8
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAKeyConvert.PrivateKeyPkcs1ToPkcs8(System.String)">
+            <summary>
+            Private Key Convert Pkcs1->Pkcs8
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAKeyConvert.PrivateKeyPkcs8ToPkcs1(System.String)">
+            <summary>
+            Private Key Convert Pkcs8->Pkcs1
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.RSAKeyGenerator">
+            <summary>
+            RSAKeyGenerator
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAKeyGenerator.XmlKey(System.Int32)">
+            <summary>
+            Generate XML Format RSA Key. Result: Index 0 is the private key and index 1 is the public key
+            </summary>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAKeyGenerator.JsonKey(System.Int32)">
+            <summary>
+            Json key
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAKeyGenerator.Pkcs1Key(System.Int32,System.Boolean)">
+            <summary>
+            Generate RSA key in Pkcs1 format. Result: Index 0 is the private key and index 1 is the public key
+            </summary>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="format">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAKeyGenerator.Pkcs8Key(System.Int32,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA key. Result: Index 0 is the private key and index 1 is the public key
+            </summary>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="format">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.RSAPemFormatHelper">
+            <summary>
+            RSAPemFormatHelper
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAPemFormatHelper.Pkcs1PrivateKeyFormat(System.String)">
+            <summary>
+            Format Pkcs1 format private key
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAPemFormatHelper.Pkcs1PrivateKeyFormatRemove(System.String)">
+            <summary>
+            Remove the Pkcs1 format private key format
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAPemFormatHelper.Pkcs8PrivateKeyFormat(System.String)">
+            <summary>
+            Format Pkcs8 format private key
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAPemFormatHelper.Pkcs8PrivateKeyFormatRemove(System.String)">
+            <summary>
+            Remove the Pkcs8 format private key format
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAPemFormatHelper.PublicKeyFormat(System.String)">
+            <summary>
+            Format public key
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAPemFormatHelper.PublicKeyFormatRemove(System.String)">
+            <summary>
+            Public key format removed
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAPkcs1Util.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            RSAPkcs1Util
+            </summary>
+            <param name="publicKey"></param>
+            <param name="privateKey"></param>
+            <param name="keySize"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAPkcs1Util.#ctor(System.Text.Encoding,System.String,System.String,System.Int32)">
+            <summary>
+            RSAPkcs1Util
+            </summary>
+            <param name="encoding"></param>
+            <param name="publicKey"></param>
+            <param name="privateKey"></param>
+            <param name="keySize"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAPkcs8Util.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            RSAPkcs8Util
+            </summary>
+            <param name="publicKey"></param>
+            <param name="privateKey"></param>
+            <param name="keySize"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAPkcs8Util.#ctor(System.Text.Encoding,System.String,System.String,System.Int32)">
+            <summary>
+            RSAPkcs8Util
+            </summary>
+            <param name="dataEncoding"></param>
+            <param name="publicKey"></param>
+            <param name="privateKey"></param>
+            <param name="keySize"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAXmlUtil.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            RSA encryption
+            SHA256 hash algorithm to use the key length of at least 2048
+            </summary>
+            <param name="keySize">Key length in bits:</param>
+            <param name="privateKey">private Key</param>
+            <param name="publicKey">public Key</param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAXmlUtil.#ctor(System.Text.Encoding,System.String,System.String,System.Int32)">
+            <summary>
+            RSA encryption
+            SHA256 hash algorithm to use the key length of at least 2048
+            </summary>
+            <param name="dataEncoding">Data coding</param>
+            <param name="keySize">Key length in bits:</param>
+            <param name="privateKey">private Key</param>
+            <param name="publicKey">public Key</param>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.SHAHashingBase">
+            <summary>
+            Abstrace SHAHashingBase encryption.
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Hash/SHAHashingBase/SHA.cs
+            Editor: AlexLEWIS
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SHAHashingBase.Encrypt``1(System.String,System.Text.Encoding)">
+            <summary>
+            SHAHashingBase hash algorithm core.
+            </summary>
+            <param name="data"></param>
+            <param name="encoding"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SHAHashingBase.Encrypt``1(System.Byte[])">
+            <summary>
+            SHAHashingBase hash algorithm core.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM2.Sm2GetZ(System.Byte[],Org.BouncyCastle.Math.EC.ECPoint)">
+            <summary>
+            计算Z值
+            </summary>
+            <param name="userId">签名方ID</param>
+            <param name="userKey">曲线的各个参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM2.Sm2Sign(System.Byte[],Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.EC.ECPoint,Cosmos.Encryption.Core.SM2.SM2Result)">
+            <summary>
+            
+            </summary>
+            <param name="md">消息</param>
+            <param name="userD">秘钥</param>
+            <param name="userKey">公钥</param>
+            <param name="sm2Ret">sm2Ret集合</param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM2.Sm2Verify(System.Byte[],Org.BouncyCastle.Math.EC.ECPoint,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Cosmos.Encryption.Core.SM2.SM2Result)">
+            <summary>
+            
+            </summary>
+            <param name="md">消息</param>
+            <param name="userKey">公钥</param>
+            <param name="r">由数字签名得到的大数r</param>
+            <param name="s">由数字签名得到的大数s</param>
+            <param name="sm2Ret"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM2_SM3CommonHelper.URShift(System.Int32,System.Int32)">
+            <summary>
+            Performs an unsigned bitwise right shift with the specified number
+            </summary>
+            <param name="number">Number to operate on</param>
+            <param name="bits">Ammount of bits to shift</param>
+            <returns>The resulting number from the shift operation</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM2_SM3CommonHelper.URShift(System.Int32,System.Int64)">
+            <summary>
+            Performs an unsigned bitwise right shift with the specified number
+            </summary>
+            <param name="number">Number to operate on</param>
+            <param name="bits">Ammount of bits to shift</param>
+            <returns>The resulting number from the shift operation</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM2_SM3CommonHelper.URShift(System.Int64,System.Int32)">
+            <summary>
+            Performs an unsigned bitwise right shift with the specified number
+            </summary>
+            <param name="number">Number to operate on</param>
+            <param name="bits">Ammount of bits to shift</param>
+            <returns>The resulting number from the shift operation</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM2_SM3CommonHelper.URShift(System.Int64,System.Int64)">
+            <summary>
+            Performs an unsigned bitwise right shift with the specified number
+            </summary>
+            <param name="number">Number to operate on</param>
+            <param name="bits">Ammount of bits to shift</param>
+            <returns>The resulting number from the shift operation</returns>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.SM3Core.HashSizeInBytes">
+            <summary>
+                哈希值大小（以字节数为单位）
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.SM3Core.GroupBlockSizeInBytes">
+            <summary>
+                分组块大小（以字节数为单位）
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.SM3Core.IV">
+            <summary>
+                初始状态向量
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.SM3Core.SM3Padding">
+            <summary>
+                填充数据
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.SM3Core._m">
+            <summary>
+                4字节数据单元存储器
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.SM3Core._v">
+            <summary>
+                当前状态向量
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.SM3Core._w">
+            <summary>
+                内部数据缓冲区
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.SM3Core._bytesCount">
+            <summary>
+                已处理的字节计数
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.SM3Core._mOff">
+            <summary>
+                缓冲区M存储位置偏移量
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.SM3Core._wOff">
+            <summary>
+                缓冲区X存储位置偏移量
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM3Core.#ctor">
+            <summary>
+                构造函数
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM3Core.#ctor(Cosmos.Encryption.Core.SM3Core)">
+            <summary>
+                拷贝构造函数
+            </summary>
+            <param name="source">要复制的对象实例</param>
+        </member>
+        <member name="P:Cosmos.Encryption.Core.SM3Core.AlgorithmName">
+            <summary>
+                算法名称
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.Core.SM3Core.HashSize">
+            <summary>
+                哈希值大小（以位为单位）
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM3Core.Create">
+            <summary>
+                创建 SM3 的默认实现的实例
+            </summary>
+            <returns>SM3 的新实例</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM3Core.Create(System.String)">
+            <summary>
+                创建 SM3 的指定实现的实例
+            </summary>
+            <param name="hashName">要使用的 SM3 的特定实现的名称，支持的值有"SM3"、"System.Security.Cryptography.SM3"</param>
+            <returns>使用指定实现的 SM3 的新实例</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM3Core.Initialize">
+            <summary>
+                类初始化
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM3Core.HashCore(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+                将数据路由到哈希算法以计算哈希值
+            </summary>
+            <param name="input">要计算其哈希代码的输入</param>
+            <param name="offset">字节数组中的偏移量，从该位置开始使用数据</param>
+            <param name="length">字节数组中用作数据的字节数</param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM3Core.HashFinal">
+            <summary>
+                完成最终计算，并返回数据流的正确哈希值
+            </summary>
+            <returns>计算所得的哈希代码</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM3Core.Update(System.Byte)">
+            <summary>
+                处理单个数据
+            </summary>
+            <param name="input">输入的单字节数据</param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM3Core.BlockUpdate(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+                处理批量数据
+            </summary>
+            <param name="input">包含输入数据的字节数组</param>
+            <param name="offset">数据在字节数组中的起始偏移量</param>
+            <param name="length">数据长度</param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM3Core.BlockUpdate(System.Byte[])">
+            <summary>
+                处理批量数据
+            </summary>
+            <param name="input">包含输入数据的字节数组</param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM3Core.DoFinal">
+            <summary>
+                完成最终计算，并返回数据流的正确哈希值
+            </summary>
+            <returns>计算所得的哈希代码</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM3Core.DoFinal(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+                完成最终计算，并返回数据流的正确哈希值
+            </summary>
+            <param name="input">包含输入数据的字节数组</param>
+            <param name="offset">数据在字节数组中的起始偏移量</param>
+            <param name="length">数据长度</param>
+            <returns>计算所得的哈希代码</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM3Core.DoFinal(System.Byte[])">
+            <summary>
+                完成最终计算，并返回数据流的正确哈希值
+            </summary>
+            <param name="input">包含输入数据的字节数组</param>
+            <returns>计算所得的哈希代码</returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.SM4Context">
+            <summary>
+            SM4 Context
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.Core.SM4Context.Mode">
+            <summary>
+            Mode
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.Core.SM4Context.SK">
+            <summary>
+            SK
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.Core.SM4Context.IsPadding">
+            <summary>
+            Is padding
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM4Context.#ctor">
+            <summary>
+            SM4 Context
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.SM4Core">
+            <summary>
+            SM4 core
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.SM4Core.SM4_ENCRYPT">
+            <summary>
+            SM4 ENCRYPT
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.SM4Core.SM4_DECRYPT">
+            <summary>
+            SM4 DECRYPT
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.SM4Core.SboxTable">
+            <summary>
+            Sbox table
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.SM4Core.FK">
+            <summary>
+            Gets FK
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.SM4Core.CK">
+            <summary>
+            Gets CK
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM4Core.sm4_setkey_enc(Cosmos.Encryption.Core.SM4Context,System.Byte[])">
+            <summary>
+            SM4 SetKey ENC
+            </summary>
+            <param name="ctx"></param>
+            <param name="key"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM4Core.sm4_setkey_dec(Cosmos.Encryption.Core.SM4Context,System.Byte[])">
+            <summary>
+            SM4 SetKey DEC
+            </summary>
+            <param name="ctx"></param>
+            <param name="key"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM4Core.sm4_crypt_ecb(Cosmos.Encryption.Core.SM4Context,System.Byte[])">
+            <summary>
+            SM4 Crypt ECB
+            </summary>
+            <param name="ctx"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM4Core.sm4_crypt_cbc(Cosmos.Encryption.Core.SM4Context,System.Byte[],System.Byte[])">
+            <summary>
+            SM4 Crypt CBC
+            </summary>
+            <param name="ctx"></param>
+            <param name="iv"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.SymmetricEncryptionBase">
+            <summary>
+            Abstrace Symmetric/SymmetricEncryptionBase encryption.
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Symmetric/XES.cs
+             Editor: AlexLEWIS
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SymmetricEncryptionBase.ComputeRealValueFunc">
+            <summary>
+            用于整理获得真实 key / iv 的方法
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.TeaCore.Encrypt(System.UInt32[],System.UInt32[],System.UInt32)">
+            sum = 0 
+        </member>
+        <member name="M:Cosmos.Encryption.Core.TeaCore.Decrypt(System.UInt32[],System.UInt32[],System.UInt32)">
+            sum = 0xC6EF3720 
+        </member>
+        <member name="F:Cosmos.Encryption.Core.XTEACore.Rounds">
+            <summary>
+            The recommended number of rounds is 32 and not 64, because each iteration performs two Feistel-cipher rounds.
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.XTEACore.Encrypt(System.Byte[],System.Byte[])">
+            <summary>
+            Encrypts the given data with the provided key.
+            </summary>
+            <param name="data">The data to encrypt.</param>
+            <param name="key">The key used for encryption.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.XTEACore.Decrypt(System.Byte[],System.Byte[])">
+            <summary>
+            Decrypts the given data with the provided key.
+            Throws an exception if the length of the data array is not a multiple of 8.
+            Throws an exception if the decrypted length is longer than the actual array.
+            </summary>
+            <param name="data">The encrypted data.</param>
+            <param name="key">The key used for decryption.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.XTEACore.CreateKey(System.Byte[])">
+            <summary>
+            Transforms an key of arbitrary length to a 128 bit key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.XTEACore.Encrypt(System.UInt32,System.UInt32[],System.UInt32[])">
+            <summary>
+            Performs an inplace encryption of the provided data array.
+            </summary>
+            <param name="rounds">The number of encryption rounds, the recommend value is 32.</param>
+            <param name="v">Data array containing two values.</param>
+            <param name="key">Key array containing 4 values.</param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.XTEACore.Decrypt(System.UInt32,System.UInt32[],System.UInt32[])">
+            <summary>
+            Performs an inplace decryption of the provided data array.
+            </summary>
+            <param name="rounds">The number of encryption rounds, the recommend value is 32.</param>
+            <param name="v">Data array containing two values.</param>
+            <param name="key">Key array containing 4 values.</param>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.ZUCCore.LFSR_S">
+            <summary>
+            state registers LFSR
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.ZUCCore.F_R1">
+            <summary>
+            registers
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.ZUCCore.BRC_X">
+            <summary>
+            output of BR procedure
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.CRC16">
+            <summary>
+            CRC16
+            Author: X-New-Life
+                https://github.com/NewLifeX/X/blob/master/NewLife.Core/Security/Crc16.cs
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.CRC16.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.CRC16.Reset">
+            <summary>
+            Reset
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.CRC16.Update(System.Int16)">
+            <summary>
+            Update
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.CRC16.Update(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Update
+            </summary>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cosmos.Encryption.CRC16.Update(System.IO.Stream,System.Int64)">
+            <summary>
+            Update
+            </summary>
+            <param name="stream"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.CRC16CheckingProvider">
+            CRC16 checking provider
+            Author: X-New-Life
+                https://github.com/NewLifeX/X/blob/master/NewLife.Core/Security/Crc16.cs
+        </member>
+        <member name="T:Cosmos.Encryption.CRC32">
+            <summary>
+            CRC32
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.CRC32.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.CRC32.Reset">
+            <summary>
+            Reset
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.CRC32.Update(System.Int32)">
+            <summary>
+            Update
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.CRC32.Update(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Update
+            </summary>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cosmos.Encryption.CRC32.Update(System.IO.Stream,System.Int64)">
+            <summary>
+            Update
+            </summary>
+            <param name="stream"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.CRC32CheckingProvider">
+            <summary>
+            CRC 32 checking provider
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.CRC32CheckingProvider.Seed">
+            <summary>
+            Seed
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.CRC32CheckingProvider.Compute(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="buf"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.CRC32CheckingProvider.Compute(System.IO.Stream,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="stream"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.CRC32CheckingProvider.Compute(System.IO.Stream,System.Int64,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="stream"></param>
+            <param name="position"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.HMACMD5HashingProvider">
+            <summary>
+            Hash/HMACMD5 hashing provider.
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Hash/HMACHashingBase/HMACMD5.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.HMACMD5HashingProvider.Signature(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            HMACMD5 encryption.
+            </summary>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="key">Encryption key,not null.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns>The encrypted string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.HMACMD5HashingProvider.Verify(System.String,System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Verify 
+            </summary>
+            <param name="comparison"></param>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="key">Encryption key,not null.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.HMACSHA1HashingProvider">
+            <summary>
+            Hash/HMACMD5 hashing provider.
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Hash/HMAC/HMACSHA1.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.HMACSHA1HashingProvider.Signature(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            HMACSHA1 encryption.
+            </summary>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="key">Encryption key,not null.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns>The encrypted string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.HMACSHA1HashingProvider.Verify(System.String,System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Verify 
+            </summary>
+            <param name="comparison"></param>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="key">Encryption key,not null.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.HMACSHA256HashingProvider">
+            <summary>
+            Hash/HMACMD5 hashing provider.
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Hash/HMAC/HMACSHA256.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.HMACSHA256HashingProvider.Signature(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            HMACSHA256 encryption.
+            </summary>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="key">Encryption key,not null.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns>The encrypted string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.HMACSHA256HashingProvider.Verify(System.String,System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Verify 
+            </summary>
+            <param name="comparison"></param>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="key">Encryption key,not null.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.HMACSHA384HashingProvider">
+            <summary>
+            Hash/HMACMD5 hashing provider.
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Hash/HMAC/HMACSHA384.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.HMACSHA384HashingProvider.Signature(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            HMACSHA384 encryption.
+            </summary>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="key">Encryption key,not null.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns>The encrypted string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.HMACSHA384HashingProvider.Verify(System.String,System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Verify 
+            </summary>
+            <param name="comparison"></param>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="key">Encryption key,not null.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.HMACSHA512HashingProvider">
+            <summary>
+            Hash/HMACMD5 hashing provider.
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Hash/HMAC/HMACSHA512.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.HMACSHA512HashingProvider.Signature(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            HMACSHA512 encryption.
+            </summary>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="key">Encryption key,not null.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns>The encrypted string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.HMACSHA512HashingProvider.Verify(System.String,System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Verify 
+            </summary>
+            <param name="comparison"></param>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="key">Encryption key,not null.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MD4HashingProvider.Signature(System.String,System.Text.Encoding)">
+            <summary>
+            MD4 hashing method
+            </summary>
+            <param name="data">The string need to hash.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns>Hashed string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MD4HashingProvider.Signature(System.Byte[])">
+            <summary>
+            MD4 hashing method
+            </summary>
+            <param name="data">The data need to hash.</param>
+            <returns>Hashed string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MD4HashingProvider.SignatureHash(System.String,System.Text.Encoding)">
+            <summary>
+            MD4 hashing method
+            </summary>
+            <param name="data">The string need to hash.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns>Hashed string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MD4HashingProvider.SignatureHash(System.Byte[])">
+            <summary>
+            MD4 hashing method
+            </summary>
+            <param name="data">The data need to hash.</param>
+            <returns>Hashed string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MD4HashingProvider.Verify(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Verify 
+            </summary>
+            <param name="comparison"></param>
+            <param name="data">The string of encrypt.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.MD5BitTypes">
+            <summary>
+            MS5 bit type
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.MD5BitTypes.L16">
+            <summary>
+            16
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.MD5BitTypes.L32">
+            <summary>
+            32
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.MD5BitTypes.L64">
+            <summary>
+            64
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.MD5HashingProvider">
+            <summary>
+            Md5 hashing provider
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Hash/MD5.cs
+            Editor: AlexLEWIS
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.MD5HashingProvider.Signature(System.String,Cosmos.Encryption.MD5BitTypes,System.Boolean,System.Boolean,System.Text.Encoding)">
+            <summary>
+            MD5 hashing method, default encrypt string is 32 bits.
+            </summary>
+            <param name="data">The string of encrypt.</param>
+            <param name="bits">Encrypt string bits number,only 16,32,64.</param>
+            <param name="isUpper"></param>
+            <param name="isIncludeHyphen"></param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns>Hashed string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MD5HashingProvider.Verify(System.String,System.String,Cosmos.Encryption.MD5BitTypes,System.Boolean,System.Boolean,System.Text.Encoding)">
+            <summary>
+            Verify 
+            </summary>
+            <param name="comparison"></param>
+            <param name="data">The string of encrypt.</param>
+            <param name="bits">Encrypt string bits number,only 16,32,64.</param>
+            <param name="isUpper"></param>
+            <param name="isIncludeHyphen"></param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.SHA1HashingProvider">
+            <summary>
+            Hash/SHA1 hashing provider.
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Hash/SHAHashingBase/SHA1.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.SHA1HashingProvider.Signature(System.String,System.Boolean,System.Boolean,System.Text.Encoding)">
+            <summary>
+            SHA1 hashing method
+            </summary>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="isIncludeHyphen"></param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <param name="isUpper"></param>
+            <returns>The encrypted string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.SHA1HashingProvider.Signature(System.Byte[])">
+            <summary>
+            SHA1 hashing method
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.SHA1HashingProvider.Verify(System.String,System.String,System.Boolean,System.Boolean,System.Text.Encoding)">
+            <summary>
+            Verify 
+            </summary>
+            <param name="comparison"></param>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="isIncludeHyphen"></param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <param name="isUpper"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.SHA256HashingProvider">
+            <summary>
+            Hash/SHA256 hashing provider.
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Hash/SHAHashingBase/SHA256.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.SHA256HashingProvider.Signature(System.String,System.Boolean,System.Boolean,System.Text.Encoding)">
+            <summary>
+            SHA256 encrypt method
+            </summary>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="isIncludeHyphen"></param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <param name="isUpper"></param>
+            <returns>The encrypted string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.SHA256HashingProvider.Signature(System.Byte[])">
+            <summary>
+            SHA256 hashing method
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.SHA256HashingProvider.Verify(System.String,System.String,System.Boolean,System.Boolean,System.Text.Encoding)">
+            <summary>
+            Verify 
+            </summary>
+            <param name="comparison"></param>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="isIncludeHyphen"></param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <param name="isUpper"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.SHA384HashingProvider">
+            <summary>
+            Hash/SHA384 hashing provider.
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Hash/SHA/SHA384.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.SHA384HashingProvider.Signature(System.String,System.Boolean,System.Boolean,System.Text.Encoding)">
+            <summary>
+            SHA384 encrypt method
+            </summary>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="isIncludeHyphen"></param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <param name="isUpper"></param>
+            <returns>The encrypted string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.SHA384HashingProvider.Signature(System.Byte[])">
+            <summary>
+            SHA384 hashing method
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.SHA384HashingProvider.Verify(System.String,System.String,System.Boolean,System.Boolean,System.Text.Encoding)">
+            <summary>
+            Verify 
+            </summary>
+            <param name="comparison"></param>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="isIncludeHyphen"></param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <param name="isUpper"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.SHA512HashingProvider">
+            <summary>
+            Hash/SHA512 hashing provider.
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Hash/SHA/SHA512.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.SHA512HashingProvider.Signature(System.String,System.Boolean,System.Boolean,System.Text.Encoding)">
+            <summary>
+            SHA512 encrypt method
+            </summary>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="isIncludeHyphen"></param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <param name="isUpper"></param>
+            <returns>The encrypted string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.SHA512HashingProvider.Signature(System.Byte[])">
+            <summary>
+            SHA512 hashing method
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.SHA512HashingProvider.Verify(System.String,System.String,System.Boolean,System.Boolean,System.Text.Encoding)">
+            <summary>
+            Verify 
+            </summary>
+            <param name="comparison"></param>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="isIncludeHyphen"></param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <param name="isUpper"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.SM3HashingProvider">
+            <summary>
+            SM3 hashing provider
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.SM3HashingProvider.Signature(System.String,System.Text.Encoding)">
+            <summary>
+            SM3 hashing method.
+            </summary>
+            <param name="data">The string need to hash.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns>Hashed string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.SM3HashingProvider.Verify(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Verify 
+            </summary>
+            <param name="comparison"></param>
+            <param name="data">The string need to hash.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.AESEncryptionProvider">
+            <summary>
+            Symmetric/AES encryption.
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Symmetric/AES.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.AESEncryptionProvider.CreateKey(Cosmos.Encryption.AESKeySizeTypes,System.Text.Encoding)">
+            <summary>
+            Create an AES key.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.AESEncryptionProvider.Encrypt(System.String,System.String,System.String,System.String,System.Text.Encoding,Cosmos.Encryption.AESKeySizeTypes)">
+            <summary>
+            AES encryption.
+            </summary>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="pwd">The password to derive the key for.</param>
+            <param name="keySize">The size only can be 128, 192, or 256</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <param name="salt">The key salt to use to derive the key.</param>
+            <param name="iv">The initialization iv (IV) to use to derive the key.</param>
+            <returns>The encrypted string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.AESEncryptionProvider.Encrypt(System.String,Cosmos.Encryption.AESKey,System.Text.Encoding)">
+            <summary>
+            AES encryption.
+            </summary>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="key">your key.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.AESEncryptionProvider.Decrypt(System.String,System.String,System.String,System.String,System.Text.Encoding,Cosmos.Encryption.AESKeySizeTypes)">
+            <summary>
+            AES decryption.
+            </summary>
+            <param name="data">The string to be decrypted,not null.</param>
+            <param name="pwd">The password to derive the key for.</param>
+            <param name="keySize">The size only can be 128, 192, or 256</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <param name="salt">The key salt to use to derive the key.</param>
+            <param name="iv">The initialization iv (IV) to use to derive the key.</param>
+            <returns>The decryption string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.AESEncryptionProvider.Decrypt(System.String,Cosmos.Encryption.AESKey,System.Text.Encoding)">
+            <summary>
+            AES encryption.
+            </summary>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="key">your key.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.AESKey">
+            <summary>
+            Aes key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.AESKey.Key">
+            <summary>
+            Aes key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.AESKey.IV">
+            <summary>
+            Aes IV
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.AESKey.Size">
+            <summary>
+            Key size
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.AESKeySizeTypes">
+            <summary>
+            Aes key size types
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.AESKeySizeTypes.L128">
+            <summary>
+            128
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.AESKeySizeTypes.L192">
+            <summary>
+            192
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.AESKeySizeTypes.L256">
+            <summary>
+            256
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.DESEncryptionProvider">
+            <summary>
+            Symmetric/DES encryption.
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Symmetric/DES.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.DESEncryptionProvider.CreateKey">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.DESKey"/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.DESEncryptionProvider.Encrypt(System.String,System.String,System.String,System.String,System.Text.Encoding)">
+            <summary>
+            DES encryption.
+            </summary>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="pwd">The password to derive the key for.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <param name="salt">The key salt to use to derive the key.</param>
+            <param name="iv">The initialization vector (IV) to use to derive the key.</param>
+            <returns>The encrypted string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.DESEncryptionProvider.Decrypt(System.String,System.String,System.String,System.String,System.Text.Encoding)">
+            <summary>
+            DES decryption.
+            </summary>
+            <param name="data">The string to be decrypted,not null.</param>
+            <param name="pwd">The password to derive the key for.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <param name="salt">The key salt to use to derive the key.</param>
+            <param name="iv">The initialization vector (IV) to use to derive the key.</param>
+            <returns>The decryption string.</returns>
+        </member>
+        <member name="T:Cosmos.Encryption.DESKey">
+            <summary>
+            Des key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.DESKey.Key">
+            <summary>
+            Des key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.DESKey.IV">
+            <summary>
+            Des IV
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.RC4EncryptionProvider">
+            <summary>
+            Symmetric/RC4 encryption.
+            Reference: https://bitlush.com/blog/rc4-encryption-in-c-sharp
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.RC4EncryptionProvider.Encrypt(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RC4EncryptionProvider.Encrypt(System.Byte[],System.String,System.Text.Encoding)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RC4EncryptionProvider.Encrypt(System.Byte[],System.Byte[])">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RC4EncryptionProvider.Decrypt(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RC4EncryptionProvider.Decrypt(System.Byte[],System.Byte[])">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.RCXEncryptionProvider">
+            <summary>
+            Symmetric/RCX encryption.
+            Reference: https://github.com/toolgood/RCX/
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.RCXEncryptionProvider.Encrypt(System.String,System.String,System.Text.Encoding,Cosmos.Encryption.RCXOrder)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RCXEncryptionProvider.Encrypt(System.Byte[],System.String,System.Text.Encoding,Cosmos.Encryption.RCXOrder)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RCXEncryptionProvider.Encrypt(System.Byte[],System.Byte[],Cosmos.Encryption.RCXOrder)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RCXEncryptionProvider.Decrypt(System.String,System.String,System.Text.Encoding,Cosmos.Encryption.RCXOrder)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RCXEncryptionProvider.Decrypt(System.Byte[],System.Byte[],Cosmos.Encryption.RCXOrder)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.RCXOrder">
+            <summary>
+            Rcx order
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.RCXOrder.ASC">
+            <summary>
+            ASC
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.RCXOrder.DESC">
+            <summary>
+            DESC
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.Symmetric.SM4EncryptionProvider">
+            <summary>
+            SM4 encryption provider
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.SM4EncryptionProvider.Encrypt(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Encrypt data by SM4-ECB
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.SM4EncryptionProvider.Encrypt(System.Byte[],System.String,System.Text.Encoding)">
+            <summary>
+            Encrypt data by SM4-ECB
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.SM4EncryptionProvider.Encrypt(System.Byte[],System.Byte[])">
+            <summary>
+            Encrypt data by SM4-ECB
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.SM4EncryptionProvider.Encrypt(System.String,System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Encrypt data by SM4-CBC
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="iv"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.SM4EncryptionProvider.Encrypt(System.Byte[],System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Encrypt data by SM4-CBC
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="iv"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.SM4EncryptionProvider.Encrypt(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Encrypt data by SM4-CBC
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="iv"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.SM4EncryptionProvider.Decrypt(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Decrypt data by SM4-ECB
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.SM4EncryptionProvider.Decrypt(System.Byte[],System.String,System.Text.Encoding)">
+            <summary>
+            Decrypt data by SM4-ECB
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.SM4EncryptionProvider.Decrypt(System.Byte[],System.Byte[])">
+            <summary>
+            Decrypt data by SM4-ECB
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.SM4EncryptionProvider.Decrypt(System.String,System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Decrypt data by SM4-CBC
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="iv"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.SM4EncryptionProvider.Decrypt(System.Byte[],System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Decrypt data by SM4-CBC
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="iv"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.SM4EncryptionProvider.Decrypt(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Decrypt data by SM4-CBC
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="iv"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Symmetric.TEAEncryptionProvider">
+            <summary>
+            TEA encryption provider
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.TEAEncryptionProvider.GenerateTeaKey">
+            <summary>
+            Create a new tea key
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.TEAEncryptionProvider.Encrypt(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.TEAEncryptionProvider.Encrypt(System.Byte[],System.String,System.Text.Encoding)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.TEAEncryptionProvider.Encrypt(System.Byte[],System.Byte[])">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.TEAEncryptionProvider.Decrypt(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.TEAEncryptionProvider.Decrypt(System.Byte[],System.String,System.Text.Encoding)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.TEAEncryptionProvider.Decrypt(System.Byte[],System.Byte[])">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Symmetric.XTEAEncryptionProvider">
+            <summary>
+            XTEA encryption provider
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.XTEAEncryptionProvider.Encrypt(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.XTEAEncryptionProvider.Encrypt(System.Byte[],System.String,System.Text.Encoding)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.XTEAEncryptionProvider.Encrypt(System.Byte[],System.Byte[])">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.XTEAEncryptionProvider.Decrypt(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.XTEAEncryptionProvider.Decrypt(System.Byte[],System.String,System.Text.Encoding)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.XTEAEncryptionProvider.Decrypt(System.Byte[],System.Byte[])">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Symmetric.XXTEAEncryptionProvider">
+            <summary>
+            XXTEA encryption provider
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.XXTEAEncryptionProvider.Encrypt(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.XXTEAEncryptionProvider.Encrypt(System.Byte[],System.String,System.Text.Encoding)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.XXTEAEncryptionProvider.Encrypt(System.Byte[],System.Byte[])">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.XXTEAEncryptionProvider.Decrypt(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.XXTEAEncryptionProvider.Decrypt(System.Byte[],System.String,System.Text.Encoding)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.XXTEAEncryptionProvider.Decrypt(System.Byte[],System.Byte[])">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Symmetric.ZUCEncryptionProvider">
+            <summary>
+            ZUC encryption provider. BUG: THERE ARE SEVERAL BUG HERE, DO NOT USE THIS PROVIDER NOW!
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.ZUCEncryptionProvider.Encrypt(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="iv"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Symmetric.ZUCEncryptionProvider.Decrypt(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="iv"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.ThreeRCXEncryptionProvider">
+            <summary>
+            Three RCX encryption provider
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.ThreeRCXEncryptionProvider.Encrypt(System.String,System.String,System.Text.Encoding,Cosmos.Encryption.RCXOrder)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.ThreeRCXEncryptionProvider.Encrypt(System.Byte[],System.String,System.Text.Encoding,Cosmos.Encryption.RCXOrder)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.ThreeRCXEncryptionProvider.Encrypt(System.Byte[],System.Byte[],Cosmos.Encryption.RCXOrder)">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.ThreeRCXEncryptionProvider.Decrypt(System.String,System.String,System.Text.Encoding,Cosmos.Encryption.RCXOrder)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="encoding"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.ThreeRCXEncryptionProvider.Decrypt(System.Byte[],System.Byte[],Cosmos.Encryption.RCXOrder)">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.TripleDESEncryptionProvider">
+            <summary>
+            Symmetric/TripleDES encryption.
+            Reference: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Symmetric/TripleDES.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.TripleDESEncryptionProvider.CreateKey(Cosmos.Encryption.TripleDESKeySizeTypes,System.Text.Encoding)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.TripleDESKey"/>
+            </summary>
+            <param name="keySize"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.TripleDESEncryptionProvider.Encrypt(System.String,System.String,System.String,System.String,System.Text.Encoding,Cosmos.Encryption.TripleDESKeySizeTypes)">
+            <summary>
+            TripleDES encryption.
+            </summary>
+            <param name="data">The string to be encrypted,not null.</param>
+            <param name="pwd">The password to derive the key for.</param>
+            <param name="keySize">The size only can be 128, 192.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <param name="salt">The key salt to use to derive the key.</param>
+            <param name="iv">The initialization iv (IV) to use to derive the key.</param>
+            <returns>The encrypted string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.TripleDESEncryptionProvider.Decrypt(System.String,System.String,System.String,System.String,System.Text.Encoding,Cosmos.Encryption.TripleDESKeySizeTypes)">
+            <summary>
+            TripleDES decryption.
+            </summary>
+            <param name="data">The string to be decrypted,not null.</param>
+            <param name="pwd">The password to derive the key for.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <param name="salt">The key salt to use to derive the key.</param>
+            <param name="keySize">The size only can be 128, 192.</param>
+            <param name="iv">The initialization vector (IV) to use to derive the key.</param>
+            <returns>The decryption string.</returns>
+        </member>
+        <member name="T:Cosmos.Encryption.TripleDESKey">
+            <summary>
+            Triple des key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.TripleDESKey.Key">
+            <summary>
+            Des key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.TripleDESKey.IV">
+            <summary>
+            Des IV
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.TripleDESKeySizeTypes">
+            <summary>
+            Triple des key size types
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.TripleDESKeySizeTypes.L192">
+            <summary>
+            192
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.TripleDESKeySizeTypes.L128">
+            <summary>
+            128
+            </summary>
+        </member>
+        <member name="T:Cosmos.Extensions.Extensions">
+            <summary>
+            Extensions for encryption
+            </summary>
+            <summary>
+            Extensions for encryption
+            </summary>
+        </member>
+        <member name="M:Cosmos.Extensions.Extensions.ToMD4(System.String,System.Text.Encoding)">
+            <summary>
+            To MD4
+            </summary>
+            <param name="data"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Extensions.Extensions.ToMD4(System.Byte[])">
+            <summary>
+            To MD4
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Extensions.Extensions.To16MD5(System.String,System.Boolean,System.Boolean,System.Text.Encoding)">
+            <summary>
+            To 16bit MD5
+            </summary>
+            <param name="data"></param>
+            <param name="isUpper"></param>
+            <param name="isIncludeHyphen"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Extensions.Extensions.To32MD5(System.String,System.Boolean,System.Boolean,System.Text.Encoding)">
+            <summary>
+            To 32bit MD5
+            </summary>
+            <param name="data"></param>
+            <param name="isUpper"></param>
+            <param name="isIncludeHyphen"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Extensions.Extensions.To64MD5(System.String,System.Boolean,System.Boolean,System.Text.Encoding)">
+            <summary>
+            To 64bit MD5
+            </summary>
+            <param name="data"></param>
+            <param name="isUpper"></param>
+            <param name="isIncludeHyphen"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Extensions.Extensions.ToSHA1(System.String,System.Boolean,System.Boolean,System.Text.Encoding)">
+            <summary>
+            To SHA1
+            </summary>
+            <param name="data"></param>
+            <param name="isUpper"></param>
+            <param name="isIncludeHyphen"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Extensions.Extensions.ToSHA1(System.Byte[],System.Boolean,System.Boolean)">
+            <summary>
+            To SHA1
+            </summary>
+            <param name="data"></param>
+            <param name="isUpper"></param>
+            <param name="isIncludeHyphen"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Extensions.Extensions.ToSHA256(System.String,System.Boolean,System.Boolean,System.Text.Encoding)">
+            <summary>
+            To SHA256
+            </summary>
+            <param name="data"></param>
+            <param name="isUpper"></param>
+            <param name="isIncludeHyphen"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Extensions.Extensions.ToSHA256(System.Byte[],System.Boolean,System.Boolean)">
+            <summary>
+            To SHA256
+            </summary>
+            <param name="data"></param>
+            <param name="isUpper"></param>
+            <param name="isIncludeHyphen"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Extensions.Extensions.ToSHA384(System.String,System.Boolean,System.Boolean,System.Text.Encoding)">
+            <summary>
+            To SHA384
+            </summary>
+            <param name="data"></param>
+            <param name="isUpper"></param>
+            <param name="isIncludeHyphen"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Extensions.Extensions.ToSHA384(System.Byte[],System.Boolean,System.Boolean)">
+            <summary>
+            To SHA384
+            </summary>
+            <param name="data"></param>
+            <param name="isUpper"></param>
+            <param name="isIncludeHyphen"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Extensions.Extensions.ToSHA512(System.String,System.Boolean,System.Boolean,System.Text.Encoding)">
+            <summary>
+            To SHA512
+            </summary>
+            <param name="data"></param>
+            <param name="isUpper"></param>
+            <param name="isIncludeHyphen"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Extensions.Extensions.ToSHA512(System.Byte[],System.Boolean,System.Boolean)">
+            <summary>
+            To SHA512
+            </summary>
+            <param name="data"></param>
+            <param name="isUpper"></param>
+            <param name="isIncludeHyphen"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Extensions.Extensions.ToSM3(System.String,System.Text.Encoding)">
+            <summary>
+            To SM3
+            </summary>
+            <param name="data"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="T:System.Security.Cryptography.MD4CryptoServiceProvider">
+            <summary>
+            MD4 Crypto Service Provider
+            </summary>
+        </member>
+        <member name="M:System.Security.Cryptography.MD4CryptoServiceProvider.#ctor">
+            <summary>
+            Create a new instance of <see cref="T:System.Security.Cryptography.MD4CryptoServiceProvider"/>
+            </summary>
+        </member>
+        <member name="M:System.Security.Cryptography.MD4CryptoServiceProvider.Initialize">
+            <summary>
+            Initialize
+            </summary>
+        </member>
+        <member name="M:System.Security.Cryptography.MD4CryptoServiceProvider.HashCore(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Hash code
+            </summary>
+            <param name="array"></param>
+            <param name="offset"></param>
+            <param name="length"></param>
+        </member>
+        <member name="M:System.Security.Cryptography.MD4CryptoServiceProvider.HashFinal">
+            <summary>
+            Hash final
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
