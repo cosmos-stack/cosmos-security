@@ -6,8 +6,11 @@ using Cosmos.Encryption.Core.Internals;
 
 namespace Cosmos.Encryption.Symmetric
 {
+    /// <summary>
+    /// SM4 encryption provider
+    /// </summary>
     // ReSharper disable once InconsistentNaming
-    public sealed class SM4EncryptionProvider : ISymmetricEncyption
+    public sealed class SM4EncryptionProvider : ISymmetricEncryption
     {
         private SM4EncryptionProvider() { }
 

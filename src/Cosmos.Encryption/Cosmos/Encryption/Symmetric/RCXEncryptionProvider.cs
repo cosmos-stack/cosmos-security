@@ -19,36 +19,74 @@ namespace Cosmos.Encryption
     /// Reference: https://github.com/toolgood/RCX/
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public sealed class RCXEncryptionProvider : ISymmetricEncyption
+    public sealed class RCXEncryptionProvider : ISymmetricEncryption
     {
         // ReSharper disable once InconsistentNaming
         private const int KEY_LENGTH = 256;
 
         private RCXEncryptionProvider() { }
 
+        /// <summary>
+        /// Encrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <param name="encoding"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
         public static string Encrypt(string data, string key, Encoding encoding = null, RCXOrder order = RCXOrder.ASC)
         {
             encoding = EncodingHelper.Fixed(encoding);
             return Convert.ToBase64String(EncryptCore(encoding.GetBytes(data), encoding.GetBytes(key), order));
         }
 
+        /// <summary>
+        /// Encrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <param name="encoding"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
         public static string Encrypt(byte[] data, string key, Encoding encoding = null, RCXOrder order = RCXOrder.ASC)
         {
             encoding = EncodingHelper.Fixed(encoding);
             return Convert.ToBase64String(EncryptCore(data, encoding.GetBytes(key), order));
         }
 
+        /// <summary>
+        /// Encrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
         public static byte[] Encrypt(byte[] data, byte[] key, RCXOrder order = RCXOrder.ASC)
         {
             return EncryptCore(data, key, order);
         }
 
+        /// <summary>
+        /// Decrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <param name="encoding"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
         public static string Decrypt(string data, string key, Encoding encoding = null, RCXOrder order = RCXOrder.ASC)
         {
             encoding = EncodingHelper.Fixed(encoding);
             return encoding.GetString(EncryptCore(Convert.FromBase64String(data), encoding.GetBytes(key), order));
         }
 
+        /// <summary>
+        /// Decrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <param name="order"></param>
+        /// <returns></returns>
         public static byte[] Decrypt(byte[] data, byte[] key, RCXOrder order = RCXOrder.ASC)
         {
             return EncryptCore(data, key, order);

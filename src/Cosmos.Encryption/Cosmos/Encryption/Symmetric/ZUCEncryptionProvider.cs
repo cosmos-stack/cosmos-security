@@ -9,6 +9,13 @@ namespace Cosmos.Encryption.Symmetric
     // ReSharper disable once InconsistentNaming
     public static class ZUCEncryptionProvider
     {
+        /// <summary>
+        /// Encrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <param name="iv"></param>
+        /// <returns></returns>
         public static byte[] Encrypt(byte[] data, byte[] key, byte[] iv)
         {
             var zuc = new ZUCCore(FixKey(key), FixKey(iv));
@@ -18,6 +25,13 @@ namespace Cosmos.Encryption.Symmetric
             return v;
         }
 
+        /// <summary>
+        /// Decrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <param name="iv"></param>
+        /// <returns></returns>
         public static byte[] Decrypt(byte[] data, byte[] key, byte[] iv)
         {
             var zuc = new ZUCCore(FixKey(key), FixKey(iv));

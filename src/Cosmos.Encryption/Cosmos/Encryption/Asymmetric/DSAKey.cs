@@ -1,6 +1,9 @@
 ﻿// ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption
 {
+    /// <summary>
+    /// Dsa key
+    /// </summary>
     // ReSharper disable once InconsistentNaming
     public class DSAKey
     {

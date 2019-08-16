@@ -12,33 +12,66 @@ namespace Cosmos.Encryption
     /// Reference: https://bitlush.com/blog/rc4-encryption-in-c-sharp
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public sealed class RC4EncryptionProvider : ISymmetricEncyption
+    public sealed class RC4EncryptionProvider : ISymmetricEncryption
     {
         private RC4EncryptionProvider() { }
 
+        /// <summary>
+        /// Encrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
         public static string Encrypt(string data, string key, Encoding encoding = null)
         {
             encoding = EncodingHelper.Fixed(encoding);
             return Convert.ToBase64String(EncryptCore(encoding.GetBytes(data), encoding.GetBytes(key)));
         }
 
+        /// <summary>
+        /// Encrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
         public static string Encrypt(byte[] data, string key, Encoding encoding = null)
         {
             encoding = EncodingHelper.Fixed(encoding);
             return Convert.ToBase64String(EncryptCore(data, encoding.GetBytes(key)));
         }
 
+        /// <summary>
+        /// Encrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static byte[] Encrypt(byte[] data, byte[] key)
         {
             return EncryptCore(data, key);
         }
 
+        /// <summary>
+        /// Decrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
         public static string Decrypt(string data, string key, Encoding encoding = null)
         {
             encoding = EncodingHelper.Fixed(encoding);
             return encoding.GetString(EncryptCore(Convert.FromBase64String(data), encoding.GetBytes(key)));
         }
 
+        /// <summary>
+        /// Decrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static byte[] Decrypt(byte[] data, byte[] key)
         {
             return EncryptCore(data, key);

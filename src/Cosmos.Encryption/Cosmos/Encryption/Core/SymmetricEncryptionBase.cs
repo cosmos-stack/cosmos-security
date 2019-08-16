@@ -7,13 +7,13 @@ using Cosmos.Encryption.Core.Internals;
 namespace Cosmos.Encryption.Core
 {
     /// <summary>
-    /// Abstrace Symmetric/SymmetricEncyptionBase encryption.
+    /// Abstrace Symmetric/SymmetricEncryptionBase encryption.
     /// Reference: Seay Xu
     ///     https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Symmetric/XES.cs
     ///  Editor: AlexLEWIS
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public abstract class SymmetricEncyptionBase
+    public abstract class SymmetricEncryptionBase
     {
         /// <summary>
         /// 用于整理获得真实 key / iv 的方法
@@ -42,6 +42,14 @@ namespace Cosmos.Encryption.Core
                 return rfcOriginStringData.GetBytes(len);
             };
 
+        /// <summary>
+        /// Nice encryption code
+        /// </summary>
+        /// <typeparam name="TCryptoServiceProvider"></typeparam>
+        /// <param name="sourceBytes"></param>
+        /// <param name="keyBytes"></param>
+        /// <param name="ivBytes"></param>
+        /// <returns></returns>
         protected static byte[] NiceEncryptCore<TCryptoServiceProvider>(byte[] sourceBytes, byte[] keyBytes, byte[] ivBytes)
             where TCryptoServiceProvider : SymmetricAlgorithm, new()
         {
@@ -61,6 +69,14 @@ namespace Cosmos.Encryption.Core
             }
         }
 
+        /// <summary>
+        /// Nice decryption core
+        /// </summary>
+        /// <typeparam name="TCryptoServiceProvider"></typeparam>
+        /// <param name="encryptBytes"></param>
+        /// <param name="keyBytes"></param>
+        /// <param name="ivBytes"></param>
+        /// <returns></returns>
         protected static byte[] NiceDecryptCore<TCryptoServiceProvider>(byte[] encryptBytes, byte[] keyBytes, byte[] ivBytes)
             where TCryptoServiceProvider : SymmetricAlgorithm, new()
         {

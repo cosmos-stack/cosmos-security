@@ -13,6 +13,9 @@ using Org.BouncyCastle.Security;
 
 namespace Cosmos.Encryption.Core
 {
+    /// <summary>
+    /// RSAKeyGenerator
+    /// </summary>
     // ReSharper disable once InconsistentNaming
     public static class RSAKeyGenerator
     {
@@ -34,6 +37,11 @@ namespace Cosmos.Encryption.Core
                 };
             }
         }
+        /// <summary>
+        /// Json key
+        /// </summary>
+        /// <param name="keySize"></param>
+        /// <returns></returns>
 
         public static RSAKey JsonKey(int keySize)
         {

@@ -15,10 +15,24 @@ namespace Cosmos.Encryption.Algorithms {
     public sealed class Ceaser : IEncryptionAlgorithm {
         private int Key { get; }
 
+        /// <summary>
+        /// Create a new instance of <see cref="Ceaser"/>
+        /// </summary>
+        /// <param name="key"></param>
         public Ceaser(int key) => Key = key;
 
+        /// <summary>
+        /// Encrypt
+        /// </summary>
+        /// <param name="plainText"></param>
+        /// <returns></returns>
         public string Encrypt(string plainText) => ProcessFunc()(Key)(plainText)(EncryptionAlgorithmMode.Encrypt);
 
+        /// <summary>
+        /// Decrypt
+        /// </summary>
+        /// <param name="cipher"></param>
+        /// <returns></returns>
         public string Decrypt(string cipher) => ProcessFunc()(Key)(cipher)(EncryptionAlgorithmMode.Decrypt);
 
 

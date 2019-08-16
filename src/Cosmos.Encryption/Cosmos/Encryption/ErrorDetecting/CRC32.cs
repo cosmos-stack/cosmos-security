@@ -7,25 +7,48 @@ using Cosmos.Encryption.Core.Internals;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption
 {
+    /// <summary>
+    /// CRC32
+    /// </summary>
     // ReSharper disable once InconsistentNaming
     public sealed class CRC32 : ICRC<CRC32, uint, int>
     {
+        /// <summary>
+        /// Value
+        /// </summary>
         public uint Value { get; set; } = CRC32CheckingProvider.Seed;
         // ReSharper disable once InconsistentNaming
         private uint[] CRCTable { get; } = CRCTableGenerator.GenerationCRC32Table();
 
+        /// <summary>
+        /// Reset
+        /// </summary>
+        /// <returns></returns>
         public CRC32 Reset()
         {
             Value = CRC32CheckingProvider.Seed;
             return this;
         }
 
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public CRC32 Update(int value)
         {
             Value = CRCTable[(Value ^ value) & 0xFF] ^ (Value >> 8);
             return this;
         }
 
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <param name="offset"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public CRC32 Update(byte[] buffer, int offset = 0, int count = -1)
         {
             Checker.Buffer(buffer);
@@ -48,6 +71,12 @@ namespace Cosmos.Encryption
             return this;
         }
 
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
         public CRC32 Update(Stream stream, long count = -1)
         {
             Checker.Stream(stream);

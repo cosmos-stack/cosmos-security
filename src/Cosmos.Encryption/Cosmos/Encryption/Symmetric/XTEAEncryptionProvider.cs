@@ -6,12 +6,22 @@ using Cosmos.Encryption.Core.Internals;
 
 namespace Cosmos.Encryption.Symmetric
 {
+    /// <summary>
+    /// XTEA encryption provider
+    /// </summary>
     // ReSharper disable once IdentifierTypo
     // ReSharper disable once InconsistentNaming
-    public sealed class XTEAEncryptionProvider : ISymmetricEncyption
+    public sealed class XTEAEncryptionProvider : ISymmetricEncryption
     {
         private XTEAEncryptionProvider() { }
 
+        /// <summary>
+        /// Encrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
         public static string Encrypt(string data, string key, Encoding encoding = null)
         {
             if (string.IsNullOrWhiteSpace(data))
@@ -21,7 +31,13 @@ namespace Cosmos.Encryption.Symmetric
             return Convert.ToBase64String(Encrypt(encoding.GetBytes(data), encoding.GetBytes(key)));
         }
 
-
+        /// <summary>
+        /// Encrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
         public static string Encrypt(byte[] data, string key, Encoding encoding = null)
         {
             if (data.Length == 0)
@@ -31,6 +47,12 @@ namespace Cosmos.Encryption.Symmetric
             return Convert.ToBase64String(Encrypt(data, encoding.GetBytes(key)));
         }
 
+        /// <summary>
+        /// Encrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static byte[] Encrypt(byte[] data, byte[] key)
         {
             if (data.Length == 0)
@@ -39,6 +61,13 @@ namespace Cosmos.Encryption.Symmetric
             return XTEACore.Encrypt(data, FixKey(key));
         }
 
+        /// <summary>
+        /// Decrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
         public static string Decrypt(string data, string key, Encoding encoding = null)
         {
             if (string.IsNullOrWhiteSpace(data))
@@ -48,6 +77,13 @@ namespace Cosmos.Encryption.Symmetric
             return encoding.GetString(Decrypt(Convert.FromBase64String(data), encoding.GetBytes(key)));
         }
 
+        /// <summary>
+        /// Decrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
         public static string Decrypt(byte[] data, string key, Encoding encoding = null)
         {
             if (data.Length == 0)
@@ -57,6 +93,12 @@ namespace Cosmos.Encryption.Symmetric
             return encoding.GetString(Decrypt(data, encoding.GetBytes(key)));
         }
 
+        /// <summary>
+        /// Decrypt
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static byte[] Decrypt(byte[] data, byte[] key)
         {
             if (data.Length == 0)
