@@ -1168,7 +1168,63 @@
             <param name="Message"></param>
             <param name="InnerException"></param>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:Cosmos.Encryption.Core.Fraction" -->
+        <member name="T:Cosmos.Encryption.Core.Fraction">
+            <summary>
+            Class name: Fraction
+            Developed by: Syed Mehroz Alam
+            Email: smehrozalam@yahoo.com
+            URL: Programming Home "http://www.geocities.com/smehrozalam/"
+            Version: 2.0
+            
+            What's new in version 2.0:
+            	*	Changed Numerator and Denominator from Int32(integer) to Int64(long) for increased range
+            	*	renamed ConvertToString() to (overloaded) ToString()
+            	*	added the capability of detecting/raising overflow exceptions
+            	*	Fixed the bug that very small numbers e.g. 0.00000001 could not be converted to fraction
+            	*	Other minor bugs fixed
+            
+            Properties:
+            	Numerator: Set/Get value for Numerator
+            	Denominator:  Set/Get value for Numerator
+            	Value:  Set an integer value for the fraction
+            
+            Constructors:
+            	no arguments:	initializes fraction as 0/1
+            	(Numerator, Denominator): initializes fraction with the given numerator and denominator values
+            	(integer):	initializes fraction with the given integer value
+            	(long):	initializes fraction with the given long value
+            	(double):	initializes fraction with the given double value
+            	(string):	initializes fraction with the given string value
+            				the string can be an in the form of and integer, double or fraction.
+            				e.g it can be like "123" or "123.321" or "123/456"
+            
+            Public Methods (Description is given with respective methods' definitions)
+            	(override) string ToString(Fraction)
+            	Fraction ToFraction(string)
+            	Fraction ToFraction(double)
+            	double ToDouble(Fraction)
+            	Fraction Duplicate()
+            	Fraction Inverse(integer)
+            	Fraction Inverse(Fraction)
+            	ReduceFraction(Fraction)
+            	Equals(object)
+            	GetHashCode()
+            
+            Private Methods (Description is given with respective methods' definitions)
+            	Initialize(Numerator, Denominator)
+            	Fraction Negate(Fraction)
+            	Fraction Add(Fraction1, Fraction2)
+            
+            Overloaded Operators (overloaded for Fractions, Integers and Doubles)
+            	Unary: -
+            	Binary: +,-,*,/ 
+            	Relational and Logical Operators: ==, !=, &lt;, &gt;, &lt;=, &gt;=
+            
+            Overloaded user-defined conversions
+            	Implicit:	From double/long/string to Fraction
+            	Explicit:	From Fraction to double/string
+            </summary>
+        </member>
         <member name="F:Cosmos.Encryption.Core.Fraction.m_iNumerator">
             <summary>
             Class attributes/members
@@ -1545,9 +1601,42 @@
             Exception class for Fraction, derived from System.Exception
             </summary>
         </member>
+        <member name="M:Cosmos.Encryption.Core.FractionException.#ctor">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.Core.FractionException"/>
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.FractionException.#ctor(System.String)">
+            <summary>
+            reate a new instance of <see cref="T:Cosmos.Encryption.Core.FractionException"/>
+            </summary>
+            <param name="Message"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.FractionException.#ctor(System.String,System.Exception)">
+            <summary>
+            reate a new instance of <see cref="T:Cosmos.Encryption.Core.FractionException"/>
+            </summary>
+            <param name="Message"></param>
+            <param name="InnerException"></param>
+        </member>
         <member name="T:Cosmos.Encryption.Core.RSABase">
             <summary>
             RSABase
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.RSABase.PrivateRsa">
+            <summary>
+            Private rsa
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.RSABase.PublicRsa">
+            <summary>
+            Public rsa
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.RSABase.DataEncoding">
+            <summary>
+            Data encoding
             </summary>
         </member>
         <member name="M:Cosmos.Encryption.Core.RSABase.Encrypt(System.String,System.Security.Cryptography.RSAEncryptionPadding)">
@@ -1777,6 +1866,11 @@
             <param name="str"></param>
             <returns></returns>
         </member>
+        <member name="T:Cosmos.Encryption.Core.RSAPkcs1Util">
+            <summary>
+            RSAPkcs1Util
+            </summary>
+        </member>
         <member name="M:Cosmos.Encryption.Core.RSAPkcs1Util.#ctor(System.String,System.String,System.Int32)">
             <summary>
             RSAPkcs1Util
@@ -1794,6 +1888,11 @@
             <param name="privateKey"></param>
             <param name="keySize"></param>
         </member>
+        <member name="T:Cosmos.Encryption.Core.RSAPkcs8Util">
+            <summary>
+            RSAPkcs8Util
+            </summary>
+        </member>
         <member name="M:Cosmos.Encryption.Core.RSAPkcs8Util.#ctor(System.String,System.String,System.Int32)">
             <summary>
             RSAPkcs8Util
@@ -1810,6 +1909,11 @@
             <param name="publicKey"></param>
             <param name="privateKey"></param>
             <param name="keySize"></param>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.RSAXmlUtil">
+            <summary>
+            RSA Xml util
+            </summary>
         </member>
         <member name="M:Cosmos.Encryption.Core.RSAXmlUtil.#ctor(System.String,System.String,System.Int32)">
             <summary>
@@ -2158,6 +2262,26 @@
             用于整理获得真实 key / iv 的方法
             </summary>
         </member>
+        <member name="M:Cosmos.Encryption.Core.SymmetricEncryptionBase.NiceEncryptCore``1(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Nice encryption code
+            </summary>
+            <typeparam name="TCryptoServiceProvider"></typeparam>
+            <param name="sourceBytes"></param>
+            <param name="keyBytes"></param>
+            <param name="ivBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SymmetricEncryptionBase.NiceDecryptCore``1(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Nice decryption core
+            </summary>
+            <typeparam name="TCryptoServiceProvider"></typeparam>
+            <param name="encryptBytes"></param>
+            <param name="keyBytes"></param>
+            <param name="ivBytes"></param>
+            <returns></returns>
+        </member>
         <member name="M:Cosmos.Encryption.Core.TeaCore.Encrypt(System.UInt32[],System.UInt32[],System.UInt32)">
             sum = 0 
         </member>
@@ -2272,6 +2396,37 @@
             CRC16 checking provider
             Author: X-New-Life
                 https://github.com/NewLifeX/X/blob/master/NewLife.Core/Security/Crc16.cs
+        </member>
+        <member name="F:Cosmos.Encryption.CRC16CheckingProvider.Seed">
+            <summary>
+            Seed
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.CRC16CheckingProvider.Compute(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="buf"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.CRC16CheckingProvider.Compute(System.IO.Stream,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="stream"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.CRC16CheckingProvider.Compute(System.IO.Stream,System.Int64,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="stream"></param>
+            <param name="position"></param>
+            <param name="count"></param>
+            <returns></returns>
         </member>
         <member name="T:Cosmos.Encryption.CRC32">
             <summary>
@@ -2479,6 +2634,11 @@
             <param name="key">Encryption key,not null.</param>
             <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
             <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.MD4HashingProvider">
+            <summary>
+            MD4 Hashing provider
+            </summary>
         </member>
         <member name="M:Cosmos.Encryption.MD4HashingProvider.Signature(System.String,System.Text.Encoding)">
             <summary>
