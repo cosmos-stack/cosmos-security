@@ -398,99 +398,6 @@
             Reference: myloveCc
                 https://github.com/myloveCc/NETCore.Encrypt/blob/master/src/NETCore.Encrypt/EncryptProvider.cs
             </summary>
-            <summary>
-            Asymmetric/RSA encryption.
-            Reference: Seay Xu
-                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Asymmetric/RSA.cs
-            Reference: myloveCc
-                https://github.com/myloveCc/NETCore.Encrypt/blob/master/src/NETCore.Encrypt/EncryptProvider.cs
-            </summary>
-        </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.Encrypt(System.String,System.String,System.Security.Cryptography.RSAEncryptionPadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
-            <summary>
-            Encrypt string data with xml/json format.
-            </summary>
-            <param name="data">The data to be encrypted.</param>
-            <param name="publicKey">The public key of xml format.</param>
-            <param name="padding"></param>
-            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
-            <param name="sizeType"></param>
-            <param name="keyType"></param>
-            <returns>The encrypted data.</returns>
-        </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.Encrypt(System.Byte[],System.String,System.Security.Cryptography.RSAEncryptionPadding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
-            <summary>
-            Encrypt byte[] data with xml/json format.
-            </summary>
-            <param name="dataBytes">The data to be encrypted.</param>
-            <param name="publicKey">The public key of xml format.</param>
-            <param name="sizeType"></param>
-            <param name="keyType"></param>
-            <param name="padding"></param>
-            <returns>The encrypted data.</returns>
-        </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.Decrypt(System.String,System.String,System.Security.Cryptography.RSAEncryptionPadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
-            <summary>
-            Decrypt string data with xml/json format.
-            </summary>
-            <param name="data">The data to be encrypted.</param>
-            <param name="privateKey">The private key of xml format.</param>
-            <param name="padding"></param>
-            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
-            <param name="sizeType"></param>
-            <param name="keyType"></param>
-            <returns>The decrypted data.</returns>
-        </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.Decrypt(System.Byte[],System.String,System.Security.Cryptography.RSAEncryptionPadding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
-            <summary>
-            Decrypt byte[] data with xml/json format.
-            </summary>
-            <param name="dataBytes">The data to be encrypted.</param>
-            <param name="privateKey">The private key of xml format.</param>
-            <param name="padding"></param>
-            <param name="sizeType"></param>
-            <param name="keyType"></param>
-            <returns>The decrypted data.</returns>
-        </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.SignatureAsString(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
-            <summary>
-            Signature as string
-            </summary>
-            <param name="data"></param>
-            <param name="publicKey"></param>
-            <param name="hashAlgorithmName"></param>
-            <param name="padding"></param>
-            <param name="encoding"></param>
-            <param name="sizeType"></param>
-            <param name="keyType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.Signature(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
-            <summary>
-            Signature as byte[]
-            </summary>
-            <param name="data"></param>
-            <param name="publicKey"></param>
-            <param name="hashAlgorithmName"></param>
-            <param name="padding"></param>
-            <param name="encoding"></param>
-            <param name="sizeType"></param>
-            <param name="keyType"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.Verify(System.String,System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
-            <summary>
-            Verify
-            </summary>
-            <param name="data"></param>
-            <param name="publicKey"></param>
-            <param name="signature"></param>
-            <param name="hashAlgorithmName"></param>
-            <param name="padding"></param>
-            <param name="encoding"></param>
-            <param name="sizeType"></param>
-            <param name="keyType"></param>
-            <returns></returns>
         </member>
         <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreateKey(Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes,System.Boolean)">
             <summary>
@@ -1639,89 +1546,61 @@
             Data encoding
             </summary>
         </member>
-        <member name="M:Cosmos.Encryption.Core.RSABase.Encrypt(System.String,System.Security.Cryptography.RSAEncryptionPadding)">
+        <member name="M:Cosmos.Encryption.Core.RSABase.EncryptByPublicKey(System.String)">
             <summary>
             RSA public key encryption
             </summary>
             <param name="data">Need to encrypt data</param>
-            <param name="padding">Padding algorithm</param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.Core.RSABase.Encrypt(System.Byte[],System.Security.Cryptography.RSAEncryptionPadding)">
+        <member name="M:Cosmos.Encryption.Core.RSABase.EncryptByPublicKey(System.Byte[])">
             <summary>
             RSA public key encryption
             </summary>
             <param name="dataBytes">Need to encrypt data</param>
-            <param name="padding">Padding algorithm</param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.Core.RSABase.Decrypt(System.String,System.Security.Cryptography.RSAEncryptionPadding)">
+        <member name="M:Cosmos.Encryption.Core.RSABase.EncryptByPrivateKey(System.String)">
+            <summary>
+            RSA public key encryption
+            </summary>
+            <param name="data">Need to encrypt data</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSABase.EncryptByPrivateKey(System.Byte[])">
+            <summary>
+            RSA private key encryption
+            </summary>
+            <param name="dataBytes">Need to encrypt data</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSABase.DecryptByPublicKey(System.String)">
+            <summary>
+            RSA public key is decrypted
+            </summary>
+            <param name="data">Need to decrypt the data</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSABase.DecryptByPublicKey(System.Byte[])">
+            <summary>
+            RSA public key is decrypted
+            </summary>
+            <param name="dataBytes">Need to decrypt the data</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSABase.DecryptByPrivateKey(System.String)">
             <summary>
             RSA private key is decrypted
             </summary>
             <param name="data">Need to decrypt the data</param>
-            <param name="padding">Padding algorithm</param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.Core.RSABase.Decrypt(System.Byte[],System.Security.Cryptography.RSAEncryptionPadding)">
+        <member name="M:Cosmos.Encryption.Core.RSABase.DecryptByPrivateKey(System.Byte[])">
             <summary>
             RSA private key is decrypted
             </summary>
             <param name="dataBytes">Need to decrypt the data</param>
-            <param name="padding">Padding algorithm</param>
             <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.Core.RSABase.SignData(System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
-            <summary>
-            Use private key for data signing
-            </summary>
-            <param name="data">Need to sign data</param>
-            <param name="hashAlgorithmName">Signed hash algorithm name</param>
-            <param name="padding">Signature padding algorithm</param>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.Core.RSABase.SignDataGetBytes(System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
-            <summary>
-            Use private key for data signing
-            </summary>
-            <param name="data">Need to sign data</param>
-            <param name="hashAlgorithmName">Signed hash algorithm name</param>
-            <param name="padding">Signature padding algorithm</param>
-            <returns>Sign bytes</returns>
-        </member>
-        <member name="M:Cosmos.Encryption.Core.RSABase.VerifyData(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
-            <summary>
-            Use public key to verify data signature
-            </summary>
-            <param name="data">Need to verify the signature data</param>
-            <param name="sign">sign</param>
-            <param name="hashAlgorithmName">Signed hash algorithm name</param>
-            <param name="padding">Signature padding algorithm</param>
-            <returns></returns>
-        </member>
-        <member name="T:Cosmos.Encryption.Core.RSAJsonUtil">
-            <summary>
-            RSAJsonUtil
-            </summary>
-        </member>
-        <member name="M:Cosmos.Encryption.Core.RSAJsonUtil.#ctor(System.String,System.String,System.Int32)">
-            <summary>
-            RSA encryption
-            SHA256 hash algorithm to use the key length of at least 2048
-            </summary>
-            <param name="keySize">Key length in bits:</param>
-            <param name="privateKey">private Key</param>
-            <param name="publicKey">public Key</param>
-        </member>
-        <member name="M:Cosmos.Encryption.Core.RSAJsonUtil.#ctor(System.Text.Encoding,System.String,System.String,System.Int32)">
-            <summary>
-            RSA encryption
-            SHA256 hash algorithm to use the key length of at least 2048
-            </summary>
-            <param name="dataEncoding">Data coding</param>
-            <param name="keySize">Key length in bits:</param>
-            <param name="privateKey">private Key</param>
-            <param name="publicKey">public Key</param>
         </member>
         <member name="T:Cosmos.Encryption.Core.RSAKeyConvert">
             <summary>
@@ -1909,30 +1788,6 @@
             <param name="publicKey"></param>
             <param name="privateKey"></param>
             <param name="keySize"></param>
-        </member>
-        <member name="T:Cosmos.Encryption.Core.RSAXmlUtil">
-            <summary>
-            RSA Xml util
-            </summary>
-        </member>
-        <member name="M:Cosmos.Encryption.Core.RSAXmlUtil.#ctor(System.String,System.String,System.Int32)">
-            <summary>
-            RSA encryption
-            SHA256 hash algorithm to use the key length of at least 2048
-            </summary>
-            <param name="keySize">Key length in bits:</param>
-            <param name="privateKey">private Key</param>
-            <param name="publicKey">public Key</param>
-        </member>
-        <member name="M:Cosmos.Encryption.Core.RSAXmlUtil.#ctor(System.Text.Encoding,System.String,System.String,System.Int32)">
-            <summary>
-            RSA encryption
-            SHA256 hash algorithm to use the key length of at least 2048
-            </summary>
-            <param name="dataEncoding">Data coding</param>
-            <param name="keySize">Key length in bits:</param>
-            <param name="privateKey">private Key</param>
-            <param name="publicKey">public Key</param>
         </member>
         <member name="T:Cosmos.Encryption.Core.SHAHashingBase">
             <summary>

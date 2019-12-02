@@ -1,3 +1,4 @@
+#if !NET451
 using System;
 using System.Security.Cryptography;
 using System.Text;
@@ -54,3 +55,4 @@ namespace Cosmos.Encryption.Core
         }
     }
 }
+#endif

@@ -1,7 +1,10 @@
-#if !NET451
+#if NET451
+
 using System;
 using System.Security.Cryptography;
 using System.Text;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Security;
 
 /*
  * Reference to:
@@ -22,10 +25,14 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         public RSA PrivateRsa;
 
+        protected AsymmetricKeyParameter PrivateRsaKeyParameter;
+
         /// <summary>
         /// Public rsa
         /// </summary>
         public RSA PublicRsa;
+
+        protected AsymmetricKeyParameter PublicRsaKeyParameter;
 
         /// <summary>
         /// Data encoding
@@ -38,9 +45,8 @@ namespace Cosmos.Encryption.Core
         /// RSA public key encryption
         /// </summary>
         /// <param name="data">Need to encrypt data</param>
-        /// <param name="padding">Padding algorithm</param>
         /// <returns></returns>
-        public string EncryptByPublicKey(string data, RSAEncryptionPadding padding)
+        public string EncryptByPublicKey(string data)
         {
             if (PublicRsa == null)
             {
@@ -48,23 +54,22 @@ namespace Cosmos.Encryption.Core
             }
 
             var dataBytes = DataEncoding.GetBytes(data);
-            return EncryptByPublicKey(dataBytes, padding);
+            return EncryptByPublicKey(dataBytes);
         }
 
         /// <summary>
         /// RSA public key encryption
         /// </summary>
         /// <param name="dataBytes">Need to encrypt data</param>
-        /// <param name="padding">Padding algorithm</param>
         /// <returns></returns>
-        public string EncryptByPublicKey(byte[] dataBytes, RSAEncryptionPadding padding)
+        public string EncryptByPublicKey(byte[] dataBytes)
         {
             if (PublicRsa == null)
             {
                 throw new ArgumentException("public key can not null");
             }
 
-            var resBytes = PublicRsa.Encrypt(dataBytes, padding);
+            var resBytes = PublicRsa.EncryptValue(dataBytes);
             return Convert.ToBase64String(resBytes);
         }
 
@@ -76,9 +81,8 @@ namespace Cosmos.Encryption.Core
         /// RSA public key encryption
         /// </summary>
         /// <param name="data">Need to encrypt data</param>
-        /// <param name="padding">Padding algorithm</param>
         /// <returns></returns>
-        public string EncryptByPrivateKey(string data, RSAEncryptionPadding padding)
+        public string EncryptByPrivateKey(string data)
         {
             if (PrivateRsa == null)
             {
@@ -86,23 +90,22 @@ namespace Cosmos.Encryption.Core
             }
 
             var dataBytes = DataEncoding.GetBytes(data);
-            return EncryptByPrivateKey(dataBytes, padding);
+            return EncryptByPrivateKey(dataBytes);
         }
 
         /// <summary>
         /// RSA private key encryption
         /// </summary>
         /// <param name="dataBytes">Need to encrypt data</param>
-        /// <param name="padding">Padding algorithm</param>
         /// <returns></returns>
-        public string EncryptByPrivateKey(byte[] dataBytes, RSAEncryptionPadding padding)
+        public string EncryptByPrivateKey(byte[] dataBytes)
         {
             if (PrivateRsa == null)
             {
                 throw new ArgumentException("private key can not null");
             }
 
-            var resBytes = PrivateRsa.Encrypt(dataBytes, padding);
+            var resBytes = PrivateRsa.EncryptValue(dataBytes);
             return Convert.ToBase64String(resBytes);
         }
 
@@ -114,9 +117,8 @@ namespace Cosmos.Encryption.Core
         /// RSA public key is decrypted
         /// </summary>
         /// <param name="data">Need to decrypt the data</param>
-        /// <param name="padding">Padding algorithm</param>
         /// <returns></returns>
-        public string DecryptByPublicKey(string data, RSAEncryptionPadding padding)
+        public string DecryptByPublicKey(string data)
         {
             if (PublicRsa == null)
             {
@@ -124,23 +126,22 @@ namespace Cosmos.Encryption.Core
             }
 
             byte[] dataBytes = Convert.FromBase64String(data);
-            return DecryptByPublicKey(dataBytes, padding);
+            return DecryptByPublicKey(dataBytes);
         }
 
         /// <summary>
         /// RSA public key is decrypted
         /// </summary>
         /// <param name="dataBytes">Need to decrypt the data</param>
-        /// <param name="padding">Padding algorithm</param>
         /// <returns></returns>
-        public string DecryptByPublicKey(byte[] dataBytes, RSAEncryptionPadding padding)
+        public string DecryptByPublicKey(byte[] dataBytes)
         {
             if (PublicRsa == null)
             {
                 throw new ArgumentException("public key can not null");
             }
 
-            var resBytes = PublicRsa.Decrypt(dataBytes, padding);
+            var resBytes = PublicRsa.DecryptValue(dataBytes);
             return DataEncoding.GetString(resBytes);
         }
 
@@ -152,9 +153,8 @@ namespace Cosmos.Encryption.Core
         /// RSA private key is decrypted
         /// </summary>
         /// <param name="data">Need to decrypt the data</param>
-        /// <param name="padding">Padding algorithm</param>
         /// <returns></returns>
-        public string DecryptByPrivateKey(string data, RSAEncryptionPadding padding)
+        public string DecryptByPrivateKey(string data)
         {
             if (PrivateRsa == null)
             {
@@ -162,27 +162,28 @@ namespace Cosmos.Encryption.Core
             }
 
             byte[] dataBytes = Convert.FromBase64String(data);
-            return DecryptByPrivateKey(dataBytes, padding);
+            return DecryptByPrivateKey(dataBytes);
         }
 
         /// <summary>
         /// RSA private key is decrypted
         /// </summary>
         /// <param name="dataBytes">Need to decrypt the data</param>
-        /// <param name="padding">Padding algorithm</param>
         /// <returns></returns>
-        public string DecryptByPrivateKey(byte[] dataBytes, RSAEncryptionPadding padding)
+        public string DecryptByPrivateKey(byte[] dataBytes)
         {
             if (PrivateRsa == null)
             {
                 throw new ArgumentException("private key can not null");
             }
 
-            var resBytes = PrivateRsa.Decrypt(dataBytes, padding);
+            var resBytes = PrivateRsa.DecryptValue(dataBytes);
             return DataEncoding.GetString(resBytes);
         }
 
         #endregion
+
+        /*
 
         #region Sign - Private key
 
@@ -240,6 +241,31 @@ namespace Cosmos.Encryption.Core
             var signBytes = Convert.FromBase64String(sign);
             var res = PublicRsa.VerifyData(dataBytes, signBytes, hashAlgorithmName, padding);
             return res;
+        }
+
+        #endregion
+        
+        */
+
+        #region Misc
+
+        protected AsymmetricKeyParameter GetPublicKeyParameter(string s)
+        {
+            s = s.Replace("\r", "").Replace("\n", "").Replace(" ", "");
+            byte[] publicInfoByte = Convert.FromBase64String(s);
+            //Asn1Object pubKeyObj = Asn1Object.FromByteArray(publicInfoByte); //这里也可以从流中读取，从本地导入   
+            AsymmetricKeyParameter pubKey = PublicKeyFactory.CreateKey(publicInfoByte);
+            return pubKey;
+        }
+
+        protected AsymmetricKeyParameter GetPrivateKeyParameter(string s)
+        {
+            s = s.Replace("\r", "").Replace("\n", "").Replace(" ", "");
+            byte[] privateInfoByte = Convert.FromBase64String(s);
+            // Asn1Object priKeyObj = Asn1Object.FromByteArray(privateInfoByte);//这里也可以从流中读取，从本地导入   
+            // PrivateKeyInfo privateKeyInfo = PrivateKeyInfoFactory.CreatePrivateKeyInfo(privateKey);
+            AsymmetricKeyParameter priKey = PrivateKeyFactory.CreateKey(privateInfoByte);
+            return priKey;
         }
 
         #endregion

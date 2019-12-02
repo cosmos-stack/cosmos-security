@@ -1,3 +1,5 @@
+#if !NET4511
+
 using System;
 using System.Security.Cryptography;
 using System.Text;
@@ -47,6 +49,10 @@ namespace Cosmos.Encryption.Core
                 PrivateRsa.KeySize = keySize;
                 PrivateRsa.FromPkcs1PrivateString(privateKey, out var priRsap);
 
+#if NET451
+                PrivateRsaKeyParameter = GetPrivateKeyParameter(privateKey);
+#endif
+
                 if (string.IsNullOrEmpty(publicKey))
                 {
                     PublicRsa = RSA.Create();
@@ -57,6 +63,10 @@ namespace Cosmos.Encryption.Core
                         Exponent = priRsap.Exponent
                     };
                     PublicRsa.ImportParameters(pubRasp);
+
+#if NET451
+                    PublicRsaKeyParameter = GetPublicKeyParameter(publicKey);
+#endif
                 }
             }
 
@@ -65,9 +75,15 @@ namespace Cosmos.Encryption.Core
                 PublicRsa = RSA.Create();
                 PublicRsa.KeySize = keySize;
                 PublicRsa.FromPkcs1PublicString(publicKey, out _);
+                
+#if NET451
+                PublicRsaKeyParameter = GetPublicKeyParameter(publicKey);
+#endif
             }
 
             DataEncoding = encoding ?? Encoding.UTF8;
         }
     }
 }
+
+#endif
