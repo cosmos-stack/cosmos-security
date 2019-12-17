@@ -10,6 +10,7 @@
         <AssemblyName>Cosmos.Encryption</AssemblyName>
         <PackageId>Cosmos.Encryption</PackageId>
         <Description>Cosmos encryption library</Description>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
     
     <ItemGroup>
@@ -24,5 +25,9 @@
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
       <DocumentationFile>Cosmos.Encryption.xml</DocumentationFile>
     </PropertyGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0' OR '$(TargetFramework)'=='net461' OR '$(TargetFramework)'=='net451'">
+        <PackageReference Include="System.Memory" Version="4.5.3" />
+    </ItemGroup>
 
 </Project>

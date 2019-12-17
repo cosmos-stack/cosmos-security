@@ -1619,6 +1619,64 @@
             <param name="Message"></param>
             <param name="InnerException"></param>
         </member>
+        <member name="T:Cosmos.Encryption.Core.MurmurHash3Core">
+            <summary>
+            MurmurHash3 core services
+            Reference to:
+                https://github.com/darrenkopp/murmurhash-net/blob/master/MurmurHash/MurmurHash.cs
+                Author: Darren Kopp
+                Apache License 2.0
+            </summary>
+            <summary>
+            MurmurHash3 core services
+            Reference to:
+                https://github.com/darrenkopp/murmurhash-net/blob/master/MurmurHash/MurmurHash.cs
+                Author: Darren Kopp
+                Apache License 2.0
+            </summary>
+            <summary>
+            MurmurHash3 core services
+            Reference to:
+                https://github.com/darrenkopp/murmurhash-net/blob/master/MurmurHash/MurmurHash.cs
+                Author: Darren Kopp
+                Apache License 2.0
+            </summary>
+            <summary>
+            MuemueHash3 core services
+            Reference to:
+                https://github.com/darrenkopp/murmurhash-net/blob/master/MurmurHash/MurmurHash.cs
+                Author: Darren Kopp
+                Apache License 2.0
+            </summary>
+            <summary>
+            MurmurHash3 core services
+            Reference to:
+                https://github.com/odinmillion/MurmurHash.Net/blob/master/src/MurmurHash.Net/MurmurHash3.cs
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MurmurHash3Core.CreateL32(System.UInt32,Cosmos.Encryption.MurmurHash3Managed)">
+            <summary>
+            Create MurmurHash3 32
+            </summary>
+            <param name="seed"></param>
+            <param name="managed"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.MurmurHash3Core.CreateL128(System.UInt32,Cosmos.Encryption.MurmurHash3Managed,Cosmos.Encryption.MurmurHash3Preference)">
+            <summary>
+            Create MurmurHash3 128
+            </summary>
+            <param name="seed"></param>
+            <param name="managed"></param>
+            <param name="preference"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Core.MurmurHash3Core.FastMode">
+            <summary>
+            Fast mode for MurmurHash3
+            </summary>
+        </member>
         <member name="T:Cosmos.Encryption.Core.RSABase">
             <summary>
             RSABase
@@ -2743,7 +2801,7 @@
             <summary>
             MD5 hashing method, default encrypt string is 32 bits.
             </summary>
-            <param name="data">The string of encrypt.</param>
+            <param name="data">The string you want to hash.</param>
             <param name="bits">Encrypt string bits number,only 16,32,64.</param>
             <param name="isUpper"></param>
             <param name="isIncludeHyphen"></param>
@@ -2761,6 +2819,339 @@
             <param name="isIncludeHyphen"></param>
             <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
             <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.MurmurHash2Provider">
+            <summary>
+            MurmurHash2 hashing provider
+            Reference to:
+                https://github.com/jitbit/MurmurHash.net/blob/master/MurmurHash.cs
+                Author: jitbit.com
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash2Provider.Signature(System.String,System.Text.Encoding,System.UInt32)">
+            <summary>
+            Signature
+            </summary>
+            <param name="data">The string you want to hash.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <param name="seed"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash2Provider.Signature(System.Byte[],System.UInt32)">
+            <summary>
+            Signature
+            </summary>
+            <param name="data">The data need to hash.</param>
+            <param name="seed"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash2Provider.SignatureHash(System.String,System.Text.Encoding,System.UInt32)">
+            <summary>
+            Signature hash
+            </summary>
+            <param name="data"></param>
+            <param name="encoding"></param>
+            <param name="seed"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash2Provider.SignatureHash(System.Byte[],System.UInt32)">
+            <summary>
+            Signature Hash
+            </summary>
+            <param name="data"></param>
+            <param name="seed"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash2Provider.Verify(System.Int64,System.String,System.Text.Encoding,System.UInt32)">
+            <summary>
+            Verify
+            </summary>
+            <param name="comparison"></param>
+            <param name="data"></param>
+            <param name="encoding"></param>
+            <param name="seed"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash2Provider.Verify(System.Int64,System.Byte[],System.UInt32)">
+            <summary>
+            Verify
+            </summary>
+            <param name="comparison"></param>
+            <param name="data"></param>
+            <param name="seed"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.MurmurHash3InputStream">
+            <summary>
+            MurmurHash3 input stream
+            Reference to:
+                https://github.com/darrenkopp/murmurhash-net/blob/master/MurmurHash/MurmurHash.cs
+                Author: Darren Kopp
+                Apache License 2.0
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3InputStream.#ctor(System.IO.Stream,System.UInt32,Cosmos.Encryption.MurmurHash3Managed,Cosmos.Encryption.MurmurHash3Types,Cosmos.Encryption.MurmurHash3Preference)">
+            <inheritdoc />
+        </member>
+        <member name="P:Cosmos.Encryption.MurmurHash3InputStream.Hash">
+            <summary>
+            Hash
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.MurmurHash3InputStream.CanRead">
+            <inheritdoc />
+        </member>
+        <member name="P:Cosmos.Encryption.MurmurHash3InputStream.CanSeek">
+            <inheritdoc />
+        </member>
+        <member name="P:Cosmos.Encryption.MurmurHash3InputStream.CanWrite">
+            <inheritdoc />
+        </member>
+        <member name="P:Cosmos.Encryption.MurmurHash3InputStream.Length">
+            <inheritdoc />
+        </member>
+        <member name="P:Cosmos.Encryption.MurmurHash3InputStream.Position">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3InputStream.Flush">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3InputStream.Read(System.Byte[],System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3InputStream.Seek(System.Int64,System.IO.SeekOrigin)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3InputStream.SetLength(System.Int64)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3InputStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3InputStream.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Cosmos.Encryption.MurmurHash3Managed">
+            <summary>
+            MurmurHash3 managed
+            Reference to:
+                https://github.com/darrenkopp/murmurhash-net/blob/master/MurmurHash/MurmurHash.cs
+                Author: Darren Kopp
+                Apache License 2.0
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.MurmurHash3Managed.TRUE">
+            <summary>
+            Managed mode
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.MurmurHash3Managed.FALSE">
+            <summary>
+            Unmanaged mode
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.MurmurHash3OutputStream">
+            <summary>
+            MurmurHash3 output stream
+            Reference to:
+                https://github.com/darrenkopp/murmurhash-net/blob/master/MurmurHash/MurmurHash.cs
+                Author: Darren Kopp
+                Apache License 2.0
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3OutputStream.#ctor(System.IO.Stream,System.UInt32,Cosmos.Encryption.MurmurHash3Managed,Cosmos.Encryption.MurmurHash3Types,Cosmos.Encryption.MurmurHash3Preference)">
+            <inheritdoc />
+        </member>
+        <member name="P:Cosmos.Encryption.MurmurHash3OutputStream.Hash">
+            <summary>
+            Hash
+            </summary>
+        </member>
+        <member name="P:Cosmos.Encryption.MurmurHash3OutputStream.CanRead">
+            <inheritdoc />
+        </member>
+        <member name="P:Cosmos.Encryption.MurmurHash3OutputStream.CanSeek">
+            <inheritdoc />
+        </member>
+        <member name="P:Cosmos.Encryption.MurmurHash3OutputStream.CanWrite">
+            <inheritdoc />
+        </member>
+        <member name="P:Cosmos.Encryption.MurmurHash3OutputStream.Length">
+            <inheritdoc />
+        </member>
+        <member name="P:Cosmos.Encryption.MurmurHash3OutputStream.Position">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3OutputStream.Flush">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3OutputStream.Read(System.Byte[],System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3OutputStream.Seek(System.Int64,System.IO.SeekOrigin)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3OutputStream.SetLength(System.Int64)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3OutputStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3OutputStream.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Cosmos.Encryption.MurmurHash3Preference">
+            <summary>
+            Preference of MurmurHash3 hashing algorithm 
+            Reference to:
+                https://github.com/darrenkopp/murmurhash-net/blob/master/MurmurHash/MurmurHash.cs
+                Author: Darren Kopp
+                Apache License 2.0
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.MurmurHash3Preference.AUTO">
+            <summary>
+            Auto
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.MurmurHash3Preference.X64">
+            <summary>
+            x64
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.MurmurHash3Preference.X86">
+            <summary>
+            x86
+            </summary>
+        </member>
+        <member name="T:Cosmos.Encryption.MurmurHash3Provider">
+             <summary>
+             MurmurHash3 hashing provider
+             Reference to:
+                 https://github.com/odinmillion/MurmurHash.Net/blob/master/src/MurmurHash.Net/MurmurHash3.cs
+            
+             Reference to:
+                 https://github.com/darrenkopp/murmurhash-net/blob/master/MurmurHash/MurmurHash.cs
+                 Author: Darren Kopp
+                 Apache License 2.0
+             </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3Provider.Signature(System.String,System.UInt32,System.Text.Encoding,Cosmos.Encryption.MurmurHash3Types,Cosmos.Encryption.MurmurHash3Preference,Cosmos.Encryption.MurmurHash3Managed)">
+            <summary>
+            Signature
+            </summary>
+            <param name="data"></param>
+            <param name="seed"></param>
+            <param name="encoding"></param>
+            <param name="types"></param>
+            <param name="preference"></param>
+            <param name="managed"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3Provider.Signature(System.Byte[],System.UInt32,Cosmos.Encryption.MurmurHash3Types,Cosmos.Encryption.MurmurHash3Preference,Cosmos.Encryption.MurmurHash3Managed)">
+            <summary>
+            Signature
+            </summary>
+            <param name="data"></param>
+            <param name="seed"></param>
+            <param name="types"></param>
+            <param name="preference"></param>
+            <param name="managed"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3Provider.SignatureHash(System.String,System.UInt32,System.Text.Encoding,Cosmos.Encryption.MurmurHash3Types,Cosmos.Encryption.MurmurHash3Preference,Cosmos.Encryption.MurmurHash3Managed)">
+            <summary>
+            Signature hash
+            </summary>
+            <param name="data"></param>
+            <param name="seed"></param>
+            <param name="encoding"></param>
+            <param name="types"></param>
+            <param name="preference"></param>
+            <param name="managed"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3Provider.SignatureHash(System.Byte[],System.UInt32,Cosmos.Encryption.MurmurHash3Types,Cosmos.Encryption.MurmurHash3Preference,Cosmos.Encryption.MurmurHash3Managed)">
+            <summary>
+            Signature hash
+            </summary>
+            <param name="data"></param>
+            <param name="seed"></param>
+            <param name="types"></param>
+            <param name="preference"></param>
+            <param name="managed"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3Provider.CreateInputStream(System.IO.Stream,System.UInt32,Cosmos.Encryption.MurmurHash3Managed,Cosmos.Encryption.MurmurHash3Types,Cosmos.Encryption.MurmurHash3Preference)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.MurmurHash3InputStream"/>.
+            </summary>
+            <param name="stream"></param>
+            <param name="seed"></param>
+            <param name="managed"></param>
+            <param name="types"></param>
+            <param name="preference"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3Provider.CreateOutputStream(System.IO.Stream,System.UInt32,Cosmos.Encryption.MurmurHash3Managed,Cosmos.Encryption.MurmurHash3Types,Cosmos.Encryption.MurmurHash3Preference)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Encryption.MurmurHash3OutputStream"/>.
+            </summary>
+            <param name="stream"></param>
+            <param name="seed"></param>
+            <param name="managed"></param>
+            <param name="types"></param>
+            <param name="preference"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3Provider.Verify(System.UInt32,System.String,System.UInt32,System.Text.Encoding,Cosmos.Encryption.MurmurHash3Types,Cosmos.Encryption.MurmurHash3Preference,Cosmos.Encryption.MurmurHash3Managed)">
+            <summary>
+            Verify
+            </summary>
+            <param name="comparison"></param>
+            <param name="data"></param>
+            <param name="seed"></param>
+            <param name="encoding"></param>
+            <param name="types"></param>
+            <param name="preference"></param>
+            <param name="managed"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MurmurHash3Provider.Verify(System.UInt32,System.Byte[],System.UInt32,Cosmos.Encryption.MurmurHash3Types,Cosmos.Encryption.MurmurHash3Preference,Cosmos.Encryption.MurmurHash3Managed)">
+            <summary>
+            Verify
+            </summary>
+            <param name="comparison"></param>
+            <param name="data"></param>
+            <param name="seed"></param>
+            <param name="types"></param>
+            <param name="preference"></param>
+            <param name="managed"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.MurmurHash3Types">
+            <summary>
+            The type of MurmurHash3 hashing algorithm
+            Reference to:
+                https://github.com/darrenkopp/murmurhash-net/blob/master/MurmurHash/MurmurHash.cs
+                Author: Darren Kopp
+                Apache License 2.0
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.MurmurHash3Types.FAST">
+            <summary>
+            Fast mode
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.MurmurHash3Types.L_32">
+            <summary>
+            Murmur32 mode
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.MurmurHash3Types.L_128">
+            <summary>
+            Murmur128 mode
+            </summary>
         </member>
         <member name="T:Cosmos.Encryption.SHA1HashingProvider">
             <summary>
@@ -2922,6 +3313,44 @@
             <param name="comparison"></param>
             <param name="data">The string need to hash.</param>
             <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Encryption.Time33HashingProvider">
+            <summary>
+            Time33  / DBJ33A hashing provider
+            Reference to:
+                http://www.nowamagic.net/academy/detail/3008097
+                https://www.cnblogs.com/52fhy/p/5007456.html
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Time33HashingProvider.Signature(System.String,System.Text.Encoding)">
+            <summary>
+            Signature
+            </summary>
+            <param name="data">The string you want to hash.</param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Time33HashingProvider.Signature(System.Byte[])">
+            <summary>
+            Signature
+            </summary>
+            <param name="data">The data need to hash.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Time33HashingProvider.SignatureHash(System.String,System.Text.Encoding)">
+            <summary>
+            Signature hash
+            </summary>
+            <param name="data"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Time33HashingProvider.SignatureHash(System.Byte[])">
+            <summary>
+            Signature hash
+            </summary>
+            <param name="data"></param>
             <returns></returns>
         </member>
         <member name="M:Cosmos.Encryption.Time33HashingProvider.Verify(System.Int64,System.String,System.Text.Encoding)">
@@ -3768,6 +4197,21 @@
             </summary>
             <param name="data"></param>
             <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Extensions.Extensions.ToTime33(System.String,System.Text.Encoding)">
+            <summary>
+            To Time33 / DBJ33A
+            </summary>
+            <param name="data"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Extensions.Extensions.ToTime33(System.Byte[])">
+            <summary>
+            To Time33 / DBJ33A
+            </summary>
+            <param name="data"></param>
             <returns></returns>
         </member>
         <member name="T:System.Security.Cryptography.MD4CryptoServiceProvider">
