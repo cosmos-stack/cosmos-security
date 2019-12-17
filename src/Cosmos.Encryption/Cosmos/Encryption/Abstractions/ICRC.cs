@@ -1,18 +1,17 @@
 ﻿using System.IO;
 
-namespace Cosmos.Encryption.Abstractions
-{
+namespace Cosmos.Encryption.Abstractions {
     /// <summary>
     /// Interface for CRC
     /// </summary>
     /// <typeparam name="TCRC"></typeparam>
     /// <typeparam name="T1"></typeparam>
     /// <typeparam name="T2"></typeparam>
+    // ReSharper disable once InconsistentNaming
     public interface ICRC<TCRC, T1, T2>
         where TCRC : class, ICRC<TCRC, T1, T2>, new()
         where T1 : struct
-        where T2 : struct
-    {
+        where T2 : struct {
         /// <summary>
         /// Value
         /// </summary>

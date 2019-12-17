@@ -5,20 +5,19 @@ using Cosmos.Encryption.Core;
 using Cosmos.Encryption.Core.Internals;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption
-{
+namespace Cosmos.Encryption {
     /// <summary>
     /// CRC16
     /// Author: X-New-Life
     ///     https://github.com/NewLifeX/X/blob/master/NewLife.Core/Security/Crc16.cs
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public sealed class CRC16 : ICRC<CRC16, ushort, short>
-    {
+    public sealed class CRC16 : ICRC<CRC16, ushort, short> {
         /// <summary>
         /// Value
         /// </summary>
         public ushort Value { get; set; } = CRC16CheckingProvider.Seed;
+
         // ReSharper disable once InconsistentNaming
         private ushort[] CRCTable { get; } = CRCTableGenerator.GenerationCRC16Table();
 
@@ -26,8 +25,7 @@ namespace Cosmos.Encryption
         /// Reset
         /// </summary>
         /// <returns></returns>
-        public CRC16 Reset()
-        {
+        public CRC16 Reset() {
             Value = CRC16CheckingProvider.Seed;
             return this;
         }
@@ -37,9 +35,8 @@ namespace Cosmos.Encryption
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public CRC16 Update(short value)
-        {
-            Value = (ushort)((Value << 8) ^ CRCTable[(Value >> 8) ^ value]);
+        public CRC16 Update(short value) {
+            Value = (ushort) ((Value << 8) ^ CRCTable[(Value >> 8) ^ value]);
             return this;
         }
 
@@ -51,20 +48,17 @@ namespace Cosmos.Encryption
         /// <param name="count"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public CRC16 Update(byte[] buffer, int offset = 0, int count = -1)
-        {
+        public CRC16 Update(byte[] buffer, int offset = 0, int count = -1) {
             Checker.Buffer(buffer);
 
             if (count <= 0) count = buffer.Length;
-            if (offset < 0 || offset + count > buffer.Length)
-            {
+            if (offset < 0 || offset + count > buffer.Length) {
                 throw new ArgumentOutOfRangeException(nameof(offset));
             }
 
             Value ^= Value;
-            for (var i = 0; i < count; i++)
-            {
-                Value = (ushort)((Value << 8) ^ CRCTable[(Value >> 8 ^ buffer[offset + i]) & 0xFF]);
+            for (var i = 0; i < count; i++) {
+                Value = (ushort) ((Value << 8) ^ CRCTable[(Value >> 8 ^ buffer[offset + i]) & 0xFF]);
             }
 
             return this;
@@ -76,24 +70,21 @@ namespace Cosmos.Encryption
         /// <param name="stream"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public CRC16 Update(Stream stream, long count = -1)
-        {
+        public CRC16 Update(Stream stream, long count = -1) {
             Checker.Stream(stream);
 
             if (count <= 0) count = long.MaxValue;
 
-            while (--count >= 0)
-            {
+            while (--count >= 0) {
                 var b = stream.ReadByte();
                 if (b == -1) break;
 
-                Value ^= (byte)b;
-                for (var i = 0; i < 8; i++)
-                {
+                Value ^= (byte) b;
+                for (var i = 0; i < 8; i++) {
                     if ((Value & 0x0001) != 0)
-                        Value = (ushort)((Value >> 1) ^ 0xa001);
+                        Value = (ushort) ((Value >> 1) ^ 0xa001);
                     else
-                        Value = (ushort)(Value >> 1);
+                        Value = (ushort) (Value >> 1);
                 }
             }
 

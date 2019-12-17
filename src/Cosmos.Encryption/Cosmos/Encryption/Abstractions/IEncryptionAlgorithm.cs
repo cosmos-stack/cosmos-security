@@ -1,10 +1,8 @@
-﻿namespace Cosmos.Encryption.Abstractions
-{
+﻿namespace Cosmos.Encryption.Abstractions {
     /// <summary>
     /// Interface for encryption algorithm
     /// </summary>
-    public interface IEncryptionAlgorithm
-    {
+    public interface IEncryptionAlgorithm {
         /// <summary>
         /// Encrypt
         /// </summary>

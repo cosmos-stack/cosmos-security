@@ -5,8 +5,7 @@ using Cosmos.Encryption.Core.Internals;
 using Cosmos.Encryption.Core.Internals.Extensions;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption
-{
+namespace Cosmos.Encryption {
     /// <summary>
     /// Asymmetric/RSA encryption.
     /// Reference: Seay Xu
@@ -15,8 +14,7 @@ namespace Cosmos.Encryption
     ///     https://github.com/myloveCc/NETCore.Encrypt/blob/master/src/NETCore.Encrypt/EncryptProvider.cs
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public static partial class RSAEncryptionProvider
-    {
+    public static partial class RSAEncryptionProvider {
         /// <summary>
         /// Create a new <see cref="RSAKey"/>
         /// </summary>
@@ -24,24 +22,22 @@ namespace Cosmos.Encryption
         /// <param name="keyType"></param>
         /// <param name="format"></param>
         /// <returns></returns>
-        public static RSAKey CreateKey(RSAKeySizeTypes size = RSAKeySizeTypes.R2048, RSAKeyTypes keyType = RSAKeyTypes.XML, bool format = false)
-        {
-            switch (keyType)
-            {
+        public static RSAKey CreateKey(RSAKeySizeTypes size = RSAKeySizeTypes.R2048, RSAKeyTypes keyType = RSAKeyTypes.XML, bool format = false) {
+            switch (keyType) {
                 case RSAKeyTypes.Pkcs1:
-                    return Core.RSAKeyGenerator.Pkcs1Key((int)size, format);
+                    return Core.RSAKeyGenerator.Pkcs1Key((int) size, format);
 
                 case RSAKeyTypes.Pkcs8:
-                    return Core.RSAKeyGenerator.Pkcs8Key((int)size, format);
+                    return Core.RSAKeyGenerator.Pkcs8Key((int) size, format);
 
                 case RSAKeyTypes.XML:
-                    return Core.RSAKeyGenerator.XmlKey((int)size);
+                    return Core.RSAKeyGenerator.XmlKey((int) size);
 
                 case RSAKeyTypes.JSON:
-                    return Core.RSAKeyGenerator.JsonKey((int)size);
+                    return Core.RSAKeyGenerator.JsonKey((int) size);
 
                 default:
-                    return Core.RSAKeyGenerator.XmlKey((int)size);
+                    return Core.RSAKeyGenerator.XmlKey((int) size);
             }
         }
 
@@ -50,10 +46,8 @@ namespace Cosmos.Encryption
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static RSA CreateFromXmlKey(string key)
-        {
-            if (string.IsNullOrWhiteSpace(key))
-            {
+        public static RSA CreateFromXmlKey(string key) {
+            if (string.IsNullOrWhiteSpace(key)) {
                 throw new ArgumentNullException(nameof(key));
             }
 
@@ -67,8 +61,7 @@ namespace Cosmos.Encryption
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static RSA CreateFromJsonKey(string key)
-        {
+        public static RSA CreateFromJsonKey(string key) {
             Checker.Key(key);
 
             var rsa = RSA.Create();
@@ -81,8 +74,7 @@ namespace Cosmos.Encryption
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static RSA CreateFromPkcs1PublicKey(string key)
-        {
+        public static RSA CreateFromPkcs1PublicKey(string key) {
             Checker.Key(key);
 
             var rsa = RSA.Create();
@@ -95,8 +87,7 @@ namespace Cosmos.Encryption
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static RSA CreateFromPkcs1PrivateKey(string key)
-        {
+        public static RSA CreateFromPkcs1PrivateKey(string key) {
             Checker.Key(key);
 
             var rsa = RSA.Create();
@@ -109,8 +100,7 @@ namespace Cosmos.Encryption
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static RSA CreateFromPkcs8PublicKey(string key)
-        {
+        public static RSA CreateFromPkcs8PublicKey(string key) {
             Checker.Key(key);
 
             var rsa = RSA.Create();
@@ -123,8 +113,7 @@ namespace Cosmos.Encryption
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static RSA CreateFromPkcs8PrivateKey(string key)
-        {
+        public static RSA CreateFromPkcs8PrivateKey(string key) {
             var rsa = RSA.Create();
             rsa.FromPkcs8PrivateString(key, out _);
             return rsa;
@@ -136,8 +125,7 @@ namespace Cosmos.Encryption
         /// <param name="certFile">The string path of certificate file.</param>
         /// <param name="password">The string password of certificate file.</param>
         /// <returns>String private key of xml format.</returns>
-        public static string GetPrivateKey(string certFile, string password)
-        {
+        public static string GetPrivateKey(string certFile, string password) {
             Checker.File(certFile, nameof(certFile));
             var cert = new X509Certificate2(certFile, password, X509KeyStorageFlags.Exportable);
             return cert.PrivateKey.ToXmlString(true);
@@ -148,8 +136,7 @@ namespace Cosmos.Encryption
         /// </summary>
         /// <param name="certFile">The string path of certificate file.</param>
         /// <returns>String public key of xml format.</returns>
-        public static string GetPublicKey(string certFile)
-        {
+        public static string GetPublicKey(string certFile) {
             Checker.File(certFile, nameof(certFile));
             var cert = new X509Certificate2(certFile);
             return cert.PublicKey.Key.ToXmlString(false);

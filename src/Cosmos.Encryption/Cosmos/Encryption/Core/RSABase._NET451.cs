@@ -1,5 +1,4 @@
 #if NET451
-
 using System;
 using System.Security.Cryptography;
 using System.Text;
@@ -12,19 +11,20 @@ using Org.BouncyCastle.Security;
  *     Author:Zhiqiang Li
  */
 
-namespace Cosmos.Encryption.Core
-{
+namespace Cosmos.Encryption.Core {
     /// <summary>
     /// RSABase
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public abstract class RSABase
-    {
+    public abstract class RSABase {
         /// <summary>
         /// Private rsa
         /// </summary>
         public RSA PrivateRsa;
 
+        /// <summary>
+        /// Private rsa key parameter
+        /// </summary>
         protected AsymmetricKeyParameter PrivateRsaKeyParameter;
 
         /// <summary>
@@ -32,6 +32,9 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         public RSA PublicRsa;
 
+        /// <summary>
+        /// Public rsa key parameter
+        /// </summary>
         protected AsymmetricKeyParameter PublicRsaKeyParameter;
 
         /// <summary>
@@ -46,10 +49,8 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         /// <param name="data">Need to encrypt data</param>
         /// <returns></returns>
-        public string EncryptByPublicKey(string data)
-        {
-            if (PublicRsa == null)
-            {
+        public string EncryptByPublicKey(string data) {
+            if (PublicRsa == null) {
                 throw new ArgumentException("public key can not null");
             }
 
@@ -62,10 +63,8 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         /// <param name="dataBytes">Need to encrypt data</param>
         /// <returns></returns>
-        public string EncryptByPublicKey(byte[] dataBytes)
-        {
-            if (PublicRsa == null)
-            {
+        public string EncryptByPublicKey(byte[] dataBytes) {
+            if (PublicRsa == null) {
                 throw new ArgumentException("public key can not null");
             }
 
@@ -82,10 +81,8 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         /// <param name="data">Need to encrypt data</param>
         /// <returns></returns>
-        public string EncryptByPrivateKey(string data)
-        {
-            if (PrivateRsa == null)
-            {
+        public string EncryptByPrivateKey(string data) {
+            if (PrivateRsa == null) {
                 throw new ArgumentException("private key can not null");
             }
 
@@ -98,10 +95,8 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         /// <param name="dataBytes">Need to encrypt data</param>
         /// <returns></returns>
-        public string EncryptByPrivateKey(byte[] dataBytes)
-        {
-            if (PrivateRsa == null)
-            {
+        public string EncryptByPrivateKey(byte[] dataBytes) {
+            if (PrivateRsa == null) {
                 throw new ArgumentException("private key can not null");
             }
 
@@ -118,10 +113,8 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         /// <param name="data">Need to decrypt the data</param>
         /// <returns></returns>
-        public string DecryptByPublicKey(string data)
-        {
-            if (PublicRsa == null)
-            {
+        public string DecryptByPublicKey(string data) {
+            if (PublicRsa == null) {
                 throw new ArgumentException("public key can not null");
             }
 
@@ -134,10 +127,8 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         /// <param name="dataBytes">Need to decrypt the data</param>
         /// <returns></returns>
-        public string DecryptByPublicKey(byte[] dataBytes)
-        {
-            if (PublicRsa == null)
-            {
+        public string DecryptByPublicKey(byte[] dataBytes) {
+            if (PublicRsa == null) {
                 throw new ArgumentException("public key can not null");
             }
 
@@ -154,10 +145,8 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         /// <param name="data">Need to decrypt the data</param>
         /// <returns></returns>
-        public string DecryptByPrivateKey(string data)
-        {
-            if (PrivateRsa == null)
-            {
+        public string DecryptByPrivateKey(string data) {
+            if (PrivateRsa == null) {
                 throw new ArgumentException("private key can not null");
             }
 
@@ -170,10 +159,8 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         /// <param name="dataBytes">Need to decrypt the data</param>
         /// <returns></returns>
-        public string DecryptByPrivateKey(byte[] dataBytes)
-        {
-            if (PrivateRsa == null)
-            {
+        public string DecryptByPrivateKey(byte[] dataBytes) {
+            if (PrivateRsa == null) {
                 throw new ArgumentException("private key can not null");
             }
 
@@ -249,8 +236,12 @@ namespace Cosmos.Encryption.Core
 
         #region Misc
 
-        protected AsymmetricKeyParameter GetPublicKeyParameter(string s)
-        {
+        /// <summary>
+        /// Get public key parameter
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        protected AsymmetricKeyParameter GetPublicKeyParameter(string s) {
             s = s.Replace("\r", "").Replace("\n", "").Replace(" ", "");
             byte[] publicInfoByte = Convert.FromBase64String(s);
             //Asn1Object pubKeyObj = Asn1Object.FromByteArray(publicInfoByte); //这里也可以从流中读取，从本地导入   
@@ -258,8 +249,12 @@ namespace Cosmos.Encryption.Core
             return pubKey;
         }
 
-        protected AsymmetricKeyParameter GetPrivateKeyParameter(string s)
-        {
+        /// <summary>
+        /// Get private key parameter
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        protected AsymmetricKeyParameter GetPrivateKeyParameter(string s) {
             s = s.Replace("\r", "").Replace("\n", "").Replace(" ", "");
             byte[] privateInfoByte = Convert.FromBase64String(s);
             // Asn1Object priKeyObj = Asn1Object.FromByteArray(privateInfoByte);//这里也可以从流中读取，从本地导入   

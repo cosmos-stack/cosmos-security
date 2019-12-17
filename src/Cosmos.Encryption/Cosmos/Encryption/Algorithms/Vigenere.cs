@@ -2,8 +2,7 @@
 using Cosmos.Encryption.Abstractions;
 using Cosmos.Encryption.Core.Internals;
 
-namespace Cosmos.Encryption.Algorithms
-{
+namespace Cosmos.Encryption.Algorithms {
     /// <summary>
     /// Vigenere encryption algorithm
     /// for more info, please view:
@@ -11,8 +10,7 @@ namespace Cosmos.Encryption.Algorithms
     /// Author: Omar-Salem
     ///     https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/Vigenere.cs
     /// </summary>
-    public sealed class Vigenere : IEncryptionAlgorithm
-    {
+    public sealed class Vigenere : IEncryptionAlgorithm {
         private string Key { get; }
 
         /// <summary>
@@ -35,21 +33,17 @@ namespace Cosmos.Encryption.Algorithms
         /// <returns></returns>
         public string Decrypt(string cipher) => ProcessFunc()(Key)(cipher)(EncryptionAlgorithmMode.Decrypt);
 
-        private static Func<string, Func<string, Func<EncryptionAlgorithmMode, string>>> ProcessFunc() => key => message => mode =>
-        {
+        private static Func<string, Func<string, Func<EncryptionAlgorithmMode, string>>> ProcessFunc() => key => message => mode => {
             key = key.ToString().ToLower().Replace(" ", "");
             key = DuplicateKeyFunc()(key)(message);
             return AlgorithmUtils.Shift(message, key, mode, AlphabetDictionaryGenerator.Generate());
         };
 
-        private static Func<string, Func<string, string>> DuplicateKeyFunc() => key => message =>
-        {
-            if (key.Length < message.Length)
-            {
+        private static Func<string, Func<string, string>> DuplicateKeyFunc() => key => message => {
+            if (key.Length < message.Length) {
                 var length = message.Length - key.Length;
 
-                for (var i = 0; i < length; i++)
-                {
+                for (var i = 0; i < length; i++) {
                     key += key[i % key.Length];
                 }
             }

@@ -3,7 +3,7 @@
     <Import Project="..\..\build\common.props" />
 
     <PropertyGroup>
-        <TargetFrameworks>netcoreapp3.0;netstandard2.1;netstandard2.0;net461;net451</TargetFrameworks>
+        <TargetFrameworks>netcoreapp3.1;netstandard2.1;netstandard2.0;net461;net451</TargetFrameworks>
     </PropertyGroup>
     
     <PropertyGroup>
@@ -13,8 +13,8 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="Cosmos.Serialization.NewtonsoftJson" Version="0.1.1-beta3-133300" />
-        <PackageReference Include="Portable.BouncyCastle" Version="1.8.5" />
+        <PackageReference Include="Cosmos.Serialization.NewtonsoftJson" Version="0.1.2-alpha1-100004" />
+        <PackageReference Include="Portable.BouncyCastle" Version="1.8.5.2" />
     </ItemGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

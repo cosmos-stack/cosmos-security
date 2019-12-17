@@ -14,21 +14,18 @@ using Org.BouncyCastle.Security;
  *     Author:Zhiqiang Li
  */
 
-namespace Cosmos.Encryption.Core
-{
+namespace Cosmos.Encryption.Core {
     /// <summary>
     /// RSAKeyConvert
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public static class RSAKeyConvert
-    {
+    public static class RSAKeyConvert {
         /// <summary>
         /// Public Key Convert pem->xml
         /// </summary>
         /// <param name="publicKey"></param>
         /// <returns></returns>
-        public static string PublicKeyPemToXml(string publicKey)
-        {
+        public static string PublicKeyPemToXml(string publicKey) {
             publicKey = RSAPemFormatHelper.PublicKeyFormat(publicKey);
 
             var pr = new PemReader(new StringReader(publicKey));
@@ -52,15 +49,15 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         /// <param name="publicKey"></param>
         /// <returns></returns>
-        public static string PublicKeyXmlToPem(string publicKey)
-        {
+        public static string PublicKeyXmlToPem(string publicKey) {
             var root = XElement.Parse(publicKey);
             //Modulus
             var modulus = root.Element("Modulus");
             //Exponent
             var exponent = root.Element("Exponent");
 
-            var rsaKeyParameters = new RsaKeyParameters(false, new BigInteger(1, Convert.FromBase64String(modulus.Value)), new BigInteger(1, Convert.FromBase64String(exponent.Value)));
+            var rsaKeyParameters = new RsaKeyParameters(false, new BigInteger(1, Convert.FromBase64String(modulus.Value)),
+                new BigInteger(1, Convert.FromBase64String(exponent.Value)));
 
             var sw = new StringWriter();
             var pWrt = new PemWriter(sw);
@@ -74,15 +71,14 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         /// <param name="privateKey"></param>
         /// <returns></returns>
-        public static string PrivateKeyPkcs1ToXml(string privateKey)
-        {
+        public static string PrivateKeyPkcs1ToXml(string privateKey) {
             privateKey = RSAPemFormatHelper.Pkcs1PrivateKeyFormat(privateKey);
 
             var pr = new PemReader(new StringReader(privateKey));
             if (!(pr.ReadObject() is AsymmetricCipherKeyPair asymmetricCipherKeyPair))
                 throw new Exception("Private key format is incorrect");
 
-            var rsaPrivateCrtKeyParameters = (RsaPrivateCrtKeyParameters)PrivateKeyFactory.CreateKey(PrivateKeyInfoFactory.CreatePrivateKeyInfo(asymmetricCipherKeyPair.Private));
+            var rsaPrivateCrtKeyParameters = (RsaPrivateCrtKeyParameters) PrivateKeyFactory.CreateKey(PrivateKeyInfoFactory.CreatePrivateKeyInfo(asymmetricCipherKeyPair.Private));
 
             var privateElement = new XElement("RSAKeyValue");
             //Modulus
@@ -119,8 +115,7 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         /// <param name="privateKey"></param>
         /// <returns></returns>
-        public static string PrivateKeyXmlToPkcs1(string privateKey)
-        {
+        public static string PrivateKeyXmlToPkcs1(string privateKey) {
             var root = XElement.Parse(privateKey);
             //Modulus
             var modulus = root.Element("Modulus");
@@ -163,11 +158,10 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         /// <param name="privateKey"></param>
         /// <returns></returns>
-        public static string PrivateKeyPkcs8ToXml(string privateKey)
-        {
+        public static string PrivateKeyPkcs8ToXml(string privateKey) {
             privateKey = RSAPemFormatHelper.Pkcs8PrivateKeyFormatRemove(privateKey);
             RsaPrivateCrtKeyParameters privateKeyParam =
-                (RsaPrivateCrtKeyParameters)PrivateKeyFactory.CreateKey(Convert.FromBase64String(privateKey));
+                (RsaPrivateCrtKeyParameters) PrivateKeyFactory.CreateKey(Convert.FromBase64String(privateKey));
 
             //Key
             var privateElement = new XElement("RSAKeyValue");
@@ -205,8 +199,7 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         /// <param name="privateKey"></param>
         /// <returns></returns>
-        public static string PrivateKeyXmlToPkcs8(string privateKey)
-        {
+        public static string PrivateKeyXmlToPkcs8(string privateKey) {
             var root = XElement.Parse(privateKey);
             //Modulus
             var modulus = root.Element("Modulus");
@@ -250,8 +243,7 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         /// <param name="privateKey"></param>
         /// <returns></returns>
-        public static string PrivateKeyPkcs1ToPkcs8(string privateKey)
-        {
+        public static string PrivateKeyPkcs1ToPkcs8(string privateKey) {
             privateKey = RSAPemFormatHelper.Pkcs1PrivateKeyFormat(privateKey);
             var pr = new PemReader(new StringReader(privateKey));
 
@@ -269,8 +261,7 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         /// <param name="privateKey"></param>
         /// <returns></returns>
-        public static string PrivateKeyPkcs8ToPkcs1(string privateKey)
-        {
+        public static string PrivateKeyPkcs8ToPkcs1(string privateKey) {
             privateKey = RSAPemFormatHelper.Pkcs8PrivateKeyFormat(privateKey);
             var pr = new PemReader(new StringReader(privateKey));
 

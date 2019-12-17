@@ -11,15 +11,13 @@ using Cosmos.Encryption.Core.Internals.Extensions;
  *     Author:Zhiqiang Li
  */
 
-namespace Cosmos.Encryption.Core
-{
+namespace Cosmos.Encryption.Core {
     /// <summary>
     /// RSAPkcs1Util
     /// </summary>
     // ReSharper disable once InconsistentNaming
     // ReSharper disable  IdentifierTypo
-    public class RSAPkcs1Util : RSABase
-    {
+    public class RSAPkcs1Util : RSABase {
         /// <summary>
         /// RSAPkcs1Util
         /// </summary>
@@ -36,15 +34,12 @@ namespace Cosmos.Encryption.Core
         /// <param name="publicKey"></param>
         /// <param name="privateKey"></param>
         /// <param name="keySize"></param>
-        public RSAPkcs1Util(Encoding encoding, string publicKey, string privateKey = null, int keySize = 2048)
-        {
-            if (string.IsNullOrEmpty(privateKey) && string.IsNullOrEmpty(publicKey))
-            {
+        public RSAPkcs1Util(Encoding encoding, string publicKey, string privateKey = null, int keySize = 2048) {
+            if (string.IsNullOrEmpty(privateKey) && string.IsNullOrEmpty(publicKey)) {
                 throw new Exception("Public and private keys must not be empty at the same time");
             }
 
-            if (!string.IsNullOrEmpty(privateKey))
-            {
+            if (!string.IsNullOrEmpty(privateKey)) {
                 PrivateRsa = RSA.Create();
                 PrivateRsa.KeySize = keySize;
                 PrivateRsa.FromPkcs1PrivateString(privateKey, out var priRsap);
@@ -53,12 +48,10 @@ namespace Cosmos.Encryption.Core
                 PrivateRsaKeyParameter = GetPrivateKeyParameter(privateKey);
 #endif
 
-                if (string.IsNullOrEmpty(publicKey))
-                {
+                if (string.IsNullOrEmpty(publicKey)) {
                     PublicRsa = RSA.Create();
                     PublicRsa.KeySize = keySize;
-                    var pubRasp = new RSAParameters
-                    {
+                    var pubRasp = new RSAParameters {
                         Modulus = priRsap.Modulus,
                         Exponent = priRsap.Exponent
                     };
@@ -70,12 +63,11 @@ namespace Cosmos.Encryption.Core
                 }
             }
 
-            if (!string.IsNullOrEmpty(publicKey))
-            {
+            if (!string.IsNullOrEmpty(publicKey)) {
                 PublicRsa = RSA.Create();
                 PublicRsa.KeySize = keySize;
                 PublicRsa.FromPkcs1PublicString(publicKey, out _);
-                
+
 #if NET451
                 PublicRsaKeyParameter = GetPublicKeyParameter(publicKey);
 #endif

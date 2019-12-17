@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Cosmos.Encryption.Core.Internals
-{
-    internal static class AlphabetDictionaryGenerator
-    {
+namespace Cosmos.Encryption.Core.Internals {
+    internal static class AlphabetDictionaryGenerator {
         private static Dictionary<char, int> AlphabetCache { get; }
 
-        static AlphabetDictionaryGenerator()
-        {
+        static AlphabetDictionaryGenerator() {
             AlphabetCache = GenerateFunc()();
         }
 
@@ -16,13 +13,11 @@ namespace Cosmos.Encryption.Core.Internals
 
         public static Dictionary<char, int> GenerateNewInstance() => GenerateFunc()();
 
-        private static Func<Dictionary<char, int>> GenerateFunc() => () =>
-        {
+        private static Func<Dictionary<char, int>> GenerateFunc() => () => {
             var alphabet = new Dictionary<char, int>();
             var c = 'a';
 
-            for (var i = 0; i < 26; c++, i++)
-            {
+            for (var i = 0; i < 26; c++, i++) {
                 alphabet.Add(c, i);
             }
 

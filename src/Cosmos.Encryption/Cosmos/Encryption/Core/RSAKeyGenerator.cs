@@ -11,25 +11,20 @@ using Org.BouncyCastle.Security;
  *     Author:Zhiqiang Li
  */
 
-namespace Cosmos.Encryption.Core
-{
+namespace Cosmos.Encryption.Core {
     /// <summary>
     /// RSAKeyGenerator
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public static class RSAKeyGenerator
-    {
+    public static class RSAKeyGenerator {
         /// <summary>
         /// Generate XML Format RSA Key. Result: Index 0 is the private key and index 1 is the public key
         /// </summary>
         /// <param name="keySize">Key Size.Unit: bits</param>
         /// <returns></returns>
-        public static RSAKey XmlKey(int keySize)
-        {
-            using (var rsa = new RSACryptoServiceProvider(keySize))
-            {
-                return new RSAKey
-                {
+        public static RSAKey XmlKey(int keySize) {
+            using (var rsa = new RSACryptoServiceProvider(keySize)) {
+                return new RSAKey {
                     PublicKey = rsa.ToLvccXmlString(false),
                     PrivateKey = rsa.ToLvccXmlString(true),
                     Exponent = rsa.ExportParameters(false).Exponent.ToHexString(),
@@ -37,18 +32,15 @@ namespace Cosmos.Encryption.Core
                 };
             }
         }
+
         /// <summary>
         /// Json key
         /// </summary>
         /// <param name="keySize"></param>
         /// <returns></returns>
-
-        public static RSAKey JsonKey(int keySize)
-        {
-            using (var rsa = new RSACryptoServiceProvider(keySize))
-            {
-                return new RSAKey
-                {
+        public static RSAKey JsonKey(int keySize) {
+            using (var rsa = new RSACryptoServiceProvider(keySize)) {
+                return new RSAKey {
                     PublicKey = rsa.ToJsonString(false),
                     PrivateKey = rsa.ToJsonString(true),
                     Exponent = rsa.ExportParameters(false).Exponent.ToHexString(),
@@ -63,8 +55,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="keySize">Key Size.Unit: bits</param>
         /// <param name="format">Whether the format is true If it is standard pem file format</param>
         /// <returns></returns>
-        public static RSAKey Pkcs1Key(int keySize, bool format)
-        {
+        public static RSAKey Pkcs1Key(int keySize, bool format) {
             IAsymmetricCipherKeyPairGenerator kpGen = GeneratorUtilities.GetKeyPairGenerator("RSA");
             kpGen.Init(new KeyGenerationParameters(new SecureRandom(), keySize));
             var keyPair = kpGen.GenerateKeyPair();
@@ -75,12 +66,11 @@ namespace Cosmos.Encryption.Core
             pWrt.Writer.Close();
             var privateKey = sw.ToString();
 
-            if (!format)
-            {
+            if (!format) {
                 privateKey = privateKey
-                    .ReplaceToEmpty(RSAConstants.RSA_PRIVATE_KEY_START)
-                    .ReplaceToEmpty(RSAConstants.RSA_PRIVATE_KEY_END)
-                    .ReplaceToEmpty(RSAConstants.R_N);
+                            .ReplaceToEmpty(RSAConstants.RSA_PRIVATE_KEY_START)
+                            .ReplaceToEmpty(RSAConstants.RSA_PRIVATE_KEY_END)
+                            .ReplaceToEmpty(RSAConstants.R_N);
             }
 
             StringWriter swpub = new StringWriter();
@@ -88,16 +78,14 @@ namespace Cosmos.Encryption.Core
             pWrtpub.WriteObject(keyPair.Public);
             pWrtpub.Writer.Close();
             string publicKey = swpub.ToString();
-            if (!format)
-            {
+            if (!format) {
                 publicKey = publicKey
-                    .ReplaceToEmpty(RSAConstants.PUBLIC_KEY_START)
-                    .ReplaceToEmpty(RSAConstants.PUBLIC_KEY_END)
-                    .ReplaceToEmpty(RSAConstants.R_N);
+                           .ReplaceToEmpty(RSAConstants.PUBLIC_KEY_START)
+                           .ReplaceToEmpty(RSAConstants.PUBLIC_KEY_END)
+                           .ReplaceToEmpty(RSAConstants.R_N);
             }
 
-            return new RSAKey
-            {
+            return new RSAKey {
                 PublicKey = publicKey,
                 PrivateKey = privateKey
             };
@@ -109,8 +97,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="keySize">Key Size.Unit: bits</param>
         /// <param name="format">Whether the format is true If it is standard pem file format</param>
         /// <returns></returns>
-        public static RSAKey Pkcs8Key(int keySize, bool format)
-        {
+        public static RSAKey Pkcs8Key(int keySize, bool format) {
             IAsymmetricCipherKeyPairGenerator kpGen = GeneratorUtilities.GetKeyPairGenerator("RSA");
             kpGen.Init(new KeyGenerationParameters(new SecureRandom(), keySize));
             var keyPair = kpGen.GenerateKeyPair();
@@ -122,12 +109,11 @@ namespace Cosmos.Encryption.Core
             pWrtpri.Writer.Close();
             string privateKey = swpri.ToString();
 
-            if (!format)
-            {
+            if (!format) {
                 privateKey = privateKey
-                    .ReplaceToEmpty(RSAConstants.PRIVATE_KEY_START)
-                    .ReplaceToEmpty(RSAConstants.PRIVATE_KEY_END)
-                    .ReplaceToEmpty(RSAConstants.R_N);
+                            .ReplaceToEmpty(RSAConstants.PRIVATE_KEY_START)
+                            .ReplaceToEmpty(RSAConstants.PRIVATE_KEY_END)
+                            .ReplaceToEmpty(RSAConstants.R_N);
             }
 
             StringWriter swpub = new StringWriter();
@@ -135,16 +121,14 @@ namespace Cosmos.Encryption.Core
             pWrtpub.WriteObject(keyPair.Public);
             pWrtpub.Writer.Close();
             string publicKey = swpub.ToString();
-            if (!format)
-            {
+            if (!format) {
                 publicKey = publicKey
-                    .ReplaceToEmpty(RSAConstants.PUBLIC_KEY_START)
-                    .ReplaceToEmpty(RSAConstants.PUBLIC_KEY_END)
-                    .ReplaceToEmpty(RSAConstants.R_N);
+                           .ReplaceToEmpty(RSAConstants.PUBLIC_KEY_START)
+                           .ReplaceToEmpty(RSAConstants.PUBLIC_KEY_END)
+                           .ReplaceToEmpty(RSAConstants.R_N);
             }
 
-            return new RSAKey
-            {
+            return new RSAKey {
                 PublicKey = publicKey,
                 PrivateKey = privateKey
             };

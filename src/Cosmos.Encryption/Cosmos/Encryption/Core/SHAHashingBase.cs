@@ -3,8 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Cosmos.Encryption.Core.Internals;
 
-namespace Cosmos.Encryption.Core
-{
+namespace Cosmos.Encryption.Core {
     /// <summary>
     /// Abstrace SHAHashingBase encryption.
     /// Reference: Seay Xu
@@ -12,8 +11,7 @@ namespace Cosmos.Encryption.Core
     /// Editor: AlexLEWIS
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public abstract class SHAHashingBase
-    {
+    public abstract class SHAHashingBase {
         /// <summary>
         /// SHAHashingBase hash algorithm core.
         /// </summary>
@@ -21,22 +19,18 @@ namespace Cosmos.Encryption.Core
         /// <param name="encoding"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        protected static string Encrypt<T>(string data, Encoding encoding = null) where T : HashAlgorithm, new()
-        {
-            if (data == null)
-            {
+        protected static string Encrypt<T>(string data, Encoding encoding = null) where T : HashAlgorithm, new() {
+            if (data == null) {
                 throw new ArgumentNullException(nameof(data));
             }
 
             encoding = EncodingHelper.Fixed(encoding);
 
-            using (HashAlgorithm hash = new T())
-            {
+            using (HashAlgorithm hash = new T()) {
                 var bytes = hash.ComputeHash(encoding.GetBytes(data));
 
                 var sbStr = new StringBuilder();
-                foreach (var b in bytes)
-                {
+                foreach (var b in bytes) {
                     sbStr.Append(b.ToString("X2"));
                 }
 
@@ -50,15 +44,12 @@ namespace Cosmos.Encryption.Core
         /// <typeparam name="T"></typeparam>
         /// <param name="data"></param>
         /// <returns></returns>
-        protected static byte[] Encrypt<T>(byte[] data) where T : HashAlgorithm, new()
-        {
-            if (data == null)
-            {
+        protected static byte[] Encrypt<T>(byte[] data) where T : HashAlgorithm, new() {
+            if (data == null) {
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using (HashAlgorithm hash = new T())
-            {
+            using (HashAlgorithm hash = new T()) {
                 return hash.ComputeHash(data);
             }
         }

@@ -6,14 +6,13 @@
  */
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption
-{
+
+namespace Cosmos.Encryption {
     /// <summary>
     /// Rcx order
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public enum RCXOrder
-    {
+    public enum RCXOrder {
         /// <summary>
         /// ASC
         /// </summary>

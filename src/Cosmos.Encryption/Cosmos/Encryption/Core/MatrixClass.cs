@@ -1,7 +1,6 @@
 ﻿using System;
 
-namespace Cosmos.Encryption.Core
-{
+namespace Cosmos.Encryption.Core {
     /// <summary>
     /// A copy from GitHub project:
     ///     https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Entities/MatrixClass.cs#L83:20
@@ -77,8 +76,7 @@ namespace Cosmos.Encryption.Core
     /// 		* for two matrices or one MatrixClass with integer or fraction or double
     /// 		/ for MatrixClass with integer or fraction or double
     /// </summary>
-    internal class MatrixClass
-    {
+    internal class MatrixClass {
         /// <summary>
         /// Class attributes/members
         /// </summary>
@@ -91,45 +89,37 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// Constructors
         /// </summary>
-        public MatrixClass(Fraction[,] elements)
-        {
+        public MatrixClass(Fraction[,] elements) {
             m_iElement = elements;
             m_iRows = elements.GetLength(0);
             m_iCols = elements.GetLength(1);
         }
 
-        public MatrixClass(int[,] elements)
-        {
+        public MatrixClass(int[,] elements) {
             m_iRows = elements.GetLength(0);
             m_iCols = elements.GetLength(1);
             ;
             m_iElement = new Fraction[m_iRows, m_iCols];
-            for (int i = 0; i < elements.GetLength(0); i++)
-            {
-                for (int j = 0; j < elements.GetLength(1); j++)
-                {
+            for (int i = 0; i < elements.GetLength(0); i++) {
+                for (int j = 0; j < elements.GetLength(1); j++) {
                     this[i, j] = new Fraction(elements[i, j]);
                 }
             }
         }
 
-        public MatrixClass(double[,] elements)
-        {
+        public MatrixClass(double[,] elements) {
             m_iRows = elements.GetLength(0);
             m_iCols = elements.GetLength(1);
             ;
             m_iElement = new Fraction[m_iRows, m_iCols];
-            for (int i = 0; i < elements.GetLength(0); i++)
-            {
-                for (int j = 0; j < elements.GetLength(1); j++)
-                {
+            for (int i = 0; i < elements.GetLength(0); i++) {
+                for (int j = 0; j < elements.GetLength(1); j++) {
                     this[i, j] = Fraction.ToFraction(elements[i, j]);
                 }
             }
         }
 
-        public MatrixClass(int iRows, int iCols)
-        {
+        public MatrixClass(int iRows, int iCols) {
             m_iRows = iRows;
             m_iCols = iCols;
             m_iElement = new Fraction[iRows, iCols];
@@ -158,15 +148,13 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// Internal functions for getting/setting values
         /// </summary>
-        private Fraction GetElement(int iRow, int iCol)
-        {
+        private Fraction GetElement(int iRow, int iCol) {
             if (iRow < 0 || iRow > Rows - 1 || iCol < 0 || iCol > Cols - 1)
                 throw new MatrixClassException("Invalid index specified");
             return m_iElement[iRow, iCol];
         }
 
-        private void SetElement(int iRow, int iCol, Fraction value)
-        {
+        private void SetElement(int iRow, int iCol, Fraction value) {
             if (iRow < 0 || iRow > Rows - 1 || iCol < 0 || iCol > Cols - 1)
                 throw new MatrixClassException("Invalid index specified");
             m_iElement[iRow, iCol] = value.Duplicate();
@@ -176,11 +164,9 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// The function returns the current MatrixClass object as a string
         /// </summary>
-        public override string ToString()
-        {
+        public override string ToString() {
             string str = "";
-            for (int i = 0; i < this.Rows; i++)
-            {
+            for (int i = 0; i < this.Rows; i++) {
                 for (int j = 0; j < this.Cols; j++)
                     str += this[i, j] + "\t";
                 str += "\n";
@@ -193,17 +179,14 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// The function return the Minor of element[Row,Col] of a MatrixClass object 
         /// </summary>
-        public static MatrixClass Minor(MatrixClass MatrixClass, int iRow, int iCol)
-        {
+        public static MatrixClass Minor(MatrixClass MatrixClass, int iRow, int iCol) {
             MatrixClass minor = new MatrixClass(MatrixClass.Rows - 1, MatrixClass.Cols - 1);
             int m = 0, n = 0;
-            for (int i = 0; i < MatrixClass.Rows; i++)
-            {
+            for (int i = 0; i < MatrixClass.Rows; i++) {
                 if (i == iRow)
                     continue;
                 n = 0;
-                for (int j = 0; j < MatrixClass.Cols; j++)
-                {
+                for (int j = 0; j < MatrixClass.Cols; j++) {
                     if (j == iCol)
                         continue;
                     minor[m, n] = MatrixClass[i, j];
@@ -220,10 +203,8 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// The function multiplies the given row of the current MatrixClass object by a Fraction 
         /// </summary>
-        public void MultiplyRow(int iRow, Fraction frac)
-        {
-            for (int j = 0; j < this.Cols; j++)
-            {
+        public void MultiplyRow(int iRow, Fraction frac) {
+            for (int j = 0; j < this.Cols; j++) {
                 this[iRow, j] *= frac;
                 Fraction.ReduceFraction(this[iRow, j]);
             }
@@ -232,16 +213,14 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// The function multiplies the given row of the current MatrixClass object by an integer
         /// </summary>
-        public void MultiplyRow(int iRow, int iNo)
-        {
+        public void MultiplyRow(int iRow, int iNo) {
             this.MultiplyRow(iRow, new Fraction(iNo));
         }
 
         /// <summary>
         /// The function multiplies the given row of the current MatrixClass object by a double
         /// </summary>
-        public void MultiplyRow(int iRow, double dbl)
-        {
+        public void MultiplyRow(int iRow, double dbl) {
             this.MultiplyRow(iRow, Fraction.ToFraction(dbl));
         }
 
@@ -250,8 +229,7 @@ namespace Cosmos.Encryption.Core
         /// It performs the following calculation:
         /// iTargetRow = iTargetRow + iMultiple*iSecondRow
         /// </summary>
-        public void AddRow(int iTargetRow, int iSecondRow, Fraction iMultiple)
-        {
+        public void AddRow(int iTargetRow, int iSecondRow, Fraction iMultiple) {
             for (int j = 0; j < this.Cols; j++)
                 this[iTargetRow, j] += (this[iSecondRow, j] * iMultiple);
         }
@@ -259,10 +237,8 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// The function interchanges two rows of the current MatrixClass object
         /// </summary>
-        public void InterchangeRow(int iRow1, int iRow2)
-        {
-            for (int j = 0; j < this.Cols; j++)
-            {
+        public void InterchangeRow(int iRow1, int iRow2) {
+            for (int j = 0; j < this.Cols; j++) {
                 Fraction temp = this[iRow1, j];
                 this[iRow1, j] = this[iRow2, j];
                 this[iRow2, j] = temp;
@@ -273,19 +249,17 @@ namespace Cosmos.Encryption.Core
         /// The function concatenates the two given matrices column-wise
         /// it can be helpful in a equation solver class where the augmented MatrixClass is obtained by concatenation
         /// </summary>
-        public static MatrixClass Concatenate(MatrixClass MatrixClass1, MatrixClass MatrixClass2)
-        {
+        public static MatrixClass Concatenate(MatrixClass MatrixClass1, MatrixClass MatrixClass2) {
             if (MatrixClass1.Rows != MatrixClass2.Rows)
                 throw new MatrixClassException("Concatenation not possible");
             MatrixClass MatrixClass = new MatrixClass(MatrixClass1.Rows, MatrixClass1.Cols + MatrixClass2.Cols);
             for (int i = 0; i < MatrixClass.Rows; i++)
-                for (int j = 0; j < MatrixClass.Cols; j++)
-                {
-                    if (j < MatrixClass1.Cols)
-                        MatrixClass[i, j] = MatrixClass1[i, j];
-                    else
-                        MatrixClass[i, j] = MatrixClass2[i, j - MatrixClass1.Cols];
-                }
+            for (int j = 0; j < MatrixClass.Cols; j++) {
+                if (j < MatrixClass1.Cols)
+                    MatrixClass[i, j] = MatrixClass1[i, j];
+                else
+                    MatrixClass[i, j] = MatrixClass2[i, j - MatrixClass1.Cols];
+            }
 
             return MatrixClass;
         }
@@ -297,42 +271,36 @@ namespace Cosmos.Encryption.Core
         /// In such cases use the Determinent() function which computes determinent in the traditional 
         /// manner(by using minors)
         /// </summary>
-        public Fraction DeterminentFast()
-        {
+        public Fraction DeterminentFast() {
             if (this.Rows != this.Cols)
                 throw new MatrixClassException("Determinent of a non-square MatrixClass doesn't exist");
             Fraction det = new Fraction(1);
-            try
-            {
+            try {
                 MatrixClass ReducedEchelonMatrixClass = this.Duplicate();
-                for (int i = 0; i < this.Rows; i++)
-                {
+                for (int i = 0; i < this.Rows; i++) {
                     if (ReducedEchelonMatrixClass[i, i] == 0) // if diagonal entry is zero, 
                         for (int j = i + 1; j < ReducedEchelonMatrixClass.Rows; j++)
                             if (ReducedEchelonMatrixClass[j, i] != 0) //check if some below entry is non-zero
                             {
                                 ReducedEchelonMatrixClass.InterchangeRow(i, j); // then interchange the two rows
-                                det *= -1; //interchanging two rows negates the determinent
+                                det *= -1;                                      //interchanging two rows negates the determinent
                             }
 
                     det *= ReducedEchelonMatrixClass[i, i];
                     ReducedEchelonMatrixClass.MultiplyRow(i, Fraction.Inverse(ReducedEchelonMatrixClass[i, i]));
 
-                    for (int j = i + 1; j < ReducedEchelonMatrixClass.Rows; j++)
-                    {
+                    for (int j = i + 1; j < ReducedEchelonMatrixClass.Rows; j++) {
                         ReducedEchelonMatrixClass.AddRow(j, i, -ReducedEchelonMatrixClass[j, i]);
                     }
 
-                    for (int j = i - 1; j >= 0; j--)
-                    {
+                    for (int j = i - 1; j >= 0; j--) {
                         ReducedEchelonMatrixClass.AddRow(j, i, -ReducedEchelonMatrixClass[j, i]);
                     }
                 }
 
                 return det;
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 throw new MatrixClassException("Determinent of the given MatrixClass could not be calculated");
             }
         }
@@ -343,8 +311,7 @@ namespace Cosmos.Encryption.Core
         /// It can be much slower(due to recursion) if the given MatrixClass has order greater than 6
         /// Try using DeterminentFast() function if the order of MatrixClass is greater than 6
         /// </summary>
-        public Fraction Determinent()
-        {
+        public Fraction Determinent() {
             return Determinent(this);
         }
 
@@ -352,15 +319,14 @@ namespace Cosmos.Encryption.Core
         /// The helper function for the above Determinent() method
         /// it calls itself recursively and computes determinent using minors
         /// </summary>
-        private Fraction Determinent(MatrixClass MatrixClass)
-        {
+        private Fraction Determinent(MatrixClass MatrixClass) {
             Fraction det = new Fraction(0);
             if (MatrixClass.Rows != MatrixClass.Cols)
                 throw new MatrixClassException("Determinent of a non-square MatrixClass doesn't exist");
             if (MatrixClass.Rows == 1)
                 return MatrixClass[0, 0];
             for (int j = 0; j < MatrixClass.Cols; j++)
-                det += (MatrixClass[0, j] * Determinent(MatrixClass.Minor(MatrixClass, 0, j)) * (int)System.Math.Pow(-1, 0 + j));
+                det += (MatrixClass[0, j] * Determinent(MatrixClass.Minor(MatrixClass, 0, j)) * (int) System.Math.Pow(-1, 0 + j));
             return det;
         }
 
@@ -368,22 +334,19 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// The function returns the Echelon form of the current MatrixClass
         /// </summary>
-        public MatrixClass EchelonForm()
-        {
-            try
-            {
+        public MatrixClass EchelonForm() {
+            try {
                 MatrixClass EchelonMatrixClass = this.Duplicate();
-                for (int i = 0; i < this.Rows; i++)
-                {
+                for (int i = 0; i < this.Rows; i++) {
                     if (EchelonMatrixClass[i, i] == 0) // if diagonal entry is zero, 
                         for (int j = i + 1; j < EchelonMatrixClass.Rows; j++)
-                            if (EchelonMatrixClass[j, i] != 0) //check if some below entry is non-zero
+                            if (EchelonMatrixClass[j, i] != 0)           //check if some below entry is non-zero
                                 EchelonMatrixClass.InterchangeRow(i, j); // then interchange the two rows
-                    if (EchelonMatrixClass[i, i] == 0) // if not found any non-zero diagonal entry
-                        continue; // increment i;
-                    if (EchelonMatrixClass[i, i] != 1) // if diagonal entry is not 1 , 	
+                    if (EchelonMatrixClass[i, i] == 0)                   // if not found any non-zero diagonal entry
+                        continue;                                        // increment i;
+                    if (EchelonMatrixClass[i, i] != 1)                   // if diagonal entry is not 1 , 	
                         for (int j = i + 1; j < EchelonMatrixClass.Rows; j++)
-                            if (EchelonMatrixClass[j, i] == 1) //check if some below entry is 1
+                            if (EchelonMatrixClass[j, i] == 1)           //check if some below entry is 1
                                 EchelonMatrixClass.InterchangeRow(i, j); // then interchange the two rows
                     EchelonMatrixClass.MultiplyRow(i, Fraction.Inverse(EchelonMatrixClass[i, i]));
                     for (int j = i + 1; j < EchelonMatrixClass.Rows; j++)
@@ -392,8 +355,7 @@ namespace Cosmos.Encryption.Core
 
                 return EchelonMatrixClass;
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 throw new MatrixClassException("MatrixClass can not be reduced to Echelon form");
             }
         }
@@ -401,22 +363,19 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// The function returns the reduced echelon form of the current MatrixClass
         /// </summary>
-        public MatrixClass ReducedEchelonForm()
-        {
-            try
-            {
+        public MatrixClass ReducedEchelonForm() {
+            try {
                 MatrixClass ReducedEchelonMatrixClass = this.Duplicate();
-                for (int i = 0; i < this.Rows; i++)
-                {
+                for (int i = 0; i < this.Rows; i++) {
                     if (ReducedEchelonMatrixClass[i, i] == 0) // if diagonal entry is zero, 
                         for (int j = i + 1; j < ReducedEchelonMatrixClass.Rows; j++)
-                            if (ReducedEchelonMatrixClass[j, i] != 0) //check if some below entry is non-zero
+                            if (ReducedEchelonMatrixClass[j, i] != 0)           //check if some below entry is non-zero
                                 ReducedEchelonMatrixClass.InterchangeRow(i, j); // then interchange the two rows
-                    if (ReducedEchelonMatrixClass[i, i] == 0) // if not found any non-zero diagonal entry
-                        continue; // increment i;
-                    if (ReducedEchelonMatrixClass[i, i] != 1) // if diagonal entry is not 1 , 	
+                    if (ReducedEchelonMatrixClass[i, i] == 0)                   // if not found any non-zero diagonal entry
+                        continue;                                               // increment i;
+                    if (ReducedEchelonMatrixClass[i, i] != 1)                   // if diagonal entry is not 1 , 	
                         for (int j = i + 1; j < ReducedEchelonMatrixClass.Rows; j++)
-                            if (ReducedEchelonMatrixClass[j, i] == 1) //check if some below entry is 1
+                            if (ReducedEchelonMatrixClass[j, i] == 1)           //check if some below entry is 1
                                 ReducedEchelonMatrixClass.InterchangeRow(i, j); // then interchange the two rows
                     ReducedEchelonMatrixClass.MultiplyRow(i, Fraction.Inverse(ReducedEchelonMatrixClass[i, i]));
                     for (int j = i + 1; j < ReducedEchelonMatrixClass.Rows; j++)
@@ -427,8 +386,7 @@ namespace Cosmos.Encryption.Core
 
                 return ReducedEchelonMatrixClass;
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 throw new MatrixClassException("MatrixClass can not be reduced to Echelon form");
             }
         }
@@ -438,35 +396,30 @@ namespace Cosmos.Encryption.Core
         /// The function is very fast and efficient but may raise overflow exceptions in some cases.
         /// In such cases use the Inverse() method which computes inverse in the traditional way(using adjoint).
         /// </summary>
-        public MatrixClass InverseFast()
-        {
+        public MatrixClass InverseFast() {
             if (this.DeterminentFast() == 0)
                 throw new MatrixClassException("Inverse of a singular MatrixClass is not possible");
-            try
-            {
+            try {
                 MatrixClass IdentityMatrixClass = MatrixClass.IdentityMatrixClass(this.Rows, this.Cols);
                 MatrixClass ReducedEchelonMatrixClass = this.Duplicate();
-                for (int i = 0; i < this.Rows; i++)
-                {
+                for (int i = 0; i < this.Rows; i++) {
                     if (ReducedEchelonMatrixClass[i, i] == 0) // if diagonal entry is zero, 
                         for (int j = i + 1; j < ReducedEchelonMatrixClass.Rows; j++)
                             if (ReducedEchelonMatrixClass[j, i] != 0) //check if some below entry is non-zero
                             {
                                 ReducedEchelonMatrixClass.InterchangeRow(i, j); // then interchange the two rows
-                                IdentityMatrixClass.InterchangeRow(i, j); // then interchange the two rows
+                                IdentityMatrixClass.InterchangeRow(i, j);       // then interchange the two rows
                             }
 
                     IdentityMatrixClass.MultiplyRow(i, Fraction.Inverse(ReducedEchelonMatrixClass[i, i]));
                     ReducedEchelonMatrixClass.MultiplyRow(i, Fraction.Inverse(ReducedEchelonMatrixClass[i, i]));
 
-                    for (int j = i + 1; j < ReducedEchelonMatrixClass.Rows; j++)
-                    {
+                    for (int j = i + 1; j < ReducedEchelonMatrixClass.Rows; j++) {
                         IdentityMatrixClass.AddRow(j, i, -ReducedEchelonMatrixClass[j, i]);
                         ReducedEchelonMatrixClass.AddRow(j, i, -ReducedEchelonMatrixClass[j, i]);
                     }
 
-                    for (int j = i - 1; j >= 0; j--)
-                    {
+                    for (int j = i - 1; j >= 0; j--) {
                         IdentityMatrixClass.AddRow(j, i, -ReducedEchelonMatrixClass[j, i]);
                         ReducedEchelonMatrixClass.AddRow(j, i, -ReducedEchelonMatrixClass[j, i]);
                     }
@@ -474,8 +427,7 @@ namespace Cosmos.Encryption.Core
 
                 return IdentityMatrixClass;
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 throw new MatrixClassException("Inverse of the given MatrixClass could not be calculated");
             }
         }
@@ -485,21 +437,17 @@ namespace Cosmos.Encryption.Core
         /// It can be much slower if the given MatrixClass has order greater than 6
         /// Try using InverseFast() function if the order of MatrixClass is greater than 6
         /// </summary>
-        public MatrixClass Inverse()
-        {
+        public MatrixClass Inverse() {
             if (this.Determinent() == 0)
                 throw new MatrixClassException("Inverse of a singular MatrixClass is not possible");
-            int b = FindB((int)this.Determinent().Numerator);
+            int b = FindB((int) this.Determinent().Numerator);
             return this.Adjoint(b);
         }
 
-        private int FindB(int Det)
-        {
+        private int FindB(int Det) {
             int result = 0;
-            for (int i = 2; i < 26; i++)
-            {
-                if (((i * Det) % 26) == 1)
-                {
+            for (int i = 2; i < 26; i++) {
+                if (((i * Det) % 26) == 1) {
                     result = i;
                     break;
                 }
@@ -511,57 +459,52 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// The function returns the adjoint of the current MatrixClass
         /// </summary>
-        public MatrixClass Adjoint(int b)
-        {
+        public MatrixClass Adjoint(int b) {
             if (this.Rows != this.Cols)
                 throw new MatrixClassException("Adjoint of a non-square MatrixClass does not exists");
             MatrixClass AdjointMatrixClass = new MatrixClass(this.Rows, this.Cols);
             for (int i = 0; i < this.Rows; i++)
-                for (int j = 0; j < this.Cols; j++)
-                    AdjointMatrixClass[i, j] = b * Math.Pow(-1, i + j) * (Minor(this, j, i).Determinent());
+            for (int j = 0; j < this.Cols; j++)
+                AdjointMatrixClass[i, j] = b * Math.Pow(-1, i + j) * (Minor(this, j, i).Determinent());
             return AdjointMatrixClass;
         }
 
         /// <summary>
         /// The function returns the transpose of the current MatrixClass
         /// </summary>
-        public MatrixClass Transpose()
-        {
+        public MatrixClass Transpose() {
             MatrixClass TransposeMatrixClass = new MatrixClass(this.Cols, this.Rows);
             for (int i = 0; i < TransposeMatrixClass.Rows; i++)
-                for (int j = 0; j < TransposeMatrixClass.Cols; j++)
-                    TransposeMatrixClass[i, j] = this[j, i];
+            for (int j = 0; j < TransposeMatrixClass.Cols; j++)
+                TransposeMatrixClass[i, j] = this[j, i];
             return TransposeMatrixClass;
         }
 
         /// <summary>
         /// The function duplicates the current MatrixClass object
         /// </summary>
-        public MatrixClass Duplicate()
-        {
+        public MatrixClass Duplicate() {
             MatrixClass MatrixClass = new MatrixClass(Rows, Cols);
             for (int i = 0; i < Rows; i++)
-                for (int j = 0; j < Cols; j++)
-                    MatrixClass[i, j] = this[i, j];
+            for (int j = 0; j < Cols; j++)
+                MatrixClass[i, j] = this[i, j];
             return MatrixClass;
         }
 
         /// <summary>
         /// The function returns a Scalar MatrixClass of dimension ( Row x Col ) and scalar K
         /// </summary>
-        public static MatrixClass ScalarMatrixClass(int iRows, int iCols, int K)
-        {
+        public static MatrixClass ScalarMatrixClass(int iRows, int iCols, int K) {
             Fraction zero = new Fraction(0);
             Fraction scalar = new Fraction(K);
             MatrixClass MatrixClass = new MatrixClass(iRows, iCols);
             for (int i = 0; i < iRows; i++)
-                for (int j = 0; j < iCols; j++)
-                {
-                    if (i == j)
-                        MatrixClass[i, j] = scalar;
-                    else
-                        MatrixClass[i, j] = zero;
-                }
+            for (int j = 0; j < iCols; j++) {
+                if (i == j)
+                    MatrixClass[i, j] = scalar;
+                else
+                    MatrixClass[i, j] = zero;
+            }
 
             return MatrixClass;
         }
@@ -569,34 +512,31 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// The function returns an identity MatrixClass of dimensions ( Row x Col )
         /// </summary>
-        public static MatrixClass IdentityMatrixClass(int iRows, int iCols)
-        {
+        public static MatrixClass IdentityMatrixClass(int iRows, int iCols) {
             return ScalarMatrixClass(iRows, iCols, 1);
         }
 
         /// <summary>
         /// The function returns a Unit MatrixClass of dimension ( Row x Col )
         /// </summary>
-        public static MatrixClass UnitMatrixClass(int iRows, int iCols)
-        {
+        public static MatrixClass UnitMatrixClass(int iRows, int iCols) {
             Fraction temp = new Fraction(1);
             MatrixClass MatrixClass = new MatrixClass(iRows, iCols);
             for (int i = 0; i < iRows; i++)
-                for (int j = 0; j < iCols; j++)
-                    MatrixClass[i, j] = temp;
+            for (int j = 0; j < iCols; j++)
+                MatrixClass[i, j] = temp;
             return MatrixClass;
         }
 
         /// <summary>
         /// The function returns a Null MatrixClass of dimension ( Row x Col )
         /// </summary>
-        public static MatrixClass NullMatrixClass(int iRows, int iCols)
-        {
+        public static MatrixClass NullMatrixClass(int iRows, int iCols) {
             Fraction temp = new Fraction(0);
             MatrixClass MatrixClass = new MatrixClass(iRows, iCols);
             for (int i = 0; i < iRows; i++)
-                for (int j = 0; j < iCols; j++)
-                    MatrixClass[i, j] = temp;
+            for (int j = 0; j < iCols; j++)
+                MatrixClass[i, j] = temp;
             return MatrixClass;
         }
 
@@ -604,68 +544,55 @@ namespace Cosmos.Encryption.Core
         /// Operators for the MatrixClass object
         /// includes -(unary), and binary opertors such as +,-,*,/
         /// </summary>
-        public static MatrixClass operator -(MatrixClass MatrixClass)
-        {
+        public static MatrixClass operator -(MatrixClass MatrixClass) {
             return MatrixClass.Negate(MatrixClass);
         }
 
-        public static MatrixClass operator +(MatrixClass MatrixClass1, MatrixClass MatrixClass2)
-        {
+        public static MatrixClass operator +(MatrixClass MatrixClass1, MatrixClass MatrixClass2) {
             return MatrixClass.Add(MatrixClass1, MatrixClass2);
         }
 
-        public static MatrixClass operator -(MatrixClass MatrixClass1, MatrixClass MatrixClass2)
-        {
+        public static MatrixClass operator -(MatrixClass MatrixClass1, MatrixClass MatrixClass2) {
             return MatrixClass.Add(MatrixClass1, -MatrixClass2);
         }
 
-        public static MatrixClass operator *(MatrixClass MatrixClass1, MatrixClass MatrixClass2)
-        {
+        public static MatrixClass operator *(MatrixClass MatrixClass1, MatrixClass MatrixClass2) {
             return MatrixClass.Multiply(MatrixClass1, MatrixClass2);
         }
 
-        public static MatrixClass operator *(MatrixClass MatrixClass1, int iNo)
-        {
+        public static MatrixClass operator *(MatrixClass MatrixClass1, int iNo) {
             return MatrixClass.Multiply(MatrixClass1, iNo);
         }
 
-        public static MatrixClass operator *(MatrixClass MatrixClass1, double dbl)
-        {
+        public static MatrixClass operator *(MatrixClass MatrixClass1, double dbl) {
             return MatrixClass.Multiply(MatrixClass1, Fraction.ToFraction(dbl));
         }
 
-        public static MatrixClass operator *(MatrixClass MatrixClass1, Fraction frac)
-        {
+        public static MatrixClass operator *(MatrixClass MatrixClass1, Fraction frac) {
             return MatrixClass.Multiply(MatrixClass1, frac);
         }
 
-        public static MatrixClass operator *(int iNo, MatrixClass MatrixClass1)
-        {
+        public static MatrixClass operator *(int iNo, MatrixClass MatrixClass1) {
             return MatrixClass.Multiply(MatrixClass1, iNo);
         }
 
-        public static MatrixClass operator *(double dbl, MatrixClass MatrixClass1)
-        {
+        public static MatrixClass operator *(double dbl, MatrixClass MatrixClass1) {
             return MatrixClass.Multiply(MatrixClass1, Fraction.ToFraction(dbl));
         }
 
-        public static MatrixClass operator *(Fraction frac, MatrixClass MatrixClass1)
-        {
+        public static MatrixClass operator *(Fraction frac, MatrixClass MatrixClass1) {
             return MatrixClass.Multiply(MatrixClass1, frac);
         }
 
-        public static MatrixClass operator /(MatrixClass MatrixClass1, int iNo)
-        {
+        public static MatrixClass operator /(MatrixClass MatrixClass1, int iNo) {
             return MatrixClass.Multiply(MatrixClass1, Fraction.Inverse(new Fraction(iNo)));
         }
 
-        public static MatrixClass operator /(MatrixClass MatrixClass1, double dbl)
-        {
+        public static MatrixClass operator /(MatrixClass MatrixClass1, double dbl) {
             return MatrixClass.Multiply(MatrixClass1, Fraction.Inverse(Fraction.ToFraction(dbl)));
         }
 
-        public static MatrixClass operator /(MatrixClass MatrixClass1, Fraction frac)
-        {
+        public static MatrixClass operator /(MatrixClass MatrixClass1, Fraction frac) {
             return MatrixClass.Multiply(MatrixClass1, Fraction.Inverse(frac));
         }
 
@@ -673,49 +600,44 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// Internal Fucntions for the above operators
         /// </summary>
-        private static MatrixClass Negate(MatrixClass MatrixClass)
-        {
+        private static MatrixClass Negate(MatrixClass MatrixClass) {
             return MatrixClass.Multiply(MatrixClass, -1);
         }
 
-        private static MatrixClass Add(MatrixClass MatrixClass1, MatrixClass MatrixClass2)
-        {
+        private static MatrixClass Add(MatrixClass MatrixClass1, MatrixClass MatrixClass2) {
             if (MatrixClass1.Rows != MatrixClass2.Rows || MatrixClass1.Cols != MatrixClass2.Cols)
                 throw new MatrixClassException("Operation not possible");
             MatrixClass result = new MatrixClass(MatrixClass1.Rows, MatrixClass1.Cols);
             for (int i = 0; i < result.Rows; i++)
-                for (int j = 0; j < result.Cols; j++)
-                    result[i, j] = MatrixClass1[i, j] + MatrixClass2[i, j];
+            for (int j = 0; j < result.Cols; j++)
+                result[i, j] = MatrixClass1[i, j] + MatrixClass2[i, j];
             return result;
         }
 
-        private static MatrixClass Multiply(MatrixClass MatrixClass1, MatrixClass MatrixClass2)
-        {
+        private static MatrixClass Multiply(MatrixClass MatrixClass1, MatrixClass MatrixClass2) {
             if (MatrixClass1.Cols != MatrixClass2.Rows)
                 throw new MatrixClassException("Operation not possible");
             MatrixClass result = MatrixClass.NullMatrixClass(MatrixClass1.Rows, MatrixClass2.Cols);
             for (int i = 0; i < result.Rows; i++)
-                for (int j = 0; j < result.Cols; j++)
-                    for (int k = 0; k < MatrixClass1.Cols; k++)
-                        result[i, j] += MatrixClass1[i, k] * MatrixClass2[k, j];
+            for (int j = 0; j < result.Cols; j++)
+            for (int k = 0; k < MatrixClass1.Cols; k++)
+                result[i, j] += MatrixClass1[i, k] * MatrixClass2[k, j];
             return result;
         }
 
-        private static MatrixClass Multiply(MatrixClass MatrixClass, int iNo)
-        {
+        private static MatrixClass Multiply(MatrixClass MatrixClass, int iNo) {
             MatrixClass result = new MatrixClass(MatrixClass.Rows, MatrixClass.Cols);
             for (int i = 0; i < MatrixClass.Rows; i++)
-                for (int j = 0; j < MatrixClass.Cols; j++)
-                    result[i, j] = MatrixClass[i, j] * iNo;
+            for (int j = 0; j < MatrixClass.Cols; j++)
+                result[i, j] = MatrixClass[i, j] * iNo;
             return result;
         }
 
-        private static MatrixClass Multiply(MatrixClass MatrixClass, Fraction frac)
-        {
+        private static MatrixClass Multiply(MatrixClass MatrixClass, Fraction frac) {
             MatrixClass result = new MatrixClass(MatrixClass.Rows, MatrixClass.Cols);
             for (int i = 0; i < MatrixClass.Rows; i++)
-                for (int j = 0; j < MatrixClass.Cols; j++)
-                    result[i, j] = MatrixClass[i, j] * frac;
+            for (int j = 0; j < MatrixClass.Cols; j++)
+                result[i, j] = MatrixClass[i, j] * frac;
             return result;
         }
     } //end class MatrixClass
@@ -723,8 +645,7 @@ namespace Cosmos.Encryption.Core
     /// <summary>
     /// Exception class for MatrixClass class, derived from System.Exception
     /// </summary>
-    public class MatrixClassException : Exception
-    {
+    public class MatrixClassException : Exception {
         /// <summary>
         /// Create a new instance of <see cref="MatrixClassException"/>
         /// </summary>
@@ -803,8 +724,7 @@ namespace Cosmos.Encryption.Core
     /// 	Implicit:	From double/long/string to Fraction
     /// 	Explicit:	From Fraction to double/string
     /// </summary>
-    public class Fraction
-    {
+    public class Fraction {
         /// <summary>
         /// Class attributes/members
         /// </summary>
@@ -815,8 +735,7 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// Create a new instance of <see cref="Fraction"/>
         /// </summary>
-        public Fraction()
-        {
+        public Fraction() {
             Initialize(0, 1);
         }
 
@@ -824,8 +743,7 @@ namespace Cosmos.Encryption.Core
         /// Create a new instance of <see cref="Fraction"/>
         /// </summary>
         /// <param name="iWholeNumber"></param>
-        public Fraction(long iWholeNumber)
-        {
+        public Fraction(long iWholeNumber) {
             Initialize(iWholeNumber, 1);
         }
 
@@ -833,18 +751,16 @@ namespace Cosmos.Encryption.Core
         /// Create a new instance of <see cref="Fraction"/>
         /// </summary>
         /// <param name="dDecimalValue"></param>
-        public Fraction(double dDecimalValue)
-        {
+        public Fraction(double dDecimalValue) {
             Fraction temp = ToFraction(dDecimalValue);
             Initialize(temp.Numerator, temp.Denominator);
         }
+
         /// <summary>
         /// Create a new instance of <see cref="Fraction"/>
         /// </summary>
         /// <param name="strValue"></param>
-
-        public Fraction(string strValue)
-        {
+        public Fraction(string strValue) {
             Fraction temp = ToFraction(strValue);
             Initialize(temp.Numerator, temp.Denominator);
         }
@@ -854,16 +770,14 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         /// <param name="iNumerator"></param>
         /// <param name="iDenominator"></param>
-        public Fraction(long iNumerator, long iDenominator)
-        {
+        public Fraction(long iNumerator, long iDenominator) {
             Initialize(iNumerator, iDenominator);
         }
 
         /// <summary>
         /// Internal function for constructors
         /// </summary>
-        private void Initialize(long iNumerator, long iDenominator)
-        {
+        private void Initialize(long iNumerator, long iDenominator) {
             Numerator = iNumerator;
             Denominator = iDenominator;
             ReduceFraction(this);
@@ -908,24 +822,21 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// The function takes a Fraction object and returns its value as double
         /// </summary>
-        public static double ToDouble(Fraction frac)
-        {
-            return ((double)frac.Numerator / frac.Denominator);
+        public static double ToDouble(Fraction frac) {
+            return ((double) frac.Numerator / frac.Denominator);
         }
 
         /// <summary>
         /// The function returns the current Fraction object as double
         /// </summary>
-        public double ToDouble()
-        {
-            return ((double)this.Numerator / this.Denominator);
+        public double ToDouble() {
+            return ((double) this.Numerator / this.Denominator);
         }
 
         /// <summary>
         /// The function returns the current Fraction object as a string
         /// </summary>
-        public override string ToString()
-        {
+        public override string ToString() {
             string str;
             if (this.Denominator == 1)
                 str = this.Numerator.ToString();
@@ -939,8 +850,7 @@ namespace Cosmos.Encryption.Core
         /// the string can be an in the form of and integer, double or fraction.
         /// e.g it can be like "123" or "123.321" or "123/456"
         /// </summary>
-        public static Fraction ToFraction(string strValue)
-        {
+        public static Fraction ToFraction(string strValue) {
             int i;
             for (i = 0; i < strValue.Length; i++)
                 if (strValue[i] == '/')
@@ -961,19 +871,15 @@ namespace Cosmos.Encryption.Core
         /// The function takes a floating point number as an argument 
         /// and returns its corresponding reduced fraction
         /// </summary>
-        public static Fraction ToFraction(double dValue)
-        {
-            try
-            {
-                checked
-                {
+        public static Fraction ToFraction(double dValue) {
+            try {
+                checked {
                     Fraction frac;
                     if (dValue % 1 == 0) // if whole number
                     {
-                        frac = new Fraction((long)dValue);
+                        frac = new Fraction((long) dValue);
                     }
-                    else
-                    {
+                    else {
                         double dTemp = dValue;
                         long iMultiple = 1;
                         string strTemp = dValue.ToString();
@@ -988,25 +894,22 @@ namespace Cosmos.Encryption.Core
                         while (strTemp[i] != '.')
                             i++;
                         int iDigitsAfterDecimal = strTemp.Length - i - 1;
-                        while (iDigitsAfterDecimal > 0)
-                        {
+                        while (iDigitsAfterDecimal > 0) {
                             dTemp *= 10;
                             iMultiple *= 10;
                             iDigitsAfterDecimal--;
                         }
 
-                        frac = new Fraction((int)Math.Round(dTemp), iMultiple);
+                        frac = new Fraction((int) Math.Round(dTemp), iMultiple);
                     }
 
                     return frac;
                 }
             }
-            catch (OverflowException)
-            {
+            catch (OverflowException) {
                 throw new FractionException("Conversion not possible due to overflow");
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 throw new FractionException("Conversion not possible");
             }
         }
@@ -1014,8 +917,7 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// The function replicates current Fraction object
         /// </summary>
-        public Fraction Duplicate()
-        {
+        public Fraction Duplicate() {
             Fraction frac = new Fraction();
             frac.Numerator = Numerator;
             frac.Denominator = Denominator;
@@ -1025,8 +927,7 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// The function returns the inverse of a Fraction object
         /// </summary>
-        public static Fraction Inverse(Fraction frac1)
-        {
+        public static Fraction Inverse(Fraction frac1) {
             if (frac1.Numerator == 0)
                 throw new FractionException("Operation not possible (Denominator cannot be assigned a ZERO Value)");
 
@@ -1041,8 +942,7 @@ namespace Cosmos.Encryption.Core
         /// includes -(unary), and binary opertors such as +, -, *, /
         /// also includes relational and logical operators such as ==, !=, &lt;, &gt;, &lt;=, &gt;=
         /// </summary>
-        public static Fraction operator -(Fraction frac1)
-        {
+        public static Fraction operator -(Fraction frac1) {
             return (Negate(frac1));
         }
 
@@ -1052,8 +952,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="frac2"></param>
         /// <returns></returns>
-        public static Fraction operator +(Fraction frac1, Fraction frac2)
-        {
+        public static Fraction operator +(Fraction frac1, Fraction frac2) {
             return (Add(frac1, frac2));
         }
 
@@ -1063,8 +962,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="iNo"></param>
         /// <param name="frac1"></param>
         /// <returns></returns>
-        public static Fraction operator +(int iNo, Fraction frac1)
-        {
+        public static Fraction operator +(int iNo, Fraction frac1) {
             return (Add(frac1, new Fraction(iNo)));
         }
 
@@ -1074,8 +972,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="iNo"></param>
         /// <returns></returns>
-        public static Fraction operator +(Fraction frac1, int iNo)
-        {
+        public static Fraction operator +(Fraction frac1, int iNo) {
             return (Add(frac1, new Fraction(iNo)));
         }
 
@@ -1085,8 +982,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="dbl"></param>
         /// <param name="frac1"></param>
         /// <returns></returns>
-        public static Fraction operator +(double dbl, Fraction frac1)
-        {
+        public static Fraction operator +(double dbl, Fraction frac1) {
             return (Add(frac1, Fraction.ToFraction(dbl)));
         }
 
@@ -1096,8 +992,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="dbl"></param>
         /// <returns></returns>
-        public static Fraction operator +(Fraction frac1, double dbl)
-        {
+        public static Fraction operator +(Fraction frac1, double dbl) {
             return (Add(frac1, Fraction.ToFraction(dbl)));
         }
 
@@ -1107,8 +1002,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="frac2"></param>
         /// <returns></returns>
-        public static Fraction operator -(Fraction frac1, Fraction frac2)
-        {
+        public static Fraction operator -(Fraction frac1, Fraction frac2) {
             return (Add(frac1, -frac2));
         }
 
@@ -1118,8 +1012,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="iNo"></param>
         /// <param name="frac1"></param>
         /// <returns></returns>
-        public static Fraction operator -(int iNo, Fraction frac1)
-        {
+        public static Fraction operator -(int iNo, Fraction frac1) {
             return (Add(-frac1, new Fraction(iNo)));
         }
 
@@ -1129,8 +1022,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="iNo"></param>
         /// <returns></returns>
-        public static Fraction operator -(Fraction frac1, int iNo)
-        {
+        public static Fraction operator -(Fraction frac1, int iNo) {
             return (Add(frac1, -(new Fraction(iNo))));
         }
 
@@ -1140,8 +1032,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="dbl"></param>
         /// <param name="frac1"></param>
         /// <returns></returns>
-        public static Fraction operator -(double dbl, Fraction frac1)
-        {
+        public static Fraction operator -(double dbl, Fraction frac1) {
             return (Add(-frac1, Fraction.ToFraction(dbl)));
         }
 
@@ -1151,8 +1042,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="dbl"></param>
         /// <returns></returns>
-        public static Fraction operator -(Fraction frac1, double dbl)
-        {
+        public static Fraction operator -(Fraction frac1, double dbl) {
             return (Add(frac1, -Fraction.ToFraction(dbl)));
         }
 
@@ -1162,8 +1052,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="frac2"></param>
         /// <returns></returns>
-        public static Fraction operator *(Fraction frac1, Fraction frac2)
-        {
+        public static Fraction operator *(Fraction frac1, Fraction frac2) {
             return (Multiply(frac1, frac2));
         }
 
@@ -1173,8 +1062,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="iNo"></param>
         /// <param name="frac1"></param>
         /// <returns></returns>
-        public static Fraction operator *(int iNo, Fraction frac1)
-        {
+        public static Fraction operator *(int iNo, Fraction frac1) {
             return (Multiply(frac1, new Fraction(iNo)));
         }
 
@@ -1184,8 +1072,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="iNo"></param>
         /// <returns></returns>
-        public static Fraction operator *(Fraction frac1, int iNo)
-        {
+        public static Fraction operator *(Fraction frac1, int iNo) {
             return (Multiply(frac1, new Fraction(iNo)));
         }
 
@@ -1195,8 +1082,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="dbl"></param>
         /// <param name="frac1"></param>
         /// <returns></returns>
-        public static Fraction operator *(double dbl, Fraction frac1)
-        {
+        public static Fraction operator *(double dbl, Fraction frac1) {
             return (Multiply(frac1, Fraction.ToFraction(dbl)));
         }
 
@@ -1206,8 +1092,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="dbl"></param>
         /// <returns></returns>
-        public static Fraction operator *(Fraction frac1, double dbl)
-        {
+        public static Fraction operator *(Fraction frac1, double dbl) {
             return (Multiply(frac1, Fraction.ToFraction(dbl)));
         }
 
@@ -1217,8 +1102,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="frac2"></param>
         /// <returns></returns>
-        public static Fraction operator /(Fraction frac1, Fraction frac2)
-        {
+        public static Fraction operator /(Fraction frac1, Fraction frac2) {
             return (Multiply(frac1, Inverse(frac2)));
         }
 
@@ -1228,8 +1112,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="iNo"></param>
         /// <param name="frac1"></param>
         /// <returns></returns>
-        public static Fraction operator /(int iNo, Fraction frac1)
-        {
+        public static Fraction operator /(int iNo, Fraction frac1) {
             return (Multiply(Inverse(frac1), new Fraction(iNo)));
         }
 
@@ -1239,8 +1122,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="iNo"></param>
         /// <returns></returns>
-        public static Fraction operator /(Fraction frac1, int iNo)
-        {
+        public static Fraction operator /(Fraction frac1, int iNo) {
             return (Multiply(frac1, Inverse(new Fraction(iNo))));
         }
 
@@ -1250,8 +1132,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="dbl"></param>
         /// <param name="frac1"></param>
         /// <returns></returns>
-        public static Fraction operator /(double dbl, Fraction frac1)
-        {
+        public static Fraction operator /(double dbl, Fraction frac1) {
             return (Multiply(Inverse(frac1), Fraction.ToFraction(dbl)));
         }
 
@@ -1261,8 +1142,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="dbl"></param>
         /// <returns></returns>
-        public static Fraction operator /(Fraction frac1, double dbl)
-        {
+        public static Fraction operator /(Fraction frac1, double dbl) {
             return (Multiply(frac1, Fraction.Inverse(Fraction.ToFraction(dbl))));
         }
 
@@ -1272,8 +1152,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="frac2"></param>
         /// <returns></returns>
-        public static bool operator ==(Fraction frac1, Fraction frac2)
-        {
+        public static bool operator ==(Fraction frac1, Fraction frac2) {
             return frac1.Equals(frac2);
         }
 
@@ -1283,8 +1162,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="frac2"></param>
         /// <returns></returns>
-        public static bool operator !=(Fraction frac1, Fraction frac2)
-        {
+        public static bool operator !=(Fraction frac1, Fraction frac2) {
             return (!frac1.Equals(frac2));
         }
 
@@ -1294,8 +1172,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="iNo"></param>
         /// <returns></returns>
-        public static bool operator ==(Fraction frac1, int iNo)
-        {
+        public static bool operator ==(Fraction frac1, int iNo) {
             return frac1.Equals(new Fraction(iNo));
         }
 
@@ -1305,8 +1182,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="iNo"></param>
         /// <returns></returns>
-        public static bool operator !=(Fraction frac1, int iNo)
-        {
+        public static bool operator !=(Fraction frac1, int iNo) {
             return (!frac1.Equals(new Fraction(iNo)));
         }
 
@@ -1316,8 +1192,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="dbl"></param>
         /// <returns></returns>
-        public static bool operator ==(Fraction frac1, double dbl)
-        {
+        public static bool operator ==(Fraction frac1, double dbl) {
             return frac1.Equals(new Fraction(dbl));
         }
 
@@ -1327,8 +1202,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="dbl"></param>
         /// <returns></returns>
-        public static bool operator !=(Fraction frac1, double dbl)
-        {
+        public static bool operator !=(Fraction frac1, double dbl) {
             return (!frac1.Equals(new Fraction(dbl)));
         }
 
@@ -1338,8 +1212,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="frac2"></param>
         /// <returns></returns>
-        public static bool operator <(Fraction frac1, Fraction frac2)
-        {
+        public static bool operator <(Fraction frac1, Fraction frac2) {
             return frac1.Numerator * frac2.Denominator < frac2.Numerator * frac1.Denominator;
         }
 
@@ -1349,8 +1222,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="frac2"></param>
         /// <returns></returns>
-        public static bool operator >(Fraction frac1, Fraction frac2)
-        {
+        public static bool operator >(Fraction frac1, Fraction frac2) {
             return frac1.Numerator * frac2.Denominator > frac2.Numerator * frac1.Denominator;
         }
 
@@ -1360,8 +1232,7 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="frac2"></param>
         /// <returns></returns>
-        public static bool operator <=(Fraction frac1, Fraction frac2)
-        {
+        public static bool operator <=(Fraction frac1, Fraction frac2) {
             return frac1.Numerator * frac2.Denominator <= frac2.Numerator * frac1.Denominator;
         }
 
@@ -1371,33 +1242,29 @@ namespace Cosmos.Encryption.Core
         /// <param name="frac1"></param>
         /// <param name="frac2"></param>
         /// <returns></returns>
-        public static bool operator >=(Fraction frac1, Fraction frac2)
-        {
+        public static bool operator >=(Fraction frac1, Fraction frac2) {
             return frac1.Numerator * frac2.Denominator >= frac2.Numerator * frac1.Denominator;
         }
 
         /// <summary>
         /// checks whether two fractions are equal
         /// </summary>
-        public override bool Equals(object obj)
-        {
-            Fraction frac = (Fraction)obj;
+        public override bool Equals(object obj) {
+            Fraction frac = (Fraction) obj;
             return (Numerator == frac.Numerator && Denominator == frac.Denominator);
         }
 
         /// <summary>
         /// returns a hash code for this fraction
         /// </summary>
-        public override int GetHashCode()
-        {
+        public override int GetHashCode() {
             return (Convert.ToInt32((Numerator ^ Denominator) & 0xFFFFFFFF));
         }
 
         /// <summary>
         /// internal function for negation
         /// </summary>
-        private static Fraction Negate(Fraction frac1)
-        {
+        private static Fraction Negate(Fraction frac1) {
             long iNumerator = -frac1.Numerator;
             long iDenominator = frac1.Denominator;
             return (new Fraction(iNumerator, iDenominator));
@@ -1406,44 +1273,34 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// internal functions for binary operations
         /// </summary>
-        private static Fraction Add(Fraction frac1, Fraction frac2)
-        {
-            try
-            {
-                checked
-                {
+        private static Fraction Add(Fraction frac1, Fraction frac2) {
+            try {
+                checked {
                     long iNumerator = frac1.Numerator * frac2.Denominator + frac2.Numerator * frac1.Denominator;
                     long iDenominator = frac1.Denominator * frac2.Denominator;
                     return (new Fraction(iNumerator, iDenominator));
                 }
             }
-            catch (OverflowException)
-            {
+            catch (OverflowException) {
                 throw new FractionException("Overflow occurred while performing arithemetic operation");
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 throw new FractionException("An error occurred while performing arithemetic operation");
             }
         }
 
-        private static Fraction Multiply(Fraction frac1, Fraction frac2)
-        {
-            try
-            {
-                checked
-                {
+        private static Fraction Multiply(Fraction frac1, Fraction frac2) {
+            try {
+                checked {
                     long iNumerator = frac1.Numerator * frac2.Numerator;
                     long iDenominator = frac1.Denominator * frac2.Denominator;
                     return (new Fraction(iNumerator, iDenominator));
                 }
             }
-            catch (OverflowException)
-            {
+            catch (OverflowException) {
                 throw new FractionException("Overflow occurred while performing arithemetic operation");
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 throw new FractionException("An error occurred while performing arithemetic operation");
             }
         }
@@ -1451,16 +1308,13 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// The function returns GCD of two numbers (used for reducing a Fraction)
         /// </summary>
-        private static long GCD(long iNo1, long iNo2)
-        {
+        private static long GCD(long iNo1, long iNo2) {
             // take absolute values
             if (iNo1 < 0) iNo1 = -iNo1;
             if (iNo2 < 0) iNo2 = -iNo2;
 
-            do
-            {
-                if (iNo1 < iNo2)
-                {
+            do {
+                if (iNo1 < iNo2) {
                     long tmp = iNo1; // swap the two operands
                     iNo1 = iNo2;
                     iNo2 = tmp;
@@ -1476,12 +1330,9 @@ namespace Cosmos.Encryption.Core
         /// The function reduces(simplifies) a Fraction object by dividing both its numerator 
         /// and denominator by their GCD
         /// </summary>
-        public static void ReduceFraction(Fraction frac)
-        {
-            try
-            {
-                if (frac.Numerator == 0)
-                {
+        public static void ReduceFraction(Fraction frac) {
+            try {
+                if (frac.Numerator == 0) {
                     frac.Denominator = 1;
                     return;
                 }
@@ -1497,8 +1348,7 @@ namespace Cosmos.Encryption.Core
                     frac.Denominator *= -1;
                 }
             } // end try
-            catch (Exception exp)
-            {
+            catch (Exception exp) {
                 throw new FractionException("Cannot reduce Fraction: " + exp.Message);
             }
         }
@@ -1507,8 +1357,7 @@ namespace Cosmos.Encryption.Core
     /// <summary>
     /// Exception class for Fraction, derived from System.Exception
     /// </summary>
-    public class FractionException : Exception
-    {
+    public class FractionException : Exception {
         /// <summary>
         /// Create a new instance of <see cref="FractionException"/>
         /// </summary>

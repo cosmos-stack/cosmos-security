@@ -6,18 +6,15 @@
  *      Author: zhebinhu
  */
 
-namespace Cosmos.Encryption.Core
-{
-    internal class ZUCCore
-    {
+namespace Cosmos.Encryption.Core {
+    internal class ZUCCore {
         private readonly byte[] _key;
         private readonly byte[] _iv;
 
         private const int MASK = int.MaxValue;
         private const long LMASK = long.MaxValue;
 
-        public ZUCCore(byte[] key, byte[] iv)
-        {
+        public ZUCCore(byte[] key, byte[] iv) {
             _key = new byte[16];
             _iv = new byte[16];
 
@@ -30,7 +27,7 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// state registers LFSR
         /// </summary>
-        private int[] LFSR_S = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        private int[] LFSR_S = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
         /// <summary>
         /// registers
@@ -42,11 +39,10 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// output of BR procedure
         /// </summary>
-        private int[] BRC_X = { 0, 0, 0, 0 };
+        private int[] BRC_X = {0, 0, 0, 0};
 
         /* S-boxes */
-        private int[] S0 =
-        {
+        private int[] S0 = {
             0x3e, 0x72, 0x5b, 0x47, 0xca, 0xe0, 0x00, 0x33, 0x04, 0xd1, 0x54, 0x98, 0x09, 0xb9, 0x6d, 0xcb,
             0x7b, 0x1b, 0xf9, 0x32, 0xaf, 0x9d, 0x6a, 0xa5, 0xb8, 0x2d, 0xfc, 0x1d, 0x08, 0x53, 0x03, 0x90,
             0x4d, 0x4e, 0x84, 0x99, 0xe4, 0xce, 0xd9, 0x91, 0xdd, 0xb6, 0x85, 0x48, 0x8b, 0x29, 0x6e, 0xac,
@@ -65,8 +61,7 @@ namespace Cosmos.Encryption.Core
             0x8d, 0x27, 0x1a, 0xdb, 0x81, 0xb3, 0xa0, 0xf4, 0x45, 0x7a, 0x19, 0xdf, 0xee, 0x78, 0x34, 0x60
         };
 
-        private int[] S1 =
-        {
+        private int[] S1 = {
             0x55, 0xc2, 0x63, 0x71, 0x3b, 0xc8, 0x47, 0x86, 0x9f, 0x3c, 0xda, 0x5b, 0x29, 0xaa, 0xfd, 0x77,
             0x8c, 0xc5, 0x94, 0x0c, 0xa6, 0x1a, 0x13, 0x00, 0xe3, 0xa8, 0x16, 0x72, 0x40, 0xf9, 0xf8, 0x42,
             0x44, 0x26, 0x68, 0x96, 0x81, 0xd9, 0x45, 0x3e, 0x10, 0x76, 0xc6, 0xa7, 0x8b, 0x39, 0x43, 0xe1,
@@ -86,27 +81,22 @@ namespace Cosmos.Encryption.Core
         };
 
         /* D constants */
-        private int[] EK_d =
-        {
+        private int[] EK_d = {
             0x44D7, 0x26BC, 0x626B, 0x135E, 0x5789, 0x35E2, 0x7135, 0x09AF,
             0x4D78, 0x2F13, 0x6BC4, 0x1AF1, 0x5E26, 0x3C4D, 0x789A, 0x47AC
         };
 
-        private static int AddM(int a, int b)
-        {
+        private static int AddM(int a, int b) {
             int c = a + b;
-            return (c & 0x7FFFFFFF) + (UInt32MoveRight((int)(c & 0x80000000), 31));
+            return (c & 0x7FFFFFFF) + (UInt32MoveRight((int) (c & 0x80000000), 31));
         }
 
-        private static int MulByPow2(int x, int k)
-        {
+        private static int MulByPow2(int x, int k) {
             return ((((x) << k) | (UInt32MoveRight(x, 31 - k))) & 0x7FFFFFFF);
         }
 
-        private static int UInt32MoveRight(int value, int pos)
-        {
-            if (pos != 0)
-            {
+        private static int UInt32MoveRight(int value, int pos) {
+            if (pos != 0) {
                 //无符号整数最高位不表示正负但操作数还是有符号的，有符号数右移1位，正数时高位补0，负数时高位补1
                 value = value >> 1;
                 //和整数最大值进行逻辑与运算，运算后的结果为忽略表示正负值的最高位
@@ -118,10 +108,8 @@ namespace Cosmos.Encryption.Core
             return value;
         }
 
-        private static long UInt64MoveRight(long value, int pos)
-        {
-            if (pos != 0)
-            {
+        private static long UInt64MoveRight(long value, int pos) {
+            if (pos != 0) {
                 //无符号整数最高位不表示正负但操作数还是有符号的，有符号数右移1位，正数时高位补0，负数时高位补1
                 value = value >> 1;
                 //和整数最大值进行逻辑与运算，运算后的结果为忽略表示正负值的最高位
@@ -134,8 +122,7 @@ namespace Cosmos.Encryption.Core
         }
 
         /* LFSR */
-        private void LFSRWithInitializationMode(int u)
-        {
+        private void LFSRWithInitializationMode(int u) {
             int f, v;
 
             f = LFSR_S[0];
@@ -157,16 +144,15 @@ namespace Cosmos.Encryption.Core
             f = AddM(f, u);
 
             /* update the state */
-            for (int i = 0; i < 15; ++i)
-            {
+            for (int i = 0; i < 15; ++i) {
                 LFSR_S[i] = LFSR_S[i + 1];
             }
+
             LFSR_S[15] = f;
         }
 
         /* LFSR with work mode */
-        private void LFSRWithWorkMode()
-        {
+        private void LFSRWithWorkMode() {
             int f, v;
 
             f = LFSR_S[0];
@@ -186,49 +172,43 @@ namespace Cosmos.Encryption.Core
             f = AddM(f, v);
 
             /* update state */
-            for (int i = 0; i < 15; ++i)
-            {
+            for (int i = 0; i < 15; ++i) {
                 LFSR_S[i] = LFSR_S[i + 1];
             }
+
             LFSR_S[15] = f;
         }
 
         /* Bit Reorganization Procedure */
-        private void BitReorganization()
-        {
+        private void BitReorganization() {
             BRC_X[0] = ((LFSR_S[15] & 0x7FFF8000) << 1) | (LFSR_S[14] & 0xFFFF);
             BRC_X[1] = ((LFSR_S[11] & 0xFFFF) << 16) | (UInt32MoveRight(LFSR_S[9], 15));
             BRC_X[2] = ((LFSR_S[7] & 0xFFFF) << 16) | (UInt32MoveRight(LFSR_S[5], 15));
             BRC_X[3] = ((LFSR_S[2] & 0xFFFF) << 16) | (UInt32MoveRight(LFSR_S[0], 15));
         }
 
-        private static long ROT(long a, int k)
-        {
+        private static long ROT(long a, int k) {
             return (((a) << k) | (UInt64MoveRight(a, 32 - k)));
         }
 
         /* linear transformation L1 */
-        private static long L1(long X)
-        {
+        private static long L1(long X) {
             return (X ^ ROT(X, 2) ^ ROT(X, 10) ^ ROT(X, 18) ^ ROT(X, 24));
         }
 
         /* linear transformation L2 */
-        private static long L2(long X)
-        {
+        private static long L2(long X) {
             return (X ^ ROT(X, 8) ^ ROT(X, 14) ^ ROT(X, 22) ^ ROT(X, 30));
         }
 
         /* create 32-bit word */
 
-        private static int MAKEU32(int a, int b, int c, int d)
-        {
-            return (int)(((long)a << 24) | ((long)b << 16) | ((long)c << 8) | ((long)d));
+        private static int MAKEU32(int a, int b, int c, int d) {
+            return (int) (((long) a << 24) | ((long) b << 16) | ((long) c << 8) | ((long) d));
         }
 
         /* non-linear function F */
-        private long F()
-        {
+        private long F() {
             long W, W1, W2, u, v;
 
             W = (BRC_X[0] ^ F_R1) + F_R2;
@@ -241,37 +221,33 @@ namespace Cosmos.Encryption.Core
             u = u & 0x00000000FFFFFFFFL;
             v = L2((W2 << 16) & 0x00000000FFFFFFFFL | (UInt64MoveRight(W1, 16)));
             v = v & 0x00000000FFFFFFFFL;
-            F_R1 = MAKEU32(S0[(int)(UInt64MoveRight(u, 24))], S1[(int)((UInt64MoveRight(u, 16)) & 0xFF)], S0[(int)((UInt64MoveRight(u, 8)) & 0xFF)], S1[(int)(u & 0xFF)]);
-            F_R2 = MAKEU32(S0[(int)(UInt64MoveRight(v, 24))], S1[(int)((UInt64MoveRight(v, 16)) & 0xFF)], S0[(int)((UInt64MoveRight(v, 8)) & 0xFF)], S1[(int)(v & 0xFF)]);
+            F_R1 = MAKEU32(S0[(int) (UInt64MoveRight(u, 24))], S1[(int) ((UInt64MoveRight(u, 16)) & 0xFF)], S0[(int) ((UInt64MoveRight(u, 8)) & 0xFF)], S1[(int) (u & 0xFF)]);
+            F_R2 = MAKEU32(S0[(int) (UInt64MoveRight(v, 24))], S1[(int) ((UInt64MoveRight(v, 16)) & 0xFF)], S0[(int) ((UInt64MoveRight(v, 8)) & 0xFF)], S1[(int) (v & 0xFF)]);
 
             return W;
         }
 
-        private static int MAKEU31(int a, int b, int c)
-        {
-            return (int)(((long)((long)(0)
-                                 | (int)(a)) << 23)
-                         | ((long)(b) << 8)
-                         | (long)((long)(0)
-                                  | (int)(c)));
+        private static int MAKEU31(int a, int b, int c) {
+            return (int) (((long) ((long) (0)
+                                 | (int) (a)) << 23)
+                        | ((long) (b) << 8)
+                        | (long) ((long) (0)
+                                | (int) (c)));
         }
 
-        private void Initialization(int[] k, int[] iv)
-        {
+        private void Initialization(int[] k, int[] iv) {
             long w;
 
             /* expand key */
-            for (int i = 0; i < 16; ++i)
-            {
+            for (int i = 0; i < 16; ++i) {
                 LFSR_S[i] = MAKEU31(k[i], EK_d[i], iv[i]);
             }
 
             long nCount = 32;
-            while (nCount > 0)
-            {
+            while (nCount > 0) {
                 BitReorganization();
                 w = F();
-                LFSRWithInitializationMode((int)(UInt64MoveRight(w, 1)));
+                LFSRWithInitializationMode((int) (UInt64MoveRight(w, 1)));
                 nCount--;
             }
 
@@ -280,24 +256,19 @@ namespace Cosmos.Encryption.Core
             LFSRWithWorkMode();
         }
 
-        public void GenerateKeyStream(long[] pKeyStream, long KeyStreamLen)
-        {
+        public void GenerateKeyStream(long[] pKeyStream, long KeyStreamLen) {
             /* working cycles */
-            for (int i = 0; i < KeyStreamLen; ++i)
-            {
+            for (int i = 0; i < KeyStreamLen; ++i) {
                 BitReorganization();
                 pKeyStream[i] = F() ^ BRC_X[3] & 0x00000000ffffffffL;
                 LFSRWithWorkMode();
             }
         }
 
-        private static string ByteToHexStr(byte[] bytes)
-        {
+        private static string ByteToHexStr(byte[] bytes) {
             string returnStr = "";
-            if (bytes != null)
-            {
-                for (int i = 0; i < bytes.Length; i++)
-                {
+            if (bytes != null) {
+                for (int i = 0; i < bytes.Length; i++) {
 
                     returnStr += bytes[i].ToString("X2");
                 }
@@ -306,62 +277,57 @@ namespace Cosmos.Encryption.Core
             return returnStr;
         }
 
-        public static class Utils
-        {
-            public static Int32[] StrToInt32s(byte[] s, int startIdx, int length)
-            {
+        public static class Utils {
+            public static Int32[] StrToInt32s(byte[] s, int startIdx, int length) {
                 if (length <= 0) length = s.Length;
 
                 int fs = length / 4;
                 int ls = length % 4;
                 Int32[] l = new Int32[fs + ((ls > 0) ? 1 : 0)];
                 int idx = startIdx;
-                for (var i = 0; i < fs; i++)
-                {
-                    l[i] = (int)s[idx++] |
-                           ((int)s[idx++] << 8) |
-                           ((int)s[idx++] << 16) |
-                           ((int)s[idx++] << 24);
+                for (var i = 0; i < fs; i++) {
+                    l[i] = (int) s[idx++] |
+                           ((int) s[idx++] << 8) |
+                           ((int) s[idx++] << 16) |
+                           ((int) s[idx++] << 24);
                 }
-                if (ls > 0)
-                {
+
+                if (ls > 0) {
                     // note running off the end of the string generates nulls since 
                     // bitwise operators treat NaN as 0
-                    byte[] v = new byte[4] { 0, 0, 0, 0 };
-                    for (var i = 0; i < ls; i++)
-                    {
+                    byte[] v = new byte[4] {0, 0, 0, 0};
+                    for (var i = 0; i < ls; i++) {
                         v[i] = s[fs * 4 + i];
                     }
+
                     l[fs] = BitConverter.ToInt32(v, 0);
                 }
 
                 return l;
             }
 
-            public static Int64[] StrToLongs(byte[] s, int startIdx, int length)
-            {
+            public static Int64[] StrToLongs(byte[] s, int startIdx, int length) {
                 if (length <= 0) length = s.Length;
 
                 int fs = length / 4;
                 int ls = length % 4;
                 Int64[] l = new Int64[fs + ((ls > 0) ? 1 : 0)];
                 int idx = startIdx;
-                for (var i = 0; i < fs; i++)
-                {
-                    l[i] = (uint)s[idx++] |
-                           ((uint)s[idx++] << 8) |
-                           ((uint)s[idx++] << 16) |
-                           ((uint)s[idx++] << 24);
+                for (var i = 0; i < fs; i++) {
+                    l[i] = (uint) s[idx++] |
+                           ((uint) s[idx++] << 8) |
+                           ((uint) s[idx++] << 16) |
+                           ((uint) s[idx++] << 24);
                 }
-                if (ls > 0)
-                {
+
+                if (ls > 0) {
                     // note running off the end of the string generates nulls since 
                     // bitwise operators treat NaN as 0
-                    byte[] v = new byte[4] { 0, 0, 0, 0 };
-                    for (var i = 0; i < ls; i++)
-                    {
+                    byte[] v = new byte[4] {0, 0, 0, 0};
+                    for (var i = 0; i < ls; i++) {
                         v[i] = s[fs * 4 + i];
                     }
+
                     l[fs] = BitConverter.ToUInt32(v, 0);
                 }
 

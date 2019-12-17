@@ -1,11 +1,9 @@
-﻿namespace Cosmos.Encryption.Core.Internals
-{
+﻿namespace Cosmos.Encryption.Core.Internals {
     /// <summary>
     /// Author:myloveCc
     ///     https://github.com/myloveCc/NETCore.Encrypt/blob/master/src/NETCore.Encrypt/Internal/RSAParametersJson.cs
     /// </summary>
-    internal class RSAParametersJson
-    {
+    internal class RSAParametersJson {
         //Public key Modulus
         public string Modulus { get; set; }
 

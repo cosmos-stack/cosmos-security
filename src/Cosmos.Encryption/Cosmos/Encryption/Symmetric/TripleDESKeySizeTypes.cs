@@ -1,13 +1,11 @@
 ﻿// ReSharper disable once CheckNamespace
 
-namespace Cosmos.Encryption
-{
+namespace Cosmos.Encryption {
     /// <summary>
     /// Triple des key size types
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public enum TripleDESKeySizeTypes : int
-    {
+    public enum TripleDESKeySizeTypes : int {
         /// <summary>
         /// 192
         /// </summary>

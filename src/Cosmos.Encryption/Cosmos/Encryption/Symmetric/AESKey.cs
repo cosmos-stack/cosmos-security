@@ -1,12 +1,11 @@
 ﻿// ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption
-{
+
+namespace Cosmos.Encryption {
     /// <summary>
     /// Aes key
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public class AESKey
-    {
+    public class AESKey {
         /// <summary>
         /// Aes key
         /// </summary>

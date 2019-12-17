@@ -3,8 +3,7 @@ using System.Text;
 using Cosmos.Encryption.Abstractions;
 using Cosmos.Encryption.Core.Internals;
 
-namespace Cosmos.Encryption.Algorithms
-{
+namespace Cosmos.Encryption.Algorithms {
     /// <summary>
     /// RailFence encryption algorithm
     /// for more info, please view:
@@ -12,8 +11,7 @@ namespace Cosmos.Encryption.Algorithms
     /// Author: Omar-Salem
     ///     https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/RailFence.cs
     /// </summary>
-    public sealed class RailFence : IEncryptionAlgorithm
-    {
+    public sealed class RailFence : IEncryptionAlgorithm {
         private int Key { get; }
 
         /// <summary>
@@ -36,15 +34,13 @@ namespace Cosmos.Encryption.Algorithms
         /// <returns></returns>
         public string Decrypt(string cipher) => ProcessFunc()(Key)(cipher)(EncryptionAlgorithmMode.Decrypt);
 
-        private static Func<int, Func<string, Func<EncryptionAlgorithmMode, string>>> ProcessFunc() => key => message => mode =>
-        {
+        private static Func<int, Func<string, Func<EncryptionAlgorithmMode, string>>> ProcessFunc() => key => message => mode => {
             var rows = key;
-            var columns = (int)Math.Ceiling((double)message.Length / rows);
+            var columns = (int) Math.Ceiling((double) message.Length / rows);
             var matrix = FillArrayFunc()(message)(rows)(columns)(mode);
             var sbStr = new StringBuilder();
 
-            foreach (char c in matrix)
-            {
+            foreach (char c in matrix) {
                 sbStr.Append(c);
             }
 
@@ -52,13 +48,11 @@ namespace Cosmos.Encryption.Algorithms
         };
 
         private static Func<string, Func<int, Func<int, Func<EncryptionAlgorithmMode, char[,]>>>> FillArrayFunc()
-            => message => rowsCount => columnsCount => mode =>
-            {
+            => message => rowsCount => columnsCount => mode => {
                 int charPosition = 0, length = 0, width = 0;
                 var matrix = new char[rowsCount, columnsCount];
 
-                switch (mode)
-                {
+                switch (mode) {
                     case EncryptionAlgorithmMode.Encrypt:
                         length = rowsCount;
                         width = columnsCount;
@@ -71,16 +65,12 @@ namespace Cosmos.Encryption.Algorithms
                         break;
                 }
 
-                for (var i = 0; i < width; i++)
-                {
-                    for (var j = 0; j < length; j++)
-                    {
-                        if (charPosition < message.Length)
-                        {
+                for (var i = 0; i < width; i++) {
+                    for (var j = 0; j < length; j++) {
+                        if (charPosition < message.Length) {
                             matrix[j, i] = message[charPosition];
                         }
-                        else
-                        {
+                        else {
                             matrix[j, i] = '*';
                         }
 
