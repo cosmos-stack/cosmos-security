@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using Cosmos.Encryption.Core.Internals;
 
@@ -25,7 +26,7 @@ namespace Cosmos.Encryption {
 
             return Signature(bytes);
         }
-        
+
         /// <summary>
         /// Signature
         /// </summary>
@@ -43,6 +44,23 @@ namespace Cosmos.Encryption {
 
             return hash;
         }
+
+        /// <summary>
+        /// Signature hash
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static byte[] SignatureHash(string data, Encoding encoding = null)
+            => BitConverter.GetBytes(Signature(data, encoding));
+
+        /// <summary>
+        /// Signature hash
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static byte[] SignatureHash(byte[] data)
+            => BitConverter.GetBytes(Signature(data));
 
         /// <summary>
         /// Verify 
