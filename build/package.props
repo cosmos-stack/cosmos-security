@@ -1,0 +1,12 @@
+<Project>
+	<PropertyGroup Label="Package">
+		<Product>Cosmos.Encryption</Product>
+		<Authors>AlexLEWIS;dotnetcore;StarrySky;Cosmos</Authors>
+		<RepositoryUrl>https://github.com/cosmos-loops/Encryption</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageProjectUrl>https://github.com/cosmos-loops/Encryption</PackageProjectUrl>
+		<PackageIcon>icon.png</PackageIcon>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageTags>StarrySky;Cosmos;Encryption</PackageTags>
+	</PropertyGroup>
+</Project>

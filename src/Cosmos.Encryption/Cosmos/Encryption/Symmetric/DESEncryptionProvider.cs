@@ -6,26 +6,22 @@ using Cosmos.Encryption.Core;
 using Cosmos.Encryption.Core.Internals;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption
-{
+namespace Cosmos.Encryption {
     /// <summary>
     /// Symmetric/DES encryption.
     /// Reference: Seay Xu
     ///     https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Symmetric/DES.cs
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public sealed class DESEncryptionProvider : SymmetricEncryptionBase, ISymmetricEncryption
-    {
+    public sealed class DESEncryptionProvider : SymmetricEncryptionBase, ISymmetricEncryption {
         private DESEncryptionProvider() { }
 
         /// <summary>
         /// Create a new instance of <see cref="DESKey"/>
         /// </summary>
         /// <returns></returns>
-        public static DESKey CreateKey()
-        {
-            return new DESKey
-            {
+        public static DESKey CreateKey() {
+            return new DESKey {
                 Key = RandomStringGenerator.Generate(),
                 IV = RandomStringGenerator.Generate()
             };
@@ -40,8 +36,7 @@ namespace Cosmos.Encryption
         /// <param name="salt">The key salt to use to derive the key.</param>
         /// <param name="iv">The initialization vector (IV) to use to derive the key.</param>
         /// <returns>The encrypted string.</returns>
-        public static string Encrypt(string data, string pwd, string iv, string salt = null, Encoding encoding = null)
-        {
+        public static string Encrypt(string data, string pwd, string iv, string salt = null, Encoding encoding = null) {
             Checker.Data(data);
             Checker.Password(pwd);
             Checker.IV(iv);
@@ -63,8 +58,7 @@ namespace Cosmos.Encryption
         /// <param name="salt">The key salt to use to derive the key.</param>
         /// <param name="iv">The initialization vector (IV) to use to derive the key.</param>
         /// <returns>The decryption string.</returns>
-        public static string Decrypt(string data, string pwd, string iv, string salt = null, Encoding encoding = null)
-        {
+        public static string Decrypt(string data, string pwd, string iv, string salt = null, Encoding encoding = null) {
             Checker.Data(data);
             Checker.Password(pwd);
             Checker.IV(iv);

@@ -5,14 +5,12 @@ using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Math.EC;
 using Org.BouncyCastle.Utilities.IO;
 
-namespace Cosmos.Encryption.Asymmetric
-{
+namespace Cosmos.Encryption.Asymmetric {
     /// <summary>
     /// SM2 encryption provider. BUG: THERE ARE SEVERAL BUG HERE, DO NOT USE THIS PROVIDER NOW!
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public static class SM2EncryptionProvider
-    {
+    public static class SM2EncryptionProvider {
         /// <summary>
         /// Signature
         /// </summary>
@@ -20,8 +18,7 @@ namespace Cosmos.Encryption.Asymmetric
         /// <param name="userId"></param>
         /// <param name="privateKey"></param>
         /// <returns></returns>
-        public static byte[] Signature(byte[] data, byte[] userId, byte[] privateKey)
-        {
+        public static byte[] Signature(byte[] data, byte[] userId, byte[] privateKey) {
             if (privateKey == null || privateKey.Length == 0)
                 return null;
 
@@ -46,7 +43,7 @@ namespace Cosmos.Encryption.Asymmetric
 
             DerInteger d_r = new DerInteger(sm2Result.r);
             DerInteger d_s = new DerInteger(sm2Result.s);
-            Asn1EncodableVector v2 = new Asn1EncodableVector { d_r, d_s };
+            Asn1EncodableVector v2 = new Asn1EncodableVector {d_r, d_s};
             DerSequence sign = new DerSequence(v2);
             return sign.GetEncoded();
         }
@@ -60,8 +57,7 @@ namespace Cosmos.Encryption.Asymmetric
         /// <param name="userId"></param>
         /// <param name="publicKey"></param>
         /// <returns></returns>
-        public static bool Verify(byte[] signedData, byte[] data, byte[] userId, byte[] publicKey)
-        {
+        public static bool Verify(byte[] signedData, byte[] data, byte[] userId, byte[] publicKey) {
             if (publicKey == null || publicKey.Length == 0)
                 return false;
 
@@ -81,9 +77,9 @@ namespace Cosmos.Encryption.Asymmetric
             MemoryInputStream bis = new MemoryInputStream(signedData);
             Asn1InputStream dis = new Asn1InputStream(bis);
             Asn1Object derObj = dis.ReadObject();
-            var e = (Asn1Sequence)derObj;
-            DerInteger r = (DerInteger)e[0];
-            DerInteger s = (DerInteger)e[1];
+            var e = (Asn1Sequence) derObj;
+            DerInteger r = (DerInteger) e[0];
+            DerInteger s = (DerInteger) e[1];
             SM2.SM2Result sm2Result = new SM2.SM2Result();
             sm2Result.r = r.PositiveValue;
             sm2Result.s = s.PositiveValue;
@@ -98,8 +94,7 @@ namespace Cosmos.Encryption.Asymmetric
         /// <param name="data"></param>
         /// <param name="publicKey"></param>
         /// <returns></returns>
-        public static byte[] Encrypt(byte[] data, byte[] publicKey)
-        {
+        public static byte[] Encrypt(byte[] data, byte[] publicKey) {
             if (publicKey == null || publicKey.Length == 0)
                 return null;
 
@@ -122,7 +117,7 @@ namespace Cosmos.Encryption.Asymmetric
             DerInteger y = new DerInteger(c1.YCoord.ToBigInteger());
             DerOctetString derDig = new DerOctetString(c3);
             DerOctetString derEnc = new DerOctetString(source);
-            Asn1EncodableVector v = new Asn1EncodableVector { x, y, derDig, derEnc };
+            Asn1EncodableVector v = new Asn1EncodableVector {x, y, derDig, derEnc};
             DerSequence seq = new DerSequence(v);
             MemoryOutputStream bos = new MemoryOutputStream();
             DerOutputStream dos = new DerOutputStream(bos);
@@ -136,8 +131,7 @@ namespace Cosmos.Encryption.Asymmetric
         /// <param name="encryptedData"></param>
         /// <param name="privateKey"></param>
         /// <returns></returns>
-        public static byte[] Decrypt(byte[] encryptedData, byte[] privateKey)
-        {
+        public static byte[] Decrypt(byte[] encryptedData, byte[] privateKey) {
             if (privateKey == null || privateKey.Length == 0)
                 return null;
 
@@ -153,14 +147,14 @@ namespace Cosmos.Encryption.Asymmetric
             MemoryInputStream bis = new MemoryInputStream(enc);
             Asn1InputStream dis = new Asn1InputStream(bis);
             Asn1Object derObj = dis.ReadObject();
-            Asn1Sequence asn1 = (Asn1Sequence)derObj;
-            DerInteger x = (DerInteger)asn1[0];
-            DerInteger y = (DerInteger)asn1[1];
+            Asn1Sequence asn1 = (Asn1Sequence) derObj;
+            DerInteger x = (DerInteger) asn1[0];
+            DerInteger y = (DerInteger) asn1[1];
             ECPoint c1 = sm2.ecc_curve.CreatePoint(x.PositiveValue, y.PositiveValue, true);
 
             SM2.Cipher cipher = new SM2.Cipher();
             cipher.Init_dec(userD, c1);
-            DerOctetString data = (DerOctetString)asn1[3];
+            DerOctetString data = (DerOctetString) asn1[3];
             enc = data.GetOctets();
             cipher.Decrypt(enc);
             byte[] c3 = new byte[32];

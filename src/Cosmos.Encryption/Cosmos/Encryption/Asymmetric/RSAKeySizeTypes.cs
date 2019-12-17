@@ -1,13 +1,11 @@
 ﻿// ReSharper disable once CheckNamespace
 
-namespace Cosmos.Encryption
-{
+namespace Cosmos.Encryption {
     /// <summary>
     /// Rsa key size type
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public enum RSAKeySizeTypes
-    {
+    public enum RSAKeySizeTypes {
         /// <summary>
         /// 1024
         /// </summary>

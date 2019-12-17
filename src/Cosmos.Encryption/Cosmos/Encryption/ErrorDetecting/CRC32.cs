@@ -5,18 +5,17 @@ using Cosmos.Encryption.Core;
 using Cosmos.Encryption.Core.Internals;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption
-{
+namespace Cosmos.Encryption {
     /// <summary>
     /// CRC32
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public sealed class CRC32 : ICRC<CRC32, uint, int>
-    {
+    public sealed class CRC32 : ICRC<CRC32, uint, int> {
         /// <summary>
         /// Value
         /// </summary>
         public uint Value { get; set; } = CRC32CheckingProvider.Seed;
+
         // ReSharper disable once InconsistentNaming
         private uint[] CRCTable { get; } = CRCTableGenerator.GenerationCRC32Table();
 
@@ -24,8 +23,7 @@ namespace Cosmos.Encryption
         /// Reset
         /// </summary>
         /// <returns></returns>
-        public CRC32 Reset()
-        {
+        public CRC32 Reset() {
             Value = CRC32CheckingProvider.Seed;
             return this;
         }
@@ -35,8 +33,7 @@ namespace Cosmos.Encryption
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public CRC32 Update(int value)
-        {
+        public CRC32 Update(int value) {
             Value = CRCTable[(Value ^ value) & 0xFF] ^ (Value >> 8);
             return this;
         }
@@ -49,22 +46,18 @@ namespace Cosmos.Encryption
         /// <param name="count"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public CRC32 Update(byte[] buffer, int offset = 0, int count = -1)
-        {
+        public CRC32 Update(byte[] buffer, int offset = 0, int count = -1) {
             Checker.Buffer(buffer);
 
-            if (count <= 0)
-            {
+            if (count <= 0) {
                 count = buffer.Length;
             }
 
-            if (offset < 0 || offset + count > buffer.Length)
-            {
+            if (offset < 0 || offset + count > buffer.Length) {
                 throw new ArgumentOutOfRangeException(nameof(offset));
             }
 
-            while (--count >= 0)
-            {
+            while (--count >= 0) {
                 Value = CRCTable[(Value ^ buffer[offset++]) & 0xFF] ^ (Value >> 8);
             }
 
@@ -77,17 +70,14 @@ namespace Cosmos.Encryption
         /// <param name="stream"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public CRC32 Update(Stream stream, long count = -1)
-        {
+        public CRC32 Update(Stream stream, long count = -1) {
             Checker.Stream(stream);
 
-            if (count <= 0)
-            {
+            if (count <= 0) {
                 count = long.MaxValue;
             }
 
-            while (--count >= 0)
-            {
+            while (--count >= 0) {
                 var b = stream.ReadByte();
                 if (b == -1) break;
 

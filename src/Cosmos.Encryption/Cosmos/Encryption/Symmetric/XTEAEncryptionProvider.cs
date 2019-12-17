@@ -4,15 +4,13 @@ using Cosmos.Encryption.Abstractions;
 using Cosmos.Encryption.Core;
 using Cosmos.Encryption.Core.Internals;
 
-namespace Cosmos.Encryption.Symmetric
-{
+namespace Cosmos.Encryption.Symmetric {
     /// <summary>
     /// XTEA encryption provider
     /// </summary>
     // ReSharper disable once IdentifierTypo
     // ReSharper disable once InconsistentNaming
-    public sealed class XTEAEncryptionProvider : ISymmetricEncryption
-    {
+    public sealed class XTEAEncryptionProvider : ISymmetricEncryption {
         private XTEAEncryptionProvider() { }
 
         /// <summary>
@@ -22,8 +20,7 @@ namespace Cosmos.Encryption.Symmetric
         /// <param name="key"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string Encrypt(string data, string key, Encoding encoding = null)
-        {
+        public static string Encrypt(string data, string key, Encoding encoding = null) {
             if (string.IsNullOrWhiteSpace(data))
                 return string.Empty;
 
@@ -38,8 +35,7 @@ namespace Cosmos.Encryption.Symmetric
         /// <param name="key"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string Encrypt(byte[] data, string key, Encoding encoding = null)
-        {
+        public static string Encrypt(byte[] data, string key, Encoding encoding = null) {
             if (data.Length == 0)
                 return string.Empty;
 
@@ -53,8 +49,7 @@ namespace Cosmos.Encryption.Symmetric
         /// <param name="data"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static byte[] Encrypt(byte[] data, byte[] key)
-        {
+        public static byte[] Encrypt(byte[] data, byte[] key) {
             if (data.Length == 0)
                 return data;
 
@@ -68,8 +63,7 @@ namespace Cosmos.Encryption.Symmetric
         /// <param name="key"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string Decrypt(string data, string key, Encoding encoding = null)
-        {
+        public static string Decrypt(string data, string key, Encoding encoding = null) {
             if (string.IsNullOrWhiteSpace(data))
                 return data;
 
@@ -84,8 +78,7 @@ namespace Cosmos.Encryption.Symmetric
         /// <param name="key"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string Decrypt(byte[] data, string key, Encoding encoding = null)
-        {
+        public static string Decrypt(byte[] data, string key, Encoding encoding = null) {
             if (data.Length == 0)
                 return string.Empty;
 
@@ -99,24 +92,20 @@ namespace Cosmos.Encryption.Symmetric
         /// <param name="data"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static byte[] Decrypt(byte[] data, byte[] key)
-        {
+        public static byte[] Decrypt(byte[] data, byte[] key) {
             if (data.Length == 0)
                 return data;
 
             return XTEACore.Decrypt(data, key);
         }
 
-        private static byte[] FixKey(byte[] key)
-        {
+        private static byte[] FixKey(byte[] key) {
             if (key.Length == 16) return key;
             byte[] fixedKey = new byte[16];
-            if (key.Length < 16)
-            {
+            if (key.Length < 16) {
                 key.CopyTo(fixedKey, 0);
             }
-            else
-            {
+            else {
                 Array.Copy(key, 0, fixedKey, 0, 16);
             }
 

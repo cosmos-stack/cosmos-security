@@ -6,14 +6,12 @@ using System.Collections.Generic;
  *      https://www.2cto.com/kf/201603/496248.html
  */
 
-namespace Cosmos.Encryption.Core
-{
+namespace Cosmos.Encryption.Core {
     /// <summary>
     /// SM4 core
     /// </summary>
     // ReSharper disable InconsistentNaming
-    public class SM4Core
-    {
+    public class SM4Core {
         /// <summary>
         /// SM4 ENCRYPT
         /// </summary>
@@ -25,22 +23,20 @@ namespace Cosmos.Encryption.Core
         public const int SM4_DECRYPT = 0;
 
         private long GET_ULONG_BE(byte[] b, int i) =>
-            (long)(b[i] & 0xff) << 24 | (long)((b[i + 1] & 0xff) << 16) | (long)((b[i + 2] & 0xff) << 8) | (long)(b[i + 3] & 0xff) & 0xffffffffL;
+            (long) (b[i] & 0xff) << 24 | (long) ((b[i + 1] & 0xff) << 16) | (long) ((b[i + 2] & 0xff) << 8) | (long) (b[i + 3] & 0xff) & 0xffffffffL;
 
-        private void PUT_ULONG_BE(long n, byte[] b, int i)
-        {
-            b[i] = (byte)(int)(0xFF & n >> 24);
-            b[i + 1] = (byte)(int)(0xFF & n >> 16);
-            b[i + 2] = (byte)(int)(0xFF & n >> 8);
-            b[i + 3] = (byte)(int)(0xFF & n);
+        private void PUT_ULONG_BE(long n, byte[] b, int i) {
+            b[i] = (byte) (int) (0xFF & n >> 24);
+            b[i + 1] = (byte) (int) (0xFF & n >> 16);
+            b[i + 2] = (byte) (int) (0xFF & n >> 8);
+            b[i + 3] = (byte) (int) (0xFF & n);
         }
 
         private long SHL(long x, int n) => (x & 0xFFFFFFFF) << n;
 
         private long ROTL(long x, int n) => SHL(x, n) | x >> (32 - n);
 
-        private void SWAP(long[] sk, int i)
-        {
+        private void SWAP(long[] sk, int i) {
             long t = sk[i];
             sk[i] = sk[(31 - i)];
             sk[(31 - i)] = t;
@@ -49,8 +45,7 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// Sbox table
         /// </summary>
-        public byte[] SboxTable = new byte[]
-        {
+        public byte[] SboxTable = new byte[] {
             (byte) 0xd6, (byte) 0x90, (byte) 0xe9, (byte) 0xfe,
             (byte) 0xcc, (byte) 0xe1, 0x3d, (byte) 0xb7, 0x16, (byte) 0xb6,
             0x14, (byte) 0xc2, 0x28, (byte) 0xfb, 0x2c, 0x05, 0x2b, 0x67,
@@ -95,13 +90,12 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// Gets FK
         /// </summary>
-        public uint[] FK = { 0xa3b1bac6, 0x56aa3350, 0x677d9197, 0xb27022dc };
+        public uint[] FK = {0xa3b1bac6, 0x56aa3350, 0x677d9197, 0xb27022dc};
 
         /// <summary>
         /// Gets CK
         /// </summary>
-        public uint[] CK =
-        {
+        public uint[] CK = {
             0x00070e15, 0x1c232a31, 0x383f464d, 0x545b6269,
             0x70777e85, 0x8c939aa1, 0xa8afb6bd, 0xc4cbd2d9,
             0xe0e7eef5, 0xfc030a11, 0x181f262d, 0x343b4249,
@@ -112,15 +106,13 @@ namespace Cosmos.Encryption.Core
             0x10171e25, 0x2c333a41, 0x484f565d, 0x646b7279
         };
 
-        private byte sm4Sbox(byte inch)
-        {
+        private byte sm4Sbox(byte inch) {
             int i = inch & 0xFF;
             byte retVal = SboxTable[i];
             return retVal;
         }
 
-        private long sm4Lt(long ka)
-        {
+        private long sm4Lt(long ka) {
             long bb = 0L;
             long c = 0L;
             byte[] a = new byte[4];
@@ -137,8 +129,7 @@ namespace Cosmos.Encryption.Core
 
         private long sm4F(long x0, long x1, long x2, long x3, long rk) => x0 ^ sm4Lt(x1 ^ x2 ^ x3 ^ rk);
 
-        private long sm4CalciRK(long ka)
-        {
+        private long sm4CalciRK(long ka) {
             long bb = 0L;
             long rk = 0L;
             byte[] a = new byte[4];
@@ -153,8 +144,7 @@ namespace Cosmos.Encryption.Core
             return rk;
         }
 
-        private void sm4_setkey(long[] SK, byte[] key)
-        {
+        private void sm4_setkey(long[] SK, byte[] key) {
             long[] MK = new long[4];
             long[] k = new long[36];
             int i = 0;
@@ -162,27 +152,24 @@ namespace Cosmos.Encryption.Core
             MK[1] = GET_ULONG_BE(key, 4);
             MK[2] = GET_ULONG_BE(key, 8);
             MK[3] = GET_ULONG_BE(key, 12);
-            k[0] = MK[0] ^ (long)FK[0];
-            k[1] = MK[1] ^ (long)FK[1];
-            k[2] = MK[2] ^ (long)FK[2];
-            k[3] = MK[3] ^ (long)FK[3];
-            for (; i < 32; i++)
-            {
-                k[(i + 4)] = (k[i] ^ sm4CalciRK(k[(i + 1)] ^ k[(i + 2)] ^ k[(i + 3)] ^ (long)CK[i]));
+            k[0] = MK[0] ^ (long) FK[0];
+            k[1] = MK[1] ^ (long) FK[1];
+            k[2] = MK[2] ^ (long) FK[2];
+            k[3] = MK[3] ^ (long) FK[3];
+            for (; i < 32; i++) {
+                k[(i + 4)] = (k[i] ^ sm4CalciRK(k[(i + 1)] ^ k[(i + 2)] ^ k[(i + 3)] ^ (long) CK[i]));
                 SK[i] = k[(i + 4)];
             }
         }
 
-        private void sm4_one_round(long[] sk, byte[] input, byte[] output)
-        {
+        private void sm4_one_round(long[] sk, byte[] input, byte[] output) {
             int i = 0;
             long[] ulbuf = new long[36];
             ulbuf[0] = GET_ULONG_BE(input, 0);
             ulbuf[1] = GET_ULONG_BE(input, 4);
             ulbuf[2] = GET_ULONG_BE(input, 8);
             ulbuf[3] = GET_ULONG_BE(input, 12);
-            while (i < 32)
-            {
+            while (i < 32) {
                 ulbuf[(i + 4)] = sm4F(ulbuf[i], ulbuf[(i + 1)], ulbuf[(i + 2)], ulbuf[(i + 3)], sk[i]);
                 i++;
             }
@@ -193,26 +180,21 @@ namespace Cosmos.Encryption.Core
             PUT_ULONG_BE(ulbuf[32], output, 12);
         }
 
-        private byte[] padding(byte[] input, int mode)
-        {
-            if (input == null)
-            {
+        private byte[] padding(byte[] input, int mode) {
+            if (input == null) {
                 return null;
             }
 
-            byte[] ret = (byte[])null;
-            if (mode == SM4_ENCRYPT)
-            {
+            byte[] ret = (byte[]) null;
+            if (mode == SM4_ENCRYPT) {
                 int p = 16 - input.Length % 16;
                 ret = new byte[input.Length + p];
                 Array.Copy(input, 0, ret, 0, input.Length);
-                for (int i = 0; i < p; i++)
-                {
-                    ret[input.Length + i] = (byte)p;
+                for (int i = 0; i < p; i++) {
+                    ret[input.Length + i] = (byte) p;
                 }
             }
-            else
-            {
+            else {
                 int p = input[input.Length - 1];
                 ret = new byte[input.Length - p];
                 Array.Copy(input, 0, ret, 0, input.Length - p);
@@ -226,8 +208,7 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="key"></param>
-        public void sm4_setkey_enc(SM4Context ctx, byte[] key)
-        {
+        public void sm4_setkey_enc(SM4Context ctx, byte[] key) {
             ctx.Mode = SM4_ENCRYPT;
             sm4_setkey(ctx.SK, key);
         }
@@ -237,13 +218,11 @@ namespace Cosmos.Encryption.Core
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="key"></param>
-        public void sm4_setkey_dec(SM4Context ctx, byte[] key)
-        {
+        public void sm4_setkey_dec(SM4Context ctx, byte[] key) {
             int i = 0;
             ctx.Mode = SM4_DECRYPT;
             sm4_setkey(ctx.SK, key);
-            for (i = 0; i < 16; i++)
-            {
+            for (i = 0; i < 16; i++) {
                 SWAP(ctx.SK, i);
             }
         }
@@ -254,10 +233,8 @@ namespace Cosmos.Encryption.Core
         /// <param name="ctx"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        public byte[] sm4_crypt_ecb(SM4Context ctx, byte[] input)
-        {
-            if ((ctx.IsPadding) && (ctx.Mode == SM4_ENCRYPT))
-            {
+        public byte[] sm4_crypt_ecb(SM4Context ctx, byte[] input) {
+            if ((ctx.IsPadding) && (ctx.Mode == SM4_ENCRYPT)) {
                 input = padding(input, SM4_ENCRYPT);
             }
 
@@ -265,8 +242,7 @@ namespace Cosmos.Encryption.Core
             byte[] bins = new byte[length];
             Array.Copy(input, 0, bins, 0, length);
             byte[] bous = new byte[length];
-            for (int i = 0; length > 0; length -= 16, i++)
-            {
+            for (int i = 0; length > 0; length -= 16, i++) {
                 byte[] inBytes = new byte[16];
                 byte[] outBytes = new byte[16];
                 Array.Copy(bins, i * 16, inBytes, 0, length > 16 ? 16 : length);
@@ -274,8 +250,7 @@ namespace Cosmos.Encryption.Core
                 Array.Copy(outBytes, 0, bous, i * 16, length > 16 ? 16 : length);
             }
 
-            if (ctx.IsPadding && ctx.Mode == SM4_DECRYPT)
-            {
+            if (ctx.IsPadding && ctx.Mode == SM4_DECRYPT) {
                 bous = padding(bous, SM4_DECRYPT);
             }
 
@@ -289,10 +264,8 @@ namespace Cosmos.Encryption.Core
         /// <param name="iv"></param>
         /// <param name="input"></param>
         /// <returns></returns>
-        public byte[] sm4_crypt_cbc(SM4Context ctx, byte[] iv, byte[] input)
-        {
-            if (ctx.IsPadding && ctx.Mode == SM4_ENCRYPT)
-            {
+        public byte[] sm4_crypt_cbc(SM4Context ctx, byte[] iv, byte[] input) {
+            if (ctx.IsPadding && ctx.Mode == SM4_ENCRYPT) {
                 input = padding(input, SM4_ENCRYPT);
             }
 
@@ -302,33 +275,27 @@ namespace Cosmos.Encryption.Core
             Array.Copy(input, 0, bins, 0, length);
             byte[] bous = null;
             List<byte> bousList = new List<byte>();
-            if (ctx.Mode == SM4_ENCRYPT)
-            {
-                for (int j = 0; length > 0; length -= 16, j++)
-                {
+            if (ctx.Mode == SM4_ENCRYPT) {
+                for (int j = 0; length > 0; length -= 16, j++) {
                     byte[] inBytes = new byte[16];
                     byte[] outBytes = new byte[16];
                     byte[] out1 = new byte[16];
 
                     Array.Copy(bins, i * 16, inBytes, 0, length > 16 ? 16 : length);
-                    for (i = 0; i < 16; i++)
-                    {
-                        outBytes[i] = ((byte)(inBytes[i] ^ iv[i]));
+                    for (i = 0; i < 16; i++) {
+                        outBytes[i] = ((byte) (inBytes[i] ^ iv[i]));
                     }
 
                     sm4_one_round(ctx.SK, outBytes, out1);
                     Array.Copy(out1, 0, iv, 0, 16);
-                    for (int k = 0; k < 16; k++)
-                    {
+                    for (int k = 0; k < 16; k++) {
                         bousList.Add(out1[k]);
                     }
                 }
             }
-            else
-            {
+            else {
                 byte[] temp = new byte[16];
-                for (int j = 0; length > 0; length -= 16, j++)
-                {
+                for (int j = 0; length > 0; length -= 16, j++) {
                     byte[] inBytes = new byte[16];
                     byte[] outBytes = new byte[16];
                     byte[] out1 = new byte[16];
@@ -336,27 +303,23 @@ namespace Cosmos.Encryption.Core
                     Array.Copy(bins, i * 16, inBytes, 0, length > 16 ? 16 : length);
                     Array.Copy(inBytes, 0, temp, 0, 16);
                     sm4_one_round(ctx.SK, inBytes, outBytes);
-                    for (i = 0; i < 16; i++)
-                    {
-                        out1[i] = ((byte)(outBytes[i] ^ iv[i]));
+                    for (i = 0; i < 16; i++) {
+                        out1[i] = ((byte) (outBytes[i] ^ iv[i]));
                     }
 
                     Array.Copy(temp, 0, iv, 0, 16);
-                    for (int k = 0; k < 16; k++)
-                    {
+                    for (int k = 0; k < 16; k++) {
                         bousList.Add(out1[k]);
                     }
                 }
 
             }
 
-            if (ctx.IsPadding && ctx.Mode == SM4_DECRYPT)
-            {
+            if (ctx.IsPadding && ctx.Mode == SM4_DECRYPT) {
                 bous = padding(bousList.ToArray(), SM4_DECRYPT);
                 return bous;
             }
-            else
-            {
+            else {
                 return bousList.ToArray();
             }
         }

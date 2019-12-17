@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Cosmos.Encryption.Hash;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Text;
+//using Cosmos.Encryption.Hash;
 using Xunit;
 
 namespace Cosmos.Encryption.Tests.Hash

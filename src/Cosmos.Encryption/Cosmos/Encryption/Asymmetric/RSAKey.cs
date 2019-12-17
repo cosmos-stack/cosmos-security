@@ -1,15 +1,13 @@
 ﻿// ReSharper disable once CheckNamespace
 
-namespace Cosmos.Encryption
-{
+namespace Cosmos.Encryption {
     /// <summary>
     /// RSA Key
     /// Reference: myloveCc
     ///     https://github.com/myloveCc/NETCore.Encrypt/blob/master/src/NETCore.Encrypt/Internal/RSAKey.cs
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public class RSAKey
-    {
+    public class RSAKey {
         /// <summary>
         /// Rsa public key
         /// </summary>

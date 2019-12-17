@@ -8,13 +8,11 @@ using Cosmos.Encryption.Core.Internals;
  *     Author: ToolGood
  */
 
-namespace Cosmos.Encryption
-{
+namespace Cosmos.Encryption {
     /// <summary>
     /// Base64 convert provider
     /// </summary>
-    public static class Base64ConvertProvider
-    {
+    public static class Base64ConvertProvider {
         // ReSharper disable once UnusedMember.Local
         // ReSharper disable once InconsistentNaming
         private const string BASE64 = "===========================================+=+=/0123456789=======ABCDEFGHIJKLMNOPQRSTUVWXYZ====/=abcdefghijklmnopqrstuvwxyz=====";
@@ -24,8 +22,7 @@ namespace Cosmos.Encryption
         /// </summary>
         /// <param name="bytes"></param>
         /// <returns></returns>
-        public static string ToBase64String(byte[] bytes)
-        {
+        public static string ToBase64String(byte[] bytes) {
             return Convert.ToBase64String(bytes);
         }
 
@@ -35,8 +32,7 @@ namespace Cosmos.Encryption
         /// <param name="data">The string to be encrypted,not null.</param>
         /// <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
         /// <returns>The encrypted string.</returns>
-        public static string ToBase64String(string data, Encoding encoding = null)
-        {
+        public static string ToBase64String(string data, Encoding encoding = null) {
             encoding = EncodingHelper.Fixed(encoding);
             return ToBase64String(encoding.GetBytes(data));
         }
@@ -47,10 +43,8 @@ namespace Cosmos.Encryption
         /// <param name="data">The string to be decrypted,not null.</param>
         /// <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
         /// <returns>The decrypted string.</returns>
-        public static string FromBase64String(string data, Encoding encoding = null)
-        {
-            if (data == null)
-            {
+        public static string FromBase64String(string data, Encoding encoding = null) {
+            if (data == null) {
                 throw new ArgumentNullException(nameof(data));
             }
 
@@ -63,8 +57,7 @@ namespace Cosmos.Encryption
         /// </summary>
         /// <param name="bytes"></param>
         /// <returns></returns>
-        public static string ToBase64UrlString(byte[] bytes)
-        {
+        public static string ToBase64UrlString(byte[] bytes) {
             var result = new StringBuilder(Convert.ToBase64String(bytes).TrimEnd('='));
             result.Replace('+', '-');
             result.Replace('/', '_');
@@ -77,8 +70,7 @@ namespace Cosmos.Encryption
         /// <param name="str"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string ToBase64UrlString(string str, Encoding encoding)
-        {
+        public static string ToBase64UrlString(string str, Encoding encoding) {
             return ToBase64UrlString(encoding.GetBytes(str));
         }
 
@@ -86,12 +78,10 @@ namespace Cosmos.Encryption
         /// Convert from base64url string to string
         /// </summary>
         /// <param name="base64UrlString"></param>
-        public static byte[] FromBase64UrlString(string base64UrlString)
-        {
+        public static byte[] FromBase64UrlString(string base64UrlString) {
             var sb = new StringBuilder();
-            foreach (var c in base64UrlString)
-            {
-                if ((int)c >= 128) continue;
+            foreach (var c in base64UrlString) {
+                if ((int) c >= 128) continue;
                 var k = BASE64[c];
                 if (k == '=') continue;
                 sb.Append(k);
@@ -108,8 +98,7 @@ namespace Cosmos.Encryption
         /// </summary>
         /// <param name="base64UrlString"></param>
         /// <param name="encoding"></param>
-        public static string FromBase64UrlString(string base64UrlString, Encoding encoding)
-        {
+        public static string FromBase64UrlString(string base64UrlString, Encoding encoding) {
             return encoding.GetString(FromBase64UrlString(base64UrlString));
         }
     }

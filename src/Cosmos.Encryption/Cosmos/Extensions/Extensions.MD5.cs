@@ -1,10 +1,8 @@
 ﻿using System.Text;
 using Cosmos.Encryption;
 
-namespace Cosmos.Extensions
-{
-    public static partial class Extensions
-    {
+namespace Cosmos.Extensions {
+    public static partial class Extensions {
         /// <summary>
         /// To 16bit MD5
         /// </summary>
@@ -28,7 +26,7 @@ namespace Cosmos.Extensions
         // ReSharper disable once InconsistentNaming
         public static string To32MD5(this string data, bool isUpper = true, bool isIncludeHyphen = false, Encoding encoding = null)
             => MD5HashingProvider.Signature(data, MD5BitTypes.L32, isUpper, isIncludeHyphen, encoding);
-        
+
         /// <summary>
         /// To 64bit MD5
         /// </summary>

@@ -3,14 +3,12 @@
  *      https://www.2cto.com/kf/201603/496248.html
  */
 
-namespace Cosmos.Encryption.Core
-{
+namespace Cosmos.Encryption.Core {
     /// <summary>
     /// SM4 Context
     /// </summary>
     // ReSharper disable InconsistentNaming
-    public class SM4Context
-    {
+    public class SM4Context {
         /// <summary>
         /// Mode
         /// </summary>
@@ -29,8 +27,7 @@ namespace Cosmos.Encryption.Core
         /// <summary>
         /// SM4 Context
         /// </summary>
-        public SM4Context()
-        {
+        public SM4Context() {
             Mode = 1;
             IsPadding = true;
             SK = new long[32];

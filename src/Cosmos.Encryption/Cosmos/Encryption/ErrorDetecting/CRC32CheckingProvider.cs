@@ -2,18 +2,17 @@
 using Cosmos.Encryption.Core;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption
-{
+namespace Cosmos.Encryption {
     /// <summary>
     /// CRC 32 checking provider
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public sealed class CRC32CheckingProvider : CRCCheckingBase<uint, int>
-    {
+    public sealed class CRC32CheckingProvider : CRCCheckingBase<uint, int> {
         /// <summary>
         /// Seed
         /// </summary>
         public const uint Seed = 0xFFFFFFFF;
+
         private CRC32CheckingProvider() { }
 
         /// <summary>
@@ -23,8 +22,7 @@ namespace Cosmos.Encryption
         /// <param name="offset"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public static uint Compute(byte[] buf, int offset = 0, int count = -1)
-        {
+        public static uint Compute(byte[] buf, int offset = 0, int count = -1) {
             return Compute<CRC32>(buf, offset, count);
         }
 
@@ -34,8 +32,7 @@ namespace Cosmos.Encryption
         /// <param name="stream"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public static uint Compute(Stream stream, int count = -1)
-        {
+        public static uint Compute(Stream stream, int count = -1) {
             return Compute<CRC32>(stream, count);
         }
 
@@ -46,8 +43,7 @@ namespace Cosmos.Encryption
         /// <param name="position"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public static uint Compute(Stream stream, long position = -1, int count = -1)
-        {
+        public static uint Compute(Stream stream, long position = -1, int count = -1) {
             return Compute<CRC32>(stream, position, count);
         }
     }

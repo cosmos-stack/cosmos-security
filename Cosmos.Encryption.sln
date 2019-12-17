@@ -17,9 +17,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{ACACF492
 	ProjectSection(SolutionItems) = preProject
 		build\common.props = build\common.props
 		build\version.props = build\version.props
+		build\misc.props = build\misc.props
+		build\package.props = build\package.props
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosmos.Encryption.Tests.TestingConsole", "tests\Cosmos.Encryption.Tests.TestingConsole\Cosmos.Encryption.Tests.TestingConsole.csproj", "{68D978D8-7EA7-4C9B-B4F7-B107A68D558B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Folder", "Solution Folder", "{216BCB4D-E925-4925-8DF6-96719C2DDDAC}"
+ProjectSection(SolutionItems) = preProject
+	.gitignore = .gitignore
+	LICENSE = LICENSE
+	NuGet.config = NuGet.config
+	Publish.bat = Publish.bat
+	PublishToMyGet.bat = PublishToMyGet.bat
+	README.md = README.md
+EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +64,7 @@ Global
 		{A630520D-F1C3-46C4-92C7-3AB184A26105} = {FAB7E90F-6BA0-4305-96C1-B71EB1BBEEC3}
 		{F40BFB7E-049F-41E1-AEEA-CDDE1CE85417} = {FAB7E90F-6BA0-4305-96C1-B71EB1BBEEC3}
 		{68D978D8-7EA7-4C9B-B4F7-B107A68D558B} = {FAB7E90F-6BA0-4305-96C1-B71EB1BBEEC3}
+		{ACACF492-6B6B-44B7-B5EE-33A18A1C18EF} = {216BCB4D-E925-4925-8DF6-96719C2DDDAC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D59A7B73-5F98-4002-9551-304D243E4B48}

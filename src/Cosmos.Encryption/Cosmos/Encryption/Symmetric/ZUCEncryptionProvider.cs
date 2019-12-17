@@ -1,14 +1,12 @@
 ﻿using System;
 using Cosmos.Encryption.Core;
 
-namespace Cosmos.Encryption.Symmetric
-{
+namespace Cosmos.Encryption.Symmetric {
     /// <summary>
     /// ZUC encryption provider. BUG: THERE ARE SEVERAL BUG HERE, DO NOT USE THIS PROVIDER NOW!
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public static class ZUCEncryptionProvider
-    {
+    public static class ZUCEncryptionProvider {
         /// <summary>
         /// Encrypt
         /// </summary>
@@ -16,8 +14,7 @@ namespace Cosmos.Encryption.Symmetric
         /// <param name="key"></param>
         /// <param name="iv"></param>
         /// <returns></returns>
-        public static byte[] Encrypt(byte[] data, byte[] key, byte[] iv)
-        {
+        public static byte[] Encrypt(byte[] data, byte[] key, byte[] iv) {
             var zuc = new ZUCCore(FixKey(key), FixKey(iv));
             var v = new byte[data.Length];
             Array.Copy(data, 0, v, 0, data.Length);
@@ -32,8 +29,7 @@ namespace Cosmos.Encryption.Symmetric
         /// <param name="key"></param>
         /// <param name="iv"></param>
         /// <returns></returns>
-        public static byte[] Decrypt(byte[] data, byte[] key, byte[] iv)
-        {
+        public static byte[] Decrypt(byte[] data, byte[] key, byte[] iv) {
             var zuc = new ZUCCore(FixKey(key), FixKey(iv));
             var v = new byte[data.Length];
             Array.Copy(data, 0, v, 0, data.Length);
@@ -41,16 +37,13 @@ namespace Cosmos.Encryption.Symmetric
             return v;
         }
 
-        private static byte[] FixKey(byte[] key)
-        {
+        private static byte[] FixKey(byte[] key) {
             if (key.Length == 16) return key;
             byte[] fixedKey = new byte[16];
-            if (key.Length < 16)
-            {
+            if (key.Length < 16) {
                 key.CopyTo(fixedKey, 0);
             }
-            else
-            {
+            else {
                 Array.Copy(key, 0, fixedKey, 0, 16);
             }
 
