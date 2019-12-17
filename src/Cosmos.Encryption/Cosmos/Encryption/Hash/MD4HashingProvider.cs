@@ -50,9 +50,8 @@ namespace Cosmos.Encryption {
         }
 
         private static byte[] Core(byte[] buffer) {
-            using (var md4 = new MD4CryptoServiceProvider()) {
-                return md4.ComputeHash(buffer);
-            }
+            using var md4 = new MD4CryptoServiceProvider();
+            return md4.ComputeHash(buffer);
         }
 
         /// <summary>
