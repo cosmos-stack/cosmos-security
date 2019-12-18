@@ -30,11 +30,11 @@ namespace Cosmos.Encryption.Core {
         /// RSA encryption
         /// SHA256 hash algorithm to use the key length of at least 2048
         /// </summary>
-        /// <param name="dataEncoding">Data coding</param>
+        /// <param name="encoding">Data coding</param>
         /// <param name="keySize">Key length in bits:</param>
         /// <param name="privateKey">private Key</param>
         /// <param name="publicKey">public Key</param>
-        public RSAXmlUtil(Encoding dataEncoding, string publicKey, string privateKey = null, int keySize = 2048) {
+        public RSAXmlUtil(Encoding encoding, string publicKey, string privateKey = null, int keySize = 2048) {
             if (string.IsNullOrEmpty(privateKey) && string.IsNullOrEmpty(publicKey)) {
                 throw new ArgumentException("Public and private keys must not be empty at the same time");
             }
@@ -51,7 +51,7 @@ namespace Cosmos.Encryption.Core {
                 PublicRsa.FromLvccXmlString(publicKey);
             }
 
-            DataEncoding = EncodingHelper.Fixed(dataEncoding);
+            DataEncoding = EncodingHelper.Fixed(encoding);
         }
     }
 }

@@ -19,10 +19,10 @@ namespace Cosmos.Encryption.Asymmetric {
         /// <param name="privateKey"></param>
         /// <returns></returns>
         public static byte[] Signature(byte[] data, byte[] userId, byte[] privateKey) {
-            if (privateKey == null || privateKey.Length == 0)
+            if (privateKey is null || privateKey.Length == 0)
                 return null;
 
-            if (data == null || data.Length == 0)
+            if (data is null || data.Length == 0)
                 return null;
 
             SM2 sm2 = SM2.Instance;
@@ -58,10 +58,10 @@ namespace Cosmos.Encryption.Asymmetric {
         /// <param name="publicKey"></param>
         /// <returns></returns>
         public static bool Verify(byte[] signedData, byte[] data, byte[] userId, byte[] publicKey) {
-            if (publicKey == null || publicKey.Length == 0)
+            if (publicKey is null || publicKey.Length == 0)
                 return false;
 
-            if (data == null || data.Length == 0)
+            if (data is null || data.Length == 0)
                 return false;
 
             SM2 sm2 = SM2.Instance;
@@ -95,10 +95,10 @@ namespace Cosmos.Encryption.Asymmetric {
         /// <param name="publicKey"></param>
         /// <returns></returns>
         public static byte[] Encrypt(byte[] data, byte[] publicKey) {
-            if (publicKey == null || publicKey.Length == 0)
+            if (publicKey is null || publicKey.Length == 0)
                 return null;
 
-            if (data == null || data.Length == 0)
+            if (data is null || data.Length == 0)
                 return null;
 
             var source = new byte[data.Length];
@@ -132,10 +132,10 @@ namespace Cosmos.Encryption.Asymmetric {
         /// <param name="privateKey"></param>
         /// <returns></returns>
         public static byte[] Decrypt(byte[] encryptedData, byte[] privateKey) {
-            if (privateKey == null || privateKey.Length == 0)
+            if (privateKey is null || privateKey.Length == 0)
                 return null;
 
-            if (encryptedData == null || encryptedData.Length == 0)
+            if (encryptedData is null || encryptedData.Length == 0)
                 return null;
 
             byte[] enc = new byte[encryptedData.Length];

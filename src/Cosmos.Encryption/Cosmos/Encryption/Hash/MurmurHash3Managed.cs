@@ -14,11 +14,13 @@ namespace Cosmos.Encryption {
         /// <summary>
         /// Managed mode
         /// </summary>
+        // ReSharper disable once InconsistentNaming
         TRUE,
 
         /// <summary>
         /// Unmanaged mode
         /// </summary>
+        // ReSharper disable once InconsistentNaming
         FALSE,
     }
 }

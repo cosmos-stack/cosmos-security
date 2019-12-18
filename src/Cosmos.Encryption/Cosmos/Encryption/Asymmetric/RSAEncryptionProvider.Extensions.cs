@@ -1,5 +1,6 @@
 using System;
 using System.Security.Cryptography;
+using System.Text;
 using Cosmos.Encryption.Core;
 using Cosmos.Encryption.Core.Internals.Extensions;
 
@@ -168,6 +169,34 @@ namespace Cosmos.Encryption {
                     break;
 #endif
             }
+        }
+
+        #endregion
+
+        #region Extensions for touching RSA utils.
+
+        private static RSABase TouchRsaUtilFromPublicKey(RSAKeyTypes keyType, Encoding encoding, string publicKey, RSAKeySizeTypes sizeType) {
+            RSABase rsa = keyType switch {
+                RSAKeyTypes.XML   => new RSAXmlUtil(encoding, publicKey, keySize: (int) sizeType),
+                RSAKeyTypes.JSON  => new RSAJsonUtil(encoding, publicKey, keySize: (int) sizeType),
+                RSAKeyTypes.Pkcs1 => new RSAPkcs1Util(encoding, publicKey, keySize: (int) sizeType),
+                RSAKeyTypes.Pkcs8 => new RSAPkcs8Util(encoding, publicKey, keySize: (int) sizeType),
+                _                 => throw new NotSupportedException("Unknown RSA key type.")
+            };
+
+            return rsa;
+        }
+
+        private static RSABase TouchRsaUtilFromPrivateKey(RSAKeyTypes keyType, Encoding encoding, string privateKey, RSAKeySizeTypes sizeType) {
+            RSABase rsa = keyType switch {
+                RSAKeyTypes.XML   => new RSAXmlUtil(encoding, null, privateKey, (int) sizeType),
+                RSAKeyTypes.JSON  => new RSAXmlUtil(encoding, null, privateKey, (int) sizeType),
+                RSAKeyTypes.Pkcs1 => new RSAPkcs1Util(encoding, null, privateKey, (int) sizeType),
+                RSAKeyTypes.Pkcs8 => new RSAPkcs8Util(encoding, null, privateKey, (int) sizeType),
+                _                 => throw new NotSupportedException("Unknown RSA key type."),
+            };
+
+            return rsa;
         }
 
         #endregion

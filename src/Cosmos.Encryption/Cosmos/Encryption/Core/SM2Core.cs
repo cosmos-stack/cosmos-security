@@ -21,11 +21,7 @@ namespace Cosmos.Encryption.Core {
 
         #region 使用标准参数
 
-        public static SM2 Instance //返回错
-        {
-            get { return new SM2(false); }
-
-        }
+        public static SM2 Instance => new SM2(false); //返回错
 
         #endregion
 
