@@ -1,8 +1,7 @@
-#if !NET451
-
 using System;
 using System.Security.Cryptography;
 using System.Text;
+using Cosmos.Encryption.Core.Internals;
 using Cosmos.Encryption.Core.Internals.Extensions;
 
 /*
@@ -52,9 +51,7 @@ namespace Cosmos.Encryption.Core {
                 PublicRsa.FromLvccXmlString(publicKey);
             }
 
-            DataEncoding = dataEncoding ?? Encoding.UTF8;
+            DataEncoding = EncodingHelper.Fixed(dataEncoding);
         }
     }
 }
-
-#endif

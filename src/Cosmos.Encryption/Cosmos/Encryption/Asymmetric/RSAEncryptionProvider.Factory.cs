@@ -46,11 +46,10 @@ namespace Cosmos.Encryption {
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static RSA CreateFromXmlKey(string key) {
+        public static RSA CreateKeyFromXml(string key) {
             if (string.IsNullOrWhiteSpace(key)) {
                 throw new ArgumentNullException(nameof(key));
             }
-
             var rsa = RSA.Create();
             rsa.FromLvccXmlString(key);
             return rsa;
@@ -61,9 +60,8 @@ namespace Cosmos.Encryption {
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static RSA CreateFromJsonKey(string key) {
+        public static RSA CreateKeyFromJson(string key) {
             Checker.Key(key);
-
             var rsa = RSA.Create();
             rsa.FromJsonString(key);
             return rsa;
@@ -74,9 +72,8 @@ namespace Cosmos.Encryption {
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static RSA CreateFromPkcs1PublicKey(string key) {
+        public static RSA CreatePublicKeyFromPkcs1(string key) {
             Checker.Key(key);
-
             var rsa = RSA.Create();
             rsa.FromPkcs1PublicString(key, out _);
             return rsa;
@@ -87,9 +84,8 @@ namespace Cosmos.Encryption {
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static RSA CreateFromPkcs1PrivateKey(string key) {
+        public static RSA CreatePrivateKeyFromPkcs1(string key) {
             Checker.Key(key);
-
             var rsa = RSA.Create();
             rsa.FromPkcs1PrivateString(key, out _);
             return rsa;
@@ -100,9 +96,8 @@ namespace Cosmos.Encryption {
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static RSA CreateFromPkcs8PublicKey(string key) {
+        public static RSA CreatePublicKeyFromPkcs8(string key) {
             Checker.Key(key);
-
             var rsa = RSA.Create();
             rsa.FromPkcs8PublicString(key, out _);
             return rsa;
@@ -113,7 +108,8 @@ namespace Cosmos.Encryption {
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static RSA CreateFromPkcs8PrivateKey(string key) {
+        public static RSA CreatePrivateKeyFromPkcs8(string key) {
+            Checker.Key(key);
             var rsa = RSA.Create();
             rsa.FromPkcs8PrivateString(key, out _);
             return rsa;

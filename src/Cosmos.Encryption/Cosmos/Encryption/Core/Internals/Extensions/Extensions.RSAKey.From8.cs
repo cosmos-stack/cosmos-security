@@ -1,6 +1,9 @@
 using System;
+using System.IO;
 using System.Security.Cryptography;
 using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Math;
+using Org.BouncyCastle.OpenSsl;
 using Org.BouncyCastle.Security;
 
 namespace Cosmos.Encryption.Core.Internals.Extensions {
@@ -8,7 +11,7 @@ namespace Cosmos.Encryption.Core.Internals.Extensions {
     internal static partial class RSAKeyExtensions {
         // ReSharper disable once IdentifierTypo
         public static void FromPkcs8PublicString(this RSA rsa, string publicKey, out RSAParameters parameters) {
-            publicKey = RSAPemFormatHelper.PublicKeyFormatRemove(publicKey);
+            publicKey = RSAPemFormatHelper.Pkcs8PublicKeyFormatRemove(publicKey);
             var publicKeyParam = (RsaKeyParameters) PublicKeyFactory.CreateKey(Convert.FromBase64String(publicKey));
 
             parameters = new RSAParameters {
@@ -37,5 +40,50 @@ namespace Cosmos.Encryption.Core.Internals.Extensions {
 
             rsa.ImportParameters(parameters);
         }
+
+        public static string ToPkcs8PublicString(this RSA rsa) {
+            var privateKeyParameters = rsa.ExportParameters(false);
+            RsaKeyParameters rsaKeyParameters = new RsaKeyParameters(
+                false,
+                new BigInteger(1, privateKeyParameters.Modulus),
+                new BigInteger(1, privateKeyParameters.Exponent));
+
+            using var sw = new StringWriter();
+            var pWrt = new PemWriter(sw);
+            pWrt.WriteObject(rsaKeyParameters);
+            pWrt.Writer.Close();
+            return sw.ToString();
+        }
+
+        public static string ToPkcs8PrivateString(this RSA rsa) {
+            var privateKeyParameters = rsa.ExportParameters(true);
+            RsaPrivateCrtKeyParameters rsaPrivateCrtKeyParameters = new RsaPrivateCrtKeyParameters(
+                new BigInteger(1, privateKeyParameters.Modulus),
+                new BigInteger(1, privateKeyParameters.Exponent),
+                new BigInteger(1, privateKeyParameters.D),
+                new BigInteger(1, privateKeyParameters.P),
+                new BigInteger(1, privateKeyParameters.Q),
+                new BigInteger(1, privateKeyParameters.DP),
+                new BigInteger(1, privateKeyParameters.DQ),
+                new BigInteger(1, privateKeyParameters.InverseQ));
+
+            using var privateSw = new StringWriter();
+            var privatePemWriter = new PemWriter(privateSw);
+            var pkcs8 = new Pkcs8Generator(rsaPrivateCrtKeyParameters);
+            
+            privatePemWriter.WriteObject(pkcs8);
+            privatePemWriter.Writer.Close();
+            return privateSw.ToString();
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 }

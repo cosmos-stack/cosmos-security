@@ -25,8 +25,8 @@ namespace Cosmos.Encryption.Core {
         /// </summary>
         /// <param name="publicKey"></param>
         /// <returns></returns>
-        public static string PublicKeyPemToXml(string publicKey) {
-            publicKey = RSAPemFormatHelper.PublicKeyFormat(publicKey);
+        public static string PublicKeyPemPkcs8ToXml(string publicKey) {
+            publicKey = RSAPemFormatHelper.Pkcs8PublicKeyFormat(publicKey);
 
             var pr = new PemReader(new StringReader(publicKey));
             var obj = pr.ReadObject();
@@ -56,10 +56,12 @@ namespace Cosmos.Encryption.Core {
             //Exponent
             var exponent = root.Element("Exponent");
 
-            var rsaKeyParameters = new RsaKeyParameters(false, new BigInteger(1, Convert.FromBase64String(modulus.Value)),
+            var rsaKeyParameters = new RsaKeyParameters(
+                false,
+                new BigInteger(1, Convert.FromBase64String(modulus.Value)),
                 new BigInteger(1, Convert.FromBase64String(exponent.Value)));
 
-            var sw = new StringWriter();
+            using var sw = new StringWriter();
             var pWrt = new PemWriter(sw);
             pWrt.WriteObject(rsaKeyParameters);
             pWrt.Writer.Close();
@@ -144,12 +146,11 @@ namespace Cosmos.Encryption.Core {
                 new BigInteger(1, Convert.FromBase64String(dq.Value)),
                 new BigInteger(1, Convert.FromBase64String(inverseQ.Value)));
 
-            var sw = new StringWriter();
-            PemWriter pWrt = new PemWriter(sw);
+            using var sw = new StringWriter();
+            var pWrt = new PemWriter(sw);
             pWrt.WriteObject(rsaPrivateCrtKeyParameters);
             pWrt.Writer.Close();
             return sw.ToString();
-
         }
 
 
@@ -228,7 +229,7 @@ namespace Cosmos.Encryption.Core {
                 new BigInteger(1, Convert.FromBase64String(dq.Value)),
                 new BigInteger(1, Convert.FromBase64String(inverseQ.Value)));
 
-            var privateSw = new StringWriter();
+            using var privateSw = new StringWriter();
             var privatePemWriter = new PemWriter(privateSw);
             var pkcs8 = new Pkcs8Generator(rsaPrivateCrtKeyParameters);
 

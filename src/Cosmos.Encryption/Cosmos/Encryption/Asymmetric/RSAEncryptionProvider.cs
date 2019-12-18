@@ -1,5 +1,6 @@
 ﻿#if !NET451
 
+using System;
 using System.Security.Cryptography;
 using System.Text;
 using Cosmos.Encryption.Core;
@@ -124,32 +125,15 @@ namespace Cosmos.Encryption {
             Encoding encoding = null,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
             RSAKeyTypes keyType = RSAKeyTypes.XML) {
-            switch (keyType) {
-                case RSAKeyTypes.XML: {
-                    var util = new RSAXmlUtil(encoding, null, privateKey, (int) sizeType);
-                    return util.DecryptByPrivateKey(data, padding);
-                }
+            RSABase rsa = keyType switch {
+                RSAKeyTypes.XML   => new RSAXmlUtil(encoding, null, privateKey, (int) sizeType),
+                RSAKeyTypes.JSON  => new RSAXmlUtil(encoding, null, privateKey, (int) sizeType),
+                RSAKeyTypes.Pkcs1 => new RSAPkcs1Util(encoding, null, privateKey, (int) sizeType),
+                RSAKeyTypes.Pkcs8 => new RSAPkcs8Util(encoding, null, privateKey, (int) sizeType),
+                _                 => throw new NotSupportedException("Unknown RSA key type."),
+            };
 
-                case RSAKeyTypes.JSON: {
-                    var util = new RSAJsonUtil(encoding, null, privateKey, (int) sizeType);
-                    return util.DecryptByPrivateKey(data, padding);
-                }
-
-                case RSAKeyTypes.Pkcs1: {
-                    var util = new RSAPkcs1Util(encoding, null, privateKey, (int) sizeType);
-                    return util.DecryptByPrivateKey(data, padding);
-                }
-
-                case RSAKeyTypes.Pkcs8: {
-                    var util = new RSAPkcs8Util(encoding, null, privateKey, (int) sizeType);
-                    return util.DecryptByPrivateKey(data, padding);
-                }
-
-                default: {
-                    var util = new RSAXmlUtil(encoding, null, privateKey, (int) sizeType);
-                    return util.DecryptByPrivateKey(data, padding);
-                }
-            }
+            return rsa.DecryptByPrivateKey(data, padding);
         }
 
         /// <summary>
