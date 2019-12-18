@@ -22,7 +22,7 @@ namespace Cosmos.Encryption {
         /// <param name="sizeType"></param>
         /// <param name="keyType"></param>
         /// <returns>The encrypted data.</returns>
-        public static string Encrypt(
+        public static string EncryptByPublicKey(
             string data,
             string publicKey,
             Encoding encoding = null,
@@ -40,7 +40,7 @@ namespace Cosmos.Encryption {
         /// <param name="sizeType"></param>
         /// <param name="keyType"></param>
         /// <returns>The encrypted data.</returns>
-        public static string Encrypt(
+        public static string EncryptByPublicKey(
             byte[] dataBytes,
             string publicKey,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
@@ -59,7 +59,7 @@ namespace Cosmos.Encryption {
         /// <param name="sizeType"></param>
         /// <param name="keyType"></param>
         /// <returns>The decrypted data.</returns>
-        public static string Decrypt(
+        public static string DecryptByPrivateKey(
             string data,
             string privateKey,
             Encoding encoding = null,
@@ -77,7 +77,7 @@ namespace Cosmos.Encryption {
         /// <param name="sizeType"></param>
         /// <param name="keyType"></param>
         /// <returns>The decrypted data.</returns>
-        public static string Decrypt(
+        public static string DecryptByPrivateKey(
             byte[] dataBytes,
             string privateKey,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,

@@ -26,7 +26,7 @@ namespace Cosmos.Encryption {
         /// <param name="sizeType"></param>
         /// <param name="keyType"></param>
         /// <returns>The encrypted data.</returns>
-        public static string Encrypt(
+        public static string EncryptByPublicKey(
             string data,
             string publicKey,
             RSAEncryptionPadding padding,
@@ -46,7 +46,7 @@ namespace Cosmos.Encryption {
         /// <param name="keyType"></param>
         /// <param name="padding"></param>
         /// <returns>The encrypted data.</returns>
-        public static string Encrypt(
+        public static string EncryptByPublicKey(
             byte[] dataBytes,
             string publicKey,
             RSAEncryptionPadding padding,
@@ -56,6 +56,45 @@ namespace Cosmos.Encryption {
             return rsa.EncryptByPublicKey(dataBytes, padding);
         }
 
+        /// <summary>
+        /// Encrypt string data with xml/json format.
+        /// </summary>
+        /// <param name="data">The data to be encrypted.</param>
+        /// <param name="privateKey">The public key of xml format.</param>
+        /// <param name="padding"></param>
+        /// <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+        /// <param name="sizeType"></param>
+        /// <param name="keyType"></param>
+        /// <returns>The encrypted data.</returns>
+        public static string EncryptByPrivateKey(
+            string data,
+            string privateKey,
+            RSAEncryptionPadding padding,
+            Encoding encoding = null,
+            RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
+            RSAKeyTypes keyType = RSAKeyTypes.XML) {
+            var rsa = TouchRsaUtilFromPrivateKey(keyType, encoding, privateKey, sizeType);
+            return rsa.EncryptByPrivateKey(data, padding);
+        }
+
+        /// <summary>
+        /// Encrypt byte[] data with xml/json format.
+        /// </summary>
+        /// <param name="dataBytes">The data to be encrypted.</param>
+        /// <param name="privateKey">The public key of xml format.</param>
+        /// <param name="sizeType"></param>
+        /// <param name="keyType"></param>
+        /// <param name="padding"></param>
+        /// <returns>The encrypted data.</returns>
+        public static string EncryptByPrivateKey(
+            byte[] dataBytes,
+            string privateKey,
+            RSAEncryptionPadding padding,
+            RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
+            RSAKeyTypes keyType = RSAKeyTypes.XML) {
+            var rsa = TouchRsaUtilFromPrivateKey(keyType, Encoding.UTF8, privateKey, sizeType);
+            return rsa.EncryptByPrivateKey(dataBytes, padding);
+        }
 
         /// <summary>
         /// Decrypt string data with xml/json format.
@@ -67,7 +106,7 @@ namespace Cosmos.Encryption {
         /// <param name="sizeType"></param>
         /// <param name="keyType"></param>
         /// <returns>The decrypted data.</returns>
-        public static string Decrypt(
+        public static string DecryptByPrivateKey(
             string data,
             string privateKey,
             RSAEncryptionPadding padding,
@@ -87,7 +126,7 @@ namespace Cosmos.Encryption {
         /// <param name="sizeType"></param>
         /// <param name="keyType"></param>
         /// <returns>The decrypted data.</returns>
-        public static string Decrypt(
+        public static string DecryptByPrivateKey(
             byte[] dataBytes,
             string privateKey,
             RSAEncryptionPadding padding,
