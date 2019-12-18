@@ -1,6 +1,6 @@
 # COSMOSLOOPS/Cosmos.Encryption <a href="https://www.nuget.org/packages/Cosmos.Encryption/" rel="nofollow"><img src="https://img.shields.io/nuget/v/Cosmos.Encryption.svg?style=flat" alt="NuGet Version" data-canonical-src="https://img.shields.io/nuget/v/Cosmos.Encryption.svg?style=flat" style="max-width:100%;"></a>
 
-[Cosmos.Encryption](https://github.com/cosmos-loops/Cosmos.Encryption) is an inline project of [COSMOS LOOPS PROGRAMME](https://github.com/cosmos-loops).
+[Cosmos.Encryption](https://github.com/cosmos-loops/Cosmos.Encryption) is an inline project of [Cosmosloops labs.](https://github.com/cosmos-loops).
 
 ## Install
 
@@ -17,6 +17,9 @@ Install-Package Cosmos.Encryption
 - SHA1/256/384/512
 - SM3
 - HMAC
+- MurmurHash2
+- MurmurHash3
+- Time33/DBJ33A
 - AES
 - DES/TripleDES
 - RC4
@@ -78,9 +81,11 @@ People or projects that have made a great contribbution to this project:
 - [Portable.BouncyCastle](https://github.com/onovotny/bc-csharp)
 - [ToolGood.RCX](https://github.com/toolgood/RCX)
 - [xxtea/xxtea-dotnet](https://github.com/xxtea/xxtea-dotnet)
+- [murmurhash-net](https://github.com/darrenkopp/murmurhash-net/)
+- [odinmillion/MurmurHash.Net](https://github.com/odinmillion/MurmurHash.Net)
 
 # License
 
-Member project of [COSMOS LOOPS PROGRAMME](https://github.com/cosmos-loops).
+Member project of [Cosmosloops labs.](https://github.com/cosmos-loops).
 
-[Apache 2.0 License](/LICENSE)
+[Apache License 2.0](/LICENSE)
