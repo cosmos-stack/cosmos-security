@@ -21,11 +21,7 @@ namespace Cosmos.Encryption.Core {
 
         #region 使用标准参数
 
-        public static SM2 Instance //返回错
-        {
-            get { return new SM2(false); }
-
-        }
+        public static SM2 Instance => new SM2(false); //返回错
 
         #endregion
 
@@ -42,6 +38,7 @@ namespace Cosmos.Encryption.Core {
 
         #endregion
 
+        // ReSharper disable once RedundantDefaultMemberInitializer
         public bool sm2Test = false; //初始定义为错
 
         public string[] ecc_param; // = sm2_test_param;
@@ -56,9 +53,10 @@ namespace Cosmos.Encryption.Core {
         public readonly ECPoint ecc_point_g; //g点坐标的字段
 
         public readonly ECDomainParameters ecc_bc_spec;
+
         public readonly ECKeyPairGenerator ecc_key_pair_generator;
-        public ECPoint userKey;
-        public BigInteger userD;
+        // public ECPoint userKey;
+        // public BigInteger userD;
 
         #region ecc生成
 
@@ -159,10 +157,10 @@ namespace Cosmos.Encryption.Core {
             // e
             BigInteger e = new BigInteger(1, md); //字节转化大整数
             // k
-            BigInteger k = null; //初始定义大数k为空
-            ECPoint kp = null;   //定义kp点为空
-            BigInteger r = null; //定义大数r为空，保存求得的r值
-            BigInteger s = null; //定义大数r为空，保存求得的s值
+            BigInteger k; //初始定义大数k为空
+            ECPoint kp;   //定义kp点为空
+            BigInteger r; //定义大数r为空，保存求得的r值
+            BigInteger s; //定义大数r为空，保存求得的s值
 
             do {
                 do {

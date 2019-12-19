@@ -1,9 +1,9 @@
 ﻿#if !NET451
 
+using System;
 using System.Security.Cryptography;
 using System.Text;
 using Cosmos.Encryption.Core;
-using Cosmos.Encryption.Core.Internals;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption {
@@ -26,41 +26,15 @@ namespace Cosmos.Encryption {
         /// <param name="sizeType"></param>
         /// <param name="keyType"></param>
         /// <returns>The encrypted data.</returns>
-        public static string Encrypt(
+        public static string EncryptByPublicKey(
             string data,
             string publicKey,
             RSAEncryptionPadding padding,
             Encoding encoding = null,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
             RSAKeyTypes keyType = RSAKeyTypes.XML) {
-            encoding = EncodingHelper.Fixed(encoding);
-
-            switch (keyType) {
-                case RSAKeyTypes.XML: {
-                    var util = new RSAXmlUtil(encoding, publicKey, keySize: (int) sizeType);
-                    return util.EncryptByPublicKey(data, padding);
-                }
-
-                case RSAKeyTypes.JSON: {
-                    var util = new RSAJsonUtil(encoding, publicKey, keySize: (int) sizeType);
-                    return util.EncryptByPublicKey(data, padding);
-                }
-
-                case RSAKeyTypes.Pkcs1: {
-                    var util = new RSAPkcs1Util(encoding, publicKey, keySize: (int) sizeType);
-                    return util.EncryptByPublicKey(data, padding);
-                }
-
-                case RSAKeyTypes.Pkcs8: {
-                    var util = new RSAPkcs8Util(encoding, publicKey, keySize: (int) sizeType);
-                    return util.EncryptByPublicKey(data, padding);
-                }
-
-                default: {
-                    var util = new RSAXmlUtil(encoding, publicKey, keySize: (int) sizeType);
-                    return util.EncryptByPublicKey(data, padding);
-                }
-            }
+            var rsa = TouchRsaUtilFromPublicKey(keyType, encoding, publicKey, sizeType);
+            return rsa.EncryptByPublicKey(data, padding);
         }
 
         /// <summary>
@@ -72,40 +46,55 @@ namespace Cosmos.Encryption {
         /// <param name="keyType"></param>
         /// <param name="padding"></param>
         /// <returns>The encrypted data.</returns>
-        public static string Encrypt(
+        public static string EncryptByPublicKey(
             byte[] dataBytes,
             string publicKey,
             RSAEncryptionPadding padding,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
             RSAKeyTypes keyType = RSAKeyTypes.XML) {
-            switch (keyType) {
-                case RSAKeyTypes.XML: {
-                    var util = new RSAXmlUtil(Encoding.UTF8, publicKey, keySize: (int) sizeType);
-                    return util.EncryptByPublicKey(dataBytes, padding);
-                }
-
-                case RSAKeyTypes.JSON: {
-                    var util = new RSAJsonUtil(Encoding.UTF8, publicKey, keySize: (int) sizeType);
-                    return util.EncryptByPublicKey(dataBytes, padding);
-                }
-
-                case RSAKeyTypes.Pkcs1: {
-                    var util = new RSAPkcs1Util(Encoding.UTF8, publicKey, keySize: (int) sizeType);
-                    return util.EncryptByPublicKey(dataBytes, padding);
-                }
-
-                case RSAKeyTypes.Pkcs8: {
-                    var util = new RSAPkcs8Util(Encoding.UTF8, publicKey, keySize: (int) sizeType);
-                    return util.EncryptByPublicKey(dataBytes, padding);
-                }
-
-                default: {
-                    var util = new RSAXmlUtil(Encoding.UTF8, publicKey, keySize: (int) sizeType);
-                    return util.EncryptByPublicKey(dataBytes, padding);
-                }
-            }
+            var rsa = TouchRsaUtilFromPublicKey(keyType, Encoding.UTF8, publicKey, sizeType);
+            return rsa.EncryptByPublicKey(dataBytes, padding);
         }
 
+        /// <summary>
+        /// Encrypt string data with xml/json format.
+        /// </summary>
+        /// <param name="data">The data to be encrypted.</param>
+        /// <param name="privateKey">The public key of xml format.</param>
+        /// <param name="padding"></param>
+        /// <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+        /// <param name="sizeType"></param>
+        /// <param name="keyType"></param>
+        /// <returns>The encrypted data.</returns>
+        public static string EncryptByPrivateKey(
+            string data,
+            string privateKey,
+            RSAEncryptionPadding padding,
+            Encoding encoding = null,
+            RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
+            RSAKeyTypes keyType = RSAKeyTypes.XML) {
+            var rsa = TouchRsaUtilFromPrivateKey(keyType, encoding, privateKey, sizeType);
+            return rsa.EncryptByPrivateKey(data, padding);
+        }
+
+        /// <summary>
+        /// Encrypt byte[] data with xml/json format.
+        /// </summary>
+        /// <param name="dataBytes">The data to be encrypted.</param>
+        /// <param name="privateKey">The public key of xml format.</param>
+        /// <param name="sizeType"></param>
+        /// <param name="keyType"></param>
+        /// <param name="padding"></param>
+        /// <returns>The encrypted data.</returns>
+        public static string EncryptByPrivateKey(
+            byte[] dataBytes,
+            string privateKey,
+            RSAEncryptionPadding padding,
+            RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
+            RSAKeyTypes keyType = RSAKeyTypes.XML) {
+            var rsa = TouchRsaUtilFromPrivateKey(keyType, Encoding.UTF8, privateKey, sizeType);
+            return rsa.EncryptByPrivateKey(dataBytes, padding);
+        }
 
         /// <summary>
         /// Decrypt string data with xml/json format.
@@ -117,39 +106,15 @@ namespace Cosmos.Encryption {
         /// <param name="sizeType"></param>
         /// <param name="keyType"></param>
         /// <returns>The decrypted data.</returns>
-        public static string Decrypt(
+        public static string DecryptByPrivateKey(
             string data,
             string privateKey,
             RSAEncryptionPadding padding,
             Encoding encoding = null,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
             RSAKeyTypes keyType = RSAKeyTypes.XML) {
-            switch (keyType) {
-                case RSAKeyTypes.XML: {
-                    var util = new RSAXmlUtil(encoding, null, privateKey, (int) sizeType);
-                    return util.DecryptByPrivateKey(data, padding);
-                }
-
-                case RSAKeyTypes.JSON: {
-                    var util = new RSAJsonUtil(encoding, null, privateKey, (int) sizeType);
-                    return util.DecryptByPrivateKey(data, padding);
-                }
-
-                case RSAKeyTypes.Pkcs1: {
-                    var util = new RSAPkcs1Util(encoding, null, privateKey, (int) sizeType);
-                    return util.DecryptByPrivateKey(data, padding);
-                }
-
-                case RSAKeyTypes.Pkcs8: {
-                    var util = new RSAPkcs8Util(encoding, null, privateKey, (int) sizeType);
-                    return util.DecryptByPrivateKey(data, padding);
-                }
-
-                default: {
-                    var util = new RSAXmlUtil(encoding, null, privateKey, (int) sizeType);
-                    return util.DecryptByPrivateKey(data, padding);
-                }
-            }
+            var rsa = TouchRsaUtilFromPrivateKey(keyType, encoding, privateKey, sizeType);
+            return rsa.DecryptByPrivateKey(data, padding);
         }
 
         /// <summary>
@@ -161,38 +126,14 @@ namespace Cosmos.Encryption {
         /// <param name="sizeType"></param>
         /// <param name="keyType"></param>
         /// <returns>The decrypted data.</returns>
-        public static string Decrypt(
+        public static string DecryptByPrivateKey(
             byte[] dataBytes,
             string privateKey,
             RSAEncryptionPadding padding,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
             RSAKeyTypes keyType = RSAKeyTypes.XML) {
-            switch (keyType) {
-                case RSAKeyTypes.XML: {
-                    var util = new RSAXmlUtil(Encoding.UTF8, null, privateKey, (int) sizeType);
-                    return util.DecryptByPrivateKey(dataBytes, padding);
-                }
-
-                case RSAKeyTypes.JSON: {
-                    var util = new RSAJsonUtil(Encoding.UTF8, null, privateKey, (int) sizeType);
-                    return util.DecryptByPrivateKey(dataBytes, padding);
-                }
-
-                case RSAKeyTypes.Pkcs1: {
-                    var util = new RSAPkcs1Util(Encoding.UTF8, null, privateKey, (int) sizeType);
-                    return util.DecryptByPrivateKey(dataBytes, padding);
-                }
-
-                case RSAKeyTypes.Pkcs8: {
-                    var util = new RSAPkcs8Util(Encoding.UTF8, null, privateKey, (int) sizeType);
-                    return util.DecryptByPrivateKey(dataBytes, padding);
-                }
-
-                default: {
-                    var util = new RSAXmlUtil(Encoding.UTF8, null, privateKey, (int) sizeType);
-                    return util.DecryptByPrivateKey(dataBytes, padding);
-                }
-            }
+            var rsa = TouchRsaUtilFromPrivateKey(keyType, Encoding.UTF8, privateKey, sizeType);
+            return rsa.DecryptByPrivateKey(dataBytes, padding);
         }
 
         /// <summary>
@@ -214,32 +155,8 @@ namespace Cosmos.Encryption {
             Encoding encoding = null,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
             RSAKeyTypes keyType = RSAKeyTypes.XML) {
-            switch (keyType) {
-                case RSAKeyTypes.XML: {
-                    var util = new RSAXmlUtil(encoding, publicKey, keySize: (int) sizeType);
-                    return util.SignData(data, hashAlgorithmName, padding);
-                }
-
-                case RSAKeyTypes.JSON: {
-                    var util = new RSAJsonUtil(encoding, publicKey, keySize: (int) sizeType);
-                    return util.SignData(data, hashAlgorithmName, padding);
-                }
-
-                case RSAKeyTypes.Pkcs1: {
-                    var util = new RSAPkcs1Util(encoding, publicKey, keySize: (int) sizeType);
-                    return util.SignData(data, hashAlgorithmName, padding);
-                }
-
-                case RSAKeyTypes.Pkcs8: {
-                    var util = new RSAPkcs8Util(encoding, publicKey, keySize: (int) sizeType);
-                    return util.SignData(data, hashAlgorithmName, padding);
-                }
-
-                default: {
-                    var util = new RSAXmlUtil(encoding, publicKey, keySize: (int) sizeType);
-                    return util.SignData(data, hashAlgorithmName, padding);
-                }
-            }
+            var rsa = TouchRsaUtilFromPublicKey(keyType, encoding, publicKey, sizeType);
+            return rsa.SignData(data, hashAlgorithmName, padding);
         }
 
         /// <summary>
@@ -261,32 +178,8 @@ namespace Cosmos.Encryption {
             Encoding encoding = null,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
             RSAKeyTypes keyType = RSAKeyTypes.XML) {
-            switch (keyType) {
-                case RSAKeyTypes.XML: {
-                    var util = new RSAXmlUtil(encoding, publicKey, keySize: (int) sizeType);
-                    return util.SignDataGetBytes(data, hashAlgorithmName, padding);
-                }
-
-                case RSAKeyTypes.JSON: {
-                    var util = new RSAJsonUtil(encoding, publicKey, keySize: (int) sizeType);
-                    return util.SignDataGetBytes(data, hashAlgorithmName, padding);
-                }
-
-                case RSAKeyTypes.Pkcs1: {
-                    var util = new RSAPkcs1Util(encoding, publicKey, keySize: (int) sizeType);
-                    return util.SignDataGetBytes(data, hashAlgorithmName, padding);
-                }
-
-                case RSAKeyTypes.Pkcs8: {
-                    var util = new RSAPkcs8Util(encoding, publicKey, keySize: (int) sizeType);
-                    return util.SignDataGetBytes(data, hashAlgorithmName, padding);
-                }
-
-                default: {
-                    var util = new RSAXmlUtil(encoding, publicKey, keySize: (int) sizeType);
-                    return util.SignDataGetBytes(data, hashAlgorithmName, padding);
-                }
-            }
+            var rsa = TouchRsaUtilFromPublicKey(keyType, encoding, publicKey, sizeType);
+            return rsa.SignDataGetBytes(data, hashAlgorithmName, padding);
         }
 
         /// <summary>
@@ -310,32 +203,8 @@ namespace Cosmos.Encryption {
             Encoding encoding = null,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
             RSAKeyTypes keyType = RSAKeyTypes.XML) {
-            switch (keyType) {
-                case RSAKeyTypes.XML: {
-                    var util = new RSAXmlUtil(encoding, publicKey, keySize: (int) sizeType);
-                    return util.VerifyData(data, signature, hashAlgorithmName, padding);
-                }
-
-                case RSAKeyTypes.JSON: {
-                    var util = new RSAJsonUtil(encoding, publicKey, keySize: (int) sizeType);
-                    return util.VerifyData(data, signature, hashAlgorithmName, padding);
-                }
-
-                case RSAKeyTypes.Pkcs1: {
-                    var util = new RSAPkcs1Util(encoding, publicKey, keySize: (int) sizeType);
-                    return util.VerifyData(data, signature, hashAlgorithmName, padding);
-                }
-
-                case RSAKeyTypes.Pkcs8: {
-                    var util = new RSAPkcs8Util(encoding, publicKey, keySize: (int) sizeType);
-                    return util.VerifyData(data, signature, hashAlgorithmName, padding);
-                }
-
-                default: {
-                    var util = new RSAXmlUtil(encoding, publicKey, keySize: (int) sizeType);
-                    return util.VerifyData(data, signature, hashAlgorithmName, padding);
-                }
-            }
+            var rsa = TouchRsaUtilFromPublicKey(keyType, encoding, publicKey, sizeType);
+            return rsa.VerifyData(data, signature, hashAlgorithmName, padding);
         }
     }
 }

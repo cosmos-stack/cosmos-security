@@ -26,10 +26,9 @@ namespace Cosmos.Encryption.Core {
 
             encoding = EncodingHelper.Fixed(encoding);
 
-            using (KeyedHashAlgorithm hash = new T()) {
-                hash.Key = encoding.GetBytes(key);
-                return hash.ComputeHash(encoding.GetBytes(data)).ToHexString();
-            }
+            using KeyedHashAlgorithm hash = new T();
+            hash.Key = encoding.GetBytes(key);
+            return hash.ComputeHash(encoding.GetBytes(data)).ToHexString();
         }
     }
 }

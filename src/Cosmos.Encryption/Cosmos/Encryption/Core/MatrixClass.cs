@@ -128,21 +128,17 @@ namespace Cosmos.Encryption.Core {
         /// <summary>
         /// Properites
         /// </summary>
-        public int Rows {
-            get { return m_iRows; }
-        }
+        public int Rows => m_iRows;
 
-        public int Cols {
-            get { return m_iCols; }
-        }
+        public int Cols => m_iCols;
 
         /// <summary>
         /// Indexer
         /// </summary>
         public Fraction this[int iRow, int iCol] // MatrixClass's index starts at 0,0
         {
-            get { return GetElement(iRow, iCol); }
-            set { SetElement(iRow, iCol, value); }
+            get => GetElement(iRow, iCol);
+            set => SetElement(iRow, iCol, value);
         }
 
         /// <summary>
@@ -214,14 +210,14 @@ namespace Cosmos.Encryption.Core {
         /// The function multiplies the given row of the current MatrixClass object by an integer
         /// </summary>
         public void MultiplyRow(int iRow, int iNo) {
-            this.MultiplyRow(iRow, new Fraction(iNo));
+            MultiplyRow(iRow, new Fraction(iNo));
         }
 
         /// <summary>
         /// The function multiplies the given row of the current MatrixClass object by a double
         /// </summary>
         public void MultiplyRow(int iRow, double dbl) {
-            this.MultiplyRow(iRow, Fraction.ToFraction(dbl));
+            MultiplyRow(iRow, Fraction.ToFraction(dbl));
         }
 
         /// <summary>

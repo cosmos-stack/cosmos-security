@@ -7,6 +7,9 @@ namespace Cosmos.Encryption.Core {
 
         public const string PRIVATE_KEY_START = "-----BEGIN PRIVATE KEY-----";
         public const string PRIVATE_KEY_END = "-----END PRIVATE KEY-----";
+        
+        public const string RSA_PUBLIC_KEY_START = "-----BEGIN RSA PUBLIC KEY-----";
+        public const string RSA_PUBLIC_KEY_END = "-----END RSA PUBLIC KEY-----";
 
         public const string RSA_PRIVATE_KEY_START = "-----BEGIN RSA PRIVATE KEY-----";
         public const string RSA_PRIVATE_KEY_END = "-----END RSA PRIVATE KEY-----";

@@ -28,19 +28,12 @@ namespace Cosmos.Encryption {
 
             encoding = EncodingHelper.Fixed(encoding);
 
-            switch (bits) {
-                case MD5BitTypes.L16:
-                    return Encrypt16Func()(data)(encoding).ToFixUpperCase(isUpper).ToFixHyphenChar(isIncludeHyphen);
-
-                case MD5BitTypes.L32:
-                    return Encrypt32Func()(data)(encoding).ToFixUpperCase(isUpper).ToFixHyphenChar(isIncludeHyphen);
-
-                case MD5BitTypes.L64:
-                    return Encrypt64Func()(data)(encoding).ToFixUpperCase(isUpper).ToFixHyphenChar(isIncludeHyphen);
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(bits), bits, null);
-            }
+            return bits switch {
+                MD5BitTypes.L16 => Encrypt16Func()(data)(encoding).ToFixUpperCase(isUpper).ToFixHyphenChar(isIncludeHyphen),
+                MD5BitTypes.L32 => Encrypt32Func()(data)(encoding).ToFixUpperCase(isUpper).ToFixHyphenChar(isIncludeHyphen),
+                MD5BitTypes.L64 => Encrypt64Func()(data)(encoding).ToFixUpperCase(isUpper).ToFixHyphenChar(isIncludeHyphen),
+                _               => throw new ArgumentOutOfRangeException(nameof(bits), bits, null)
+            };
         }
 
         private static Func<string, Func<Encoding, string>> Encrypt16Func() =>
@@ -53,9 +46,8 @@ namespace Cosmos.Encryption {
             str => encoding => Convert.ToBase64String(PreencryptFunc()(str)(encoding));
 
         private static Func<string, Func<Encoding, byte[]>> PreencryptFunc() => str => encoding => {
-            using (var md5 = MD5.Create()) {
-                return md5.ComputeHash(encoding.GetBytes(str));
-            }
+            using var md5 = MD5.Create();
+            return md5.ComputeHash(encoding.GetBytes(str));
         };
 
         /// <summary>

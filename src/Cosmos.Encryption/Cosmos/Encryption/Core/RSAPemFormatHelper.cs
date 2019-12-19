@@ -96,11 +96,51 @@ namespace Cosmos.Encryption.Core {
         }
 
         /// <summary>
-        /// Format public key
+        /// Format pkcs1 public key
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public static string PublicKeyFormat(string str) {
+        public static string Pkcs1PublicKeyFormat(string str) {
+            if (str.StartsWith(RSAConstants.RSA_PUBLIC_KEY_START)) {
+                return str;
+            }
+
+            var res = new List<string> {RSAConstants.RSA_PUBLIC_KEY_START};
+            var pos = 0;
+
+            while (pos < str.Length) {
+                var count = str.Length - pos < 64 ? str.Length - pos : 64;
+                res.Add(str.Substring(pos, count));
+                pos += count;
+            }
+
+            res.Add(RSAConstants.RSA_PUBLIC_KEY_END);
+            var resStr = string.Join(RSAConstants.R_N, res);
+            return resStr;
+        }
+
+        /// <summary>
+        /// Remove the Pkcs1 format public key format
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string Pkcs1PublicKeyFormatRemove(string str) {
+            if (!str.StartsWith(RSAConstants.RSA_PUBLIC_KEY_START)) {
+                return str;
+            }
+
+            return str
+                  .ReplaceToEmpty(RSAConstants.RSA_PUBLIC_KEY_START)
+                  .ReplaceToEmpty(RSAConstants.RSA_PUBLIC_KEY_END)
+                  .ReplaceToEmpty(RSAConstants.R_N);
+        }
+
+        /// <summary>
+        /// Format pkcs8 public key
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string Pkcs8PublicKeyFormat(string str) {
             if (str.StartsWith(RSAConstants.PUBLIC_KEY_START)) {
                 return str;
             }
@@ -120,11 +160,11 @@ namespace Cosmos.Encryption.Core {
         }
 
         /// <summary>
-        /// Public key format removed
+        /// Remove the Pkcs8 format public key format
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public static string PublicKeyFormatRemove(string str) {
+        public static string Pkcs8PublicKeyFormatRemove(string str) {
             if (!str.StartsWith(RSAConstants.PUBLIC_KEY_START)) {
                 return str;
             }
