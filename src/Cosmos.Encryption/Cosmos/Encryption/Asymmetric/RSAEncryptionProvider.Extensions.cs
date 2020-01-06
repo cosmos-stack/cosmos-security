@@ -1,6 +1,9 @@
 using System;
 using System.Security.Cryptography;
 using System.Text;
+#if NETCOREAPP3_1 || NETSTANDARD2_1
+using Cosmos.Conversions;
+#endif
 using Cosmos.Encryption.Core;
 using Cosmos.Encryption.Core.Internals.Extensions;
 
@@ -23,8 +26,8 @@ namespace Cosmos.Encryption {
                 RSAKeyTypes.XML  => rsa.ToLvccXmlString(true),
                 RSAKeyTypes.JSON => rsa.ToJsonString(true),
 #if NETCOREAPP3_1 || NETSTANDARD2_1
-                RSAKeyTypes.Pkcs1 => Base64ConvertProvider.ToBase64String(rsa.ExportRSAPrivateKey()),
-                RSAKeyTypes.Pkcs8 => Base64ConvertProvider.ToBase64String(rsa.ExportPkcs8PrivateKey()),
+                RSAKeyTypes.Pkcs1 => Base64Conversion.ToBase64String(rsa.ExportRSAPrivateKey()),
+                RSAKeyTypes.Pkcs8 => Base64Conversion.ToBase64String(rsa.ExportPkcs8PrivateKey()),
 #else
                 RSAKeyTypes.Pkcs1 => rsa.ToPkcs1PrivateString(),
                 RSAKeyTypes.Pkcs8 => rsa.ToPkcs8PrivateString(),
@@ -57,8 +60,8 @@ namespace Cosmos.Encryption {
                 RSAKeyTypes.XML  => rsa.ToLvccXmlString(false),
                 RSAKeyTypes.JSON => rsa.ToJsonString(false),
 #if NETCOREAPP3_1 || NETSTANDARD2_1
-                RSAKeyTypes.Pkcs1 => Base64ConvertProvider.ToBase64String(rsa.ExportRSAPublicKey()),
-                RSAKeyTypes.Pkcs8 => Base64ConvertProvider.ToBase64String(rsa.ExportRSAPublicKey()),
+                RSAKeyTypes.Pkcs1 => Base64Conversion.ToBase64String(rsa.ExportRSAPublicKey()),
+                RSAKeyTypes.Pkcs8 => Base64Conversion.ToBase64String(rsa.ExportRSAPublicKey()),
 #else
                 RSAKeyTypes.Pkcs1 => rsa.ToPkcs1PublicString(),
                 RSAKeyTypes.Pkcs8 => rsa.ToPkcs8PublicString(),
@@ -190,7 +193,7 @@ namespace Cosmos.Encryption {
         private static RSABase TouchRsaUtilFromPrivateKey(RSAKeyTypes keyType, Encoding encoding, string privateKey, RSAKeySizeTypes sizeType) {
             RSABase rsa = keyType switch {
                 RSAKeyTypes.XML   => new RSAXmlUtil(encoding, null, privateKey, (int) sizeType),
-                RSAKeyTypes.JSON  => new RSAXmlUtil(encoding, null, privateKey, (int) sizeType),
+                RSAKeyTypes.JSON  => new RSAJsonUtil(encoding, null, privateKey, (int) sizeType),
                 RSAKeyTypes.Pkcs1 => new RSAPkcs1Util(encoding, null, privateKey, (int) sizeType),
                 RSAKeyTypes.Pkcs8 => new RSAPkcs8Util(encoding, null, privateKey, (int) sizeType),
                 _                 => throw new NotSupportedException("Unknown RSA key type."),
