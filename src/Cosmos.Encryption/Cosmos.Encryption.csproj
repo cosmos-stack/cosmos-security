@@ -14,7 +14,7 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="Cosmos.Serialization.NewtonsoftJson" Version="0.1.2-alpha1-100004" />
+        <PackageReference Include="Cosmos.Serialization.NewtonsoftJson" Version="0.1.2-beta1-101136" />
         <PackageReference Include="Portable.BouncyCastle" Version="1.8.5.2" />
     </ItemGroup>
 

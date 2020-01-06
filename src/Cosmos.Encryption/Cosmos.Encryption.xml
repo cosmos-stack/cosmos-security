@@ -4,49 +4,6 @@
         <name>Cosmos.Encryption</name>
     </assembly>
     <members>
-        <member name="T:Cosmos.Encryption.Abstractions.ICRC`3">
-            <summary>
-            Interface for CRC
-            </summary>
-            <typeparam name="TCRC"></typeparam>
-            <typeparam name="T1"></typeparam>
-            <typeparam name="T2"></typeparam>
-        </member>
-        <member name="P:Cosmos.Encryption.Abstractions.ICRC`3.Value">
-            <summary>
-            Value
-            </summary>
-        </member>
-        <member name="M:Cosmos.Encryption.Abstractions.ICRC`3.Reset">
-            <summary>
-            Reset
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.Abstractions.ICRC`3.Update(`2)">
-            <summary>
-            Update
-            </summary>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.Abstractions.ICRC`3.Update(System.Byte[],System.Int32,System.Int32)">
-            <summary>
-            Update
-            </summary>
-            <param name="buffer"></param>
-            <param name="offset"></param>
-            <param name="count"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.Abstractions.ICRC`3.Update(System.IO.Stream,System.Int64)">
-            <summary>
-            Update
-            </summary>
-            <param name="stream"></param>
-            <param name="count"></param>
-            <returns></returns>
-        </member>
         <member name="T:Cosmos.Encryption.Abstractions.IEncryptionAlgorithm">
             <summary>
             Interface for encryption algorithm
@@ -386,10 +343,6 @@
         <member name="T:Cosmos.Encryption.RSAEncryptionProvider">
             <summary>
             Asymmetric/RSA encryption.
-            Reference: Seay Xu
-                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Asymmetric/RSA.cs
-            Reference: myloveCc
-                https://github.com/myloveCc/NETCore.Encrypt/blob/master/src/NETCore.Encrypt/EncryptProvider.cs
             </summary>
             <summary>
             Asymmetric/RSA encryption.
@@ -406,7 +359,7 @@
                 https://github.com/myloveCc/NETCore.Encrypt/blob/master/src/NETCore.Encrypt/EncryptProvider.cs
             </summary>
         </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.Encrypt(System.String,System.String,System.Security.Cryptography.RSAEncryptionPadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.EncryptByPublicKey(System.String,System.String,System.Security.Cryptography.RSAEncryptionPadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
             <summary>
             Encrypt string data with xml/json format.
             </summary>
@@ -418,7 +371,7 @@
             <param name="keyType"></param>
             <returns>The encrypted data.</returns>
         </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.Encrypt(System.Byte[],System.String,System.Security.Cryptography.RSAEncryptionPadding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.EncryptByPublicKey(System.Byte[],System.String,System.Security.Cryptography.RSAEncryptionPadding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
             <summary>
             Encrypt byte[] data with xml/json format.
             </summary>
@@ -429,7 +382,30 @@
             <param name="padding"></param>
             <returns>The encrypted data.</returns>
         </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.Decrypt(System.String,System.String,System.Security.Cryptography.RSAEncryptionPadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.EncryptByPrivateKey(System.String,System.String,System.Security.Cryptography.RSAEncryptionPadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+            <summary>
+            Encrypt string data with xml/json format.
+            </summary>
+            <param name="data">The data to be encrypted.</param>
+            <param name="privateKey">The public key of xml format.</param>
+            <param name="padding"></param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <param name="sizeType"></param>
+            <param name="keyType"></param>
+            <returns>The encrypted data.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.EncryptByPrivateKey(System.Byte[],System.String,System.Security.Cryptography.RSAEncryptionPadding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+            <summary>
+            Encrypt byte[] data with xml/json format.
+            </summary>
+            <param name="dataBytes">The data to be encrypted.</param>
+            <param name="privateKey">The public key of xml format.</param>
+            <param name="sizeType"></param>
+            <param name="keyType"></param>
+            <param name="padding"></param>
+            <returns>The encrypted data.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.DecryptByPrivateKey(System.String,System.String,System.Security.Cryptography.RSAEncryptionPadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
             <summary>
             Decrypt string data with xml/json format.
             </summary>
@@ -441,7 +417,7 @@
             <param name="keyType"></param>
             <returns>The decrypted data.</returns>
         </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.Decrypt(System.Byte[],System.String,System.Security.Cryptography.RSAEncryptionPadding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.DecryptByPrivateKey(System.Byte[],System.String,System.Security.Cryptography.RSAEncryptionPadding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
             <summary>
             Decrypt byte[] data with xml/json format.
             </summary>
@@ -452,7 +428,7 @@
             <param name="keyType"></param>
             <returns>The decrypted data.</returns>
         </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.SignatureAsString(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.SignatureByPublicKeyAsString(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
             <summary>
             Signature as string
             </summary>
@@ -465,7 +441,7 @@
             <param name="keyType"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.Signature(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.SignatureByPublicKeyAsBytes(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
             <summary>
             Signature as byte[]
             </summary>
@@ -478,7 +454,33 @@
             <param name="keyType"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.Verify(System.String,System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.SignatureByPrivateKeyAsString(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+            <summary>
+            Signature as string
+            </summary>
+            <param name="data"></param>
+            <param name="privateKey"></param>
+            <param name="hashAlgorithmName"></param>
+            <param name="padding"></param>
+            <param name="encoding"></param>
+            <param name="sizeType"></param>
+            <param name="keyType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.SignatureByPrivateAsBytes(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+            <summary>
+            Signature as byte[]
+            </summary>
+            <param name="data"></param>
+            <param name="privateKey"></param>
+            <param name="hashAlgorithmName"></param>
+            <param name="padding"></param>
+            <param name="encoding"></param>
+            <param name="sizeType"></param>
+            <param name="keyType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.VerifyByPublicKey(System.String,System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
             <summary>
             Verify
             </summary>
@@ -492,6 +494,56 @@
             <param name="keyType"></param>
             <returns></returns>
         </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.VerifyByPrivateKey(System.String,System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding,System.Text.Encoding,Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes)">
+            <summary>
+            Verify
+            </summary>
+            <param name="data"></param>
+            <param name="privateKey"></param>
+            <param name="signature"></param>
+            <param name="hashAlgorithmName"></param>
+            <param name="padding"></param>
+            <param name="encoding"></param>
+            <param name="sizeType"></param>
+            <param name="keyType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.ExportPrivateKey(System.Security.Cryptography.RSA,Cosmos.Encryption.RSAKeyTypes,System.Boolean)">
+            <summary>
+            Export RSA private key
+            </summary>
+            <param name="rsa"></param>
+            <param name="type"></param>
+            <param name="usePemFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.ExportPublicKey(System.Security.Cryptography.RSA,Cosmos.Encryption.RSAKeyTypes,System.Boolean)">
+            <summary>
+            Export RSA public key
+            </summary>
+            <param name="rsa"></param>
+            <param name="type"></param>
+            <param name="usePemFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.ImportPrivateKey(System.Security.Cryptography.RSA,Cosmos.Encryption.RSAKeyTypes,System.String,System.Boolean)">
+            <summary>
+            Import RSA private key
+            </summary>
+            <param name="rsa"></param>
+            <param name="type"></param>
+            <param name="privateKey"></param>
+            <param name="isPem"></param>
+        </member>
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.ImportPublicKey(System.Security.Cryptography.RSA,Cosmos.Encryption.RSAKeyTypes,System.String,System.Boolean)">
+            <summary>
+            Import RSA public key
+            </summary>
+            <param name="rsa"></param>
+            <param name="type"></param>
+            <param name="publicKey"></param>
+            <param name="isPem"></param>
+        </member>
         <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreateKey(Cosmos.Encryption.RSAKeySizeTypes,Cosmos.Encryption.RSAKeyTypes,System.Boolean)">
             <summary>
             Create a new <see cref="T:Cosmos.Encryption.RSAKey"/>
@@ -501,42 +553,42 @@
             <param name="format"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreateFromXmlKey(System.String)">
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreateKeyFromXml(System.String)">
             <summary>
             Create a new instance of <see cref="T:System.Security.Cryptography.RSA"/> from xml key
             </summary>
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreateFromJsonKey(System.String)">
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreateKeyFromJson(System.String)">
             <summary>
             Create a new instance of <see cref="T:System.Security.Cryptography.RSA"/> from json key
             </summary>
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreateFromPkcs1PublicKey(System.String)">
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreatePublicKeyFromPkcs1(System.String)">
             <summary>
             Create a new instance of <see cref="T:System.Security.Cryptography.RSA"/> from Pkcs1 public key
             </summary>
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreateFromPkcs1PrivateKey(System.String)">
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreatePrivateKeyFromPkcs1(System.String)">
             <summary>
             Create a new instance of <see cref="T:System.Security.Cryptography.RSA"/> from Pkcs1 private key
             </summary>
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreateFromPkcs8PublicKey(System.String)">
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreatePublicKeyFromPkcs8(System.String)">
             <summary>
             Create a new instance of <see cref="T:System.Security.Cryptography.RSA"/> from Pkcs8 public key
             </summary>
             <param name="key"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreateFromPkcs8PrivateKey(System.String)">
+        <member name="M:Cosmos.Encryption.RSAEncryptionProvider.CreatePrivateKeyFromPkcs8(System.String)">
             <summary>
             Create a new instance of <see cref="T:System.Security.Cryptography.RSA"/> from Pkcs8 private key
             </summary>
@@ -707,98 +759,6 @@
             </summary>
             <param name="encryptedData"></param>
             <param name="privateKey"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Cosmos.Encryption.Base64ConvertProvider">
-            <summary>
-            Base64 convert provider
-            </summary>
-        </member>
-        <member name="M:Cosmos.Encryption.Base64ConvertProvider.ToBase64String(System.Byte[])">
-            <summary>
-            Convert from bytes to base64 string
-            </summary>
-            <param name="bytes"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.Base64ConvertProvider.ToBase64String(System.String,System.Text.Encoding)">
-            <summary>
-            Base64 encode.
-            </summary>
-            <param name="data">The string to be encrypted,not null.</param>
-            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
-            <returns>The encrypted string.</returns>
-        </member>
-        <member name="M:Cosmos.Encryption.Base64ConvertProvider.FromBase64String(System.String,System.Text.Encoding)">
-            <summary>
-            Base64 decryption.
-            </summary>
-            <param name="data">The string to be decrypted,not null.</param>
-            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
-            <returns>The decrypted string.</returns>
-        </member>
-        <member name="M:Cosmos.Encryption.Base64ConvertProvider.ToBase64UrlString(System.Byte[])">
-            <summary>
-            Convert from string to base64url string
-            </summary>
-            <param name="bytes"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.Base64ConvertProvider.ToBase64UrlString(System.String,System.Text.Encoding)">
-            <summary>
-            Convert from string to base64url string
-            </summary>
-            <param name="str"></param>
-            <param name="encoding"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.Base64ConvertProvider.FromBase64UrlString(System.String)">
-            <summary>
-            Convert from base64url string to string
-            </summary>
-            <param name="base64UrlString"></param>
-        </member>
-        <member name="M:Cosmos.Encryption.Base64ConvertProvider.FromBase64UrlString(System.String,System.Text.Encoding)">
-            <summary>
-            Convert from base64url string to string
-            </summary>
-            <param name="base64UrlString"></param>
-            <param name="encoding"></param>
-        </member>
-        <member name="T:Cosmos.Encryption.Core.CRCCheckingBase`2">
-            <summary>
-            CRCCheckingBase
-            </summary>
-            <typeparam name="T1"></typeparam>
-            <typeparam name="T2"></typeparam>
-        </member>
-        <member name="M:Cosmos.Encryption.Core.CRCCheckingBase`2.Compute``1(System.Byte[],System.Int32,System.Int32)">
-            <summary>
-            Compute
-            </summary>
-            <param name="buf"></param>
-            <param name="offset"></param>
-            <param name="count"></param>
-            <typeparam name="TCRC"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.Core.CRCCheckingBase`2.Compute``1(System.IO.Stream,System.Int32)">
-            <summary>
-            Compute
-            </summary>
-            <param name="stream"></param>
-            <param name="count"></param>
-            <typeparam name="TCRC"></typeparam>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.Core.CRCCheckingBase`2.Compute``1(System.IO.Stream,System.Int64,System.Int32)">
-            <summary>
-            Compute
-            </summary>
-            <param name="stream"></param>
-            <param name="position"></param>
-            <param name="count"></param>
-            <typeparam name="TCRC"></typeparam>
             <returns></returns>
         </member>
         <member name="T:Cosmos.Encryption.Core.HMACHashingBase">
@@ -1761,7 +1721,7 @@
             <param name="padding">Padding algorithm</param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.Core.RSABase.SignData(System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+        <member name="M:Cosmos.Encryption.Core.RSABase.SignDataByPublicKey(System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
             <summary>
             Use private key for data signing
             </summary>
@@ -1770,7 +1730,7 @@
             <param name="padding">Signature padding algorithm</param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.Core.RSABase.SignDataGetBytes(System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+        <member name="M:Cosmos.Encryption.Core.RSABase.SignDataByPublicKeyToBytes(System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
             <summary>
             Use private key for data signing
             </summary>
@@ -1779,9 +1739,37 @@
             <param name="padding">Signature padding algorithm</param>
             <returns>Sign bytes</returns>
         </member>
-        <member name="M:Cosmos.Encryption.Core.RSABase.VerifyData(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+        <member name="M:Cosmos.Encryption.Core.RSABase.SignDataByPrivateKey(System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+            <summary>
+            Use private key for data signing
+            </summary>
+            <param name="data">Need to sign data</param>
+            <param name="hashAlgorithmName">Signed hash algorithm name</param>
+            <param name="padding">Signature padding algorithm</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSABase.SignDataByPrivateKeyToBytes(System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+            <summary>
+            Use private key for data signing
+            </summary>
+            <param name="data">Need to sign data</param>
+            <param name="hashAlgorithmName">Signed hash algorithm name</param>
+            <param name="padding">Signature padding algorithm</param>
+            <returns>Sign bytes</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSABase.VerifyDataByPublicKey(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
             <summary>
             Use public key to verify data signature
+            </summary>
+            <param name="data">Need to verify the signature data</param>
+            <param name="sign">sign</param>
+            <param name="hashAlgorithmName">Signed hash algorithm name</param>
+            <param name="padding">Signature padding algorithm</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSABase.VerifyDataByPrivateKey(System.String,System.String,System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+            <summary>
+            Use private key to verify data signature
             </summary>
             <param name="data">Need to verify the signature data</param>
             <param name="sign">sign</param>
@@ -1818,7 +1806,7 @@
             RSAKeyConvert
             </summary>
         </member>
-        <member name="M:Cosmos.Encryption.Core.RSAKeyConvert.PublicKeyPemToXml(System.String)">
+        <member name="M:Cosmos.Encryption.Core.RSAKeyConvert.PublicKeyPemPkcs8ToXml(System.String)">
             <summary>
             Public Key Convert pem->xml
             </summary>
@@ -1942,16 +1930,30 @@
             <param name="str"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.Core.RSAPemFormatHelper.PublicKeyFormat(System.String)">
+        <member name="M:Cosmos.Encryption.Core.RSAPemFormatHelper.Pkcs1PublicKeyFormat(System.String)">
             <summary>
-            Format public key
+            Format pkcs1 public key
             </summary>
             <param name="str"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.Core.RSAPemFormatHelper.PublicKeyFormatRemove(System.String)">
+        <member name="M:Cosmos.Encryption.Core.RSAPemFormatHelper.Pkcs1PublicKeyFormatRemove(System.String)">
             <summary>
-            Public key format removed
+            Remove the Pkcs1 format public key format
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAPemFormatHelper.Pkcs8PublicKeyFormat(System.String)">
+            <summary>
+            Format pkcs8 public key
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.RSAPemFormatHelper.Pkcs8PublicKeyFormatRemove(System.String)">
+            <summary>
+            Remove the Pkcs8 format public key format
             </summary>
             <param name="str"></param>
             <returns></returns>
@@ -2019,7 +2021,7 @@
             RSA encryption
             SHA256 hash algorithm to use the key length of at least 2048
             </summary>
-            <param name="dataEncoding">Data coding</param>
+            <param name="encoding">Data coding</param>
             <param name="keySize">Key length in bits:</param>
             <param name="privateKey">private Key</param>
             <param name="publicKey">public Key</param>
@@ -2438,162 +2440,6 @@
             <summary>
             output of BR procedure
             </summary>
-        </member>
-        <member name="T:Cosmos.Encryption.CRC16">
-            <summary>
-            CRC16
-            Author: X-New-Life
-                https://github.com/NewLifeX/X/blob/master/NewLife.Core/Security/Crc16.cs
-            </summary>
-        </member>
-        <member name="P:Cosmos.Encryption.CRC16.Value">
-            <summary>
-            Value
-            </summary>
-        </member>
-        <member name="M:Cosmos.Encryption.CRC16.Reset">
-            <summary>
-            Reset
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.CRC16.Update(System.Int16)">
-            <summary>
-            Update
-            </summary>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.CRC16.Update(System.Byte[],System.Int32,System.Int32)">
-            <summary>
-            Update
-            </summary>
-            <param name="buffer"></param>
-            <param name="offset"></param>
-            <param name="count"></param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
-        </member>
-        <member name="M:Cosmos.Encryption.CRC16.Update(System.IO.Stream,System.Int64)">
-            <summary>
-            Update
-            </summary>
-            <param name="stream"></param>
-            <param name="count"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Cosmos.Encryption.CRC16CheckingProvider">
-            CRC16 checking provider
-            Author: X-New-Life
-                https://github.com/NewLifeX/X/blob/master/NewLife.Core/Security/Crc16.cs
-        </member>
-        <member name="F:Cosmos.Encryption.CRC16CheckingProvider.Seed">
-            <summary>
-            Seed
-            </summary>
-        </member>
-        <member name="M:Cosmos.Encryption.CRC16CheckingProvider.Compute(System.Byte[],System.Int32,System.Int32)">
-            <summary>
-            Compute
-            </summary>
-            <param name="buf"></param>
-            <param name="offset"></param>
-            <param name="count"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.CRC16CheckingProvider.Compute(System.IO.Stream,System.Int32)">
-            <summary>
-            Compute
-            </summary>
-            <param name="stream"></param>
-            <param name="count"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.CRC16CheckingProvider.Compute(System.IO.Stream,System.Int64,System.Int32)">
-            <summary>
-            Compute
-            </summary>
-            <param name="stream"></param>
-            <param name="position"></param>
-            <param name="count"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Cosmos.Encryption.CRC32">
-            <summary>
-            CRC32
-            </summary>
-        </member>
-        <member name="P:Cosmos.Encryption.CRC32.Value">
-            <summary>
-            Value
-            </summary>
-        </member>
-        <member name="M:Cosmos.Encryption.CRC32.Reset">
-            <summary>
-            Reset
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.CRC32.Update(System.Int32)">
-            <summary>
-            Update
-            </summary>
-            <param name="value"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.CRC32.Update(System.Byte[],System.Int32,System.Int32)">
-            <summary>
-            Update
-            </summary>
-            <param name="buffer"></param>
-            <param name="offset"></param>
-            <param name="count"></param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
-        </member>
-        <member name="M:Cosmos.Encryption.CRC32.Update(System.IO.Stream,System.Int64)">
-            <summary>
-            Update
-            </summary>
-            <param name="stream"></param>
-            <param name="count"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Cosmos.Encryption.CRC32CheckingProvider">
-            <summary>
-            CRC 32 checking provider
-            </summary>
-        </member>
-        <member name="F:Cosmos.Encryption.CRC32CheckingProvider.Seed">
-            <summary>
-            Seed
-            </summary>
-        </member>
-        <member name="M:Cosmos.Encryption.CRC32CheckingProvider.Compute(System.Byte[],System.Int32,System.Int32)">
-            <summary>
-            Compute
-            </summary>
-            <param name="buf"></param>
-            <param name="offset"></param>
-            <param name="count"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.CRC32CheckingProvider.Compute(System.IO.Stream,System.Int32)">
-            <summary>
-            Compute
-            </summary>
-            <param name="stream"></param>
-            <param name="count"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.CRC32CheckingProvider.Compute(System.IO.Stream,System.Int64,System.Int32)">
-            <summary>
-            Compute
-            </summary>
-            <param name="stream"></param>
-            <param name="position"></param>
-            <param name="count"></param>
-            <returns></returns>
         </member>
         <member name="T:Cosmos.Encryption.HMACMD5HashingProvider">
             <summary>
@@ -4214,6 +4060,285 @@
             <param name="data"></param>
             <returns></returns>
         </member>
+        <member name="T:Cosmos.Validations.Abstractions.ICRC`3">
+            <summary>
+            Interface for CRC
+            </summary>
+            <typeparam name="TCRC"></typeparam>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+        </member>
+        <member name="P:Cosmos.Validations.Abstractions.ICRC`3.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="M:Cosmos.Validations.Abstractions.ICRC`3.Reset">
+            <summary>
+            Reset
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.Abstractions.ICRC`3.Update(`2)">
+            <summary>
+            Update
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.Abstractions.ICRC`3.Update(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Update
+            </summary>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.Abstractions.ICRC`3.Update(System.IO.Stream,System.Int64)">
+            <summary>
+            Update
+            </summary>
+            <param name="stream"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Validations.Adler32">
+            <summary>
+            Adler-32 Checking
+            </summary>
+        </member>
+        <member name="P:Cosmos.Validations.Adler32.Value">
+            <summary>
+            Gets value
+            </summary>
+        </member>
+        <member name="M:Cosmos.Validations.Adler32.Reset">
+            <summary>
+            Reset
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.Adler32.Update(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Performs the hash algorithm on given data array.
+            </summary>
+            <param name="bytesArray">Input data.</param>
+            <param name="byteStart">The position to begin reading from.</param>
+            <param name="bytesToRead">How many bytes in the bytesArray to read.</param>
+        </member>
+        <member name="M:Cosmos.Validations.Adler32.Update(System.IO.Stream,System.Int32)">
+            <summary>
+            Performs the hash algorithm on given data array.
+            </summary>
+            <param name="stream"></param>
+            <param name="bytesToRead"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Validations.Adler32CheckingProvider">
+            <summary>
+            Adler-32 checking provider
+            </summary>
+        </member>
+        <member name="M:Cosmos.Validations.Adler32CheckingProvider.Compute(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Compute 
+            </summary>
+            <param name="bytesArray">Input data.</param>
+            <param name="byteStart">The position to begin reading from.</param>
+            <param name="bytesToRead">How many bytes in the bytesArray to read.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Validations.Core.CRCCheckingBase`2">
+            <summary>
+            CRCCheckingBase
+            </summary>
+            <typeparam name="T1"></typeparam>
+            <typeparam name="T2"></typeparam>
+        </member>
+        <member name="M:Cosmos.Validations.Core.CRCCheckingBase`2.Compute``1(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="buf"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+            <typeparam name="TCRC"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.Core.CRCCheckingBase`2.Compute``1(System.IO.Stream,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="stream"></param>
+            <param name="count"></param>
+            <typeparam name="TCRC"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.Core.CRCCheckingBase`2.Compute``1(System.IO.Stream,System.Int64,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="stream"></param>
+            <param name="position"></param>
+            <param name="count"></param>
+            <typeparam name="TCRC"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Validations.CRC16">
+            <summary>
+            CRC16
+            Author: X-New-Life
+                https://github.com/NewLifeX/X/blob/master/NewLife.Core/Security/Crc16.cs
+            </summary>
+        </member>
+        <member name="P:Cosmos.Validations.CRC16.Value">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Validations.CRC16.Reset">
+            <summary>
+            Reset
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.CRC16.Update(System.Int16)">
+            <summary>
+            Update
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.CRC16.Update(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Update
+            </summary>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cosmos.Validations.CRC16.Update(System.IO.Stream,System.Int64)">
+            <summary>
+            Update
+            </summary>
+            <param name="stream"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Validations.CRC16CheckingProvider">
+            CRC16 checking provider
+            Author: X-New-Life
+                https://github.com/NewLifeX/X/blob/master/NewLife.Core/Security/Crc16.cs
+        </member>
+        <member name="F:Cosmos.Validations.CRC16CheckingProvider.Seed">
+            <summary>
+            Seed
+            </summary>
+        </member>
+        <member name="M:Cosmos.Validations.CRC16CheckingProvider.Compute(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="buf"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.CRC16CheckingProvider.Compute(System.IO.Stream,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="stream"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.CRC16CheckingProvider.Compute(System.IO.Stream,System.Int64,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="stream"></param>
+            <param name="position"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Validations.CRC32">
+            <summary>
+            CRC32
+            </summary>
+        </member>
+        <member name="P:Cosmos.Validations.CRC32.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="M:Cosmos.Validations.CRC32.Reset">
+            <summary>
+            Reset
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.CRC32.Update(System.Int32)">
+            <summary>
+            Update
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.CRC32.Update(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Update
+            </summary>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cosmos.Validations.CRC32.Update(System.IO.Stream,System.Int64)">
+            <summary>
+            Update
+            </summary>
+            <param name="stream"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Validations.CRC32CheckingProvider">
+            <summary>
+            CRC 32 checking provider
+            </summary>
+        </member>
+        <member name="F:Cosmos.Validations.CRC32CheckingProvider.Seed">
+            <summary>
+            Seed
+            </summary>
+        </member>
+        <member name="M:Cosmos.Validations.CRC32CheckingProvider.Compute(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="buf"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.CRC32CheckingProvider.Compute(System.IO.Stream,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="stream"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.CRC32CheckingProvider.Compute(System.IO.Stream,System.Int64,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="stream"></param>
+            <param name="position"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
         <member name="T:System.Security.Cryptography.MD4CryptoServiceProvider">
             <summary>
             MD4 Crypto Service Provider
@@ -4242,6 +4367,62 @@
             Hash final
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:System.Security.Cryptography.RSACompatibleExtensions">
+            <summary>
+            Compatible extensions for RSA
+            </summary>
+        </member>
+        <member name="M:System.Security.Cryptography.RSACompatibleExtensions.ExportRSAPrivateKey(System.Security.Cryptography.RSA)">
+            <summary>
+            Export RSA private key
+            </summary>
+            <param name="rsa"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.Security.Cryptography.RSACompatibleExtensions.ExportPkcs8PrivateKey(System.Security.Cryptography.RSA)">
+            <summary>
+            Export RSA private key
+            </summary>
+            <param name="rsa"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.Security.Cryptography.RSACompatibleExtensions.ExportRSAPublicKey(System.Security.Cryptography.RSA)">
+            <summary>
+            Export RSA public key
+            </summary>
+            <param name="rsa"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.Security.Cryptography.RSACompatibleExtensions.ImportRSAPrivateKey(System.Security.Cryptography.RSA,System.ReadOnlySpan{System.Byte},System.Int32@)">
+            <summary>
+            Import RSA private key
+            </summary>
+            <param name="rsa"></param>
+            <param name="privateKey"></param>
+            <param name="bytesRead"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.Security.Cryptography.RSACompatibleExtensions.ImportPkcs8PrivateKey(System.Security.Cryptography.RSA,System.ReadOnlySpan{System.Byte},System.Int32@)">
+            <summary>
+            Import pkcs8 RSA private key
+            </summary>
+            <param name="rsa"></param>
+            <param name="privateKey"></param>
+            <param name="bytesRead"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.Security.Cryptography.RSACompatibleExtensions.ImportRSAPublicKey(System.Security.Cryptography.RSA,System.ReadOnlySpan{System.Byte},System.Int32@)">
+            <summary>
+            Import RSA public key
+            </summary>
+            <param name="rsa"></param>
+            <param name="publicKey"></param>
+            <param name="bytesRead"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
     </members>
 </doc>

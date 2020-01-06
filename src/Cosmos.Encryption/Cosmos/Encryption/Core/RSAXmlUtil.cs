@@ -40,14 +40,22 @@ namespace Cosmos.Encryption.Core {
             }
 
             if (!string.IsNullOrEmpty(privateKey)) {
+#if NET451
+                PrivateRsa = new RSACryptoServiceProvider {KeySize = keySize};
+#else
                 PrivateRsa = RSA.Create();
                 PrivateRsa.KeySize = keySize;
+#endif
                 PrivateRsa.FromLvccXmlString(privateKey);
             }
 
             if (!string.IsNullOrEmpty(publicKey)) {
+#if NET451
+                PublicRsa = new RSACryptoServiceProvider {KeySize = keySize};
+#else
                 PublicRsa = RSA.Create();
                 PublicRsa.KeySize = keySize;
+#endif
                 PublicRsa.FromLvccXmlString(publicKey);
             }
 
