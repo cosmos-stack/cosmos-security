@@ -1,8 +1,8 @@
 using System;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using Cosmos.Encryption.Core.Internals;
 using Cosmos.Encryption.Core.Internals.Extensions;
+using Cosmos.Internals;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption {

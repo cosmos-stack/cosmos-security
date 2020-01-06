@@ -19,8 +19,8 @@ namespace Cosmos.Encryption.Tests.Hash {
             var signature = MD5HashingProvider.Signature("image", MD5BitTypes.L64);
             var signature2 = MD5HashingProvider.Signature("kaka123", MD5BitTypes.L64);
 
-            Assert.Equal("eIBaIhqYjnnvP0LXxb/UGA==", signature);
-            Assert.Equal("XQUvHjKvTkrCVEpfwqm5kg==", signature2);
+            Assert.Equal("EIBAIHQYJNNVP0LXXB/UGA==", signature);
+            Assert.Equal("XQUVHJKVTKRCVEPFWQM5KG==", signature2);
         }
     }
 }

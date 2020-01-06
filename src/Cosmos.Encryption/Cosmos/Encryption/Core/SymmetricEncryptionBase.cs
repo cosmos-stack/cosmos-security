@@ -2,7 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using Cosmos.Encryption.Core.Internals;
+using Cosmos.Internals;
 
 namespace Cosmos.Encryption.Core {
     /// <summary>

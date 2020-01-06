@@ -1,8 +1,8 @@
 using System;
 using System.Security.Cryptography;
 using System.Text;
-using Cosmos.Encryption.Core.Internals;
 using Cosmos.Encryption.Core.Internals.Extensions;
+using Cosmos.Internals;
 
 /*
  * Reference to:

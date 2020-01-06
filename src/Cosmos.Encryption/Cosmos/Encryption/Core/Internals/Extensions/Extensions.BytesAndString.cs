@@ -8,9 +8,9 @@ namespace Cosmos.Encryption.Core.Internals.Extensions {
         /// <param name="bytes"></param>
         /// <returns></returns>
         internal static string ToHexString(this byte[] bytes) {
-            var sb = new StringBuilder();
+            var sb = new StringBuilder(bytes.Length * 3);
             for (var i = 0; i < bytes.Length; i++) {
-                sb.Append(i.ToString("X2"));
+                sb.Append(bytes[i].ToString("X2"));
             }
 
             return sb.ToString();

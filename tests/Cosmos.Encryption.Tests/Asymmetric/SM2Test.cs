@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using Cosmos.Encryption.Asymmetric;
-using Microsoft.VisualBasic.CompilerServices;
 using Xunit;
 
 namespace Cosmos.Encryption.Tests.Asymmetric
