@@ -1,6 +1,6 @@
 using System;
 using System.Text;
-using Cosmos.Internals;
+using Cosmos.Extensions;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption {
@@ -26,9 +26,7 @@ namespace Cosmos.Encryption {
         public static uint Signature(string data, Encoding encoding = null, uint seed = SEED) {
             Checker.Data(data);
 
-            encoding = EncodingHelper.Fixed(encoding);
-
-            var bytes = encoding.GetBytes(data);
+            var bytes = encoding.Fixed().GetBytes(data);
 
             return Signature(bytes, seed);
         }

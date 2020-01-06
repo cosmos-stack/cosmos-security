@@ -82,34 +82,27 @@ namespace Cosmos.Encryption.Core {
 
             var rsaPrivateCrtKeyParameters = (RsaPrivateCrtKeyParameters) PrivateKeyFactory.CreateKey(PrivateKeyInfoFactory.CreatePrivateKeyInfo(asymmetricCipherKeyPair.Private));
 
-            var privateElement = new XElement("RSAKeyValue");
-            //Modulus
+            var element = new XElement("RSAKeyValue");
+
             var privateModulus = new XElement("Modulus", Convert.ToBase64String(rsaPrivateCrtKeyParameters.Modulus.ToByteArrayUnsigned()));
-            //Exponent
             var privateExponent = new XElement("Exponent", Convert.ToBase64String(rsaPrivateCrtKeyParameters.PublicExponent.ToByteArrayUnsigned()));
-            //P
             var privateP = new XElement("P", Convert.ToBase64String(rsaPrivateCrtKeyParameters.P.ToByteArrayUnsigned()));
-            //Q
             var privateQ = new XElement("Q", Convert.ToBase64String(rsaPrivateCrtKeyParameters.Q.ToByteArrayUnsigned()));
-            //DP
             var privateDp = new XElement("DP", Convert.ToBase64String(rsaPrivateCrtKeyParameters.DP.ToByteArrayUnsigned()));
-            //DQ
             var privateDq = new XElement("DQ", Convert.ToBase64String(rsaPrivateCrtKeyParameters.DQ.ToByteArrayUnsigned()));
-            //InverseQ
             var privateInverseQ = new XElement("InverseQ", Convert.ToBase64String(rsaPrivateCrtKeyParameters.QInv.ToByteArrayUnsigned()));
-            //D
             var privateD = new XElement("D", Convert.ToBase64String(rsaPrivateCrtKeyParameters.Exponent.ToByteArrayUnsigned()));
 
-            privateElement.Add(privateModulus);
-            privateElement.Add(privateExponent);
-            privateElement.Add(privateP);
-            privateElement.Add(privateQ);
-            privateElement.Add(privateDp);
-            privateElement.Add(privateDq);
-            privateElement.Add(privateInverseQ);
-            privateElement.Add(privateD);
+            element.Add(privateModulus);
+            element.Add(privateExponent);
+            element.Add(privateP);
+            element.Add(privateQ);
+            element.Add(privateDp);
+            element.Add(privateDq);
+            element.Add(privateInverseQ);
+            element.Add(privateD);
 
-            return privateElement.ToString();
+            return element.ToString();
         }
 
         /// <summary>
@@ -119,24 +112,17 @@ namespace Cosmos.Encryption.Core {
         /// <returns></returns>
         public static string PrivateKeyXmlToPkcs1(string privateKey) {
             var root = XElement.Parse(privateKey);
-            //Modulus
+
             var modulus = root.Element("Modulus");
-            //Exponent
             var exponent = root.Element("Exponent");
-            //P
             var p = root.Element("P");
-            //Q
             var q = root.Element("Q");
-            //DP
             var dp = root.Element("DP");
-            //DQ
             var dq = root.Element("DQ");
-            //InverseQ
             var inverseQ = root.Element("InverseQ");
-            //D
             var d = root.Element("D");
 
-            RsaPrivateCrtKeyParameters rsaPrivateCrtKeyParameters = new RsaPrivateCrtKeyParameters(
+            var rsaPrivateCrtKeyParameters = new RsaPrivateCrtKeyParameters(
                 new BigInteger(1, Convert.FromBase64String(modulus.Value)),
                 new BigInteger(1, Convert.FromBase64String(exponent.Value)),
                 new BigInteger(1, Convert.FromBase64String(d.Value)),
@@ -161,38 +147,30 @@ namespace Cosmos.Encryption.Core {
         /// <returns></returns>
         public static string PrivateKeyPkcs8ToXml(string privateKey) {
             privateKey = RSAPemFormatHelper.Pkcs8PrivateKeyFormatRemove(privateKey);
-            RsaPrivateCrtKeyParameters privateKeyParam =
-                (RsaPrivateCrtKeyParameters) PrivateKeyFactory.CreateKey(Convert.FromBase64String(privateKey));
+            var privateKeyParam = (RsaPrivateCrtKeyParameters) PrivateKeyFactory.CreateKey(Convert.FromBase64String(privateKey));
 
             //Key
-            var privateElement = new XElement("RSAKeyValue");
-            //Modulus
+            var element = new XElement("RSAKeyValue");
+
             var privateModulus = new XElement("Modulus", Convert.ToBase64String(privateKeyParam.Modulus.ToByteArrayUnsigned()));
-            //Exponent
             var privateExponent = new XElement("Exponent", Convert.ToBase64String(privateKeyParam.PublicExponent.ToByteArrayUnsigned()));
-            //P
             var privateP = new XElement("P", Convert.ToBase64String(privateKeyParam.P.ToByteArrayUnsigned()));
-            //Q
             var privateQ = new XElement("Q", Convert.ToBase64String(privateKeyParam.Q.ToByteArrayUnsigned()));
-            //DP
             var privateDp = new XElement("DP", Convert.ToBase64String(privateKeyParam.DP.ToByteArrayUnsigned()));
-            //DQ
             var privateDq = new XElement("DQ", Convert.ToBase64String(privateKeyParam.DQ.ToByteArrayUnsigned()));
-            //InverseQ
             var privateInverseQ = new XElement("InverseQ", Convert.ToBase64String(privateKeyParam.QInv.ToByteArrayUnsigned()));
-            //D
             var privateD = new XElement("D", Convert.ToBase64String(privateKeyParam.Exponent.ToByteArrayUnsigned()));
 
-            privateElement.Add(privateModulus);
-            privateElement.Add(privateExponent);
-            privateElement.Add(privateP);
-            privateElement.Add(privateQ);
-            privateElement.Add(privateDp);
-            privateElement.Add(privateDq);
-            privateElement.Add(privateInverseQ);
-            privateElement.Add(privateD);
+            element.Add(privateModulus);
+            element.Add(privateExponent);
+            element.Add(privateP);
+            element.Add(privateQ);
+            element.Add(privateDp);
+            element.Add(privateDq);
+            element.Add(privateInverseQ);
+            element.Add(privateD);
 
-            return privateElement.ToString();
+            return element.ToString();
         }
 
         /// <summary>
@@ -202,21 +180,14 @@ namespace Cosmos.Encryption.Core {
         /// <returns></returns>
         public static string PrivateKeyXmlToPkcs8(string privateKey) {
             var root = XElement.Parse(privateKey);
-            //Modulus
+
             var modulus = root.Element("Modulus");
-            //Exponent
             var exponent = root.Element("Exponent");
-            //P
             var p = root.Element("P");
-            //Q
             var q = root.Element("Q");
-            //DP
             var dp = root.Element("DP");
-            //DQ
             var dq = root.Element("DQ");
-            //InverseQ
             var inverseQ = root.Element("InverseQ");
-            //D
             var d = root.Element("D");
 
             var rsaPrivateCrtKeyParameters = new RsaPrivateCrtKeyParameters(
@@ -245,16 +216,21 @@ namespace Cosmos.Encryption.Core {
         /// <param name="privateKey"></param>
         /// <returns></returns>
         public static string PrivateKeyPkcs1ToPkcs8(string privateKey) {
-            privateKey = RSAPemFormatHelper.Pkcs1PrivateKeyFormat(privateKey);
-            var pr = new PemReader(new StringReader(privateKey));
 
-            var kp = pr.ReadObject() as AsymmetricCipherKeyPair;
-            var sw = new StringWriter();
-            var pWrt = new PemWriter(sw);
-            var pkcs8 = new Pkcs8Generator(kp.Private);
-            pWrt.WriteObject(pkcs8);
-            pWrt.Writer.Close();
-            return sw.ToString();
+            privateKey = RSAPemFormatHelper.Pkcs1PrivateKeyFormat(privateKey);
+
+            var pemReader = new PemReader(new StringReader(privateKey));
+
+            if (pemReader.ReadObject() is AsymmetricCipherKeyPair asymmetricCipherKeyPair) {
+                using var writer = new StringWriter();
+                var pemWriter = new PemWriter(writer);
+                var pkcs8Gen = new Pkcs8Generator(asymmetricCipherKeyPair.Private);
+                pemWriter.WriteObject(pkcs8Gen);
+                pemWriter.Writer.Close();
+                return writer.ToString();
+            }
+
+            throw new ArgumentException($"Unknown format for Private Key: cannot convert to {nameof(AsymmetricCipherKeyPair)}.");
         }
 
         /// <summary>
@@ -263,18 +239,20 @@ namespace Cosmos.Encryption.Core {
         /// <param name="privateKey"></param>
         /// <returns></returns>
         public static string PrivateKeyPkcs8ToPkcs1(string privateKey) {
+
             privateKey = RSAPemFormatHelper.Pkcs8PrivateKeyFormat(privateKey);
-            var pr = new PemReader(new StringReader(privateKey));
+            var pemReader = new PemReader(new StringReader(privateKey));
 
-            var kp = pr.ReadObject() as RsaPrivateCrtKeyParameters;
+            if (pemReader.ReadObject() is RsaPrivateCrtKeyParameters rsaPrivateCrtKeyParameters) {
+                var keyParameter = PrivateKeyFactory.CreateKey(PrivateKeyInfoFactory.CreatePrivateKeyInfo(rsaPrivateCrtKeyParameters));
+                using var writer = new StringWriter();
+                var pemWriter = new PemWriter(writer);
+                pemWriter.WriteObject(keyParameter);
+                pemWriter.Writer.Close();
+                return writer.ToString();
+            }
 
-            var keyParameter = PrivateKeyFactory.CreateKey(PrivateKeyInfoFactory.CreatePrivateKeyInfo(kp));
-
-            var sw = new StringWriter();
-            var pWrt = new PemWriter(sw);
-            pWrt.WriteObject(keyParameter);
-            pWrt.Writer.Close();
-            return sw.ToString();
+            throw new ArgumentException($"Unknown format for Private Key: cannot convert to {nameof(RsaPrivateCrtKeyParameters)}.");
         }
     }
 }

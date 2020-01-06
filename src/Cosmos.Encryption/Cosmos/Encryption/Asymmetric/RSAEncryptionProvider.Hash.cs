@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using Cosmos.Encryption.Core.Internals;
-using Cosmos.Internals;
+using Cosmos.Extensions;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption {
@@ -25,8 +25,7 @@ namespace Cosmos.Encryption {
         /// <returns></returns>
         // ReSharper disable once RedundantAssignment
         public static bool GetHash(string data, ref byte[] hashing, Encoding encoding = null) {
-            encoding = EncodingHelper.Fixed(encoding);
-            hashing = HashStringFunc()(data)(encoding);
+            hashing = HashStringFunc()(data)(encoding.Fixed());
             return true;
         }
 
@@ -39,13 +38,12 @@ namespace Cosmos.Encryption {
         /// <returns></returns>
         // ReSharper disable once RedundantAssignment
         public static bool GetHash(string data, ref string hashing, Encoding encoding = null) {
-            encoding = EncodingHelper.Fixed(encoding);
-            hashing = Convert.ToBase64String(HashStringFunc()(data)(encoding));
+            hashing = Convert.ToBase64String(HashStringFunc()(data)(encoding.Fixed()));
             return true;
         }
 
         private static Func<string, Func<Encoding, byte[]>> HashStringFunc() =>
-            data => encoding => HashAlgorithm.Create("MD5")?.ComputeHash(encoding.GetBytes(data));
+            data => encoding => HashAlgorithmInstance()(HashAlgorithmName.MD5)?.ComputeHash(encoding.GetBytes(data));
 
         /// <summary>
         /// Get hash sign.
@@ -72,9 +70,11 @@ namespace Cosmos.Encryption {
         }
 
         private static Func<FileStream, byte[]> HashFileFunc() => fs => {
-            var ret = HashAlgorithm.Create("MD5")?.ComputeHash(fs);
+            var ret = HashAlgorithmInstance()(HashAlgorithmName.MD5)?.ComputeHash(fs);
             fs.Close();
             return ret;
         };
+
+        private static Func<HashAlgorithmName, HashAlgorithm> HashAlgorithmInstance() => name => HashAlgorithm.Create(name.Name);
     }
 }

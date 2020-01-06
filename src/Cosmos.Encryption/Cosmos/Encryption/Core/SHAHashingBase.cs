@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using Cosmos.Internals;
+using Cosmos.Extensions;
 
 namespace Cosmos.Encryption.Core {
     /// <summary>
@@ -24,18 +24,15 @@ namespace Cosmos.Encryption.Core {
                 throw new ArgumentNullException(nameof(data));
             }
 
-            encoding = EncodingHelper.Fixed(encoding);
+            using HashAlgorithm hash = new T();
+            var bytes = hash.ComputeHash(encoding.Fixed().GetBytes(data));
 
-            using (HashAlgorithm hash = new T()) {
-                var bytes = hash.ComputeHash(encoding.GetBytes(data));
-
-                var sbStr = new StringBuilder();
-                foreach (var b in bytes) {
-                    sbStr.Append(b.ToString("X2"));
-                }
-
-                return sbStr.ToString();
+            var sbStr = new StringBuilder();
+            foreach (var b in bytes) {
+                sbStr.Append(b.ToString("X2"));
             }
+
+            return sbStr.ToString();
         }
 
         /// <summary>
@@ -49,9 +46,8 @@ namespace Cosmos.Encryption.Core {
                 throw new ArgumentNullException(nameof(data));
             }
 
-            using (HashAlgorithm hash = new T()) {
-                return hash.ComputeHash(data);
-            }
+            using HashAlgorithm hash = new T();
+            return hash.ComputeHash(data);
         }
     }
 }

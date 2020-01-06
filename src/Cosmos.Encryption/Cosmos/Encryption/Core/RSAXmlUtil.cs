@@ -2,7 +2,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 using Cosmos.Encryption.Core.Internals.Extensions;
-using Cosmos.Internals;
+using Cosmos.Extensions;
 
 /*
  * Reference to:
@@ -59,7 +59,7 @@ namespace Cosmos.Encryption.Core {
                 PublicRsa.FromLvccXmlString(publicKey);
             }
 
-            DataEncoding = EncodingHelper.Fixed(encoding);
+            DataEncoding = encoding.Fixed();
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Cosmos.Encryption {
     /// Triple des key size types
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public enum TripleDESKeySizeTypes : int {
+    public enum TripleDESKeySizeTypes {
         /// <summary>
         /// 192
         /// </summary>

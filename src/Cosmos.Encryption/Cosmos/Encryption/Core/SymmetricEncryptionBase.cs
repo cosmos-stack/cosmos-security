@@ -2,7 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using Cosmos.Internals;
+using Cosmos.Extensions;
 
 namespace Cosmos.Encryption.Core {
     /// <summary>
@@ -22,7 +22,7 @@ namespace Cosmos.Encryption.Core {
                 return new byte[0];
             }
 
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = EncodingExtensions.Fixed(encoding);
 
             var len = size / 8;
 
@@ -47,17 +47,17 @@ namespace Cosmos.Encryption.Core {
         /// <returns></returns>
         protected static byte[] NiceEncryptCore<TCryptoServiceProvider>(byte[] sourceBytes, byte[] keyBytes, byte[] ivBytes)
             where TCryptoServiceProvider : SymmetricAlgorithm, new() {
-            using (var provider = new TCryptoServiceProvider()) {
-                provider.Key = keyBytes;
-                provider.IV = ivBytes;
-                using (MemoryStream ms = new MemoryStream()) {
-                    using (CryptoStream cs = new CryptoStream(ms, provider.CreateEncryptor(), CryptoStreamMode.Write)) {
-                        cs.Write(sourceBytes, 0, sourceBytes.Length);
-                        cs.FlushFinalBlock();
-                        return ms.ToArray();
-                    }
-                }
-            }
+          
+            using var provider = new TCryptoServiceProvider();
+            provider.Key = keyBytes;
+            provider.IV = ivBytes;
+          
+            using var ms = new MemoryStream();
+            using var cs = new CryptoStream(ms, provider.CreateEncryptor(), CryptoStreamMode.Write);
+            cs.Write(sourceBytes, 0, sourceBytes.Length);
+            cs.FlushFinalBlock();
+           
+            return ms.ToArray();
         }
 
         /// <summary>
@@ -70,17 +70,16 @@ namespace Cosmos.Encryption.Core {
         /// <returns></returns>
         protected static byte[] NiceDecryptCore<TCryptoServiceProvider>(byte[] encryptBytes, byte[] keyBytes, byte[] ivBytes)
             where TCryptoServiceProvider : SymmetricAlgorithm, new() {
-            using (var provider = new TCryptoServiceProvider()) {
-                provider.Key = keyBytes;
-                provider.IV = ivBytes;
-                using (MemoryStream ms = new MemoryStream()) {
-                    using (CryptoStream cs = new CryptoStream(ms, provider.CreateDecryptor(), CryptoStreamMode.Write)) {
-                        cs.Write(encryptBytes, 0, encryptBytes.Length);
-                        cs.FlushFinalBlock();
-                        return ms.ToArray();
-                    }
-                }
-            }
+            using var provider = new TCryptoServiceProvider();
+            provider.Key = keyBytes;
+            provider.IV = ivBytes;
+             
+            using var ms = new MemoryStream();
+            using var cs = new CryptoStream(ms, provider.CreateDecryptor(), CryptoStreamMode.Write);
+            cs.Write(encryptBytes, 0, encryptBytes.Length);
+            cs.FlushFinalBlock();
+            
+            return ms.ToArray();
         }
     }
 }

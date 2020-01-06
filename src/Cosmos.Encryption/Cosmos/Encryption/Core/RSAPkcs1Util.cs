@@ -4,6 +4,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 using Cosmos.Encryption.Core.Internals.Extensions;
+using Cosmos.Extensions;
 
 /*
  * Reference to:
@@ -85,7 +86,7 @@ namespace Cosmos.Encryption.Core {
 #endif
             }
 
-            DataEncoding = encoding ?? Encoding.UTF8;
+            DataEncoding = encoding.Fixed();
         }
     }
 }

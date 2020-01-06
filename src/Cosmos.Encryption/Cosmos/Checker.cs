@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Cosmos.Internals {
+namespace Cosmos {
     internal static class Checker {
         public static void Data(string data) {
             if (string.IsNullOrEmpty(data)) {

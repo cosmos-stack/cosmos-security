@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 using Cosmos.Encryption.Abstractions;
-using Cosmos.Internals;
+using Cosmos.Extensions;
 
 /*
  * Reference to:
@@ -23,10 +23,12 @@ namespace Cosmos.Encryption.Symmetric {
     // ReSharper disable once IdentifierTypo
     // ReSharper disable once InconsistentNaming
     public sealed class XXTEAEncryptionProvider : ISymmetricEncryption {
+        // ReSharper disable once InconsistentNaming
         private const uint DELTA = 0x9E3779B9;
 
         private XXTEAEncryptionProvider() { }
 
+        // ReSharper disable once InconsistentNaming
         private static uint MX(uint sum, uint y, uint z, int p, uint e, uint[] k)
             => (z >> 5 ^ y << 2) + (y >> 3 ^ z << 4) ^ (sum ^ y) + (k[p & 3 ^ e] ^ z);
 
@@ -41,7 +43,7 @@ namespace Cosmos.Encryption.Symmetric {
             if (string.IsNullOrWhiteSpace(data))
                 return data;
 
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
             return Convert.ToBase64String(Encrypt(encoding.GetBytes(data), encoding.GetBytes(key)));
         }
 
@@ -53,11 +55,10 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string Encrypt(byte[] data, string key, Encoding encoding = null) {
-            if (data.Length == 0)
-                return Convert.ToBase64String(data);
+            return Convert.ToBase64String(data.Length == 0
+                ? data
+                : Encrypt(data, encoding.Fixed().GetBytes(key)));
 
-            encoding = EncodingHelper.Fixed(encoding);
-            return Convert.ToBase64String(Encrypt(data, encoding.GetBytes(key)));
         }
 
         /// <summary>
@@ -67,10 +68,10 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="key"></param>
         /// <returns></returns>
         public static byte[] Encrypt(byte[] data, byte[] key) {
-            if (data.Length == 0)
-                return data;
+            return data.Length == 0
+                ? data
+                : ToByteArray(Encrypt(ToUInt32Array(data, true), ToUInt32Array(FixKey(key), false)), false);
 
-            return ToByteArray(Encrypt(ToUInt32Array(data, true), ToUInt32Array(FixKey(key), false)), false);
         }
 
         /// <summary>
@@ -84,7 +85,7 @@ namespace Cosmos.Encryption.Symmetric {
             if (string.IsNullOrWhiteSpace(data))
                 return data;
 
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
             return encoding.GetString(Decrypt(Convert.FromBase64String(data), encoding.GetBytes(key)));
         }
 
@@ -96,7 +97,7 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string Decrypt(byte[] data, string key, Encoding encoding = null) {
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
             return encoding.GetString(Decrypt(data, encoding.GetBytes(key)));
         }
 
@@ -107,10 +108,10 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="key"></param>
         /// <returns></returns>
         public static byte[] Decrypt(byte[] data, byte[] key) {
-            if (data.Length == 0)
-                return data;
+            return data.Length == 0
+                ? data
+                : ToByteArray(Decrypt(ToUInt32Array(data, false), ToUInt32Array(FixKey(key), false)), true);
 
-            return ToByteArray(Decrypt(ToUInt32Array(data, false), ToUInt32Array(FixKey(key), false)), true);
         }
 
         private static uint[] Encrypt(uint[] v, uint[] k) {
@@ -163,8 +164,7 @@ namespace Cosmos.Encryption.Symmetric {
             byte[] fixedKey = new byte[16];
             if (key.Length < 16) {
                 key.CopyTo(fixedKey, 0);
-            }
-            else {
+            } else {
                 Array.Copy(key, 0, fixedKey, 0, 16);
             }
 
@@ -178,8 +178,7 @@ namespace Cosmos.Encryption.Symmetric {
             if (includeLength) {
                 ret = new uint[n + 1];
                 ret[n] = (uint) length;
-            }
-            else {
+            } else {
                 ret = new uint[n];
             }
 

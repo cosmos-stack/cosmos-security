@@ -1,9 +1,7 @@
 ﻿#if !NET451
 
-using System;
 using System.Security.Cryptography;
 using System.Text;
-using Cosmos.Encryption.Core;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption {

@@ -1,5 +1,7 @@
 ﻿using System.IO;
 
+// ReSharper disable InconsistentNaming
+
 namespace Cosmos.Validations.Abstractions {
     /// <summary>
     /// Interface for CRC
@@ -7,8 +9,7 @@ namespace Cosmos.Validations.Abstractions {
     /// <typeparam name="TCRC"></typeparam>
     /// <typeparam name="T1"></typeparam>
     /// <typeparam name="T2"></typeparam>
-    // ReSharper disable once InconsistentNaming
-    public interface ICRC<TCRC, T1, T2>
+    public interface ICRC<out TCRC, T1, in T2>
         where TCRC : class, ICRC<TCRC, T1, T2>, new()
         where T1 : struct
         where T2 : struct {

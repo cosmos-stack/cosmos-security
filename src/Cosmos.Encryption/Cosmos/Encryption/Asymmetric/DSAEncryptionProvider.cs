@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using Cosmos.Internals;
+using Cosmos.Extensions;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption {
@@ -18,10 +18,10 @@ namespace Cosmos.Encryption {
         /// <returns></returns>
         public static DSAKey CreateKey(int keySize = 1024) {
             using var provider = new DSACryptoServiceProvider(keySize);
-            var key = new DSAKey();
-            //var pa = provider.ExportParameters(true);
-            key.PrivateKey = provider.ToXmlString(true);
-            key.PublicKey = provider.ToXmlString(false);
+            var key = new DSAKey {
+                PrivateKey = provider.ToXmlString(true),
+                PublicKey = provider.ToXmlString(false)
+            };
             return key;
         }
 
@@ -56,8 +56,7 @@ namespace Cosmos.Encryption {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static byte[] Signature(string data, string privateKey, Encoding encoding = null) {
-            encoding = EncodingHelper.Fixed(encoding);
-            return Signature(encoding.GetBytes(data), privateKey);
+            return Signature(encoding.Fixed().GetBytes(data), privateKey);
         }
 
         /// <summary>
@@ -68,8 +67,7 @@ namespace Cosmos.Encryption {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static byte[] Signature(string data, DSAKey key, Encoding encoding = null) {
-            encoding = EncodingHelper.Fixed(encoding);
-            return Signature(encoding.GetBytes(data), key);
+            return Signature(encoding.Fixed().GetBytes(data), key);
         }
 
         /// <summary>

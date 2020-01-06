@@ -4,7 +4,7 @@ using System.Text;
 using Cosmos.Encryption.Abstractions;
 using Cosmos.Encryption.Core;
 using Cosmos.Encryption.Core.Internals;
-using Cosmos.Internals;
+using Cosmos.Extensions;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption {
@@ -42,7 +42,7 @@ namespace Cosmos.Encryption {
             Checker.Password(pwd);
             Checker.IV(iv);
 
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
 
             //return EncryptCore<DESCryptoServiceProvider>(data, pwd, iv, salt, encoding, 64, 64);
             return Convert.ToBase64String(NiceEncryptCore<DESCryptoServiceProvider>(encoding.GetBytes(data),
@@ -64,7 +64,7 @@ namespace Cosmos.Encryption {
             Checker.Password(pwd);
             Checker.IV(iv);
 
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
 
             //return DecryptCore<DESCryptoServiceProvider>(data, pwd, iv, salt, encoding, 64, 64);
             return encoding.GetString(NiceDecryptCore<DESCryptoServiceProvider>(Convert.FromBase64String(data),

@@ -1,5 +1,4 @@
 using System.IO;
-using Cosmos.Internals;
 using Cosmos.IO;
 
 namespace Cosmos.Validations {
@@ -61,8 +60,7 @@ namespace Cosmos.Validations {
         /// <returns></returns>
         public Adler32 Update(Stream stream, int bytesToRead = -1) {
             Checker.Stream(stream);
-            var bytes = stream.StreamToBytes();
-            return Update(bytes, 0, bytesToRead);
+            return Update(stream.StreamToBytes(), 0, bytesToRead);
         }
     }
 }
