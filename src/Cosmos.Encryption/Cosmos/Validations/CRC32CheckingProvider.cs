@@ -1,8 +1,7 @@
 ﻿using System.IO;
-using Cosmos.Encryption.Core;
+using Cosmos.Validations.Core;
 
-// ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Validations {
     /// <summary>
     /// CRC 32 checking provider
     /// </summary>

@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using Cosmos.Encryption.Abstractions;
+using Cosmos.Validations.Abstractions;
 
-namespace Cosmos.Encryption.Core {
+namespace Cosmos.Validations.Core {
     /// <summary>
     /// CRCCheckingBase
     /// </summary>

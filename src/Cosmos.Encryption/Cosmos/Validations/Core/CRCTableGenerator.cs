@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cosmos.Encryption.Core {
+namespace Cosmos.Validations.Core {
     // ReSharper disable once InconsistentNaming
     internal static class CRCTableGenerator {
         // ReSharper disable once InconsistentNaming
