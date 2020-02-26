@@ -20,7 +20,7 @@ namespace Cosmos.Encryption.Core {
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         protected static string Encrypt<T>(string data, Encoding encoding = null) where T : HashAlgorithm, new() {
-            if (data == null) {
+            if (data is null) {
                 throw new ArgumentNullException(nameof(data));
             }
 
@@ -42,7 +42,7 @@ namespace Cosmos.Encryption.Core {
         /// <param name="data"></param>
         /// <returns></returns>
         protected static byte[] Encrypt<T>(byte[] data) where T : HashAlgorithm, new() {
-            if (data == null) {
+            if (data is null) {
                 throw new ArgumentNullException(nameof(data));
             }
 
