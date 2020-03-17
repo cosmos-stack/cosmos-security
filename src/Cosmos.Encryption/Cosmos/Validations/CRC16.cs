@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using Cosmos.Validations.Abstractions;
 using Cosmos.Validations.Core;
 
@@ -39,15 +40,31 @@ namespace Cosmos.Validations {
         /// <summary>
         /// Update
         /// </summary>
+        /// <param name="value"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public CRC16 Update(string value, Encoding encoding = null) {
+            return Update(
+                string.IsNullOrWhiteSpace(value)
+                    ? CRCTableGenerator.EmptyBytes()
+                    : encoding.Fixed().GetBytes(value));
+        }
+
+        /// <summary>
+        /// Update
+        /// </summary>
         /// <param name="buffer"></param>
         /// <param name="offset"></param>
         /// <param name="count"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public CRC16 Update(byte[] buffer, int offset = 0, int count = -1) {
+        public CRC16 Update(byte[] buffer, int offset = 0, long count = -1) {
             Checker.Buffer(buffer);
 
-            if (count <= 0) count = buffer.Length;
+            if (count <= 0 || count > buffer.Length) {
+                count = buffer.Length;
+            }
+
             if (offset < 0 || offset + count > buffer.Length) {
                 throw new ArgumentOutOfRangeException(nameof(offset));
             }

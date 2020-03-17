@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Text;
 
 // ReSharper disable InconsistentNaming
 
@@ -34,11 +35,19 @@ namespace Cosmos.Validations.Abstractions {
         /// <summary>
         /// Update
         /// </summary>
+        /// <param name="value"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        TCRC Update(string value, Encoding encoding = null);
+
+        /// <summary>
+        /// Update
+        /// </summary>
         /// <param name="buffer"></param>
         /// <param name="offset"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        TCRC Update(byte[] buffer, int offset = 0, int count = 1);
+        TCRC Update(byte[] buffer, int offset = 0, long count = -1);
 
         /// <summary>
         /// Update
