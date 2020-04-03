@@ -4071,7 +4071,15 @@
             <param name="value"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Validations.Abstractions.ICRC`3.Update(System.Byte[],System.Int32,System.Int32)">
+        <member name="M:Cosmos.Validations.Abstractions.ICRC`3.Update(System.String,System.Text.Encoding)">
+            <summary>
+            Update
+            </summary>
+            <param name="value"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.Abstractions.ICRC`3.Update(System.Byte[],System.Int32,System.Int64)">
             <summary>
             Update
             </summary>
@@ -4170,6 +4178,16 @@
             <typeparam name="TCRC"></typeparam>
             <returns></returns>
         </member>
+        <member name="F:Cosmos.Validations.Core.CRCTableGenerator.CRC64_ISO_POLY">
+            <summary>
+            The ISO polynomial, defined in ISO 3309 and used in HDLC.
+            </summary>
+        </member>
+        <member name="F:Cosmos.Validations.Core.CRCTableGenerator.CRC64_ECMA_POLY">
+            <summary>
+            The ECMA polynomial, defined in ECMA 182.
+            </summary>
+        </member>
         <member name="T:Cosmos.Validations.CRC16">
             <summary>
             CRC16
@@ -4193,7 +4211,15 @@
             <param name="value"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Validations.CRC16.Update(System.Byte[],System.Int32,System.Int32)">
+        <member name="M:Cosmos.Validations.CRC16.Update(System.String,System.Text.Encoding)">
+            <summary>
+            Update
+            </summary>
+            <param name="value"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.CRC16.Update(System.Byte[],System.Int32,System.Int64)">
             <summary>
             Update
             </summary>
@@ -4270,7 +4296,15 @@
             <param name="value"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Validations.CRC32.Update(System.Byte[],System.Int32,System.Int32)">
+        <member name="M:Cosmos.Validations.CRC32.Update(System.String,System.Text.Encoding)">
+            <summary>
+            Update
+            </summary>
+            <param name="value"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.CRC32.Update(System.Byte[],System.Int32,System.Int64)">
             <summary>
             Update
             </summary>
@@ -4323,6 +4357,131 @@
             <param name="position"></param>
             <param name="count"></param>
             <returns></returns>
+        </member>
+        <member name="T:Cosmos.Validations.CRC64`1">
+            <summary>
+            Base CRC64
+            </summary>
+            <typeparam name="TCRC64"></typeparam>
+        </member>
+        <member name="P:Cosmos.Validations.CRC64`1.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="M:Cosmos.Validations.CRC64`1.Reset">
+            <summary>
+            Reset
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.CRC64`1.Update(System.Int64)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Validations.CRC64`1.Update(System.String,System.Text.Encoding)">
+            <summary>
+            Update
+            </summary>
+            <param name="value"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.CRC64`1.Update(System.Byte[],System.Int32,System.Int64)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Validations.CRC64`1.Update(System.IO.Stream,System.Int64)">
+            <inheritdoc />
+        </member>
+        <member name="T:Cosmos.Validations.CRC64CheckingProvider">
+            <summary>
+            CRC 32 checking provider
+            </summary>
+        </member>
+        <member name="F:Cosmos.Validations.CRC64CheckingProvider.Size">
+            <summary>
+            The size of CRC64 checksum in bytes.
+            </summary>
+        </member>
+        <member name="F:Cosmos.Validations.CRC64CheckingProvider.Seed">
+            <summary>
+            Seed
+            </summary>
+        </member>
+        <member name="M:Cosmos.Validations.CRC64CheckingProvider.Compute(Cosmos.Validations.CRC64Mode,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="mode"></param>
+            <param name="buf"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.CRC64CheckingProvider.Compute(Cosmos.Validations.CRC64Mode,System.IO.Stream,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="mode"></param>
+            <param name="stream"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Validations.CRC64CheckingProvider.Compute(Cosmos.Validations.CRC64Mode,System.IO.Stream,System.Int64,System.Int32)">
+            <summary>
+            Compute
+            </summary>
+            <param name="mode"></param>
+            <param name="stream"></param>
+            <param name="position"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Validations.CRC64Mode">
+            <summary>
+            CRC64 modes
+            </summary>
+        </member>
+        <member name="F:Cosmos.Validations.CRC64Mode.IsoMode">
+            <summary>
+            ISO mode
+            </summary>
+        </member>
+        <member name="F:Cosmos.Validations.CRC64Mode.EcmaMode">
+            <summary>
+            ECMA mode
+            </summary>
+        </member>
+        <member name="T:Cosmos.Validations.ECMA_CRC64">
+            <summary>
+            ECMA CRC64
+            </summary>
+        </member>
+        <member name="P:Cosmos.Validations.ECMA_CRC64.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="M:Cosmos.Validations.ECMA_CRC64.Reset">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Validations.ECMA_CRC64.Update(System.Byte[],System.Int32,System.Int64)">
+            <inheritdoc />
+        </member>
+        <member name="T:Cosmos.Validations.ISO_CRC64">
+            <summary>
+            ISO CRC64
+            </summary>
+        </member>
+        <member name="P:Cosmos.Validations.ISO_CRC64.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="M:Cosmos.Validations.ISO_CRC64.Reset">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Validations.ISO_CRC64.Update(System.Byte[],System.Int32,System.Int64)">
+            <inheritdoc />
         </member>
         <member name="T:System.Security.Cryptography.HashAlgorithmName">
             <summary>
