@@ -1,8 +1,7 @@
 ﻿using System.IO;
-using Cosmos.Encryption.Core;
+using Cosmos.Validations.Core;
 
-// ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Validations {
     /// CRC16 checking provider
     /// Author: X-New-Life
     ///     https://github.com/NewLifeX/X/blob/master/NewLife.Core/Security/Crc16.cs

@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using Cosmos.Encryption.Core.Internals;
 using Cosmos.Encryption.Core.Internals.Extensions;
+using Cosmos.Extensions;
 
 namespace Cosmos.Encryption.Core {
     /// <summary>
@@ -24,11 +24,12 @@ namespace Cosmos.Encryption.Core {
             Checker.Data(data);
             Checker.Key(key);
 
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
 
-            using KeyedHashAlgorithm hash = new T();
-            hash.Key = encoding.GetBytes(key);
-            return hash.ComputeHash(encoding.GetBytes(data)).ToHexString();
+            using (var hash = new T()) {
+                hash.Key = encoding.GetBytes(key);
+                return hash.ComputeHash(encoding.GetBytes(data)).ToHexString();
+            }
         }
     }
 }

@@ -1,26 +1,22 @@
 #if NET451
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
 using System.Text;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Security;
-
-/*
- * Reference to:
- *     https://github.com/stulzq/RSAUtil/blob/master/XC.RSAUtil/RSABase.cs
- *     Author:Zhiqiang Li
- */
 
 namespace Cosmos.Encryption.Core {
     /// <summary>
     /// RSABase
     /// </summary>
     // ReSharper disable once InconsistentNaming
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public abstract class RSABase {
         /// <summary>
         /// Private rsa
         /// </summary>
-        public RSA PrivateRsa;
+        public RSACryptoServiceProvider PrivateRsa;
 
         /// <summary>
         /// Private rsa key parameter
@@ -30,7 +26,7 @@ namespace Cosmos.Encryption.Core {
         /// <summary>
         /// Public rsa
         /// </summary>
-        public RSA PublicRsa;
+        public RSACryptoServiceProvider PublicRsa;
 
         /// <summary>
         /// Public rsa key parameter
@@ -48,27 +44,25 @@ namespace Cosmos.Encryption.Core {
         /// RSA public key encryption
         /// </summary>
         /// <param name="data">Need to encrypt data</param>
+        /// <param name="fOEAP"></param>
         /// <returns></returns>
-        public string EncryptByPublicKey(string data) {
-            if (PublicRsa == null) {
-                throw new ArgumentException("public key can not null");
-            }
-
-            var dataBytes = DataEncoding.GetBytes(data);
-            return EncryptByPublicKey(dataBytes);
+        public string EncryptByPublicKey(string data, bool fOEAP) {
+            return EncryptByPublicKey(DataEncoding.GetBytes(data), fOEAP);
         }
 
         /// <summary>
         /// RSA public key encryption
         /// </summary>
         /// <param name="dataBytes">Need to encrypt data</param>
+        /// <param name="fOEAP"></param>
         /// <returns></returns>
-        public string EncryptByPublicKey(byte[] dataBytes) {
-            if (PublicRsa == null) {
+        public string EncryptByPublicKey(byte[] dataBytes, bool fOEAP) {
+            if (PublicRsa is null) {
                 throw new ArgumentException("public key can not null");
             }
 
-            var resBytes = PublicRsa.EncryptValue(dataBytes);
+
+            var resBytes = PublicRsa.Encrypt(dataBytes, fOEAP);
             return Convert.ToBase64String(resBytes);
         }
 
@@ -82,12 +76,7 @@ namespace Cosmos.Encryption.Core {
         /// <param name="data">Need to encrypt data</param>
         /// <returns></returns>
         public string EncryptByPrivateKey(string data) {
-            if (PrivateRsa == null) {
-                throw new ArgumentException("private key can not null");
-            }
-
-            var dataBytes = DataEncoding.GetBytes(data);
-            return EncryptByPrivateKey(dataBytes);
+            return EncryptByPrivateKey(DataEncoding.GetBytes(data));
         }
 
         /// <summary>
@@ -96,7 +85,7 @@ namespace Cosmos.Encryption.Core {
         /// <param name="dataBytes">Need to encrypt data</param>
         /// <returns></returns>
         public string EncryptByPrivateKey(byte[] dataBytes) {
-            if (PrivateRsa == null) {
+            if (PrivateRsa is null) {
                 throw new ArgumentException("private key can not null");
             }
 
@@ -114,12 +103,7 @@ namespace Cosmos.Encryption.Core {
         /// <param name="data">Need to decrypt the data</param>
         /// <returns></returns>
         public string DecryptByPublicKey(string data) {
-            if (PublicRsa == null) {
-                throw new ArgumentException("public key can not null");
-            }
-
-            byte[] dataBytes = Convert.FromBase64String(data);
-            return DecryptByPublicKey(dataBytes);
+            return DecryptByPublicKey(Convert.FromBase64String(data));
         }
 
         /// <summary>
@@ -128,7 +112,7 @@ namespace Cosmos.Encryption.Core {
         /// <param name="dataBytes">Need to decrypt the data</param>
         /// <returns></returns>
         public string DecryptByPublicKey(byte[] dataBytes) {
-            if (PublicRsa == null) {
+            if (PublicRsa is null) {
                 throw new ArgumentException("public key can not null");
             }
 
@@ -144,46 +128,39 @@ namespace Cosmos.Encryption.Core {
         /// RSA private key is decrypted
         /// </summary>
         /// <param name="data">Need to decrypt the data</param>
+        /// <param name="fOEAP"></param>
         /// <returns></returns>
-        public string DecryptByPrivateKey(string data) {
-            if (PrivateRsa == null) {
-                throw new ArgumentException("private key can not null");
-            }
-
-            byte[] dataBytes = Convert.FromBase64String(data);
-            return DecryptByPrivateKey(dataBytes);
+        public string DecryptByPrivateKey(string data, bool fOEAP) {
+            return DecryptByPrivateKey(Convert.FromBase64String(data), fOEAP);
         }
 
         /// <summary>
         /// RSA private key is decrypted
         /// </summary>
         /// <param name="dataBytes">Need to decrypt the data</param>
+        /// <param name="fOEAP"></param>
         /// <returns></returns>
-        public string DecryptByPrivateKey(byte[] dataBytes) {
-            if (PrivateRsa == null) {
+        public string DecryptByPrivateKey(byte[] dataBytes, bool fOEAP) {
+            if (PrivateRsa is null) {
                 throw new ArgumentException("private key can not null");
             }
 
-            var resBytes = PrivateRsa.DecryptValue(dataBytes);
+            var resBytes = PrivateRsa.Decrypt(dataBytes, fOEAP);
             return DataEncoding.GetString(resBytes);
         }
 
         #endregion
 
-        /*
-
-        #region Sign - Private key
+        #region Sign - Public key
 
         /// <summary>
-        /// Use private key for data signing
+        /// Use public key for data signing
         /// </summary>
         /// <param name="data">Need to sign data</param>
         /// <param name="hashAlgorithmName">Signed hash algorithm name</param>
-        /// <param name="padding">Signature padding algorithm</param>
         /// <returns></returns>
-        public string SignData(string data, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding)
-        {
-            var res = SignDataGetBytes(data, hashAlgorithmName, padding);
+        public string SignDataByPublicKey(string data, HashAlgorithmName hashAlgorithmName) {
+            var res = SignDataByPublicKeyToBytes(data, hashAlgorithmName);
             return Convert.ToBase64String(res);
         }
 
@@ -192,17 +169,44 @@ namespace Cosmos.Encryption.Core {
         /// </summary>
         /// <param name="data">Need to sign data</param>
         /// <param name="hashAlgorithmName">Signed hash algorithm name</param>
-        /// <param name="padding">Signature padding algorithm</param>
         /// <returns>Sign bytes</returns>
-        public byte[] SignDataGetBytes(string data, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding)
-        {
-            if (PrivateRsa == null)
-            {
+        public byte[] SignDataByPublicKeyToBytes(string data, HashAlgorithmName hashAlgorithmName) {
+            if (PublicRsa is null) {
+                throw new ArgumentException("public key can not null");
+            }
+
+            var dataBytes = DataEncoding.GetBytes(data);
+            return PublicRsa.SignData(dataBytes, hashAlgorithmName.Name);
+        }
+
+        #endregion
+
+        #region Sign - Private key
+
+        /// <summary>
+        /// Use private key for data signing
+        /// </summary>
+        /// <param name="data">Need to sign data</param>
+        /// <param name="hashAlgorithmName">Signed hash algorithm name</param>
+        /// <returns></returns>
+        public string SignDataByPrivateKey(string data, HashAlgorithmName hashAlgorithmName) {
+            var res = SignDataByPrivateKeyToBytes(data, hashAlgorithmName);
+            return Convert.ToBase64String(res);
+        }
+
+        /// <summary>
+        /// Use private key for data signing
+        /// </summary>
+        /// <param name="data">Need to sign data</param>
+        /// <param name="hashAlgorithmName">Signed hash algorithm name</param>
+        /// <returns>Sign bytes</returns>
+        public byte[] SignDataByPrivateKeyToBytes(string data, HashAlgorithmName hashAlgorithmName) {
+            if (PrivateRsa is null) {
                 throw new ArgumentException("private key can not null");
             }
 
             var dataBytes = DataEncoding.GetBytes(data);
-            return PrivateRsa.SignData(dataBytes, hashAlgorithmName, padding);
+            return PrivateRsa.SignData(dataBytes, hashAlgorithmName.Name);
         }
 
         #endregion
@@ -215,24 +219,41 @@ namespace Cosmos.Encryption.Core {
         /// <param name="data">Need to verify the signature data</param>
         /// <param name="sign">sign</param>
         /// <param name="hashAlgorithmName">Signed hash algorithm name</param>
-        /// <param name="padding">Signature padding algorithm</param>
         /// <returns></returns>
-        public bool VerifyData(string data, string sign, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding)
-        {
-            if (PublicRsa == null)
-            {
+        public bool VerifyDataByPublicKey(string data, string sign, HashAlgorithmName hashAlgorithmName) {
+            if (PublicRsa is null) {
                 throw new ArgumentException("public key can not null");
             }
 
             var dataBytes = DataEncoding.GetBytes(data);
             var signBytes = Convert.FromBase64String(sign);
-            var res = PublicRsa.VerifyData(dataBytes, signBytes, hashAlgorithmName, padding);
+            var res = PublicRsa.VerifyData(dataBytes, hashAlgorithmName.Name, signBytes);
             return res;
         }
 
         #endregion
-        
-        */
+
+        #region Verify - Private key
+
+        /// <summary>
+        /// Use private key to verify data signature
+        /// </summary>
+        /// <param name="data">Need to verify the signature data</param>
+        /// <param name="sign">sign</param>
+        /// <param name="hashAlgorithmName">Signed hash algorithm name</param>
+        /// <returns></returns>
+        public bool VerifyDataByPrivateKey(string data, string sign, HashAlgorithmName hashAlgorithmName) {
+            if (PrivateRsa is null) {
+                throw new ArgumentException("private key can not null");
+            }
+
+            var dataBytes = DataEncoding.GetBytes(data);
+            var signBytes = Convert.FromBase64String(sign);
+            var res = PrivateRsa.VerifyData(dataBytes, hashAlgorithmName.Name, signBytes);
+            return res;
+        }
+
+        #endregion
 
         #region Misc
 

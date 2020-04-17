@@ -1,7 +1,6 @@
 using System;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using Cosmos.Encryption.Core.Internals;
 using Cosmos.Encryption.Core.Internals.Extensions;
 
 // ReSharper disable once CheckNamespace
@@ -46,11 +45,19 @@ namespace Cosmos.Encryption {
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
+#if NET451
+        public static RSACryptoServiceProvider CreateKeyFromXml(string key) {
+#else
         public static RSA CreateKeyFromXml(string key) {
+#endif
             if (string.IsNullOrWhiteSpace(key)) {
                 throw new ArgumentNullException(nameof(key));
             }
+#if NET451
+            var rsa = new RSACryptoServiceProvider();
+#else
             var rsa = RSA.Create();
+#endif
             rsa.FromLvccXmlString(key);
             return rsa;
         }
@@ -60,9 +67,17 @@ namespace Cosmos.Encryption {
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
+#if NET451
+        public static RSACryptoServiceProvider CreateKeyFromJson(string key) {
+#else
         public static RSA CreateKeyFromJson(string key) {
+#endif
             Checker.Key(key);
+#if NET451
+            var rsa = new RSACryptoServiceProvider();
+#else
             var rsa = RSA.Create();
+#endif
             rsa.FromJsonString(key);
             return rsa;
         }
@@ -72,9 +87,17 @@ namespace Cosmos.Encryption {
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
+#if NET451
+        public static RSACryptoServiceProvider CreatePublicKeyFromPkcs1(string key) {
+#else
         public static RSA CreatePublicKeyFromPkcs1(string key) {
+#endif
             Checker.Key(key);
+#if NET451
+            var rsa = new RSACryptoServiceProvider();
+#else
             var rsa = RSA.Create();
+#endif
             rsa.FromPkcs1PublicString(key, out _);
             return rsa;
         }
@@ -84,9 +107,17 @@ namespace Cosmos.Encryption {
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
+#if NET451
+        public static RSACryptoServiceProvider CreatePrivateKeyFromPkcs1(string key) {
+#else
         public static RSA CreatePrivateKeyFromPkcs1(string key) {
+#endif
             Checker.Key(key);
+#if NET451
+            var rsa = new RSACryptoServiceProvider();
+#else
             var rsa = RSA.Create();
+#endif
             rsa.FromPkcs1PrivateString(key, out _);
             return rsa;
         }
@@ -96,9 +127,17 @@ namespace Cosmos.Encryption {
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
+#if NET451
+        public static RSACryptoServiceProvider CreatePublicKeyFromPkcs8(string key) {
+#else
         public static RSA CreatePublicKeyFromPkcs8(string key) {
+#endif
             Checker.Key(key);
+#if NET451
+            var rsa = new RSACryptoServiceProvider();
+#else
             var rsa = RSA.Create();
+#endif
             rsa.FromPkcs8PublicString(key, out _);
             return rsa;
         }
@@ -108,9 +147,17 @@ namespace Cosmos.Encryption {
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
+#if NET451
+        public static RSACryptoServiceProvider CreatePrivateKeyFromPkcs8(string key) {
+#else
         public static RSA CreatePrivateKeyFromPkcs8(string key) {
+#endif
             Checker.Key(key);
+#if NET451
+            var rsa = new RSACryptoServiceProvider();
+#else
             var rsa = RSA.Create();
+#endif
             rsa.FromPkcs8PrivateString(key, out _);
             return rsa;
         }

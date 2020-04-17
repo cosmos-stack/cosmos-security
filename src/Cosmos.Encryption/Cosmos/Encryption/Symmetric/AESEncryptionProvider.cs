@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Cosmos.Encryption.Abstractions;
 using Cosmos.Encryption.Core;
-using Cosmos.Encryption.Core.Internals;
+using Cosmos.Extensions;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption {
@@ -21,7 +21,7 @@ namespace Cosmos.Encryption {
         /// </summary>
         /// <returns></returns>
         public static AESKey CreateKey(AESKeySizeTypes size = AESKeySizeTypes.L256, Encoding encoding = null) {
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
             using var provider = new AesCryptoServiceProvider {KeySize = (int) size};
             return new AESKey {
                 Key = encoding.GetString(provider.Key),
@@ -46,7 +46,7 @@ namespace Cosmos.Encryption {
             Checker.Password(pwd);
             Checker.IV(iv);
 
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
 
             //return EncryptCore<AesCryptoServiceProvider>(data, password, iv, salt, encoding, (int) keySize, 128, mode);
             return Convert.ToBase64String(NiceEncryptCore<AesCryptoServiceProvider>(encoding.GetBytes(data),
@@ -84,7 +84,7 @@ namespace Cosmos.Encryption {
             Checker.Password(pwd);
             Checker.IV(iv);
 
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
 
             //return DecryptCore<AesCryptoServiceProvider>(data, password, iv, salt, encoding, (int) keySize, 128, mode);
             return encoding.GetString(NiceDecryptCore<AesCryptoServiceProvider>(Convert.FromBase64String(data),

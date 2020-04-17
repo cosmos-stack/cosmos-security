@@ -4,6 +4,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 using Cosmos.Encryption.Core.Internals.Extensions;
+using Cosmos.Extensions;
 
 /*
  * Reference to:
@@ -40,8 +41,12 @@ namespace Cosmos.Encryption.Core {
             }
 
             if (!string.IsNullOrEmpty(privateKey)) {
+#if NET451
+                PrivateRsa = new RSACryptoServiceProvider {KeySize = keySize};
+#else
                 PrivateRsa = RSA.Create();
                 PrivateRsa.KeySize = keySize;
+#endif
                 PrivateRsa.FromPkcs1PrivateString(privateKey, out var priRsap);
 
 #if NET451
@@ -49,8 +54,12 @@ namespace Cosmos.Encryption.Core {
 #endif
 
                 if (string.IsNullOrEmpty(publicKey)) {
+#if NET451
+                    PublicRsa = new RSACryptoServiceProvider {KeySize = keySize};
+#else
                     PublicRsa = RSA.Create();
                     PublicRsa.KeySize = keySize;
+#endif
                     var pubRasp = new RSAParameters {
                         Modulus = priRsap.Modulus,
                         Exponent = priRsap.Exponent
@@ -64,8 +73,12 @@ namespace Cosmos.Encryption.Core {
             }
 
             if (!string.IsNullOrEmpty(publicKey)) {
+#if NET451
+                PublicRsa = new RSACryptoServiceProvider {KeySize = keySize};
+#else
                 PublicRsa = RSA.Create();
                 PublicRsa.KeySize = keySize;
+#endif
                 PublicRsa.FromPkcs1PublicString(publicKey, out _);
 
 #if NET451
@@ -73,7 +86,7 @@ namespace Cosmos.Encryption.Core {
 #endif
             }
 
-            DataEncoding = encoding ?? Encoding.UTF8;
+            DataEncoding = encoding.Fixed();
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using Cosmos.Encryption;
-using Cosmos.Encryption.Core.Internals;
 using Cosmos.Encryption.Core.Internals.Extensions;
 
 namespace Cosmos.Extensions {

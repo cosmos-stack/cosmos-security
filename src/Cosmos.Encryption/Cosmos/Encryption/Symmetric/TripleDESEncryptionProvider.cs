@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using Cosmos.Encryption.Core;
-using Cosmos.Encryption.Core.Internals;
+using Cosmos.Extensions;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption {
@@ -22,7 +22,7 @@ namespace Cosmos.Encryption {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static TripleDESKey CreateKey(TripleDESKeySizeTypes keySize = TripleDESKeySizeTypes.L192, Encoding encoding = null) {
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
             using (var provider = new TripleDESCryptoServiceProvider()) {
                 return new TripleDESKey {
                     Key = encoding.GetString(provider.Key),
@@ -47,7 +47,7 @@ namespace Cosmos.Encryption {
             Checker.Password(pwd);
             Checker.IV(iv);
 
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
 
             //return EncryptCore<DESCryptoServiceProvider>(data, pwd, iv, salt, encoding, 64, 64);
             return Convert.ToBase64String(NiceEncryptCore<TripleDESCryptoServiceProvider>(encoding.GetBytes(data),
@@ -72,7 +72,7 @@ namespace Cosmos.Encryption {
             Checker.Password(pwd);
             Checker.IV(iv);
 
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
 
             return encoding.GetString(NiceDecryptCore<TripleDESCryptoServiceProvider>(Convert.FromBase64String(data),
                 ComputeRealValueFunc()(pwd)(salt)(encoding)((int) keySize),

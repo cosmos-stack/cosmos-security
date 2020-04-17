@@ -1,8 +1,8 @@
 using System;
 using System.Security.Cryptography;
 using System.Text;
-using Cosmos.Encryption.Core.Internals;
 using Cosmos.Encryption.Core.Internals.Extensions;
+using Cosmos.Extensions;
 
 /*
  * Reference to:
@@ -40,18 +40,26 @@ namespace Cosmos.Encryption.Core {
             }
 
             if (!string.IsNullOrEmpty(privateKey)) {
+#if NET451
+                PrivateRsa = new RSACryptoServiceProvider {KeySize = keySize};
+#else
                 PrivateRsa = RSA.Create();
                 PrivateRsa.KeySize = keySize;
+#endif
                 PrivateRsa.FromLvccXmlString(privateKey);
             }
 
             if (!string.IsNullOrEmpty(publicKey)) {
+#if NET451
+                PublicRsa = new RSACryptoServiceProvider {KeySize = keySize};
+#else
                 PublicRsa = RSA.Create();
                 PublicRsa.KeySize = keySize;
+#endif
                 PublicRsa.FromLvccXmlString(publicKey);
             }
 
-            DataEncoding = EncodingHelper.Fixed(encoding);
+            DataEncoding = encoding.Fixed();
         }
     }
 }

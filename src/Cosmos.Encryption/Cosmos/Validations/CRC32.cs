@@ -1,11 +1,10 @@
 ﻿using System;
 using System.IO;
-using Cosmos.Encryption.Abstractions;
-using Cosmos.Encryption.Core;
-using Cosmos.Encryption.Core.Internals;
+using System.Text;
+using Cosmos.Validations.Abstractions;
+using Cosmos.Validations.Core;
 
-// ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Validations {
     /// <summary>
     /// CRC32
     /// </summary>
@@ -37,6 +36,19 @@ namespace Cosmos.Encryption {
             Value = CRCTable[(Value ^ value) & 0xFF] ^ (Value >> 8);
             return this;
         }
+        
+        /// <summary>
+        /// Update
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public CRC32 Update(string value, Encoding encoding = null) {
+            return Update(
+                string.IsNullOrWhiteSpace(value)
+                    ? CRCTableGenerator.EmptyBytes()
+                    : encoding.Fixed().GetBytes(value));
+        }
 
         /// <summary>
         /// Update
@@ -46,13 +58,13 @@ namespace Cosmos.Encryption {
         /// <param name="count"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public CRC32 Update(byte[] buffer, int offset = 0, int count = -1) {
+        public CRC32 Update(byte[] buffer, int offset = 0, long count = -1) {
             Checker.Buffer(buffer);
 
-            if (count <= 0) {
+            if (count <= 0 || count > buffer.Length) {
                 count = buffer.Length;
             }
-
+            
             if (offset < 0 || offset + count > buffer.Length) {
                 throw new ArgumentOutOfRangeException(nameof(offset));
             }

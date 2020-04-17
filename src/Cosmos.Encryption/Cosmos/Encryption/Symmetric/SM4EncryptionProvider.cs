@@ -2,7 +2,7 @@
 using System.Text;
 using Cosmos.Encryption.Abstractions;
 using Cosmos.Encryption.Core;
-using Cosmos.Encryption.Core.Internals;
+using Cosmos.Extensions;
 
 namespace Cosmos.Encryption.Symmetric {
     /// <summary>
@@ -20,7 +20,7 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string Encrypt(string data, string key, Encoding encoding = null) {
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
             return Convert.ToBase64String(Encrypt(encoding.GetBytes(data), encoding.GetBytes(key)));
         }
 
@@ -32,7 +32,7 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string Encrypt(byte[] data, string key, Encoding encoding = null) {
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
             return Convert.ToBase64String(Encrypt(data, encoding.GetBytes(key)));
         }
 
@@ -58,7 +58,7 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string Encrypt(string data, string key, string iv, Encoding encoding = null) {
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
             return Convert.ToBase64String(Encrypt(encoding.GetBytes(data), encoding.GetBytes(key), encoding.GetBytes(iv)));
         }
 
@@ -71,7 +71,7 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string Encrypt(byte[] data, string key, string iv, Encoding encoding = null) {
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = EncodingExtensions.Fixed(encoding);
             return Convert.ToBase64String(Encrypt(data, encoding.GetBytes(key), encoding.GetBytes(iv)));
         }
 
@@ -97,7 +97,7 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string Decrypt(string data, string key, Encoding encoding = null) {
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
             return encoding.GetString(Decrypt(Convert.FromBase64String(data), encoding.GetBytes(key)));
         }
 
@@ -109,7 +109,7 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string Decrypt(byte[] data, string key, Encoding encoding = null) {
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
             return encoding.GetString(Decrypt(data, encoding.GetBytes(key)));
         }
 
@@ -120,11 +120,8 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="key"></param>
         /// <returns></returns>
         public static byte[] Decrypt(byte[] data, byte[] key) {
-            SM4Context ctx = new SM4Context();
-            ctx.IsPadding = true;
-            ctx.Mode = SM4Core.SM4_DECRYPT;
-
-            SM4Core sm4 = new SM4Core();
+            var ctx = new SM4Context {IsPadding = true, Mode = SM4Core.SM4_DECRYPT};
+            var sm4 = new SM4Core();
             sm4.sm4_setkey_dec(ctx, key);
             return sm4.sm4_crypt_ecb(ctx, data);
         }
@@ -138,7 +135,7 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string Decrypt(string data, string key, string iv, Encoding encoding = null) {
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
             return encoding.GetString(Decrypt(Convert.FromBase64String(data), encoding.GetBytes(key), encoding.GetBytes(iv)));
         }
 
@@ -151,7 +148,7 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string Decrypt(byte[] data, string key, string iv, Encoding encoding = null) {
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
             return encoding.GetString(Decrypt(data, encoding.GetBytes(key), encoding.GetBytes(iv)));
         }
 
@@ -163,11 +160,8 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="iv"></param>
         /// <returns></returns>
         public static byte[] Decrypt(byte[] data, byte[] key, byte[] iv) {
-            SM4Context ctx = new SM4Context();
-            ctx.IsPadding = true;
-            ctx.Mode = SM4Core.SM4_DECRYPT;
-
-            SM4Core sm4 = new SM4Core();
+            var ctx = new SM4Context {IsPadding = true, Mode = SM4Core.SM4_DECRYPT};
+            var sm4 = new SM4Core();
             sm4.sm4_setkey_dec(ctx, key);
             return sm4.sm4_crypt_cbc(ctx, iv, data);
         }

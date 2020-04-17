@@ -23,14 +23,13 @@ namespace Cosmos.Encryption.Core {
         /// <param name="keySize">Key Size.Unit: bits</param>
         /// <returns></returns>
         public static RSAKey XmlKey(int keySize) {
-            using (var rsa = new RSACryptoServiceProvider(keySize)) {
-                return new RSAKey {
-                    PublicKey = rsa.ToLvccXmlString(false),
-                    PrivateKey = rsa.ToLvccXmlString(true),
-                    Exponent = rsa.ExportParameters(false).Exponent.ToHexString(),
-                    Modulus = rsa.ExportParameters(false).Modulus.ToHexString()
-                };
-            }
+            using var rsa = new RSACryptoServiceProvider(keySize);
+            return new RSAKey {
+                PublicKey = rsa.ToLvccXmlString(false),
+                PrivateKey = rsa.ToLvccXmlString(true),
+                Exponent = rsa.ExportParameters(false).Exponent.ToHexString(),
+                Modulus = rsa.ExportParameters(false).Modulus.ToHexString()
+            };
         }
 
         /// <summary>
@@ -39,14 +38,13 @@ namespace Cosmos.Encryption.Core {
         /// <param name="keySize"></param>
         /// <returns></returns>
         public static RSAKey JsonKey(int keySize) {
-            using (var rsa = new RSACryptoServiceProvider(keySize)) {
-                return new RSAKey {
-                    PublicKey = rsa.ToJsonString(false),
-                    PrivateKey = rsa.ToJsonString(true),
-                    Exponent = rsa.ExportParameters(false).Exponent.ToHexString(),
-                    Modulus = rsa.ExportParameters(false).Modulus.ToHexString()
-                };
-            }
+            using var rsa = new RSACryptoServiceProvider(keySize);
+            return new RSAKey {
+                PublicKey = rsa.ToJsonString(false),
+                PrivateKey = rsa.ToJsonString(true),
+                Exponent = rsa.ExportParameters(false).Exponent.ToHexString(),
+                Modulus = rsa.ExportParameters(false).Modulus.ToHexString()
+            };
         }
 
         /// <summary>

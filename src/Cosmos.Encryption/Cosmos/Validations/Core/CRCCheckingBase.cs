@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using Cosmos.Encryption.Abstractions;
+using Cosmos.Validations.Abstractions;
 
-namespace Cosmos.Encryption.Core {
+namespace Cosmos.Validations.Core {
     /// <summary>
     /// CRCCheckingBase
     /// </summary>
@@ -53,7 +53,7 @@ namespace Cosmos.Encryption.Core {
             if (position >= 0) {
                 if (count > 0) count = -count;
                 count += (int) (stream.Position - position);
-                if (count == 0) return default(T1);
+                if (count == 0) return default;
                 stream.Position = position;
             }
 

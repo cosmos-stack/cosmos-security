@@ -2,7 +2,7 @@
 using System.Text;
 using Cosmos.Encryption.Abstractions;
 using Cosmos.Encryption.Core;
-using Cosmos.Encryption.Core.Internals;
+using Cosmos.Extensions;
 
 namespace Cosmos.Encryption.Symmetric {
     /// <summary>
@@ -24,7 +24,7 @@ namespace Cosmos.Encryption.Symmetric {
             if (string.IsNullOrWhiteSpace(data))
                 return string.Empty;
 
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
             return Convert.ToBase64String(Encrypt(encoding.GetBytes(data), encoding.GetBytes(key)));
         }
 
@@ -36,11 +36,9 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string Encrypt(byte[] data, string key, Encoding encoding = null) {
-            if (data.Length == 0)
-                return string.Empty;
-
-            encoding = EncodingHelper.Fixed(encoding);
-            return Convert.ToBase64String(Encrypt(data, encoding.GetBytes(key)));
+            return data.Length == 0
+                ? string.Empty
+                : Convert.ToBase64String(Encrypt(data, encoding.Fixed().GetBytes(key)));
         }
 
         /// <summary>
@@ -50,10 +48,10 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="key"></param>
         /// <returns></returns>
         public static byte[] Encrypt(byte[] data, byte[] key) {
-            if (data.Length == 0)
-                return data;
+            return data.Length == 0
+                ? data
+                : XTEACore.Encrypt(data, FixKey(key));
 
-            return XTEACore.Encrypt(data, FixKey(key));
         }
 
         /// <summary>
@@ -67,7 +65,7 @@ namespace Cosmos.Encryption.Symmetric {
             if (string.IsNullOrWhiteSpace(data))
                 return data;
 
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
             return encoding.GetString(Decrypt(Convert.FromBase64String(data), encoding.GetBytes(key)));
         }
 
@@ -82,7 +80,7 @@ namespace Cosmos.Encryption.Symmetric {
             if (data.Length == 0)
                 return string.Empty;
 
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
             return encoding.GetString(Decrypt(data, encoding.GetBytes(key)));
         }
 
@@ -93,10 +91,10 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="key"></param>
         /// <returns></returns>
         public static byte[] Decrypt(byte[] data, byte[] key) {
-            if (data.Length == 0)
-                return data;
+            return data.Length == 0
+                ? data
+                : XTEACore.Decrypt(data, key);
 
-            return XTEACore.Decrypt(data, key);
         }
 
         private static byte[] FixKey(byte[] key) {
@@ -104,8 +102,7 @@ namespace Cosmos.Encryption.Symmetric {
             byte[] fixedKey = new byte[16];
             if (key.Length < 16) {
                 key.CopyTo(fixedKey, 0);
-            }
-            else {
+            } else {
                 Array.Copy(key, 0, fixedKey, 0, 16);
             }
 

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 using Cosmos.Encryption.Abstractions;
-using Cosmos.Encryption.Core.Internals;
+using Cosmos.Extensions;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption {
@@ -22,7 +22,7 @@ namespace Cosmos.Encryption {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string Encrypt(string data, string key, Encoding encoding = null) {
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
             return Convert.ToBase64String(EncryptCore(encoding.GetBytes(data), encoding.GetBytes(key)));
         }
 
@@ -34,7 +34,7 @@ namespace Cosmos.Encryption {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string Encrypt(byte[] data, string key, Encoding encoding = null) {
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
             return Convert.ToBase64String(EncryptCore(data, encoding.GetBytes(key)));
         }
 
@@ -56,7 +56,7 @@ namespace Cosmos.Encryption {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string Decrypt(string data, string key, Encoding encoding = null) {
-            encoding = EncodingHelper.Fixed(encoding);
+            encoding = encoding.Fixed();
             return encoding.GetString(EncryptCore(Convert.FromBase64String(data), encoding.GetBytes(key)));
         }
 
