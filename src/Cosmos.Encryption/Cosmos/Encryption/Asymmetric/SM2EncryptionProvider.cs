@@ -13,17 +13,17 @@ namespace Cosmos.Encryption.Asymmetric {
     /// SM2 encryption provider.
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public static class SM2EncryptionProvider {
+    public static partial class SM2EncryptionProvider {
         /// <summary>
         /// Signature<br />
         /// BUG: THERE ARE SEVERAL BUG HERE, DO NOT USE THIS PROVIDER NOW!
         /// </summary>
         /// <param name="data"></param>
         /// <param name="userId"></param>
-        /// <param name="privateKey"></param>
+        /// <param name="publicKey"></param>
         /// <returns></returns>
-        public static byte[] Signature(byte[] data, byte[] userId, byte[] privateKey) {
-            if (privateKey is null || privateKey.Length == 0)
+        public static byte[] Signature(byte[] data, byte[] userId, byte[] publicKey) {
+            if (publicKey is null || publicKey.Length == 0)
                 return null;
 
             if (data is null || data.Length == 0)
@@ -31,12 +31,11 @@ namespace Cosmos.Encryption.Asymmetric {
 
             SM2Core sm2 = SM2Core.Instance;
 
-            BigInteger userD = new BigInteger(privateKey);
+            BigInteger userD = new BigInteger(publicKey);
 
-            ECPoint userKey = sm2.ecc_point_g.Multiply(userD);
+            ECPoint userKey = sm2.ecc_curve.DecodePoint(publicKey); //sm2.ecc_point_g.Multiply(userD);
 
             byte[] z = sm2.Sm2GetZ(userId, userKey);
-
 
             SM2Core.SM2_SM3Digest sm3 = new SM2Core.SM2_SM3Digest();
             sm3.BlockUpdate(z, 0, z.Length);
@@ -61,18 +60,18 @@ namespace Cosmos.Encryption.Asymmetric {
         /// <param name="signedData"></param>
         /// <param name="data"></param>
         /// <param name="userId"></param>
-        /// <param name="publicKey"></param>
+        /// <param name="privateKey"></param>
         /// <returns></returns>
-        public static bool Verify(byte[] signedData, byte[] data, byte[] userId, byte[] publicKey) {
-            if (publicKey is null || publicKey.Length == 0)
+        public static bool Verify(byte[] signedData, byte[] data, byte[] userId, byte[] privateKey) {
+            if (privateKey is null || privateKey.Length == 0)
                 return false;
 
             if (data is null || data.Length == 0)
                 return false;
 
             SM2Core sm2 = SM2Core.Instance;
-            ECPoint userKey = sm2.ecc_curve.DecodePoint(publicKey);
-
+            ECPoint userKey = sm2.ecc_curve.DecodePoint(Hex.Encode(privateKey));
+//Hex.Decode(encoding.GetBytes(privateKey))
             SM2Core.SM2_SM3Digest sm3 = new SM2Core.SM2_SM3Digest();
             byte[] z = sm2.Sm2GetZ(userId, userKey);
             sm3.BlockUpdate(z, 0, z.Length);
@@ -94,15 +93,15 @@ namespace Cosmos.Encryption.Asymmetric {
             return Equals(sm2Result.r, sm2Result.R);
         }
 
-
         /// <summary>
         /// Encrypt by public key
         /// </summary>
         /// <param name="data"></param>
         /// <param name="publicKey"></param>
         /// <param name="encoding"></param>
+        /// <param name="mode"></param>
         /// <returns></returns>
-        public static string EncryptByPublicKey(string data, string publicKey, Encoding encoding = default) {
+        public static string EncryptByPublicKey(string data, string publicKey, Encoding encoding = default, SM2Mode mode = SM2Mode.C1C3C2) {
             if (publicKey is null || publicKey.Length == 0)
                 return null;
 
@@ -112,7 +111,7 @@ namespace Cosmos.Encryption.Asymmetric {
             // ReSharper disable once ExpressionIsAlwaysNull
             encoding ??= encoding.SafeValue();
 
-            return EncryptByPublicKey(encoding.GetBytes(data), publicKey, encoding);
+            return EncryptByPublicKey(encoding.GetBytes(data), publicKey, encoding, mode);
         }
 
         /// <summary>
@@ -121,8 +120,9 @@ namespace Cosmos.Encryption.Asymmetric {
         /// <param name="dataBytes"></param>
         /// <param name="publicKey"></param>
         /// <param name="encoding"></param>
+        /// <param name="mode"></param>
         /// <returns></returns>
-        public static string EncryptByPublicKey(byte[] dataBytes, string publicKey, Encoding encoding = default) {
+        public static string EncryptByPublicKey(byte[] dataBytes, string publicKey, Encoding encoding = default, SM2Mode mode = SM2Mode.C1C3C2) {
             if (publicKey is null || publicKey.Length == 0)
                 return null;
 
@@ -148,11 +148,13 @@ namespace Cosmos.Encryption.Asymmetric {
             var c3 = new byte[32];
             cipher.Dofinal(c3);
 
-            var sc1 = encoding.GetString(Hex.Encode(c1.GetEncoded()));
-            var sc2 = encoding.GetString(Hex.Encode(source));
-            var sc3 = encoding.GetString(Hex.Encode(c3));
+            var c1Str = encoding.GetString(Hex.Encode(c1.GetEncoded()));
+            var c2Str = encoding.GetString(Hex.Encode(source));
+            var c3Str = encoding.GetString(Hex.Encode(c3));
 
-            return (sc1 + sc2 + sc3).ToUpper();
+            return mode == SM2Mode.C1C2C3
+                ? (c1Str + c2Str + c3Str).ToUpper()
+                : (c1Str + c3Str + c2Str).ToUpper();
         }
 
         /// <summary>
@@ -161,8 +163,9 @@ namespace Cosmos.Encryption.Asymmetric {
         /// <param name="data"></param>
         /// <param name="publicKey"></param>
         /// <param name="encoding"></param>
+        /// <param name="mode"></param>
         /// <returns></returns>
-        public static byte[] EncryptByPublicKeyAsBytes(string data, string publicKey, Encoding encoding = default) {
+        public static byte[] EncryptByPublicKeyAsBytes(string data, string publicKey, Encoding encoding = default, SM2Mode mode = SM2Mode.C1C3C2) {
             if (publicKey is null || publicKey.Length == 0)
                 return null;
 
@@ -172,7 +175,7 @@ namespace Cosmos.Encryption.Asymmetric {
             // ReSharper disable once ExpressionIsAlwaysNull
             encoding ??= encoding.SafeValue();
 
-            return encoding.GetBytes(EncryptByPublicKey(encoding.GetBytes(data), publicKey, encoding));
+            return encoding.GetBytes(EncryptByPublicKey(encoding.GetBytes(data), publicKey, encoding, mode));
         }
 
         /// <summary>
@@ -181,8 +184,9 @@ namespace Cosmos.Encryption.Asymmetric {
         /// <param name="dataBytes"></param>
         /// <param name="publicKey"></param>
         /// <param name="encoding"></param>
+        /// <param name="mode"></param>
         /// <returns></returns>
-        public static byte[] EncryptByPublicKeyAsBytes(byte[] dataBytes, string publicKey, Encoding encoding = default) {
+        public static byte[] EncryptByPublicKeyAsBytes(byte[] dataBytes, string publicKey, Encoding encoding = default, SM2Mode mode = SM2Mode.C1C3C2) {
             if (publicKey is null || publicKey.Length == 0)
                 return null;
 
@@ -192,7 +196,7 @@ namespace Cosmos.Encryption.Asymmetric {
             // ReSharper disable once ExpressionIsAlwaysNull
             encoding ??= encoding.SafeValue();
 
-            return encoding.GetBytes(EncryptByPublicKey(dataBytes, publicKey, encoding));
+            return encoding.GetBytes(EncryptByPublicKey(dataBytes, publicKey, encoding, mode));
         }
 
         /// <summary>
@@ -201,8 +205,9 @@ namespace Cosmos.Encryption.Asymmetric {
         /// <param name="data"></param>
         /// <param name="privateKey"></param>
         /// <param name="encoding"></param>
+        /// <param name="mode"></param>
         /// <returns></returns>
-        public static string DecryptByPrivateKey(string data, string privateKey, Encoding encoding = default) {
+        public static string DecryptByPrivateKey(string data, string privateKey, Encoding encoding = default, SM2Mode mode = SM2Mode.C1C3C2) {
             if (privateKey is null || privateKey.Length == 0)
                 return null;
 
@@ -212,7 +217,7 @@ namespace Cosmos.Encryption.Asymmetric {
             // ReSharper disable once ExpressionIsAlwaysNull
             encoding ??= encoding.SafeValue();
 
-            return DecryptByPrivateKeyAsBytes(encoding.GetBytes(data), privateKey, encoding).GetString(encoding);
+            return DecryptByPrivateKeyAsBytes(encoding.GetBytes(data), privateKey, encoding, mode).GetString(encoding);
         }
 
         /// <summary>
@@ -221,8 +226,9 @@ namespace Cosmos.Encryption.Asymmetric {
         /// <param name="dataBytes"></param>
         /// <param name="privateKey"></param>
         /// <param name="encoding"></param>
+        /// <param name="mode"></param>
         /// <returns></returns>
-        public static string DecryptByPrivateKey(byte[] dataBytes, string privateKey, Encoding encoding = default) {
+        public static string DecryptByPrivateKey(byte[] dataBytes, string privateKey, Encoding encoding = default, SM2Mode mode = SM2Mode.C1C3C2) {
             if (privateKey is null || privateKey.Length == 0)
                 return null;
 
@@ -232,7 +238,7 @@ namespace Cosmos.Encryption.Asymmetric {
             // ReSharper disable once ExpressionIsAlwaysNull
             encoding ??= encoding.SafeValue();
 
-            return DecryptByPrivateKeyAsBytes(dataBytes, privateKey, encoding).GetString(encoding);
+            return DecryptByPrivateKeyAsBytes(dataBytes, privateKey, encoding, mode).GetString(encoding);
         }
 
         /// <summary>
@@ -241,8 +247,9 @@ namespace Cosmos.Encryption.Asymmetric {
         /// <param name="data"></param>
         /// <param name="privateKey"></param>
         /// <param name="encoding"></param>
+        /// <param name="mode"></param>
         /// <returns></returns>
-        public static byte[] DecryptByPrivateKeyAsBytes(string data, string privateKey, Encoding encoding = default) {
+        public static byte[] DecryptByPrivateKeyAsBytes(string data, string privateKey, Encoding encoding = default, SM2Mode mode = SM2Mode.C1C3C2) {
             if (privateKey is null || privateKey.Length == 0)
                 return null;
 
@@ -252,7 +259,7 @@ namespace Cosmos.Encryption.Asymmetric {
             // ReSharper disable once ExpressionIsAlwaysNull
             encoding ??= encoding.SafeValue();
 
-            return DecryptByPrivateKeyAsBytes(encoding.GetBytes(data), privateKey, encoding);
+            return DecryptByPrivateKeyAsBytes(encoding.GetBytes(data), privateKey, encoding, mode);
         }
 
         /// <summary>
@@ -261,8 +268,9 @@ namespace Cosmos.Encryption.Asymmetric {
         /// <param name="dataBytes"></param>
         /// <param name="privateKey"></param>
         /// <param name="encoding"></param>
+        /// <param name="mode"></param>
         /// <returns></returns>
-        public static byte[] DecryptByPrivateKeyAsBytes(byte[] dataBytes, string privateKey, Encoding encoding = default) {
+        public static byte[] DecryptByPrivateKeyAsBytes(byte[] dataBytes, string privateKey, Encoding encoding = default, SM2Mode mode = SM2Mode.C1C3C2) {
             if (privateKey is null || privateKey.Length == 0)
                 return null;
 
@@ -273,24 +281,34 @@ namespace Cosmos.Encryption.Asymmetric {
             encoding ??= encoding.SafeValue();
 
             var privateKeyBytes = Hex.Decode(encoding.GetBytes(privateKey));
-            var source = Hex.Decode(dataBytes);
-            var data = dataBytes.GetString(encoding);
 
-            var c1Bytes = Hex.Decode(encoding.GetBytes(data.Substring(0, 130)));
-            var c2Len = source.Length - 97;
-            var c2 = Hex.Decode(Encoding.UTF8.GetBytes(data.Substring(130, 2 * c2Len)));
-            var c3 = Hex.Decode(Encoding.UTF8.GetBytes(data.Substring(130 + 2 * c2Len, 64)));
+            var (c1, c2, c3) = GetContent(dataBytes, mode, encoding);
 
             var sm2 = SM2Core.Instance;
             var userD = new BigInteger(1, privateKeyBytes);
 
-            var c1 = sm2.ecc_curve.DecodePoint(c1Bytes);
+            var c = sm2.ecc_curve.DecodePoint(c1);
             var cipher = new SM2Core.Cipher();
-            cipher.Init_dec(userD, c1);
+            cipher.Init_dec(userD, c);
             cipher.Decrypt(c2);
             cipher.Dofinal(c3);
 
             return c2;
+        }
+
+        private static (byte[] c1, byte[] c2, byte[] c3) GetContent(byte[] dataBytes, SM2Mode mode, Encoding encoding) {
+            var data = dataBytes.GetString(encoding);
+            var source = Hex.Decode(dataBytes);
+            var c2Len = source.Length - 97;
+            var c1Offset = 0;
+            var c2Offset = mode == SM2Mode.C1C2C3 ? 130 : 130 + 64;
+            var c3Offset = mode == SM2Mode.C1C2C3 ? 130 + 2 * c2Len : 130;
+
+            var c1 = Hex.Decode(encoding.GetBytes(data.Substring(c1Offset, 130)));
+            var c2 = Hex.Decode(encoding.GetBytes(data.Substring(c2Offset, 2 * c2Len)));
+            var c3 = Hex.Decode(encoding.GetBytes(data.Substring(c3Offset, 64)));
+
+            return (c1, c2, c3);
         }
     }
 }

@@ -11,24 +11,28 @@ namespace Cosmos.Encryption.Tests.Asymmetric {
         private static string PriKey = "00FAB34B54C026D158B54C88BC0463CB79B22661C7C870AD2A0455300E05471CE1";
 
         [Theory]
-        [InlineData("Hello World")]
-        [InlineData("神圣的电风扇")]
-        [InlineData("机动战士 GUNDAM")]
-        [InlineData("ウルトラマンシリーズ")]
-        public void EncryptDecrypt(string originalString) {
+        [InlineData("Hello World", SM2Mode.C1C2C3)]
+        [InlineData("神圣的电风扇", SM2Mode.C1C2C3)]
+        [InlineData("机动战士 GUNDAM", SM2Mode.C1C2C3)]
+        [InlineData("ウルトラマンシリーズ", SM2Mode.C1C2C3)]
+        [InlineData("Hello World", SM2Mode.C1C3C2)]
+        [InlineData("神圣的电风扇", SM2Mode.C1C3C2)]
+        [InlineData("机动战士 GUNDAM", SM2Mode.C1C3C2)]
+        [InlineData("ウルトラマンシリーズ", SM2Mode.C1C3C2)]
+        public void EncryptDecrypt(string originalString, SM2Mode mode) {
             //var encoding = Encoding.UTF8;
 
             //1. 源数据数组
             //byte[] sourceData = Encoding.UTF8.GetBytes(originalString);
             //byte[] pubk = Encoding.UTF8.GetBytes(PubKey);
             //string encStr = SM2EncryptionProvider.EncryptByPublicKey(sourceData, Hex.Decode(pubk));
-            string encStr = SM2EncryptionProvider.EncryptByPublicKey(originalString, PubKey);
+            string encStr = SM2EncryptionProvider.EncryptByPublicKey(originalString, PubKey, mode: mode);
 
             //byte[] prik = Encoding.UTF8.GetBytes(PriKey);
             //var data = Hex.Decode(Encoding.UTF8.GetBytes(encStr));
             //var decodedData = SM2EncryptionProvider.DecryptByPrivateKey(data, Hex.Decode(prik));
             //var decodedStr = Encoding.UTF8.GetString(decodedData);
-            var decodedStr = SM2EncryptionProvider.DecryptByPrivateKey(encStr, PriKey);
+            var decodedStr = SM2EncryptionProvider.DecryptByPrivateKey(encStr, PriKey, mode: mode);
 
             // //国密规范测试私钥
             // string prik = "128B2FA8BD433C6C068C8D803DFF79792A519A55171B1B650C23661D15897263";
@@ -65,22 +69,40 @@ namespace Cosmos.Encryption.Tests.Asymmetric {
         }
 
         [Theory]
-        [InlineData("Hello World")]
-        [InlineData("神圣的电风扇")]
-        [InlineData("机动战士 GUNDAM")]
-        [InlineData("ウルトラマンシリーズ")]
-        public void Signature(string originalString) {
+        [InlineData("Hello World", SM2Mode.C1C2C3)]
+        [InlineData("神圣的电风扇", SM2Mode.C1C2C3)]
+        [InlineData("机动战士 GUNDAM", SM2Mode.C1C2C3)]
+        [InlineData("ウルトラマンシリーズ", SM2Mode.C1C2C3)]
+        [InlineData("Hello World", SM2Mode.C1C3C2)]
+        [InlineData("神圣的电风扇", SM2Mode.C1C3C2)]
+        [InlineData("机动战士 GUNDAM", SM2Mode.C1C3C2)]
+        [InlineData("ウルトラマンシリーズ", SM2Mode.C1C3C2)]
+        public void EncryptDecryptWithGenKey(string originalString, SM2Mode mode) {
+            var key = SM2EncryptionProvider.CreateKey();
+            var encStr = SM2EncryptionProvider.EncryptByPublicKey(originalString, key.PublicKey, mode: mode);
+            var decodedStr = SM2EncryptionProvider.DecryptByPrivateKey(encStr, key.PrivateKey, mode: mode);
+            Assert.Equal(originalString, decodedStr);
+        }
+
+        // [Theory]
+        // [InlineData("Hello World")]
+        // [InlineData("神圣的电风扇")]
+        // [InlineData("机动战士 GUNDAM")]
+        // [InlineData("ウルトラマンシリーズ")]
+        [Fact]
+        public void Signature( /*string originalString*/) {
+            string originalString = "Hello World";
             byte[] sourceData = Encoding.UTF8.GetBytes(originalString);
             var userId = "ALICE123@YAHOO.COM";
-            var prikS = Hex.Decode(Encoding.UTF8.GetBytes(PriKey)); // Encoding.UTF8.GetBytes(StringToHexString(PriKey, Encoding.UTF8));
-            byte[] c = SM2EncryptionProvider.Signature(sourceData, Encoding.UTF8.GetBytes(userId), prikS);
             var pubkS = Hex.Decode(Encoding.UTF8.GetBytes(PubKey)); // Encoding.UTF8.GetBytes(StringToHexString(PubKey, Encoding.UTF8));
-            var vs = SM2EncryptionProvider.Verify(c, sourceData, Encoding.UTF8.GetBytes(userId), pubkS);
+            byte[] c = SM2EncryptionProvider.Signature(sourceData, Encoding.UTF8.GetBytes(userId), pubkS);
+            var prikS = Hex.Decode(Encoding.UTF8.GetBytes(PriKey)); // Encoding.UTF8.GetBytes(StringToHexString(PriKey, Encoding.UTF8));
+            var vs = SM2EncryptionProvider.Verify(c, sourceData, Encoding.UTF8.GetBytes(userId), prikS);
             Assert.True(vs);
         }
 
         public static string StringToHexString(string s, Encoding encode) {
-            return s;
+            //return s;
             byte[] b = encode.GetBytes(s); //按照指定编码将string编程字节数组
             string result = string.Empty;
             for (int i = 0; i < b.Length; i++) //逐字节变为16进制字符，以%隔开
