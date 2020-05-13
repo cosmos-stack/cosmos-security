@@ -28,8 +28,8 @@ Install-Package Cosmos.Encryption
 - TEA/XTEA/XXTEA
 - DSA
 - RSA
+- SM2 ***(partially implement)***
 - CRC16/32
-- BASE64/BASE64URL
 
 ## Usage
 

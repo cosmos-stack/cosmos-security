@@ -15,6 +15,7 @@ namespace Cosmos {
             }
         }
 
+        // ReSharper disable once InconsistentNaming
         public static void IV(string iv) {
             if (string.IsNullOrEmpty(iv)) {
                 throw new ArgumentNullException(nameof(iv));
@@ -33,13 +34,13 @@ namespace Cosmos {
         }
 
         public static void Buffer(byte[] buffer) {
-            if (buffer == null) {
+            if (buffer is null) {
                 throw new ArgumentNullException(nameof(buffer));
             }
         }
 
         public static void Stream(Stream stream) {
-            if (stream == null) {
+            if (stream is null) {
                 throw new ArgumentNullException(nameof(stream));
             }
         }

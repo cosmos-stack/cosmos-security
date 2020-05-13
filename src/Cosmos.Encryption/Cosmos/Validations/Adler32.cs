@@ -1,4 +1,5 @@
 using System.IO;
+using Cosmos.Conversions;
 
 namespace Cosmos.Validations {
     /// <summary>
