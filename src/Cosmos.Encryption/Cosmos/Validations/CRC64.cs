@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 using System.Text;
+using Cosmos.Conversions;
+using Cosmos.Optionals;
 using Cosmos.Validations.Abstractions;
 using Cosmos.Validations.Core;
 
@@ -40,7 +42,7 @@ namespace Cosmos.Validations {
             return Update(
                 string.IsNullOrWhiteSpace(value)
                     ? CRCTableGenerator.EmptyBytes()
-                    : encoding.Fixed().GetBytes(value));
+                    : encoding.SafeValue().GetBytes(value));
         }
 
         /// <inheritdoc />
