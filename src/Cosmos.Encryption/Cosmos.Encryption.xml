@@ -694,12 +694,13 @@
         </member>
         <member name="T:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider">
             <summary>
-            SM2 encryption provider. BUG: THERE ARE SEVERAL BUG HERE, DO NOT USE THIS PROVIDER NOW!
+            SM2 encryption provider.
             </summary>
         </member>
         <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.Signature(System.Byte[],System.Byte[],System.Byte[])">
             <summary>
-            Signature
+            Signature<br />
+            BUG: THERE ARE SEVERAL BUG HERE, DO NOT USE THIS PROVIDER NOW!
             </summary>
             <param name="data"></param>
             <param name="userId"></param>
@@ -708,7 +709,8 @@
         </member>
         <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.Verify(System.Byte[],System.Byte[],System.Byte[],System.Byte[])">
             <summary>
-            Verify
+            Verify<br />
+            BUG: THERE ARE SEVERAL BUG HERE, DO NOT USE THIS PROVIDER NOW!
             </summary>
             <param name="signedData"></param>
             <param name="data"></param>
@@ -716,20 +718,76 @@
             <param name="publicKey"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.Encrypt(System.Byte[],System.Byte[])">
+        <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.EncryptByPublicKey(System.String,System.String,System.Text.Encoding)">
             <summary>
-            Encrypt
+            Encrypt by public key
             </summary>
             <param name="data"></param>
             <param name="publicKey"></param>
+            <param name="encoding"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.Decrypt(System.Byte[],System.Byte[])">
+        <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.EncryptByPublicKey(System.Byte[],System.String,System.Text.Encoding)">
             <summary>
-            Decrypt
+            Encrypt by public key
             </summary>
-            <param name="encryptedData"></param>
+            <param name="dataBytes"></param>
+            <param name="publicKey"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.EncryptByPublicKeyAsBytes(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Encrypt by public key
+            </summary>
+            <param name="data"></param>
+            <param name="publicKey"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.EncryptByPublicKeyAsBytes(System.Byte[],System.String,System.Text.Encoding)">
+            <summary>
+            Encrypt by public key
+            </summary>
+            <param name="dataBytes"></param>
+            <param name="publicKey"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.DecryptByPrivateKey(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Decrypt by private key
+            </summary>
+            <param name="data"></param>
             <param name="privateKey"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.DecryptByPrivateKey(System.Byte[],System.String,System.Text.Encoding)">
+            <summary>
+            Decrypt by private key
+            </summary>
+            <param name="dataBytes"></param>
+            <param name="privateKey"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.DecryptByPrivateKeyAsBytes(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Decrypt by private key
+            </summary>
+            <param name="data"></param>
+            <param name="privateKey"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.DecryptByPrivateKeyAsBytes(System.Byte[],System.String,System.Text.Encoding)">
+            <summary>
+            Decrypt by private key
+            </summary>
+            <param name="dataBytes"></param>
+            <param name="privateKey"></param>
+            <param name="encoding"></param>
             <returns></returns>
         </member>
         <member name="T:Cosmos.Encryption.Core.HMACHashingBase">
@@ -2036,15 +2094,7 @@
             <param name="data"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.Core.SM2.Sm2GetZ(System.Byte[],Org.BouncyCastle.Math.EC.ECPoint)">
-            <summary>
-            计算Z值
-            </summary>
-            <param name="userId">签名方ID</param>
-            <param name="userKey">曲线的各个参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.Core.SM2.Sm2Sign(System.Byte[],Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.EC.ECPoint,Cosmos.Encryption.Core.SM2.SM2Result)">
+        <member name="M:Cosmos.Encryption.Core.SM2Core.Sm2Sign(System.Byte[],Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.EC.ECPoint,Cosmos.Encryption.Core.SM2Core.SM2Result)">
             <summary>
             
             </summary>
@@ -2053,7 +2103,7 @@
             <param name="userKey">公钥</param>
             <param name="sm2Ret">sm2Ret集合</param>
         </member>
-        <member name="M:Cosmos.Encryption.Core.SM2.Sm2Verify(System.Byte[],Org.BouncyCastle.Math.EC.ECPoint,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Cosmos.Encryption.Core.SM2.SM2Result)">
+        <member name="M:Cosmos.Encryption.Core.SM2Core.Sm2Verify(System.Byte[],Org.BouncyCastle.Math.EC.ECPoint,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Cosmos.Encryption.Core.SM2Core.SM2Result)">
             <summary>
             
             </summary>
@@ -2063,38 +2113,10 @@
             <param name="s">由数字签名得到的大数s</param>
             <param name="sm2Ret"></param>
         </member>
-        <member name="M:Cosmos.Encryption.Core.SM2_SM3CommonHelper.URShift(System.Int32,System.Int32)">
-            <summary>
-            Performs an unsigned bitwise right shift with the specified number
-            </summary>
-            <param name="number">Number to operate on</param>
-            <param name="bits">Ammount of bits to shift</param>
-            <returns>The resulting number from the shift operation</returns>
-        </member>
-        <member name="M:Cosmos.Encryption.Core.SM2_SM3CommonHelper.URShift(System.Int32,System.Int64)">
-            <summary>
-            Performs an unsigned bitwise right shift with the specified number
-            </summary>
-            <param name="number">Number to operate on</param>
-            <param name="bits">Ammount of bits to shift</param>
-            <returns>The resulting number from the shift operation</returns>
-        </member>
-        <member name="M:Cosmos.Encryption.Core.SM2_SM3CommonHelper.URShift(System.Int64,System.Int32)">
-            <summary>
-            Performs an unsigned bitwise right shift with the specified number
-            </summary>
-            <param name="number">Number to operate on</param>
-            <param name="bits">Ammount of bits to shift</param>
-            <returns>The resulting number from the shift operation</returns>
-        </member>
-        <member name="M:Cosmos.Encryption.Core.SM2_SM3CommonHelper.URShift(System.Int64,System.Int64)">
-            <summary>
-            Performs an unsigned bitwise right shift with the specified number
-            </summary>
-            <param name="number">Number to operate on</param>
-            <param name="bits">Ammount of bits to shift</param>
-            <returns>The resulting number from the shift operation</returns>
-        </member>
+        <!-- Badly formed XML comment ignored for member "M:Cosmos.Encryption.Core.SM2Core.SM2_SupportClass.URShift(System.Int32,System.Int32)" -->
+        <!-- Badly formed XML comment ignored for member "M:Cosmos.Encryption.Core.SM2Core.SM2_SupportClass.URShift(System.Int32,System.Int64)" -->
+        <!-- Badly formed XML comment ignored for member "M:Cosmos.Encryption.Core.SM2Core.SM2_SupportClass.URShift(System.Int64,System.Int32)" -->
+        <!-- Badly formed XML comment ignored for member "M:Cosmos.Encryption.Core.SM2Core.SM2_SupportClass.URShift(System.Int64,System.Int64)" -->
         <member name="F:Cosmos.Encryption.Core.SM3Core.HashSizeInBytes">
             <summary>
                 哈希值大小（以字节数为单位）

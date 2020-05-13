@@ -1,18 +1,22 @@
 ﻿using System;
+using System.Text;
 using Cosmos.Encryption.Core;
 using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Math.EC;
+using Org.BouncyCastle.Utilities.Encoders;
 using Org.BouncyCastle.Utilities.IO;
+using Cosmos.Optionals;
 
 namespace Cosmos.Encryption.Asymmetric {
     /// <summary>
-    /// SM2 encryption provider. BUG: THERE ARE SEVERAL BUG HERE, DO NOT USE THIS PROVIDER NOW!
+    /// SM2 encryption provider.
     /// </summary>
     // ReSharper disable once InconsistentNaming
     public static class SM2EncryptionProvider {
         /// <summary>
-        /// Signature
+        /// Signature<br />
+        /// BUG: THERE ARE SEVERAL BUG HERE, DO NOT USE THIS PROVIDER NOW!
         /// </summary>
         /// <param name="data"></param>
         /// <param name="userId"></param>
@@ -25,20 +29,22 @@ namespace Cosmos.Encryption.Asymmetric {
             if (data is null || data.Length == 0)
                 return null;
 
-            SM2 sm2 = SM2.Instance;
+            SM2Core sm2 = SM2Core.Instance;
+
             BigInteger userD = new BigInteger(privateKey);
 
             ECPoint userKey = sm2.ecc_point_g.Multiply(userD);
 
             byte[] z = sm2.Sm2GetZ(userId, userKey);
 
-            SM2_SM3Digest sm3 = new SM2_SM3Digest();
+
+            SM2Core.SM2_SM3Digest sm3 = new SM2Core.SM2_SM3Digest();
             sm3.BlockUpdate(z, 0, z.Length);
             sm3.BlockUpdate(data, 0, data.Length);
             byte[] md = new byte[32];
             sm3.DoFinal(md, 0);
 
-            SM2.SM2Result sm2Result = new SM2.SM2Result();
+            SM2Core.SM2Result sm2Result = new SM2Core.SM2Result();
             sm2.Sm2Sign(md, userD, userKey, sm2Result);
 
             DerInteger d_r = new DerInteger(sm2Result.r);
@@ -48,9 +54,9 @@ namespace Cosmos.Encryption.Asymmetric {
             return sign.GetEncoded();
         }
 
-
         /// <summary>
-        /// Verify
+        /// Verify<br />
+        /// BUG: THERE ARE SEVERAL BUG HERE, DO NOT USE THIS PROVIDER NOW!
         /// </summary>
         /// <param name="signedData"></param>
         /// <param name="data"></param>
@@ -64,10 +70,10 @@ namespace Cosmos.Encryption.Asymmetric {
             if (data is null || data.Length == 0)
                 return false;
 
-            SM2 sm2 = SM2.Instance;
+            SM2Core sm2 = SM2Core.Instance;
             ECPoint userKey = sm2.ecc_curve.DecodePoint(publicKey);
 
-            SM2_SM3Digest sm3 = new SM2_SM3Digest();
+            SM2Core.SM2_SM3Digest sm3 = new SM2Core.SM2_SM3Digest();
             byte[] z = sm2.Sm2GetZ(userId, userKey);
             sm3.BlockUpdate(z, 0, z.Length);
             sm3.BlockUpdate(data, 0, data.Length);
@@ -80,7 +86,7 @@ namespace Cosmos.Encryption.Asymmetric {
             var e = (Asn1Sequence) derObj;
             DerInteger r = (DerInteger) e[0];
             DerInteger s = (DerInteger) e[1];
-            SM2.SM2Result sm2Result = new SM2.SM2Result();
+            SM2Core.SM2Result sm2Result = new SM2Core.SM2Result();
             sm2Result.r = r.PositiveValue;
             sm2Result.s = s.PositiveValue;
 
@@ -88,78 +94,203 @@ namespace Cosmos.Encryption.Asymmetric {
             return Equals(sm2Result.r, sm2Result.R);
         }
 
+
         /// <summary>
-        /// Encrypt
+        /// Encrypt by public key
         /// </summary>
         /// <param name="data"></param>
         /// <param name="publicKey"></param>
+        /// <param name="encoding"></param>
         /// <returns></returns>
-        public static byte[] Encrypt(byte[] data, byte[] publicKey) {
+        public static string EncryptByPublicKey(string data, string publicKey, Encoding encoding = default) {
             if (publicKey is null || publicKey.Length == 0)
                 return null;
 
             if (data is null || data.Length == 0)
                 return null;
 
-            var source = new byte[data.Length];
-            Array.Copy(data, 0, source, 0, data.Length);
+            // ReSharper disable once ExpressionIsAlwaysNull
+            encoding ??= encoding.SafeValue();
 
-            var cipher = new SM2.Cipher();
-            var sm2 = SM2.Instance;
-            ECPoint userKey = sm2.ecc_curve.DecodePoint(publicKey);
-
-            ECPoint c1 = cipher.Init_enc(sm2, userKey);
-            cipher.Encrypt(source);
-            var c3 = new byte[3];
-            cipher.Dofinal(c3);
-
-            DerInteger x = new DerInteger(c1.XCoord.ToBigInteger());
-            DerInteger y = new DerInteger(c1.YCoord.ToBigInteger());
-            DerOctetString derDig = new DerOctetString(c3);
-            DerOctetString derEnc = new DerOctetString(source);
-            Asn1EncodableVector v = new Asn1EncodableVector {x, y, derDig, derEnc};
-            DerSequence seq = new DerSequence(v);
-            MemoryOutputStream bos = new MemoryOutputStream();
-            DerOutputStream dos = new DerOutputStream(bos);
-            dos.WriteObject(seq);
-            return bos.ToArray();
+            return EncryptByPublicKey(encoding.GetBytes(data), publicKey, encoding);
         }
 
         /// <summary>
-        /// Decrypt
+        /// Encrypt by public key
         /// </summary>
-        /// <param name="encryptedData"></param>
-        /// <param name="privateKey"></param>
+        /// <param name="dataBytes"></param>
+        /// <param name="publicKey"></param>
+        /// <param name="encoding"></param>
         /// <returns></returns>
-        public static byte[] Decrypt(byte[] encryptedData, byte[] privateKey) {
+        public static string EncryptByPublicKey(byte[] dataBytes, string publicKey, Encoding encoding = default) {
+            if (publicKey is null || publicKey.Length == 0)
+                return null;
+
+            if (dataBytes is null || dataBytes.Length == 0)
+                return null;
+
+            // ReSharper disable once ExpressionIsAlwaysNull
+            encoding ??= encoding.SafeValue();
+
+            var publicKeyBytes = Hex.Decode(encoding.GetBytes(publicKey));
+
+            var source = new byte[dataBytes.Length];
+            Array.Copy(dataBytes, 0, source, 0, dataBytes.Length);
+
+            var cipher = new SM2Core.Cipher();
+            var sm2 = SM2Core.Instance;
+
+            var userKey = sm2.ecc_curve.DecodePoint(publicKeyBytes);
+
+            var c1 = cipher.Init_enc(sm2, userKey);
+            cipher.Encrypt(source);
+
+            var c3 = new byte[32];
+            cipher.Dofinal(c3);
+
+            var sc1 = encoding.GetString(Hex.Encode(c1.GetEncoded()));
+            var sc2 = encoding.GetString(Hex.Encode(source));
+            var sc3 = encoding.GetString(Hex.Encode(c3));
+
+            return (sc1 + sc2 + sc3).ToUpper();
+        }
+
+        /// <summary>
+        /// Encrypt by public key
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="publicKey"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static byte[] EncryptByPublicKeyAsBytes(string data, string publicKey, Encoding encoding = default) {
+            if (publicKey is null || publicKey.Length == 0)
+                return null;
+
+            if (data is null || data.Length == 0)
+                return null;
+
+            // ReSharper disable once ExpressionIsAlwaysNull
+            encoding ??= encoding.SafeValue();
+
+            return encoding.GetBytes(EncryptByPublicKey(encoding.GetBytes(data), publicKey, encoding));
+        }
+
+        /// <summary>
+        /// Encrypt by public key
+        /// </summary>
+        /// <param name="dataBytes"></param>
+        /// <param name="publicKey"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static byte[] EncryptByPublicKeyAsBytes(byte[] dataBytes, string publicKey, Encoding encoding = default) {
+            if (publicKey is null || publicKey.Length == 0)
+                return null;
+
+            if (dataBytes is null || dataBytes.Length == 0)
+                return null;
+
+            // ReSharper disable once ExpressionIsAlwaysNull
+            encoding ??= encoding.SafeValue();
+
+            return encoding.GetBytes(EncryptByPublicKey(dataBytes, publicKey, encoding));
+        }
+
+        /// <summary>
+        /// Decrypt by private key
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="privateKey"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static string DecryptByPrivateKey(string data, string privateKey, Encoding encoding = default) {
             if (privateKey is null || privateKey.Length == 0)
                 return null;
 
-            if (encryptedData is null || encryptedData.Length == 0)
+            if (data is null || data.Length == 0)
                 return null;
 
-            byte[] enc = new byte[encryptedData.Length];
-            Array.Copy(encryptedData, 0, enc, 0, encryptedData.Length);
+            // ReSharper disable once ExpressionIsAlwaysNull
+            encoding ??= encoding.SafeValue();
 
-            SM2 sm2 = SM2.Instance;
-            BigInteger userD = new BigInteger(1, privateKey);
+            return DecryptByPrivateKeyAsBytes(encoding.GetBytes(data), privateKey, encoding).GetString(encoding);
+        }
 
-            MemoryInputStream bis = new MemoryInputStream(enc);
-            Asn1InputStream dis = new Asn1InputStream(bis);
-            Asn1Object derObj = dis.ReadObject();
-            Asn1Sequence asn1 = (Asn1Sequence) derObj;
-            DerInteger x = (DerInteger) asn1[0];
-            DerInteger y = (DerInteger) asn1[1];
-            ECPoint c1 = sm2.ecc_curve.CreatePoint(x.PositiveValue, y.PositiveValue, true);
+        /// <summary>
+        /// Decrypt by private key
+        /// </summary>
+        /// <param name="dataBytes"></param>
+        /// <param name="privateKey"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static string DecryptByPrivateKey(byte[] dataBytes, string privateKey, Encoding encoding = default) {
+            if (privateKey is null || privateKey.Length == 0)
+                return null;
 
-            SM2.Cipher cipher = new SM2.Cipher();
+            if (dataBytes is null || dataBytes.Length == 0)
+                return null;
+
+            // ReSharper disable once ExpressionIsAlwaysNull
+            encoding ??= encoding.SafeValue();
+
+            return DecryptByPrivateKeyAsBytes(dataBytes, privateKey, encoding).GetString(encoding);
+        }
+
+        /// <summary>
+        /// Decrypt by private key
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="privateKey"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static byte[] DecryptByPrivateKeyAsBytes(string data, string privateKey, Encoding encoding = default) {
+            if (privateKey is null || privateKey.Length == 0)
+                return null;
+
+            if (data is null || data.Length == 0)
+                return null;
+
+            // ReSharper disable once ExpressionIsAlwaysNull
+            encoding ??= encoding.SafeValue();
+
+            return DecryptByPrivateKeyAsBytes(encoding.GetBytes(data), privateKey, encoding);
+        }
+
+        /// <summary>
+        /// Decrypt by private key
+        /// </summary>
+        /// <param name="dataBytes"></param>
+        /// <param name="privateKey"></param>
+        /// <param name="encoding"></param>
+        /// <returns></returns>
+        public static byte[] DecryptByPrivateKeyAsBytes(byte[] dataBytes, string privateKey, Encoding encoding = default) {
+            if (privateKey is null || privateKey.Length == 0)
+                return null;
+
+            if (dataBytes is null || dataBytes.Length == 0)
+                return null;
+
+            // ReSharper disable once ExpressionIsAlwaysNull
+            encoding ??= encoding.SafeValue();
+
+            var privateKeyBytes = Hex.Decode(encoding.GetBytes(privateKey));
+            var source = Hex.Decode(dataBytes);
+            var data = dataBytes.GetString(encoding);
+
+            var c1Bytes = Hex.Decode(encoding.GetBytes(data.Substring(0, 130)));
+            var c2Len = source.Length - 97;
+            var c2 = Hex.Decode(Encoding.UTF8.GetBytes(data.Substring(130, 2 * c2Len)));
+            var c3 = Hex.Decode(Encoding.UTF8.GetBytes(data.Substring(130 + 2 * c2Len, 64)));
+
+            var sm2 = SM2Core.Instance;
+            var userD = new BigInteger(1, privateKeyBytes);
+
+            var c1 = sm2.ecc_curve.DecodePoint(c1Bytes);
+            var cipher = new SM2Core.Cipher();
             cipher.Init_dec(userD, c1);
-            DerOctetString data = (DerOctetString) asn1[3];
-            enc = data.GetOctets();
-            cipher.Decrypt(enc);
-            byte[] c3 = new byte[32];
+            cipher.Decrypt(c2);
             cipher.Dofinal(c3);
-            return enc;
+
+            return c2;
         }
     }
 }
