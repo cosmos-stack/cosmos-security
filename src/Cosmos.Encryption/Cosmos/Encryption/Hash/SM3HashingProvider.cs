@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Security.Cryptography;
 using System.Text;
 using Cosmos.Encryption.Core;
-using Cosmos.Encryption.Core.Internals;
-using Cosmos.Extensions;
+using Cosmos.Optionals;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption {
@@ -20,7 +18,7 @@ namespace Cosmos.Encryption {
         /// <returns>Hashed string.</returns>
         public static string Signature(string data, Encoding encoding = null) {
             var sm3 = SM3Core.Create("SM3");
-            var hashBytes = sm3.ComputeHash(encoding.Fixed().GetBytes(data));
+            var hashBytes = sm3.ComputeHash(encoding.SafeValue().GetBytes(data));
             return Convert.ToBase64String(hashBytes);
         }
 

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using Cosmos.Extensions;
+using Cosmos.Optionals;
 
 namespace Cosmos.Encryption.Core {
     /// <summary>
@@ -22,7 +22,7 @@ namespace Cosmos.Encryption.Core {
                 return new byte[0];
             }
 
-            encoding = encoding.Fixed();
+            encoding = encoding.SafeValue();
 
             var len = size / 8;
 

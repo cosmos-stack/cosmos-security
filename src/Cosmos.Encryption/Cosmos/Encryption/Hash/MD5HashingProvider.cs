@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using Cosmos.Encryption.Core.Internals.Extensions;
-using Cosmos.Extensions;
+using Cosmos.Optionals;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption {
@@ -26,7 +26,7 @@ namespace Cosmos.Encryption {
         public static string Signature(string data, MD5BitTypes bits = MD5BitTypes.L32, bool isUpper = true, bool isIncludeHyphen = false, Encoding encoding = null) {
             Checker.Data(data);
 
-            encoding = EncodingExtensions.Fixed(encoding);
+            encoding = encoding.SafeValue();
 
             return bits switch {
                 MD5BitTypes.L16 => Encrypt16Func()(data)(encoding).ToFixUpperCase(isUpper).ToFixHyphenChar(isIncludeHyphen),

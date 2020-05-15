@@ -9,8 +9,7 @@
 using System;
 using System.Text;
 using Cosmos.Encryption.Abstractions;
-using Cosmos.Encryption.Core.Internals;
-using Cosmos.Extensions;
+using Cosmos.Optionals;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption {
@@ -30,7 +29,7 @@ namespace Cosmos.Encryption {
         /// <param name="order"></param>
         /// <returns></returns>
         public static string Encrypt(string data, string key, Encoding encoding = null, RCXOrder order = RCXOrder.DESC) {
-            encoding = encoding.Fixed();
+            encoding = encoding.SafeValue();
             var dataBytes = encoding.GetBytes(data);
             var keyBytes = encoding.GetBytes(key);
             return Convert.ToBase64String(EncryptCore(dataBytes, keyBytes, order));
@@ -45,7 +44,7 @@ namespace Cosmos.Encryption {
         /// <param name="order"></param>
         /// <returns></returns>
         public static string Encrypt(byte[] data, string key, Encoding encoding = null, RCXOrder order = RCXOrder.DESC) {
-            return Convert.ToBase64String(EncryptCore(data, encoding.Fixed().GetBytes(key), order));
+            return Convert.ToBase64String(EncryptCore(data, encoding.SafeValue().GetBytes(key), order));
         }
 
         /// <summary>
@@ -68,7 +67,7 @@ namespace Cosmos.Encryption {
         /// <param name="order"></param>
         /// <returns></returns>
         public static string Decrypt(string data, string key, Encoding encoding = null, RCXOrder order = RCXOrder.DESC) {
-            encoding = encoding.Fixed();
+            encoding = encoding.SafeValue();
             var dataBytes = Convert.FromBase64String(data);
             var keyBytes = encoding.GetBytes(key);
             return encoding.GetString(EncryptCore(dataBytes, keyBytes, order));
