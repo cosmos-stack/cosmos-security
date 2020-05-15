@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using Cosmos.Extensions;
+using Cosmos.Optionals;
 
 namespace Cosmos.Encryption.Core {
     /// <summary>
@@ -25,7 +25,7 @@ namespace Cosmos.Encryption.Core {
             }
 
             using HashAlgorithm hash = new T();
-            var bytes = hash.ComputeHash(encoding.Fixed().GetBytes(data));
+            var bytes = hash.ComputeHash(encoding.SafeValue().GetBytes(data));
 
             var sbStr = new StringBuilder();
             foreach (var b in bytes) {

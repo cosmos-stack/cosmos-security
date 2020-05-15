@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 using Cosmos.Encryption.Abstractions;
-using Cosmos.Extensions;
+using Cosmos.Optionals;
 
 /*
  * Reference to:
@@ -43,7 +43,7 @@ namespace Cosmos.Encryption.Symmetric {
             if (string.IsNullOrWhiteSpace(data))
                 return data;
 
-            encoding = encoding.Fixed();
+            encoding = encoding.SafeValue();
             return Convert.ToBase64String(Encrypt(encoding.GetBytes(data), encoding.GetBytes(key)));
         }
 
@@ -57,7 +57,7 @@ namespace Cosmos.Encryption.Symmetric {
         public static string Encrypt(byte[] data, string key, Encoding encoding = null) {
             return Convert.ToBase64String(data.Length == 0
                 ? data
-                : Encrypt(data, encoding.Fixed().GetBytes(key)));
+                : Encrypt(data, encoding.SafeValue().GetBytes(key)));
 
         }
 
@@ -85,7 +85,7 @@ namespace Cosmos.Encryption.Symmetric {
             if (string.IsNullOrWhiteSpace(data))
                 return data;
 
-            encoding = encoding.Fixed();
+            encoding = encoding.SafeValue();
             return encoding.GetString(Decrypt(Convert.FromBase64String(data), encoding.GetBytes(key)));
         }
 
@@ -97,7 +97,7 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static string Decrypt(byte[] data, string key, Encoding encoding = null) {
-            encoding = encoding.Fixed();
+            encoding = encoding.SafeValue();
             return encoding.GetString(Decrypt(data, encoding.GetBytes(key)));
         }
 

@@ -1,6 +1,6 @@
 /*
  * Reference to:
- *     https://github.com/toolgood/RCX/blob/master/ToolGood.RcxTest/ToolGood.RcxCrypto/RCX.cs
+ *     https://github.com/toolgood/RCX/blob/master/ToolGood.RcxTest/ToolGood.RcxCrypto/RCY.cs
  *     Author: ToolGood
  *     GitHub: https://github.com/toolgood
  */
@@ -14,15 +14,15 @@ using Cosmos.Optionals;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption {
     /// <summary>
-    /// Symmetric/RCX encryption.
+    /// Symmetric/RCY encryption.
     /// Reference: https://github.com/toolgood/RCX/
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public sealed class RCXEncryptionProvider : ISymmetricEncryption {
+    public sealed class RCYEncryptionProvider : ISymmetricEncryption {
         // ReSharper disable once InconsistentNaming
         private const int KEY_LENGTH = 256;
 
-        private RCXEncryptionProvider() { }
+        private RCYEncryptionProvider() { }
 
         /// <summary>
         /// Encrypt
@@ -32,7 +32,7 @@ namespace Cosmos.Encryption {
         /// <param name="encoding"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public static string Encrypt(string data, string key, Encoding encoding = null, RCXOrder order = RCXOrder.ASC) {
+        public static string Encrypt(string data, string key, Encoding encoding = null, RCYOrder order = RCYOrder.ASC) {
             encoding = encoding.SafeValue();
             return Convert.ToBase64String(EncryptCore(encoding.GetBytes(data), encoding.GetBytes(key), order));
         }
@@ -45,7 +45,7 @@ namespace Cosmos.Encryption {
         /// <param name="encoding"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public static string Encrypt(byte[] data, string key, Encoding encoding = null, RCXOrder order = RCXOrder.ASC) {
+        public static string Encrypt(byte[] data, string key, Encoding encoding = null, RCYOrder order = RCYOrder.ASC) {
             encoding = encoding.SafeValue();
             return Convert.ToBase64String(EncryptCore(data, encoding.GetBytes(key), order));
         }
@@ -57,7 +57,7 @@ namespace Cosmos.Encryption {
         /// <param name="key"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public static byte[] Encrypt(byte[] data, byte[] key, RCXOrder order = RCXOrder.ASC) {
+        public static byte[] Encrypt(byte[] data, byte[] key, RCYOrder order = RCYOrder.ASC) {
             return EncryptCore(data, key, order);
         }
 
@@ -69,7 +69,7 @@ namespace Cosmos.Encryption {
         /// <param name="encoding"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public static string Decrypt(string data, string key, Encoding encoding = null, RCXOrder order = RCXOrder.ASC) {
+        public static string Decrypt(string data, string key, Encoding encoding = null, RCYOrder order = RCYOrder.ASC) {
             encoding = encoding.SafeValue();
             return encoding.GetString(EncryptCore(Convert.FromBase64String(data), encoding.GetBytes(key), order));
         }
@@ -81,33 +81,28 @@ namespace Cosmos.Encryption {
         /// <param name="key"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public static byte[] Decrypt(byte[] data, byte[] key, RCXOrder order = RCXOrder.ASC) {
+        public static byte[] Decrypt(byte[] data, byte[] key, RCYOrder order = RCYOrder.ASC) {
             return EncryptCore(data, key, order);
         }
 
-        private static unsafe byte[] EncryptCore(byte[] data, byte[] pass, RCXOrder order) {
-
+        private static unsafe byte[] EncryptCore(byte[] data, byte[] pass, RCYOrder order) {
             byte[] mBox = GetKey(pass, KEY_LENGTH);
             byte[] output = new byte[data.Length];
-            //int i = 0, j = 0;
+            int i = 0, j = 0;
+            var length = data.Length;
 
-            if (order == RCXOrder.ASC) {
+            if (order == RCYOrder.ASC) {
                 fixed (byte* _mBox = &mBox[0])
                 fixed (byte* _data = &data[0])
                 fixed (byte* _output = &output[0]) {
-                    var length = data.Length;
-                    int i = 0, j = 0;
                     for (Int64 offset = 0; offset < length; offset++) {
                         i = (++i) & 0xFF;
                         j = (j + *(_mBox + i)) & 0xFF;
 
                         byte a = *(_data + offset);
-                        byte c = (byte) (a ^ *(_mBox + ((*(_mBox + i) + *(_mBox + j)) & 0xFF)));
+                        byte c = (byte) (a ^ *(_mBox + ((*(_mBox + i) & *(_mBox + j)))));
                         *(_output + offset) = c;
 
-                        byte temp = *(_mBox + a);
-                        *(_mBox + a) = *(_mBox + c);
-                        *(_mBox + c) = temp;
                         j = (j + a + c);
                     }
                 }
@@ -115,58 +110,45 @@ namespace Cosmos.Encryption {
                 fixed (byte* _mBox = &mBox[0])
                 fixed (byte* _data = &data[0])
                 fixed (byte* _output = &output[0]) {
-                    var length = data.Length;
-                    int i = 0, j = 0;
                     for (int offset = data.Length - 1; offset >= 0; offset--) {
                         i = (++i) & 0xFF;
                         j = (j + *(_mBox + i)) & 0xFF;
 
                         byte a = *(_data + offset);
-                        byte c = (byte) (a ^ *(_mBox + ((*(_mBox + i) + *(_mBox + j)) & 0xFF)));
+                        byte c = (byte) (a ^ *(_mBox + ((*(_mBox + i) & *(_mBox + j)))));
                         *(_output + offset) = c;
 
-                        byte temp = *(_mBox + a);
-                        *(_mBox + a) = *(_mBox + c);
-                        *(_mBox + c) = temp;
                         j = (j + a + c);
                     }
                 }
             }
 
-            // byte[] mBox = GetKey(pass, KEY_LENGTH);
-            // byte[] output = new byte[data.Length];
-            // int i = 0, j = 0;
-            //
-            // if (order == RCXOrder.ASC) {
-            //     for (int offset = 0; offset < data.Length; offset++) {
-            //         i = (++i) & 0xFF;
-            //         j = (j + mBox[i]) & 0xFF;
-            //
-            //         byte a = data[offset];
-            //         byte c = (byte) (a ^ mBox[(mBox[i] + mBox[j]) & 0xFF]);
-            //         output[offset] = c;
-            //
-            //         byte temp2 = mBox[c];
-            //         mBox[c] = mBox[a];
-            //         mBox[a] = temp2;
-            //         j = (j + a + c);
-            //     }
-            // } else {
-            //     for (int offset = data.Length - 1; offset >= 0; offset--) {
-            //         i = (++i) & 0xFF;
-            //         j = (j + mBox[i]) & 0xFF;
-            //
-            //         byte a = data[offset];
-            //         byte c = (byte) (a ^ mBox[(mBox[i] + mBox[j]) & 0xFF]);
-            //         output[offset] = c;
-            //
-            //         byte temp2 = mBox[c];
-            //         mBox[c] = mBox[a];
-            //         mBox[a] = temp2;
-            //         j = (j + a + c);
-            //     }
-            // }
+            //int i = 0, j = 0;
+            //byte a, c;
 
+            //if (order == OrderType.Asc) {
+            //    for (int offset = 0; offset < data.Length; offset++) {
+            //        i = (++i) & 0xFF;
+            //        j = (j + mBox[i]) & 0xFF;
+
+            //        a = data[offset];
+            //        c = (byte)(a ^ mBox[(mBox[i] & mBox[j])]);
+            //        output[offset] = c;
+
+            //        j = j + (int)a + (int)c;
+            //    }
+            //} else {
+            //    for (int offset = data.Length - 1; offset >= 0; offset--) {
+            //        i = (++i) & 0xFF;
+            //        j = (j + mBox[i]) & 0xFF;
+
+            //        a = data[offset];
+            //        c = (byte)(a ^ mBox[(mBox[i] & mBox[j])]);
+            //        output[offset] = c;
+
+            //        j = j + (int)a + (int)c;
+            //    }
+            //}
             return output;
         }
 
@@ -178,10 +160,10 @@ namespace Cosmos.Encryption {
                 }
 
                 long j = 0;
-                var length = pass.Length;
+                var lengh = pass.Length;
                 fixed (byte* _pass = &pass[0]) {
                     for (long i = 0; i < kLen; i++) {
-                        j = (j + *(_mBox + i) + *(_pass + (i % length))) % kLen;
+                        j = (j + *(_mBox + i) + *(_pass + (i % lengh))) % kLen;
                         byte temp = *(_mBox + i);
                         *(_mBox + i) = *(_mBox + j);
                         *(_mBox + j) = temp;
@@ -201,5 +183,6 @@ namespace Cosmos.Encryption {
             //}
             return mBox;
         }
+
     }
 }

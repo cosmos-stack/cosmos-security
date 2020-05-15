@@ -3,7 +3,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 using Cosmos.Encryption.Core.Internals.Extensions;
-using Cosmos.Extensions;
+using Cosmos.Optionals;
 
 /*
  * Reference to:
@@ -85,7 +85,7 @@ namespace Cosmos.Encryption.Core {
 #endif
             }
 
-            DataEncoding = dataEncoding.Fixed();
+            DataEncoding = dataEncoding.SafeValue();
         }
     }
 }

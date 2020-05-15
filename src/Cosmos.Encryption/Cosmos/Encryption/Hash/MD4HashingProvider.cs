@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using Cosmos.Encryption.Core.Internals.Extensions;
-using Cosmos.Extensions;
+using Cosmos.Optionals;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption {
@@ -36,7 +36,7 @@ namespace Cosmos.Encryption {
         /// <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
         /// <returns>Hashed string.</returns>
         public static byte[] SignatureHash(string data, Encoding encoding = null) {
-            return Core(encoding.Fixed().GetBytes(data));
+            return Core(encoding.SafeValue().GetBytes(data));
         }
 
         /// <summary>

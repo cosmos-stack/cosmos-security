@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
-using Cosmos.Extensions;
+using Cosmos.Optionals;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption {
@@ -56,7 +56,7 @@ namespace Cosmos.Encryption {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static byte[] Signature(string data, string privateKey, Encoding encoding = null) {
-            return Signature(encoding.Fixed().GetBytes(data), privateKey);
+            return Signature(encoding.SafeValue().GetBytes(data), privateKey);
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Cosmos.Encryption {
         /// <param name="encoding"></param>
         /// <returns></returns>
         public static byte[] Signature(string data, DSAKey key, Encoding encoding = null) {
-            return Signature(encoding.Fixed().GetBytes(data), key);
+            return Signature(encoding.SafeValue().GetBytes(data), key);
         }
 
         /// <summary>

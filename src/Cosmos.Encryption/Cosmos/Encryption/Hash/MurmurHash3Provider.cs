@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using Cosmos.Encryption.Core;
-using Cosmos.Extensions;
+using Cosmos.Optionals;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption {
@@ -33,7 +33,7 @@ namespace Cosmos.Encryption {
             MurmurHash3Managed managed = MurmurHash3Managed.TRUE) {
             Checker.Data(data);
 
-            var bytes = encoding.Fixed().GetBytes(data);
+            var bytes = encoding.SafeValue().GetBytes(data);
 
             return SignatureCore(bytes, seed, types, preference, managed);
         }

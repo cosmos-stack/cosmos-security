@@ -2,8 +2,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using Cosmos.Encryption.Core.Internals;
-using Cosmos.Extensions;
+using Cosmos.Optionals;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption {
@@ -25,7 +24,7 @@ namespace Cosmos.Encryption {
         /// <returns></returns>
         // ReSharper disable once RedundantAssignment
         public static bool GetHash(string data, ref byte[] hashing, Encoding encoding = null) {
-            hashing = HashStringFunc()(data)(encoding.Fixed());
+            hashing = HashStringFunc()(data)(encoding.SafeValue());
             return true;
         }
 
@@ -38,7 +37,7 @@ namespace Cosmos.Encryption {
         /// <returns></returns>
         // ReSharper disable once RedundantAssignment
         public static bool GetHash(string data, ref string hashing, Encoding encoding = null) {
-            hashing = Convert.ToBase64String(HashStringFunc()(data)(encoding.Fixed()));
+            hashing = Convert.ToBase64String(HashStringFunc()(data)(encoding.SafeValue()));
             return true;
         }
 

@@ -17,8 +17,8 @@ namespace Cosmos.Encryption {
     /// Three RCX encryption provider
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public sealed class ThreeRCXEncryptionProvider : ISymmetricEncryption {
-        private ThreeRCXEncryptionProvider() { }
+    public sealed class ThreeRCYEncryptionProvider : ISymmetricEncryption {
+        private ThreeRCYEncryptionProvider() { }
 
         /// <summary>
         /// Encrypt
@@ -28,7 +28,7 @@ namespace Cosmos.Encryption {
         /// <param name="encoding"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public static string Encrypt(string data, string key, Encoding encoding = null, RCXOrder order = RCXOrder.DESC) {
+        public static string Encrypt(string data, string key, Encoding encoding = null, RCYOrder order = RCYOrder.DESC) {
             encoding = encoding.SafeValue();
             var dataBytes = encoding.GetBytes(data);
             var keyBytes = encoding.GetBytes(key);
@@ -43,7 +43,7 @@ namespace Cosmos.Encryption {
         /// <param name="encoding"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public static string Encrypt(byte[] data, string key, Encoding encoding = null, RCXOrder order = RCXOrder.DESC) {
+        public static string Encrypt(byte[] data, string key, Encoding encoding = null, RCYOrder order = RCYOrder.DESC) {
             return Convert.ToBase64String(EncryptCore(data, encoding.SafeValue().GetBytes(key), order));
         }
 
@@ -54,7 +54,7 @@ namespace Cosmos.Encryption {
         /// <param name="key"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public static byte[] Encrypt(byte[] data, byte[] key, RCXOrder order = RCXOrder.DESC) {
+        public static byte[] Encrypt(byte[] data, byte[] key, RCYOrder order = RCYOrder.DESC) {
             return EncryptCore(data, key, order);
         }
 
@@ -66,7 +66,7 @@ namespace Cosmos.Encryption {
         /// <param name="encoding"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public static string Decrypt(string data, string key, Encoding encoding = null, RCXOrder order = RCXOrder.DESC) {
+        public static string Decrypt(string data, string key, Encoding encoding = null, RCYOrder order = RCYOrder.DESC) {
             encoding = encoding.SafeValue();
             var dataBytes = Convert.FromBase64String(data);
             var keyBytes = encoding.GetBytes(key);
@@ -80,14 +80,14 @@ namespace Cosmos.Encryption {
         /// <param name="key"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public static byte[] Decrypt(byte[] data, byte[] key, RCXOrder order = RCXOrder.DESC) {
+        public static byte[] Decrypt(byte[] data, byte[] key, RCYOrder order = RCYOrder.DESC) {
             return EncryptCore(data, key, order);
         }
 
-        private static byte[] EncryptCore(byte[] dataBytes, byte[] keyBytes, RCXOrder order = RCXOrder.DESC) {
-            var first = RCXEncryptionProvider.Encrypt(dataBytes, keyBytes, order);
-            var second = RCXEncryptionProvider.Encrypt(first, keyBytes, order);
-            return RCXEncryptionProvider.Encrypt(second, keyBytes, order);
+        private static byte[] EncryptCore(byte[] dataBytes, byte[] keyBytes, RCYOrder order = RCYOrder.DESC) {
+            var first = RCYEncryptionProvider.Encrypt(dataBytes, keyBytes, order);
+            var second = RCYEncryptionProvider.Encrypt(first, keyBytes, order);
+            return RCYEncryptionProvider.Encrypt(second, keyBytes, order);
         }
     }
 }

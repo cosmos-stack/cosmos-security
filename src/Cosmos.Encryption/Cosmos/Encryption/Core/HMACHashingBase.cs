@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using Cosmos.Encryption.Core.Internals.Extensions;
-using Cosmos.Extensions;
+using Cosmos.Optionals;
 
 namespace Cosmos.Encryption.Core {
     /// <summary>
@@ -24,7 +24,7 @@ namespace Cosmos.Encryption.Core {
             Checker.Data(data);
             Checker.Key(key);
 
-            encoding = encoding.Fixed();
+            encoding = encoding.SafeValue();
 
             using (var hash = new T()) {
                 hash.Key = encoding.GetBytes(key);
