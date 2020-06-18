@@ -4,14 +4,16 @@ using Cosmos.Encryption.Core;
 using Cosmos.Encryption.Core.Internals.Extensions;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// Hash/SHA1 hashing provider.
     /// Reference: Seay Xu
     ///     https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Hash/SHAHashingBase/SHA1.cs
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public sealed class SHA1HashingProvider : SHAHashingBase {
+    public sealed class SHA1HashingProvider : SHAHashingBase
+    {
         private SHA1HashingProvider() { }
 
         /// <summary>

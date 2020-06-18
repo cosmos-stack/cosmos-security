@@ -1,11 +1,13 @@
 ﻿// ReSharper disable once CheckNamespace
 
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// MS5 bit type
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public enum MD5BitTypes {
+    public enum MD5BitTypes
+    {
         /// <summary>
         /// 16
         /// </summary>

@@ -4,19 +4,22 @@ using Cosmos.Encryption.Core;
 using Cosmos.Optionals;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// SM3 hashing provider
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public static class SM3HashingProvider {
+    public static class SM3HashingProvider
+    {
         /// <summary>
         /// SM3 hashing method.
         /// </summary>
         /// <param name="data">The string need to hash.</param>
         /// <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
         /// <returns>Hashed string.</returns>
-        public static string Signature(string data, Encoding encoding = null) {
+        public static string Signature(string data, Encoding encoding = null)
+        {
             var sm3 = SM3Core.Create("SM3");
             var hashBytes = sm3.ComputeHash(encoding.SafeValue().GetBytes(data));
             return Convert.ToBase64String(hashBytes);

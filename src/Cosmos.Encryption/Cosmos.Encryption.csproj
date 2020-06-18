@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    
+
     <Import Project="..\..\build\common.props" />
 
     <PropertyGroup>
         <TargetFrameworks>netcoreapp3.1;netstandard2.1;netstandard2.0;net461;net451</TargetFrameworks>
     </PropertyGroup>
-    
+
     <PropertyGroup>
         <AssemblyName>Cosmos.Encryption</AssemblyName>
         <PackageId>Cosmos.Encryption</PackageId>
@@ -13,18 +13,15 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-        <DocumentationFile>Cosmos.Encryption.xml</DocumentationFile>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-        <DocumentationFile>Cosmos.Encryption.xml</DocumentationFile>
-    </PropertyGroup>
-    
     <ItemGroup>
-        <PackageReference Include="Cosmos.Serialization.NewtonsoftJson" Version="0.1.4" />
+        <PackageReference Include="Cosmos.Serialization.NewtonsoftJson" Version="0.1.4.4-alpha2-201012" />
         <PackageReference Include="Portable.BouncyCastle" Version="1.8.6.7" />
         <PackageReference Include="System.Memory" Version="4.5.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Cryptography.GM\ECMath" />
+        <Folder Include="Cryptography.GM\Utils" />
     </ItemGroup>
 
 </Project>

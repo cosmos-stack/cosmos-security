@@ -5,14 +5,16 @@ using Cosmos.Encryption.Core;
 using Cosmos.Optionals;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// Symmetric/TripleDES encryption.
     /// Reference: Seay Xu
     ///     https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Symmetric/TripleDES.cs
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public sealed class TripleDESEncryptionProvider : SymmetricEncryptionBase {
+    public sealed class TripleDESEncryptionProvider : SymmetricEncryptionBase
+    {
         private TripleDESEncryptionProvider() { }
 
         /// <summary>
@@ -21,10 +23,13 @@ namespace Cosmos.Encryption {
         /// <param name="keySize"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static TripleDESKey CreateKey(TripleDESKeySizeTypes keySize = TripleDESKeySizeTypes.L192, Encoding encoding = null) {
+        public static TripleDESKey CreateKey(TripleDESKeySizeTypes keySize = TripleDESKeySizeTypes.L192, Encoding encoding = null)
+        {
             encoding = encoding.SafeValue();
-            using (var provider = new TripleDESCryptoServiceProvider()) {
-                return new TripleDESKey {
+            using (var provider = new TripleDESCryptoServiceProvider())
+            {
+                return new TripleDESKey
+                {
                     Key = encoding.GetString(provider.Key),
                     IV = encoding.GetString(provider.IV),
                 };
@@ -42,7 +47,8 @@ namespace Cosmos.Encryption {
         /// <param name="iv">The initialization iv (IV) to use to derive the key.</param>
         /// <returns>The encrypted string.</returns>
         public static string Encrypt(string data, string pwd = null, string iv = null, string salt = null, Encoding encoding = null,
-            TripleDESKeySizeTypes keySize = TripleDESKeySizeTypes.L192) {
+            TripleDESKeySizeTypes keySize = TripleDESKeySizeTypes.L192)
+        {
             Checker.Data(data);
             Checker.Password(pwd);
             Checker.IV(iv);
@@ -67,7 +73,8 @@ namespace Cosmos.Encryption {
         /// <param name="iv">The initialization vector (IV) to use to derive the key.</param>
         /// <returns>The decryption string.</returns>
         public static string Decrypt(string data, string pwd = null, string iv = null, string salt = null, Encoding encoding = null,
-            TripleDESKeySizeTypes keySize = TripleDESKeySizeTypes.L192) {
+            TripleDESKeySizeTypes keySize = TripleDESKeySizeTypes.L192)
+        {
             Checker.Data(data);
             Checker.Password(pwd);
             Checker.IV(iv);

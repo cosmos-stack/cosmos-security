@@ -1,8 +1,10 @@
 ﻿using System.Text;
 using Cosmos.Encryption;
 
-namespace Cosmos.Extensions {
-    public static partial class Extensions {
+namespace Cosmos.Extensions
+{
+    public static partial class Extensions
+    {
         /// <summary>
         /// To 16bit MD5
         /// </summary>

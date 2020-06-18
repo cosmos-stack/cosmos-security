@@ -4,12 +4,15 @@ using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
 
-namespace Cosmos.Encryption.Core {
+namespace Cosmos.Encryption.Core
+{
     // ReSharper disable once InconsistentNaming
-    internal partial class SM2Core {
+    internal partial class SM2Core
+    {
         public static SM2Core Instance => new SM2Core();
 
-        public static readonly string[] sm2_param = {
+        public static readonly string[] sm2_param =
+        {
             "FFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000FFFFFFFFFFFFFFFF", // p,0
             "FFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000FFFFFFFFFFFFFFFC", // a,1
             "28E9FA9E9D9F5E344D5A9E4BCF6509A7F39789F515AB8F92DDBCBD414D940E93", // b,2
@@ -34,11 +37,9 @@ namespace Cosmos.Encryption.Core {
 
         public readonly ECKeyPairGenerator ecc_key_pair_generator;
 
-        private SM2Core() {
+        private SM2Core()
+        {
             ecc_param = sm2_param;
-
-            ECFieldElement ecc_gx_fieldelement;
-            ECFieldElement ecc_gy_fieldelement;
 
             ecc_p = new BigInteger(ecc_param[0], 16);
             ecc_a = new BigInteger(ecc_param[1], 16);
@@ -47,17 +48,15 @@ namespace Cosmos.Encryption.Core {
             ecc_gx = new BigInteger(ecc_param[4], 16);
             ecc_gy = new BigInteger(ecc_param[5], 16);
 
-
-            ecc_gx_fieldelement = new FpFieldElement(ecc_p, ecc_gx);
-            ecc_gy_fieldelement = new FpFieldElement(ecc_p, ecc_gy);
+            ECFieldElement ecc_gx_fieldelement = new FpFieldElement(ecc_p, ecc_gx);
+            ECFieldElement ecc_gy_fieldelement = new FpFieldElement(ecc_p, ecc_gy);
 
             ecc_curve = new FpCurve(ecc_p, ecc_a, ecc_b);
             ecc_point_g = new FpPoint(ecc_curve, ecc_gx_fieldelement, ecc_gy_fieldelement);
 
             ecc_bc_spec = new ECDomainParameters(ecc_curve, ecc_point_g, ecc_n);
 
-            ECKeyGenerationParameters ecc_ecgenparam;
-            ecc_ecgenparam = new ECKeyGenerationParameters(ecc_bc_spec, new SecureRandom());
+            var ecc_ecgenparam = new ECKeyGenerationParameters(ecc_bc_spec, new SecureRandom());
 
             ecc_key_pair_generator = new ECKeyPairGenerator();
             ecc_key_pair_generator.Init(ecc_ecgenparam);

@@ -3,21 +3,24 @@ using System.Text;
 using Cosmos.Optionals;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// Time33  / DBJ33A hashing provider
     /// Reference to:
     ///     http://www.nowamagic.net/academy/detail/3008097
     ///     https://www.cnblogs.com/52fhy/p/5007456.html
     /// </summary>
-    public static class Time33HashingProvider {
+    public static class Time33HashingProvider
+    {
         /// <summary>
         /// Signature
         /// </summary>
         /// <param name="data">The string you want to hash.</param>
         /// <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
         /// <returns></returns>
-        public static long Signature(string data, Encoding encoding = null) {
+        public static long Signature(string data, Encoding encoding = null)
+        {
             Checker.Data(data);
 
             var bytes = encoding.SafeValue().GetBytes(data);
@@ -30,11 +33,13 @@ namespace Cosmos.Encryption {
         /// </summary>
         /// <param name="data">The data need to hash.</param>
         /// <returns></returns>
-        public static long Signature(byte[] data) {
+        public static long Signature(byte[] data)
+        {
             Checker.Buffer(data);
 
             long hash = 5381;
-            for (int i = 0, len = data.Length; i < len; ++i) {
+            for (int i = 0, len = data.Length; i < len; ++i)
+            {
                 hash += (hash << 5) + data[i];
             }
 

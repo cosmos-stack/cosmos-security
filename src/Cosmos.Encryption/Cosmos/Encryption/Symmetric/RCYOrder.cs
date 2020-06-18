@@ -7,12 +7,14 @@
 
 // ReSharper disable once CheckNamespace
 
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// Rcy order
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public enum RCYOrder {
+    public enum RCYOrder
+    {
         /// <summary>
         /// ASC
         /// </summary>

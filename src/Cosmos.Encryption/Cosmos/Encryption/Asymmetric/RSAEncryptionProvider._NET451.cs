@@ -1,5 +1,4 @@
 #if NET451
-
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
 using System.Text;

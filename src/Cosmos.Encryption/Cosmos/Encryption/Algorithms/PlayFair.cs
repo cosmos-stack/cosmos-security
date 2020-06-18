@@ -5,7 +5,8 @@ using System.Text;
 using Cosmos.Encryption.Abstractions;
 using Cosmos.Encryption.Core.Internals;
 
-namespace Cosmos.Encryption.Algorithms {
+namespace Cosmos.Encryption.Algorithms
+{
     /// <summary>
     /// PlayFair encryption algorithm
     /// for more info, please view:
@@ -13,7 +14,8 @@ namespace Cosmos.Encryption.Algorithms {
     /// Author: Omar-Salem
     ///     https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/PlayFair.cs
     /// </summary>
-    public sealed class PlayFair : IEncryptionAlgorithm {
+    public sealed class PlayFair : IEncryptionAlgorithm
+    {
         private string Key { get; }
 
         /// <summary>
@@ -36,7 +38,8 @@ namespace Cosmos.Encryption.Algorithms {
         /// <returns></returns>
         public string Decrypt(string cipher) => ProcessFunc()(Key)(cipher)(EncryptionAlgorithmMode.Decrypt);
 
-        private static Func<string, Func<string, Func<EncryptionAlgorithmMode, string>>> ProcessFunc() => key => message => mode => {
+        private static Func<string, Func<string, Func<EncryptionAlgorithmMode, string>>> ProcessFunc() => key => message => mode =>
+        {
             //Key:Charcater
             //Value:Position
             var characterPositionsInMatrix = new Dictionary<char, string>();
@@ -47,13 +50,15 @@ namespace Cosmos.Encryption.Algorithms {
 
             FillMatrixFunc()(key.Distinct().ToArray())(characterPositionsInMatrix)(positionCharacterInMatrix);
 
-            if (mode == EncryptionAlgorithmMode.Encrypt) {
+            if (mode == EncryptionAlgorithmMode.Encrypt)
+            {
                 message = RepairWordFunc()(message);
             }
 
             var sbStr = new StringBuilder();
 
-            for (var i = 0; i < message.Length; i += 2) {
+            for (var i = 0; i < message.Length; i += 2)
+            {
                 var substringOf2 = message.Substring(i, 2); //get characters from text by pairs
                 //get Row & Column of each character
                 var rc1 = characterPositionsInMatrix[substringOf2[0]];
@@ -63,7 +68,8 @@ namespace Cosmos.Encryption.Algorithms {
                 {
                     int newC1 = 0, newC2 = 0;
 
-                    switch (mode) {
+                    switch (mode)
+                    {
                         case EncryptionAlgorithmMode.Encrypt: //Increment Columns
                             newC1 = (int.Parse(rc1[1].ToString()) + 1) % 5;
                             newC2 = (int.Parse(rc2[1].ToString()) + 1) % 5;
@@ -80,12 +86,14 @@ namespace Cosmos.Encryption.Algorithms {
                     sbStr.Append(positionCharacterInMatrix[rc1[0].ToString() + newC1.ToString()]);
                     sbStr.Append(positionCharacterInMatrix[rc2[0].ToString() + newC2.ToString()]);
                 }
-                else if (rc1[1] == rc2[1]) {
+                else if (rc1[1] == rc2[1])
+                {
                     //Same Column, different Row
 
                     int newR1 = 0, newR2 = 0;
 
-                    switch (mode) {
+                    switch (mode)
+                    {
                         case EncryptionAlgorithmMode.Encrypt: //Increment Rows
                             newR1 = (int.Parse(rc1[0].ToString()) + 1) % 5;
                             newR2 = (int.Parse(rc2[0].ToString()) + 1) % 5;
@@ -102,7 +110,8 @@ namespace Cosmos.Encryption.Algorithms {
                     sbStr.Append(positionCharacterInMatrix[newR1.ToString() + rc1[1].ToString()]);
                     sbStr.Append(positionCharacterInMatrix[newR2.ToString() + rc2[1].ToString()]);
                 }
-                else {
+                else
+                {
                     //different Row & Column
 
                     //1st character:row of 1st + col of 2nd
@@ -115,11 +124,13 @@ namespace Cosmos.Encryption.Algorithms {
             return sbStr.ToString();
         };
 
-        private static Func<string, string> RepairWordFunc() => message => {
+        private static Func<string, string> RepairWordFunc() => message =>
+        {
             var trimmed = message.Replace(" ", "");
             var sbStr = new StringBuilder();
 
-            for (var i = 0; i < trimmed.Length; i++) {
+            for (var i = 0; i < trimmed.Length; i++)
+            {
                 sbStr.Append(trimmed[i]);
 
                 if (i < trimmed.Length - 1 && message[i] == message[i + 1]) //check if two consecutive letters are the same
@@ -137,7 +148,8 @@ namespace Cosmos.Encryption.Algorithms {
         };
 
         private static Func<IList<char>, Func<Dictionary<char, string>, Action<Dictionary<string, char>>>> FillMatrixFunc()
-            => key => characterPositionsInMatrix => positionCharacterInMatrix => {
+            => key => characterPositionsInMatrix => positionCharacterInMatrix =>
+            {
                 var matrix = new char[5, 5];
                 var keyPosition = 0;
                 var charPosition = 0;
@@ -145,14 +157,18 @@ namespace Cosmos.Encryption.Algorithms {
                 var alphabetPlayFiar = AlphabetDictionaryGenerator.Generate().Keys.ToList();
                 alphabetPlayFiar.Remove('j');
 
-                for (var i = 0; i < 5; i++) {
-                    for (var j = 0; j < 5; j++) {
-                        if (charPosition < key.Count) {
+                for (var i = 0; i < 5; i++)
+                {
+                    for (var j = 0; j < 5; j++)
+                    {
+                        if (charPosition < key.Count)
+                        {
                             matrix[i, j] = key[charPosition]; //fill matrix with key
                             alphabetPlayFiar.Remove(key[charPosition]);
                             charPosition++;
                         }
-                        else {
+                        else
+                        {
                             //key finished...fill with rest of alphabet
                             matrix[i, j] = alphabetPlayFiar[keyPosition];
                             keyPosition++;

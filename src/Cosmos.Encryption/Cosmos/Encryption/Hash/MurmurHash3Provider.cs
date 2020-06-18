@@ -5,7 +5,8 @@ using Cosmos.Encryption.Core;
 using Cosmos.Optionals;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// MurmurHash3 hashing provider
     /// Reference to:
@@ -16,7 +17,8 @@ namespace Cosmos.Encryption {
     ///     Author: Darren Kopp
     ///     Apache License 2.0
     /// </summary>
-    public static class MurmurHash3Provider {
+    public static class MurmurHash3Provider
+    {
         /// <summary>
         /// Signature
         /// </summary>
@@ -30,7 +32,8 @@ namespace Cosmos.Encryption {
         public static uint Signature(string data, uint seed, Encoding encoding = null,
             MurmurHash3Types types = MurmurHash3Types.FAST,
             MurmurHash3Preference preference = MurmurHash3Preference.AUTO,
-            MurmurHash3Managed managed = MurmurHash3Managed.TRUE) {
+            MurmurHash3Managed managed = MurmurHash3Managed.TRUE)
+        {
             Checker.Data(data);
 
             var bytes = encoding.SafeValue().GetBytes(data);
@@ -50,7 +53,8 @@ namespace Cosmos.Encryption {
         public static uint Signature(byte[] data, uint seed,
             MurmurHash3Types types = MurmurHash3Types.FAST,
             MurmurHash3Preference preference = MurmurHash3Preference.AUTO,
-            MurmurHash3Managed managed = MurmurHash3Managed.TRUE) {
+            MurmurHash3Managed managed = MurmurHash3Managed.TRUE)
+        {
             Checker.Buffer(data);
             return SignatureCore(data, seed, types, preference, managed);
         }
@@ -68,7 +72,8 @@ namespace Cosmos.Encryption {
         public static byte[] SignatureHash(string data, uint seed, Encoding encoding = null,
             MurmurHash3Types types = MurmurHash3Types.FAST,
             MurmurHash3Preference preference = MurmurHash3Preference.AUTO,
-            MurmurHash3Managed managed = MurmurHash3Managed.TRUE) {
+            MurmurHash3Managed managed = MurmurHash3Managed.TRUE)
+        {
             return BitConverter.GetBytes(Signature(data, seed, encoding, types, preference, managed));
         }
 
@@ -84,23 +89,29 @@ namespace Cosmos.Encryption {
         public static byte[] SignatureHash(byte[] data, uint seed,
             MurmurHash3Types types = MurmurHash3Types.FAST,
             MurmurHash3Preference preference = MurmurHash3Preference.AUTO,
-            MurmurHash3Managed managed = MurmurHash3Managed.TRUE) {
+            MurmurHash3Managed managed = MurmurHash3Managed.TRUE)
+        {
             return BitConverter.GetBytes(Signature(data, seed, types, preference, managed));
         }
 
-        private static uint SignatureCore(byte[] data, uint seed, MurmurHash3Types types, MurmurHash3Preference preference, MurmurHash3Managed managed) {
-            switch (types) {
-                case MurmurHash3Types.FAST: {
+        private static uint SignatureCore(byte[] data, uint seed, MurmurHash3Types types, MurmurHash3Preference preference, MurmurHash3Managed managed)
+        {
+            switch (types)
+            {
+                case MurmurHash3Types.FAST:
+                {
                     return MurmurHash3Core.FastMode.Hash32(data.AsSpan(), seed);
                 }
 
-                case MurmurHash3Types.L_32: {
+                case MurmurHash3Types.L_32:
+                {
                     var l32 = MurmurHash3Core.CreateL32(seed, managed);
                     var h32 = l32.ComputeHash(data);
                     return BitConverter.ToUInt32(h32, 0);
                 }
 
-                case MurmurHash3Types.L_128: {
+                case MurmurHash3Types.L_128:
+                {
                     var l128 = MurmurHash3Core.CreateL128(seed, managed, preference);
                     var h128 = l128.ComputeHash(data);
                     return BitConverter.ToUInt32(h128, 0);

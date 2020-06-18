@@ -3,12 +3,14 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Cosmos.Encryption.Core {
+namespace Cosmos.Encryption.Core
+{
     /// <summary>
     /// RSABase
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public abstract class RSABase {
+    public abstract class RSABase
+    {
         /// <summary>
         /// Private rsa
         /// </summary>
@@ -32,7 +34,8 @@ namespace Cosmos.Encryption.Core {
         /// <param name="data">Need to encrypt data</param>
         /// <param name="padding">Padding algorithm</param>
         /// <returns></returns>
-        public string EncryptByPublicKey(string data, RSAEncryptionPadding padding) {
+        public string EncryptByPublicKey(string data, RSAEncryptionPadding padding)
+        {
             return EncryptByPublicKey(DataEncoding.GetBytes(data), padding);
         }
 
@@ -42,8 +45,10 @@ namespace Cosmos.Encryption.Core {
         /// <param name="dataBytes">Need to encrypt data</param>
         /// <param name="padding">Padding algorithm</param>
         /// <returns></returns>
-        public string EncryptByPublicKey(byte[] dataBytes, RSAEncryptionPadding padding) {
-            if (PublicRsa is null) {
+        public string EncryptByPublicKey(byte[] dataBytes, RSAEncryptionPadding padding)
+        {
+            if (PublicRsa is null)
+            {
                 throw new ArgumentException("public key can not null");
             }
 
@@ -61,7 +66,8 @@ namespace Cosmos.Encryption.Core {
         /// <param name="data">Need to encrypt data</param>
         /// <param name="padding">Padding algorithm</param>
         /// <returns></returns>
-        public string EncryptByPrivateKey(string data, RSAEncryptionPadding padding) {
+        public string EncryptByPrivateKey(string data, RSAEncryptionPadding padding)
+        {
             return EncryptByPrivateKey(DataEncoding.GetBytes(data), padding);
         }
 
@@ -71,8 +77,10 @@ namespace Cosmos.Encryption.Core {
         /// <param name="dataBytes">Need to encrypt data</param>
         /// <param name="padding">Padding algorithm</param>
         /// <returns></returns>
-        public string EncryptByPrivateKey(byte[] dataBytes, RSAEncryptionPadding padding) {
-            if (PrivateRsa is null) {
+        public string EncryptByPrivateKey(byte[] dataBytes, RSAEncryptionPadding padding)
+        {
+            if (PrivateRsa is null)
+            {
                 throw new ArgumentException("private key can not null");
             }
 
@@ -90,7 +98,8 @@ namespace Cosmos.Encryption.Core {
         /// <param name="data">Need to decrypt the data</param>
         /// <param name="padding">Padding algorithm</param>
         /// <returns></returns>
-        public string DecryptByPublicKey(string data, RSAEncryptionPadding padding) {
+        public string DecryptByPublicKey(string data, RSAEncryptionPadding padding)
+        {
             return DecryptByPublicKey(Convert.FromBase64String(data), padding);
         }
 
@@ -100,8 +109,10 @@ namespace Cosmos.Encryption.Core {
         /// <param name="dataBytes">Need to decrypt the data</param>
         /// <param name="padding">Padding algorithm</param>
         /// <returns></returns>
-        public string DecryptByPublicKey(byte[] dataBytes, RSAEncryptionPadding padding) {
-            if (PublicRsa is null) {
+        public string DecryptByPublicKey(byte[] dataBytes, RSAEncryptionPadding padding)
+        {
+            if (PublicRsa is null)
+            {
                 throw new ArgumentException("public key can not null");
             }
 
@@ -119,7 +130,8 @@ namespace Cosmos.Encryption.Core {
         /// <param name="data">Need to decrypt the data</param>
         /// <param name="padding">Padding algorithm</param>
         /// <returns></returns>
-        public string DecryptByPrivateKey(string data, RSAEncryptionPadding padding) {
+        public string DecryptByPrivateKey(string data, RSAEncryptionPadding padding)
+        {
             return DecryptByPrivateKey(Convert.FromBase64String(data), padding);
         }
 
@@ -129,8 +141,10 @@ namespace Cosmos.Encryption.Core {
         /// <param name="dataBytes">Need to decrypt the data</param>
         /// <param name="padding">Padding algorithm</param>
         /// <returns></returns>
-        public string DecryptByPrivateKey(byte[] dataBytes, RSAEncryptionPadding padding) {
-            if (PrivateRsa is null) {
+        public string DecryptByPrivateKey(byte[] dataBytes, RSAEncryptionPadding padding)
+        {
+            if (PrivateRsa is null)
+            {
                 throw new ArgumentException("private key can not null");
             }
 
@@ -149,7 +163,8 @@ namespace Cosmos.Encryption.Core {
         /// <param name="hashAlgorithmName">Signed hash algorithm name</param>
         /// <param name="padding">Signature padding algorithm</param>
         /// <returns></returns>
-        public string SignDataByPublicKey(string data, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding) {
+        public string SignDataByPublicKey(string data, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding)
+        {
             var res = SignDataByPublicKeyToBytes(data, hashAlgorithmName, padding);
             return Convert.ToBase64String(res);
         }
@@ -161,8 +176,10 @@ namespace Cosmos.Encryption.Core {
         /// <param name="hashAlgorithmName">Signed hash algorithm name</param>
         /// <param name="padding">Signature padding algorithm</param>
         /// <returns>Sign bytes</returns>
-        public byte[] SignDataByPublicKeyToBytes(string data, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding) {
-            if (PublicRsa is null) {
+        public byte[] SignDataByPublicKeyToBytes(string data, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding)
+        {
+            if (PublicRsa is null)
+            {
                 throw new ArgumentException("public key can not null");
             }
 
@@ -181,7 +198,8 @@ namespace Cosmos.Encryption.Core {
         /// <param name="hashAlgorithmName">Signed hash algorithm name</param>
         /// <param name="padding">Signature padding algorithm</param>
         /// <returns></returns>
-        public string SignDataByPrivateKey(string data, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding) {
+        public string SignDataByPrivateKey(string data, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding)
+        {
             var res = SignDataByPrivateKeyToBytes(data, hashAlgorithmName, padding);
             return Convert.ToBase64String(res);
         }
@@ -193,8 +211,10 @@ namespace Cosmos.Encryption.Core {
         /// <param name="hashAlgorithmName">Signed hash algorithm name</param>
         /// <param name="padding">Signature padding algorithm</param>
         /// <returns>Sign bytes</returns>
-        public byte[] SignDataByPrivateKeyToBytes(string data, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding) {
-            if (PrivateRsa is null) {
+        public byte[] SignDataByPrivateKeyToBytes(string data, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding)
+        {
+            if (PrivateRsa is null)
+            {
                 throw new ArgumentException("private key can not null");
             }
 
@@ -214,8 +234,10 @@ namespace Cosmos.Encryption.Core {
         /// <param name="hashAlgorithmName">Signed hash algorithm name</param>
         /// <param name="padding">Signature padding algorithm</param>
         /// <returns></returns>
-        public bool VerifyDataByPublicKey(string data, string sign, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding) {
-            if (PublicRsa is null) {
+        public bool VerifyDataByPublicKey(string data, string sign, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding)
+        {
+            if (PublicRsa is null)
+            {
                 throw new ArgumentException("public key can not null");
             }
 
@@ -237,8 +259,10 @@ namespace Cosmos.Encryption.Core {
         /// <param name="hashAlgorithmName">Signed hash algorithm name</param>
         /// <param name="padding">Signature padding algorithm</param>
         /// <returns></returns>
-        public bool VerifyDataByPrivateKey(string data, string sign, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding) {
-            if (PrivateRsa is null) {
+        public bool VerifyDataByPrivateKey(string data, string sign, HashAlgorithmName hashAlgorithmName, RSASignaturePadding padding)
+        {
+            if (PrivateRsa is null)
+            {
                 throw new ArgumentException("private key can not null");
             }
 
@@ -249,7 +273,6 @@ namespace Cosmos.Encryption.Core {
         }
 
         #endregion
-
     }
 }
 #endif

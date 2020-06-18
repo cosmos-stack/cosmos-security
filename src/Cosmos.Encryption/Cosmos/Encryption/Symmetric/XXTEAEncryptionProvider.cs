@@ -16,13 +16,15 @@ using Cosmos.Optionals;
  *          Roger M. Needham
  */
 
-namespace Cosmos.Encryption.Symmetric {
+namespace Cosmos.Encryption.Symmetric
+{
     /// <summary>
     /// XXTEA encryption provider
     /// </summary>
     // ReSharper disable once IdentifierTypo
     // ReSharper disable once InconsistentNaming
-    public sealed class XXTEAEncryptionProvider : ISymmetricEncryption {
+    public sealed class XXTEAEncryptionProvider : ISymmetricEncryption
+    {
         // ReSharper disable once InconsistentNaming
         private const uint DELTA = 0x9E3779B9;
 
@@ -39,7 +41,8 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="key"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string Encrypt(string data, string key, Encoding encoding = null) {
+        public static string Encrypt(string data, string key, Encoding encoding = null)
+        {
             if (string.IsNullOrWhiteSpace(data))
                 return data;
 
@@ -54,11 +57,11 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="key"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string Encrypt(byte[] data, string key, Encoding encoding = null) {
+        public static string Encrypt(byte[] data, string key, Encoding encoding = null)
+        {
             return Convert.ToBase64String(data.Length == 0
                 ? data
                 : Encrypt(data, encoding.SafeValue().GetBytes(key)));
-
         }
 
         /// <summary>
@@ -67,11 +70,11 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="data"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static byte[] Encrypt(byte[] data, byte[] key) {
+        public static byte[] Encrypt(byte[] data, byte[] key)
+        {
             return data.Length == 0
                 ? data
                 : ToByteArray(Encrypt(ToUInt32Array(data, true), ToUInt32Array(FixKey(key), false)), false);
-
         }
 
         /// <summary>
@@ -81,7 +84,8 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="key"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string Decrypt(string data, string key, Encoding encoding = null) {
+        public static string Decrypt(string data, string key, Encoding encoding = null)
+        {
             if (string.IsNullOrWhiteSpace(data))
                 return data;
 
@@ -96,7 +100,8 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="key"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static string Decrypt(byte[] data, string key, Encoding encoding = null) {
+        public static string Decrypt(byte[] data, string key, Encoding encoding = null)
+        {
             encoding = encoding.SafeValue();
             return encoding.GetString(Decrypt(data, encoding.GetBytes(key)));
         }
@@ -107,23 +112,27 @@ namespace Cosmos.Encryption.Symmetric {
         /// <param name="data"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static byte[] Decrypt(byte[] data, byte[] key) {
+        public static byte[] Decrypt(byte[] data, byte[] key)
+        {
             return data.Length == 0
                 ? data
                 : ToByteArray(Decrypt(ToUInt32Array(data, false), ToUInt32Array(FixKey(key), false)), true);
-
         }
 
-        private static uint[] Encrypt(uint[] v, uint[] k) {
+        private static uint[] Encrypt(uint[] v, uint[] k)
+        {
             var n = v.Length - 1;
             if (n < 1) return v;
             uint z = v[n], y, sum = 0, e;
             int p, q = 6 + 52 / (n + 1);
-            unchecked {
-                while (0 < q--) {
+            unchecked
+            {
+                while (0 < q--)
+                {
                     sum += DELTA;
                     e = sum >> 2 & 3;
-                    for (p = 0; p < n; p++) {
+                    for (p = 0; p < n; p++)
+                    {
                         y = v[p + 1];
                         z = v[p] += MX(sum, y, z, p, e, k);
                     }
@@ -136,16 +145,20 @@ namespace Cosmos.Encryption.Symmetric {
             return v;
         }
 
-        private static uint[] Decrypt(uint[] v, uint[] k) {
+        private static uint[] Decrypt(uint[] v, uint[] k)
+        {
             var n = v.Length - 1;
             if (n < 1) return v;
             uint z, y = v[0], sum, e;
             int p, q = 6 + 52 / (n + 1);
-            unchecked {
+            unchecked
+            {
                 sum = (uint) (q * DELTA);
-                while (sum != 0) {
+                while (sum != 0)
+                {
                     e = sum >> 2 & 3;
-                    for (p = n; p > 0; p--) {
+                    for (p = n; p > 0; p--)
+                    {
                         z = v[p - 1];
                         y = v[p] -= MX(sum, y, z, p, e, k);
                     }
@@ -159,39 +172,50 @@ namespace Cosmos.Encryption.Symmetric {
             return v;
         }
 
-        private static byte[] FixKey(byte[] key) {
+        private static byte[] FixKey(byte[] key)
+        {
             if (key.Length == 16) return key;
             byte[] fixedKey = new byte[16];
-            if (key.Length < 16) {
+            if (key.Length < 16)
+            {
                 key.CopyTo(fixedKey, 0);
-            } else {
+            }
+            else
+            {
                 Array.Copy(key, 0, fixedKey, 0, 16);
             }
 
             return fixedKey;
         }
 
-        private static uint[] ToUInt32Array(byte[] data, bool includeLength) {
+        private static uint[] ToUInt32Array(byte[] data, bool includeLength)
+        {
             var length = data.Length;
             var n = (((length & 3) == 0) ? (length >> 2) : ((length >> 2) + 1));
             uint[] ret;
-            if (includeLength) {
+            if (includeLength)
+            {
                 ret = new uint[n + 1];
                 ret[n] = (uint) length;
-            } else {
+            }
+            else
+            {
                 ret = new uint[n];
             }
 
-            for (var i = 0; i < length; i++) {
+            for (var i = 0; i < length; i++)
+            {
                 ret[i >> 2] |= (uint) data[i] << ((i & 3) << 3);
             }
 
             return ret;
         }
 
-        private static byte[] ToByteArray(uint[] data, bool includeLength) {
+        private static byte[] ToByteArray(uint[] data, bool includeLength)
+        {
             var n = data.Length << 2;
-            if (includeLength) {
+            if (includeLength)
+            {
                 var m = (int) data[data.Length - 1];
                 n -= 4;
                 if ((m < n - 3) || (m > n))

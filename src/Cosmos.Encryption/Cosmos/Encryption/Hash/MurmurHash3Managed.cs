@@ -1,7 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// MurmurHash3 managed
     /// Reference to:
@@ -10,7 +11,8 @@ namespace Cosmos.Encryption {
     ///     Apache License 2.0
     /// </summary>
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public enum MurmurHash3Managed {
+    public enum MurmurHash3Managed
+    {
         /// <summary>
         /// Managed mode
         /// </summary>

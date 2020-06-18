@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Text;
 
-namespace Cosmos.Encryption.Core.Internals {
+namespace Cosmos.Encryption.Core.Internals
+{
     /// <summary>
     /// Random string generator
     /// Author: Seay Xu
     ///     https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Util/Util.cs
     /// Editor: AlexLEWIS
     /// </summary>
-    internal static class RandomStringGenerator {
-        static RandomStringGenerator() {
+    internal static class RandomStringGenerator
+    {
+        static RandomStringGenerator()
+        {
             StringDictionaryLength = StringDictionary.Length;
         }
 
@@ -17,7 +20,8 @@ namespace Cosmos.Encryption.Core.Internals {
 
         private static readonly int StringDictionaryLength;
 
-        public static string Generate(int bits = 8) {
+        public static string Generate(int bits = 8)
+        {
             var builder = new StringBuilder();
 
             var b = new byte[4];
@@ -26,7 +30,8 @@ namespace Cosmos.Encryption.Core.Internals {
 
             var random = new Random(BitConverter.ToInt32(b, 0));
 
-            for (var i = 0; i < bits; i++) {
+            for (var i = 0; i < bits; i++)
+            {
                 builder.Append(StringDictionary.Substring(random.Next(0, StringDictionaryLength), 1));
             }
 

@@ -1,9 +1,12 @@
 using Org.BouncyCastle.Math;
 
-namespace Cosmos.Encryption.Core {
+namespace Cosmos.Encryption.Core
+{
     // ReSharper disable once InconsistentNaming
-    internal partial class SM2Core {
-        public class SM2Result {
+    internal partial class SM2Core
+    {
+        public class SM2Result
+        {
             public SM2Result() { }
 
             // 签名、验签

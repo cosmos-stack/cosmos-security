@@ -8,17 +8,22 @@ using Org.BouncyCastle.OpenSsl;
 using Org.BouncyCastle.Pkcs;
 using Org.BouncyCastle.Security;
 
-namespace Cosmos.Encryption.Core.Internals.Extensions {
+namespace Cosmos.Encryption.Core.Internals.Extensions
+{
     // ReSharper disable once InconsistentNaming
-    internal static partial class RSAKeyExtensions {
-        public static void FromPkcs1PublicString(this RSA rsa, string publicKey, out RSAParameters parameters) {
+    internal static partial class RSAKeyExtensions
+    {
+        public static void FromPkcs1PublicString(this RSA rsa, string publicKey, out RSAParameters parameters)
+        {
             publicKey = RSAPemFormatHelper.Pkcs1PublicKeyFormatRemove(publicKey);
             var pr = new PemReader(new StringReader(publicKey));
-            if (!(pr.ReadObject() is RsaKeyParameters rsaKey)) {
+            if (!(pr.ReadObject() is RsaKeyParameters rsaKey))
+            {
                 throw new Exception("Public key format is incorrect");
             }
 
-            parameters = new RSAParameters {
+            parameters = new RSAParameters
+            {
                 Modulus = rsaKey.Modulus.ToByteArrayUnsigned(),
                 Exponent = rsaKey.Exponent.ToByteArrayUnsigned()
             };
@@ -26,17 +31,20 @@ namespace Cosmos.Encryption.Core.Internals.Extensions {
             rsa.ImportParameters(parameters);
         }
 
-        public static void FromPkcs1PrivateString(this RSA rsa, string privateKey, out RSAParameters parameters) {
+        public static void FromPkcs1PrivateString(this RSA rsa, string privateKey, out RSAParameters parameters)
+        {
             privateKey = RSAPemFormatHelper.Pkcs1PrivateKeyFormatRemove(privateKey);
             var pr = new PemReader(new StringReader(privateKey));
-            if (!(pr.ReadObject() is AsymmetricCipherKeyPair asymmetricCipherKeyPair)) {
+            if (!(pr.ReadObject() is AsymmetricCipherKeyPair asymmetricCipherKeyPair))
+            {
                 throw new Exception("Private key format is incorrect");
             }
 
             var rsaPrivateCrtKeyParameters = (RsaPrivateCrtKeyParameters) PrivateKeyFactory.CreateKey(
                 PrivateKeyInfoFactory.CreatePrivateKeyInfo(asymmetricCipherKeyPair.Private));
 
-            parameters = new RSAParameters {
+            parameters = new RSAParameters
+            {
                 Modulus = rsaPrivateCrtKeyParameters.Modulus.ToByteArrayUnsigned(),
                 Exponent = rsaPrivateCrtKeyParameters.PublicExponent.ToByteArrayUnsigned(),
                 P = rsaPrivateCrtKeyParameters.P.ToByteArrayUnsigned(),
@@ -50,7 +58,8 @@ namespace Cosmos.Encryption.Core.Internals.Extensions {
             rsa.ImportParameters(parameters);
         }
 
-        public static string ToPkcs1PublicString(this RSA rsa) {
+        public static string ToPkcs1PublicString(this RSA rsa)
+        {
             var privateKeyParameters = rsa.ExportParameters(false);
             RsaKeyParameters rsaKeyParameters = new RsaKeyParameters(
                 false,
@@ -64,7 +73,8 @@ namespace Cosmos.Encryption.Core.Internals.Extensions {
             return sw.ToString();
         }
 
-        public static string ToPkcs1PrivateString(this RSA rsa) {
+        public static string ToPkcs1PrivateString(this RSA rsa)
+        {
             var privateKeyParameters = rsa.ExportParameters(true);
             RsaPrivateCrtKeyParameters rsaPrivateCrtKeyParameters = new RsaPrivateCrtKeyParameters(
                 new BigInteger(1, privateKeyParameters.Modulus),

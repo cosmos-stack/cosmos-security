@@ -10,18 +10,21 @@ using Cosmos.Optionals;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Parameters;
 
-namespace Cosmos.Encryption.Asymmetric {
+namespace Cosmos.Encryption.Asymmetric
+{
     /// <summary>
     /// SM2 encryption provider.
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public static partial class SM2EncryptionProvider {
+    public static partial class SM2EncryptionProvider
+    {
         /// <summary>
         /// Create a new <see cref="RSAKey"/>
         /// </summary>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static SM2Key CreateKey(Encoding encoding = default) {
+        public static SM2Key CreateKey(Encoding encoding = default)
+        {
             var sm2 = SM2Core.Instance;
             var key = sm2.ecc_key_pair_generator.GenerateKeyPair();
             var ecPriv = (ECPrivateKeyParameters) key.Private;

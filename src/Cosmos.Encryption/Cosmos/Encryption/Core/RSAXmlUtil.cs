@@ -10,12 +10,14 @@ using Cosmos.Optionals;
  *     Author:Zhiqiang Li
  */
 
-namespace Cosmos.Encryption.Core {
+namespace Cosmos.Encryption.Core
+{
     /// <summary>
     /// RSA Xml util
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public class RSAXmlUtil : RSABase {
+    public class RSAXmlUtil : RSABase
+    {
         /// <summary>
         /// RSA encryption
         /// SHA256 hash algorithm to use the key length of at least 2048
@@ -34,12 +36,15 @@ namespace Cosmos.Encryption.Core {
         /// <param name="keySize">Key length in bits:</param>
         /// <param name="privateKey">private Key</param>
         /// <param name="publicKey">public Key</param>
-        public RSAXmlUtil(Encoding encoding, string publicKey, string privateKey = null, int keySize = 2048) {
-            if (string.IsNullOrEmpty(privateKey) && string.IsNullOrEmpty(publicKey)) {
+        public RSAXmlUtil(Encoding encoding, string publicKey, string privateKey = null, int keySize = 2048)
+        {
+            if (string.IsNullOrEmpty(privateKey) && string.IsNullOrEmpty(publicKey))
+            {
                 throw new ArgumentException("Public and private keys must not be empty at the same time");
             }
 
-            if (!string.IsNullOrEmpty(privateKey)) {
+            if (!string.IsNullOrEmpty(privateKey))
+            {
 #if NET451
                 PrivateRsa = new RSACryptoServiceProvider {KeySize = keySize};
 #else
@@ -49,7 +54,8 @@ namespace Cosmos.Encryption.Core {
                 PrivateRsa.FromLvccXmlString(privateKey);
             }
 
-            if (!string.IsNullOrEmpty(publicKey)) {
+            if (!string.IsNullOrEmpty(publicKey))
+            {
 #if NET451
                 PublicRsa = new RSACryptoServiceProvider {KeySize = keySize};
 #else

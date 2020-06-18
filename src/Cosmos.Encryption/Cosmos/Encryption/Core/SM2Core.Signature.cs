@@ -6,19 +6,24 @@ using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Security.Cryptography.Primitives;
 using System.Text;
 using Org.BouncyCastle.Crypto.Digests;
 
-namespace Cosmos.Encryption.Core {
+namespace Cosmos.Encryption.Core
+{
     // ReSharper disable once InconsistentNaming
-    internal partial class SM2Core {
-        public virtual byte[] Sm2GetZ(byte[] userId, ECPoint userKey) {
+    internal partial class SM2Core
+    {
+        public virtual byte[] Sm2GetZ(byte[] userId, ECPoint userKey)
+        {
             SM2_SM3Digest sm3 = new SM2_SM3Digest();
             byte[] p;
             // userId length
             int len = userId.Length * 8;
-            sm3.Update((byte) (len >> 8 & 0x00ff));
-            sm3.Update((byte) (len & 0x00ff));
+            sm3.Update((byte) (len >> 8 & 0xff)); //sm3.Update((byte) (len >> 8 & 0x00ff));
+            sm3.Update((byte) (len & 0xff));      //sm3.Update((byte) (len & 0x00ff));
 
             // userId
             sm3.BlockUpdate(userId, 0, userId.Length);
@@ -33,6 +38,10 @@ namespace Cosmos.Encryption.Core {
             sm3.BlockUpdate(p, 0, p.Length);
             p = ecc_gy.ToByteArray();
             sm3.BlockUpdate(p, 0, p.Length);
+
+            var a0 = userKey.XCoord;
+            var a1 = a0.ToBigInteger();
+            var a2 = a1.ToByteArray();
 
             // x,y
             p = userKey.AffineXCoord.ToBigInteger().ToByteArray();
@@ -64,7 +73,8 @@ namespace Cosmos.Encryption.Core {
         /// <param name="userD">秘钥</param>
         /// <param name="userKey">公钥</param>
         /// <param name="sm2Ret">sm2Ret集合</param>
-        public virtual void Sm2Sign(byte[] md, BigInteger userD, ECPoint userKey, SM2Result sm2Ret) {
+        public virtual void Sm2Sign(byte[] md, BigInteger userD, ECPoint userKey, SM2Result sm2Ret)
+        {
             // e
             BigInteger e = new BigInteger(1, md); //字节转化大整数
             // k
@@ -73,18 +83,22 @@ namespace Cosmos.Encryption.Core {
             BigInteger r; //定义大数r为空，保存求得的r值
             BigInteger s; //定义大数r为空，保存求得的s值
 
-            do {
-                do {
+            do
+            {
+                do
+                {
                     AsymmetricCipherKeyPair keypair = ecc_key_pair_generator.GenerateKeyPair();
                     ECPrivateKeyParameters ecpriv = (ECPrivateKeyParameters) keypair.Private; //产生私钥
                     ECPublicKeyParameters ecpub = (ECPublicKeyParameters) keypair.Public;     //产生公钥
                     k = ecpriv.D;                                                             //产生真正的k
                     kp = ecpub.Q;
 
+                    //this.ecc_point_g.Multiply(k); //新加
                     // r
-                    r = e.Add(kp.XCoord.ToBigInteger());                       //r=e+kp坐标点的X
-                    r = r.Mod(ecc_n);                                          //对r进行模n运算，防止越界
-                } while (r.Equals(BigInteger.Zero) || r.Add(k).Equals(ecc_n)); //r==或者0当r==n时跳出循环
+                    r = e.Add(kp.XCoord.ToBigInteger()); //r=e+kp坐标点的X
+                    r = r.Mod(ecc_n);                    //对r进行模n运算，防止越界
+                }
+                while (r.Equals(BigInteger.Zero) || r.Add(k).Equals(ecc_n)); //r==或者0当r==n时跳出循环
 
                 // (1 + dA)~-1
                 BigInteger da_1 = userD.Add(BigInteger.One); //da_1=秘钥+1;
@@ -93,7 +107,8 @@ namespace Cosmos.Encryption.Core {
                 s = r.Multiply(userD);           //s=r*秘钥
                 s = k.Subtract(s).Mod(ecc_n);    //s=((k-s)%n);
                 s = da_1.Multiply(s).Mod(ecc_n); //s=((da_1*s)%n)
-            } while (s.Equals(BigInteger.Zero)); //s==0的时候跳出循环
+            }
+            while (s.Equals(BigInteger.Zero)); //s==0的时候跳出循环
 
             sm2Ret.r = r;
             sm2Ret.s = s;
@@ -133,5 +148,24 @@ namespace Cosmos.Encryption.Core {
 
         #endregion
 
+        // internal class FixedBytesGenerator : BlockDeriveBytes {
+        //     private readonly byte[] _d;
+        //     public FixedBytesGenerator(byte[] d) => _d = d;
+        //     public override int BlockSize => _d.Length;
+        //     public override void NextBlock(Span<byte> buf) => _d.CopyTo(buf);
+        // }
+
+        // internal class SM2_Signer {
+        //     public byte[] SignData(byte[] message, string privateKey, byte[] id) {
+        //         var d = System.Numerics.BigInteger.Parse(privateKey, NumberStyles.HexNumber);
+        //         var sm2 = System.Security.Cryptography.SM2.Create();
+        //
+        //         sm2.Ident = id;
+        //         sm2.ImportPrivateKey(d);
+        //         sm2.ImportPublicKey(sm2.ExportKey().Q);
+        //         return sm2.SignData(message);
+        //     }
+        //
+        //     public byte[] VerifyData(byte[] signature, byte[] message, string publicKey, byte[] id) { }
     }
 }

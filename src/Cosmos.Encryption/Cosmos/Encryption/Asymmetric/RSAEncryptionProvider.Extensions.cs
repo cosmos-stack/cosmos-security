@@ -8,10 +8,11 @@ using Cosmos.Encryption.Core;
 using Cosmos.Encryption.Core.Internals.Extensions;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     // ReSharper disable once InconsistentNaming
-    public static partial class RSAEncryptionProvider {
-
+    public static partial class RSAEncryptionProvider
+    {
         #region Extensions for export and import
 
         /// <summary>
@@ -21,13 +22,15 @@ namespace Cosmos.Encryption {
         /// <param name="type"></param>
         /// <param name="usePemFormat"></param>
         /// <returns></returns>
-        public static string ExportPrivateKey(this RSA rsa, RSAKeyTypes type, bool usePemFormat = false) {
-            var key = type switch {
+        public static string ExportPrivateKey(this RSA rsa, RSAKeyTypes type, bool usePemFormat = false)
+        {
+            var key = type switch
+            {
                 RSAKeyTypes.XML  => rsa.ToLvccXmlString(true),
                 RSAKeyTypes.JSON => rsa.ToJsonString(true),
 #if NETCOREAPP3_1 || NETSTANDARD2_1
-                RSAKeyTypes.Pkcs1 => Base64Conversion.ToBase64String(rsa.ExportRSAPrivateKey()),
-                RSAKeyTypes.Pkcs8 => Base64Conversion.ToBase64String(rsa.ExportPkcs8PrivateKey()),
+                RSAKeyTypes.Pkcs1 => Base64Converter.ToBase64String(rsa.ExportRSAPrivateKey()),
+                RSAKeyTypes.Pkcs8 => Base64Converter.ToBase64String(rsa.ExportPkcs8PrivateKey()),
 #else
                 RSAKeyTypes.Pkcs1 => rsa.ToPkcs1PrivateString(),
                 RSAKeyTypes.Pkcs8 => rsa.ToPkcs8PrivateString(),
@@ -35,8 +38,10 @@ namespace Cosmos.Encryption {
                 _ => throw new NotSupportedException("Unknown RSA key type.")
             };
 
-            if (usePemFormat) {
-                key = type switch {
+            if (usePemFormat)
+            {
+                key = type switch
+                {
                     RSAKeyTypes.XML   => key,
                     RSAKeyTypes.JSON  => key,
                     RSAKeyTypes.Pkcs1 => RSAPemFormatHelper.Pkcs1PrivateKeyFormat(key),
@@ -55,13 +60,15 @@ namespace Cosmos.Encryption {
         /// <param name="type"></param>
         /// <param name="usePemFormat"></param>
         /// <returns></returns>
-        public static string ExportPublicKey(this RSA rsa, RSAKeyTypes type, bool usePemFormat = false) {
-            var key = type switch {
+        public static string ExportPublicKey(this RSA rsa, RSAKeyTypes type, bool usePemFormat = false)
+        {
+            var key = type switch
+            {
                 RSAKeyTypes.XML  => rsa.ToLvccXmlString(false),
                 RSAKeyTypes.JSON => rsa.ToJsonString(false),
 #if NETCOREAPP3_1 || NETSTANDARD2_1
-                RSAKeyTypes.Pkcs1 => Base64Conversion.ToBase64String(rsa.ExportRSAPublicKey()),
-                RSAKeyTypes.Pkcs8 => Base64Conversion.ToBase64String(rsa.ExportRSAPublicKey()),
+                RSAKeyTypes.Pkcs1 => Base64Converter.ToBase64String(rsa.ExportRSAPublicKey()),
+                RSAKeyTypes.Pkcs8 => Base64Converter.ToBase64String(rsa.ExportRSAPublicKey()),
 #else
                 RSAKeyTypes.Pkcs1 => rsa.ToPkcs1PublicString(),
                 RSAKeyTypes.Pkcs8 => rsa.ToPkcs8PublicString(),
@@ -69,8 +76,10 @@ namespace Cosmos.Encryption {
                 _ => throw new NotSupportedException("Unknown RSA key type.")
             };
 
-            if (usePemFormat) {
-                key = type switch {
+            if (usePemFormat)
+            {
+                key = type switch
+                {
                     RSAKeyTypes.XML   => key,
                     RSAKeyTypes.JSON  => key,
                     RSAKeyTypes.Pkcs1 => RSAPemFormatHelper.Pkcs1PublicKeyFormat(key),
@@ -89,9 +98,12 @@ namespace Cosmos.Encryption {
         /// <param name="type"></param>
         /// <param name="privateKey"></param>
         /// <param name="isPem"></param>
-        public static void ImportPrivateKey(this RSA rsa, RSAKeyTypes type, string privateKey, bool isPem = false) {
-            if (isPem) {
-                privateKey = type switch {
+        public static void ImportPrivateKey(this RSA rsa, RSAKeyTypes type, string privateKey, bool isPem = false)
+        {
+            if (isPem)
+            {
+                privateKey = type switch
+                {
                     RSAKeyTypes.XML   => privateKey,
                     RSAKeyTypes.JSON  => privateKey,
                     RSAKeyTypes.Pkcs1 => RSAPemFormatHelper.Pkcs1PrivateKeyFormatRemove(privateKey),
@@ -100,7 +112,8 @@ namespace Cosmos.Encryption {
                 };
             }
 
-            switch (type) {
+            switch (type)
+            {
                 case RSAKeyTypes.XML:
                     rsa.FromLvccXmlString(privateKey);
                     break;
@@ -134,9 +147,12 @@ namespace Cosmos.Encryption {
         /// <param name="type"></param>
         /// <param name="publicKey"></param>
         /// <param name="isPem"></param>
-        public static void ImportPublicKey(this RSA rsa, RSAKeyTypes type, string publicKey, bool isPem = false) {
-            if (isPem) {
-                publicKey = type switch {
+        public static void ImportPublicKey(this RSA rsa, RSAKeyTypes type, string publicKey, bool isPem = false)
+        {
+            if (isPem)
+            {
+                publicKey = type switch
+                {
                     RSAKeyTypes.XML   => publicKey,
                     RSAKeyTypes.JSON  => publicKey,
                     RSAKeyTypes.Pkcs1 => RSAPemFormatHelper.Pkcs1PublicKeyFormatRemove(publicKey),
@@ -145,7 +161,8 @@ namespace Cosmos.Encryption {
                 };
             }
 
-            switch (type) {
+            switch (type)
+            {
                 case RSAKeyTypes.XML:
                     rsa.FromLvccXmlString(publicKey);
                     break;
@@ -178,8 +195,10 @@ namespace Cosmos.Encryption {
 
         #region Extensions for touching RSA utils.
 
-        private static RSABase TouchRsaUtilFromPublicKey(RSAKeyTypes keyType, Encoding encoding, string publicKey, RSAKeySizeTypes sizeType) {
-            RSABase rsa = keyType switch {
+        private static RSABase TouchRsaUtilFromPublicKey(RSAKeyTypes keyType, Encoding encoding, string publicKey, RSAKeySizeTypes sizeType)
+        {
+            RSABase rsa = keyType switch
+            {
                 RSAKeyTypes.XML   => new RSAXmlUtil(encoding, publicKey, keySize: (int) sizeType),
                 RSAKeyTypes.JSON  => new RSAJsonUtil(encoding, publicKey, keySize: (int) sizeType),
                 RSAKeyTypes.Pkcs1 => new RSAPkcs1Util(encoding, publicKey, keySize: (int) sizeType),
@@ -190,8 +209,10 @@ namespace Cosmos.Encryption {
             return rsa;
         }
 
-        private static RSABase TouchRsaUtilFromPrivateKey(RSAKeyTypes keyType, Encoding encoding, string privateKey, RSAKeySizeTypes sizeType) {
-            RSABase rsa = keyType switch {
+        private static RSABase TouchRsaUtilFromPrivateKey(RSAKeyTypes keyType, Encoding encoding, string privateKey, RSAKeySizeTypes sizeType)
+        {
+            RSABase rsa = keyType switch
+            {
                 RSAKeyTypes.XML   => new RSAXmlUtil(encoding, null, privateKey, (int) sizeType),
                 RSAKeyTypes.JSON  => new RSAJsonUtil(encoding, null, privateKey, (int) sizeType),
                 RSAKeyTypes.Pkcs1 => new RSAPkcs1Util(encoding, null, privateKey, (int) sizeType),
@@ -203,6 +224,5 @@ namespace Cosmos.Encryption {
         }
 
         #endregion
-
     }
 }

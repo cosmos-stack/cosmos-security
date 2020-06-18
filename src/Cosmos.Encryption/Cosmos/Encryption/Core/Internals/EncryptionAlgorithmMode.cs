@@ -1,5 +1,7 @@
-﻿namespace Cosmos.Encryption.Core.Internals {
-    internal enum EncryptionAlgorithmMode {
+﻿namespace Cosmos.Encryption.Core.Internals
+{
+    internal enum EncryptionAlgorithmMode
+    {
         Encrypt,
         Decrypt
     }
