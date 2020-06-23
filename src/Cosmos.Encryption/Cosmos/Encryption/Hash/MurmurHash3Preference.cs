@@ -1,6 +1,7 @@
 // ReSharper disable once CheckNamespace
 
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// Preference of MurmurHash3 hashing algorithm 
     /// Reference to:
@@ -8,7 +9,8 @@ namespace Cosmos.Encryption {
     ///     Author: Darren Kopp
     ///     Apache License 2.0
     /// </summary>
-    public enum MurmurHash3Preference {
+    public enum MurmurHash3Preference
+    {
         /// <summary>
         /// Auto
         /// </summary>

@@ -4,19 +4,22 @@ using Cosmos.Encryption.Core.Internals.Extensions;
 using Cosmos.Optionals;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// MD4 Hashing provider
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public static class MD4HashingProvider {
+    public static class MD4HashingProvider
+    {
         /// <summary>
         /// MD4 hashing method
         /// </summary>
         /// <param name="data">The string need to hash.</param>
         /// <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
         /// <returns>Hashed string.</returns>
-        public static string Signature(string data, Encoding encoding = null) {
+        public static string Signature(string data, Encoding encoding = null)
+        {
             return SignatureHash(data, encoding).ToHexString();
         }
 
@@ -25,7 +28,8 @@ namespace Cosmos.Encryption {
         /// </summary>
         /// <param name="data">The data need to hash.</param>
         /// <returns>Hashed string.</returns>
-        public static string Signature(byte[] data) {
+        public static string Signature(byte[] data)
+        {
             return Core(data).ToHexString();
         }
 
@@ -35,7 +39,8 @@ namespace Cosmos.Encryption {
         /// <param name="data">The string need to hash.</param>
         /// <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
         /// <returns>Hashed string.</returns>
-        public static byte[] SignatureHash(string data, Encoding encoding = null) {
+        public static byte[] SignatureHash(string data, Encoding encoding = null)
+        {
             return Core(encoding.SafeValue().GetBytes(data));
         }
 
@@ -44,11 +49,13 @@ namespace Cosmos.Encryption {
         /// </summary>
         /// <param name="data">The data need to hash.</param>
         /// <returns>Hashed string.</returns>
-        public static byte[] SignatureHash(byte[] data) {
+        public static byte[] SignatureHash(byte[] data)
+        {
             return Core(data);
         }
 
-        private static byte[] Core(byte[] buffer) {
+        private static byte[] Core(byte[] buffer)
+        {
             using var md4 = new MD4CryptoServiceProvider();
             return md4.ComputeHash(buffer);
         }

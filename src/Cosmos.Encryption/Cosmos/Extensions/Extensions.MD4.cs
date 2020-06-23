@@ -1,11 +1,13 @@
 ﻿using System.Text;
 using Cosmos.Encryption;
 
-namespace Cosmos.Extensions {
+namespace Cosmos.Extensions
+{
     /// <summary>
     /// Extensions for encryption
     /// </summary>
-    public static partial class Extensions {
+    public static partial class Extensions
+    {
         /// <summary>
         /// To MD4
         /// </summary>

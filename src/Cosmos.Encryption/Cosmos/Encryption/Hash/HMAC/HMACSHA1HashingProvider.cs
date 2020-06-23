@@ -3,7 +3,8 @@ using System.Text;
 using Cosmos.Encryption.Core;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// Hash/HMACMD5 hashing provider.
     /// Reference: Seay Xu
@@ -11,7 +12,8 @@ namespace Cosmos.Encryption {
     /// </summary>
     // ReSharper disable once InconsistentNaming
     // ReSharper disable once IdentifierTypo
-    public sealed class HMACSHA1HashingProvider : HMACHashingBase {
+    public sealed class HMACSHA1HashingProvider : HMACHashingBase
+    {
         private HMACSHA1HashingProvider() { }
 
         /// <summary>

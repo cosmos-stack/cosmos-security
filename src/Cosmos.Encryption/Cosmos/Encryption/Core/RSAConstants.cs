@@ -1,13 +1,15 @@
 // ReSharper disable InconsistentNaming
 
-namespace Cosmos.Encryption.Core {
-    internal class RSAConstants {
+namespace Cosmos.Encryption.Core
+{
+    internal class RSAConstants
+    {
         public const string PUBLIC_KEY_START = "-----BEGIN PUBLIC KEY-----";
         public const string PUBLIC_KEY_END = "-----END PUBLIC KEY-----";
 
         public const string PRIVATE_KEY_START = "-----BEGIN PRIVATE KEY-----";
         public const string PRIVATE_KEY_END = "-----END PRIVATE KEY-----";
-        
+
         public const string RSA_PUBLIC_KEY_START = "-----BEGIN RSA PUBLIC KEY-----";
         public const string RSA_PUBLIC_KEY_END = "-----END RSA PUBLIC KEY-----";
 

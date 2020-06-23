@@ -8,14 +8,15 @@ using Cosmos.Validations.Core;
 
 // ReSharper disable InconsistentNaming
 
-namespace Cosmos.Validations {
+namespace Cosmos.Validations
+{
     /// <summary>
     /// Base CRC64
     /// </summary>
     /// <typeparam name="TCRC64"></typeparam>
     public abstract class CRC64<TCRC64> : ICRC<TCRC64, ulong, long>
-        where TCRC64 : class, ICRC<TCRC64, ulong, long>, new() {
-
+    where TCRC64 : class, ICRC<TCRC64, ulong, long>, new()
+    {
         /// <summary>
         /// Value
         /// </summary>
@@ -28,7 +29,8 @@ namespace Cosmos.Validations {
         public abstract TCRC64 Reset();
 
         /// <inheritdoc />
-        public TCRC64 Update(long value) {
+        public TCRC64 Update(long value)
+        {
             return Update(BitConverter.GetBytes(value));
         }
 
@@ -38,7 +40,8 @@ namespace Cosmos.Validations {
         /// <param name="value"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public TCRC64 Update(string value, Encoding encoding = null) {
+        public TCRC64 Update(string value, Encoding encoding = null)
+        {
             return Update(
                 string.IsNullOrWhiteSpace(value)
                     ? CRCTableGenerator.EmptyBytes()
@@ -49,7 +52,8 @@ namespace Cosmos.Validations {
         public abstract TCRC64 Update(byte[] buffer, int offset = 0, long count = -1);
 
         /// <inheritdoc />
-        public TCRC64 Update(Stream stream, long count = -1) {
+        public TCRC64 Update(Stream stream, long count = -1)
+        {
             Checker.Stream(stream);
             return Update(stream.CastToBytes(), 0, count);
         }

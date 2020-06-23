@@ -5,20 +5,21 @@
  *     GitHub: https://github.com/toolgood
  */
 
-
 using System;
 using System.Text;
 using Cosmos.Encryption.Abstractions;
 using Cosmos.Optionals;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// Symmetric/RCX encryption.
     /// Reference: https://github.com/toolgood/RCX/
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public sealed class RCXEncryptionProvider : ISymmetricEncryption {
+    public sealed class RCXEncryptionProvider : ISymmetricEncryption
+    {
         // ReSharper disable once InconsistentNaming
         private const int KEY_LENGTH = 256;
 
@@ -32,7 +33,8 @@ namespace Cosmos.Encryption {
         /// <param name="encoding"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public static string Encrypt(string data, string key, Encoding encoding = null, RCXOrder order = RCXOrder.ASC) {
+        public static string Encrypt(string data, string key, Encoding encoding = null, RCXOrder order = RCXOrder.ASC)
+        {
             encoding = encoding.SafeValue();
             return Convert.ToBase64String(EncryptCore(encoding.GetBytes(data), encoding.GetBytes(key), order));
         }
@@ -45,7 +47,8 @@ namespace Cosmos.Encryption {
         /// <param name="encoding"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public static string Encrypt(byte[] data, string key, Encoding encoding = null, RCXOrder order = RCXOrder.ASC) {
+        public static string Encrypt(byte[] data, string key, Encoding encoding = null, RCXOrder order = RCXOrder.ASC)
+        {
             encoding = encoding.SafeValue();
             return Convert.ToBase64String(EncryptCore(data, encoding.GetBytes(key), order));
         }
@@ -57,7 +60,8 @@ namespace Cosmos.Encryption {
         /// <param name="key"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public static byte[] Encrypt(byte[] data, byte[] key, RCXOrder order = RCXOrder.ASC) {
+        public static byte[] Encrypt(byte[] data, byte[] key, RCXOrder order = RCXOrder.ASC)
+        {
             return EncryptCore(data, key, order);
         }
 
@@ -69,7 +73,8 @@ namespace Cosmos.Encryption {
         /// <param name="encoding"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public static string Decrypt(string data, string key, Encoding encoding = null, RCXOrder order = RCXOrder.ASC) {
+        public static string Decrypt(string data, string key, Encoding encoding = null, RCXOrder order = RCXOrder.ASC)
+        {
             encoding = encoding.SafeValue();
             return encoding.GetString(EncryptCore(Convert.FromBase64String(data), encoding.GetBytes(key), order));
         }
@@ -81,56 +86,64 @@ namespace Cosmos.Encryption {
         /// <param name="key"></param>
         /// <param name="order"></param>
         /// <returns></returns>
-        public static byte[] Decrypt(byte[] data, byte[] key, RCXOrder order = RCXOrder.ASC) {
+        public static byte[] Decrypt(byte[] data, byte[] key, RCXOrder order = RCXOrder.ASC)
+        {
             return EncryptCore(data, key, order);
         }
 
-        private static unsafe byte[] EncryptCore(byte[] data, byte[] pass, RCXOrder order) {
-
+        private static unsafe byte[] EncryptCore(byte[] data, byte[] pass, RCXOrder order)
+        {
             byte[] mBox = GetKey(pass, KEY_LENGTH);
             byte[] output = new byte[data.Length];
             //int i = 0, j = 0;
 
-            if (order == RCXOrder.ASC) {
+            if (order == RCXOrder.ASC)
+            {
                 fixed (byte* _mBox = &mBox[0])
-                fixed (byte* _data = &data[0])
-                fixed (byte* _output = &output[0]) {
-                    var length = data.Length;
-                    int i = 0, j = 0;
-                    for (Int64 offset = 0; offset < length; offset++) {
-                        i = (++i) & 0xFF;
-                        j = (j + *(_mBox + i)) & 0xFF;
+                    fixed (byte* _data = &data[0])
+                        fixed (byte* _output = &output[0])
+                        {
+                            var length = data.Length;
+                            int i = 0, j = 0;
+                            for (Int64 offset = 0; offset < length; offset++)
+                            {
+                                i = (++i) & 0xFF;
+                                j = (j + *(_mBox + i)) & 0xFF;
 
-                        byte a = *(_data + offset);
-                        byte c = (byte) (a ^ *(_mBox + ((*(_mBox + i) + *(_mBox + j)) & 0xFF)));
-                        *(_output + offset) = c;
+                                byte a = *(_data + offset);
+                                byte c = (byte) (a ^ *(_mBox + ((*(_mBox + i) + *(_mBox + j)) & 0xFF)));
+                                *(_output + offset) = c;
 
-                        byte temp = *(_mBox + a);
-                        *(_mBox + a) = *(_mBox + c);
-                        *(_mBox + c) = temp;
-                        j = (j + a + c);
-                    }
-                }
-            } else {
+                                byte temp = *(_mBox + a);
+                                *(_mBox + a) = *(_mBox + c);
+                                *(_mBox + c) = temp;
+                                j = (j + a + c);
+                            }
+                        }
+            }
+            else
+            {
                 fixed (byte* _mBox = &mBox[0])
-                fixed (byte* _data = &data[0])
-                fixed (byte* _output = &output[0]) {
-                    var length = data.Length;
-                    int i = 0, j = 0;
-                    for (int offset = data.Length - 1; offset >= 0; offset--) {
-                        i = (++i) & 0xFF;
-                        j = (j + *(_mBox + i)) & 0xFF;
+                    fixed (byte* _data = &data[0])
+                        fixed (byte* _output = &output[0])
+                        {
+                            var length = data.Length;
+                            int i = 0, j = 0;
+                            for (int offset = data.Length - 1; offset >= 0; offset--)
+                            {
+                                i = (++i) & 0xFF;
+                                j = (j + *(_mBox + i)) & 0xFF;
 
-                        byte a = *(_data + offset);
-                        byte c = (byte) (a ^ *(_mBox + ((*(_mBox + i) + *(_mBox + j)) & 0xFF)));
-                        *(_output + offset) = c;
+                                byte a = *(_data + offset);
+                                byte c = (byte) (a ^ *(_mBox + ((*(_mBox + i) + *(_mBox + j)) & 0xFF)));
+                                *(_output + offset) = c;
 
-                        byte temp = *(_mBox + a);
-                        *(_mBox + a) = *(_mBox + c);
-                        *(_mBox + c) = temp;
-                        j = (j + a + c);
-                    }
-                }
+                                byte temp = *(_mBox + a);
+                                *(_mBox + a) = *(_mBox + c);
+                                *(_mBox + c) = temp;
+                                j = (j + a + c);
+                            }
+                        }
             }
 
             // byte[] mBox = GetKey(pass, KEY_LENGTH);
@@ -170,17 +183,22 @@ namespace Cosmos.Encryption {
             return output;
         }
 
-        private static unsafe byte[] GetKey(byte[] pass, int kLen) {
+        private static unsafe byte[] GetKey(byte[] pass, int kLen)
+        {
             byte[] mBox = new byte[kLen];
-            fixed (byte* _mBox = &mBox[0]) {
-                for (long i = 0; i < kLen; i++) {
+            fixed (byte* _mBox = &mBox[0])
+            {
+                for (long i = 0; i < kLen; i++)
+                {
                     *(_mBox + i) = (byte) i;
                 }
 
                 long j = 0;
                 var length = pass.Length;
-                fixed (byte* _pass = &pass[0]) {
-                    for (long i = 0; i < kLen; i++) {
+                fixed (byte* _pass = &pass[0])
+                {
+                    for (long i = 0; i < kLen; i++)
+                    {
                         j = (j + *(_mBox + i) + *(_pass + (i % length))) % kLen;
                         byte temp = *(_mBox + i);
                         *(_mBox + i) = *(_mBox + j);

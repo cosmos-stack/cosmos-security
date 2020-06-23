@@ -6,15 +6,19 @@ using Org.BouncyCastle.Math;
 using Org.BouncyCastle.OpenSsl;
 using Org.BouncyCastle.Security;
 
-namespace Cosmos.Encryption.Core.Internals.Extensions {
+namespace Cosmos.Encryption.Core.Internals.Extensions
+{
     // ReSharper disable once InconsistentNaming
-    internal static partial class RSAKeyExtensions {
+    internal static partial class RSAKeyExtensions
+    {
         // ReSharper disable once IdentifierTypo
-        public static void FromPkcs8PublicString(this RSA rsa, string publicKey, out RSAParameters parameters) {
+        public static void FromPkcs8PublicString(this RSA rsa, string publicKey, out RSAParameters parameters)
+        {
             publicKey = RSAPemFormatHelper.Pkcs8PublicKeyFormatRemove(publicKey);
             var publicKeyParam = (RsaKeyParameters) PublicKeyFactory.CreateKey(Convert.FromBase64String(publicKey));
 
-            parameters = new RSAParameters {
+            parameters = new RSAParameters
+            {
                 Modulus = publicKeyParam.Modulus.ToByteArrayUnsigned(),
                 Exponent = publicKeyParam.Exponent.ToByteArrayUnsigned()
             };
@@ -23,11 +27,13 @@ namespace Cosmos.Encryption.Core.Internals.Extensions {
         }
 
         // ReSharper disable once IdentifierTypo
-        public static void FromPkcs8PrivateString(this RSA rsa, string privateKey, out RSAParameters parameters) {
+        public static void FromPkcs8PrivateString(this RSA rsa, string privateKey, out RSAParameters parameters)
+        {
             privateKey = RSAPemFormatHelper.Pkcs8PrivateKeyFormatRemove(privateKey);
             var privateKeyParam = (RsaPrivateCrtKeyParameters) PrivateKeyFactory.CreateKey(Convert.FromBase64String(privateKey));
 
-            parameters = new RSAParameters {
+            parameters = new RSAParameters
+            {
                 Modulus = privateKeyParam.Modulus.ToByteArrayUnsigned(),
                 Exponent = privateKeyParam.PublicExponent.ToByteArrayUnsigned(),
                 P = privateKeyParam.P.ToByteArrayUnsigned(),
@@ -41,7 +47,8 @@ namespace Cosmos.Encryption.Core.Internals.Extensions {
             rsa.ImportParameters(parameters);
         }
 
-        public static string ToPkcs8PublicString(this RSA rsa) {
+        public static string ToPkcs8PublicString(this RSA rsa)
+        {
             var privateKeyParameters = rsa.ExportParameters(false);
             RsaKeyParameters rsaKeyParameters = new RsaKeyParameters(
                 false,
@@ -55,7 +62,8 @@ namespace Cosmos.Encryption.Core.Internals.Extensions {
             return sw.ToString();
         }
 
-        public static string ToPkcs8PrivateString(this RSA rsa) {
+        public static string ToPkcs8PrivateString(this RSA rsa)
+        {
             var privateKeyParameters = rsa.ExportParameters(true);
             RsaPrivateCrtKeyParameters rsaPrivateCrtKeyParameters = new RsaPrivateCrtKeyParameters(
                 new BigInteger(1, privateKeyParameters.Modulus),
@@ -70,20 +78,10 @@ namespace Cosmos.Encryption.Core.Internals.Extensions {
             using var privateSw = new StringWriter();
             var privatePemWriter = new PemWriter(privateSw);
             var pkcs8 = new Pkcs8Generator(rsaPrivateCrtKeyParameters);
-            
+
             privatePemWriter.WriteObject(pkcs8);
             privatePemWriter.Writer.Close();
             return privateSw.ToString();
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
 }

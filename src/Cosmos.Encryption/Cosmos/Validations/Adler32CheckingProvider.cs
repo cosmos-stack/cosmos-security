@@ -1,8 +1,10 @@
-namespace Cosmos.Validations {
+namespace Cosmos.Validations
+{
     /// <summary>
     /// Adler-32 checking provider
     /// </summary>
-    public static class Adler32CheckingProvider {
+    public static class Adler32CheckingProvider
+    {
         /// <summary>
         /// Compute 
         /// </summary>
@@ -10,7 +12,8 @@ namespace Cosmos.Validations {
         /// <param name="byteStart">The position to begin reading from.</param>
         /// <param name="bytesToRead">How many bytes in the bytesArray to read.</param>
         /// <returns></returns>
-        public static uint Compute(byte[] bytesArray, int byteStart, int bytesToRead) {
+        public static uint Compute(byte[] bytesArray, int byteStart, int bytesToRead)
+        {
             var adler32 = new Adler32();
             adler32.Update(bytesArray, byteStart, bytesToRead);
             return adler32.Value;

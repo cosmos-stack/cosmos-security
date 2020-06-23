@@ -1,7 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// The type of MurmurHash3 hashing algorithm
     /// Reference to:
@@ -10,7 +11,8 @@ namespace Cosmos.Encryption {
     ///     Apache License 2.0
     /// </summary>
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public enum MurmurHash3Types {
+    public enum MurmurHash3Types
+    {
         /// <summary>
         /// Fast mode
         /// </summary>

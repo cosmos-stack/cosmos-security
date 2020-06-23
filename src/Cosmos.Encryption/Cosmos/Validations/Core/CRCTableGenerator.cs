@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
 
-namespace Cosmos.Validations.Core {
+namespace Cosmos.Validations.Core
+{
     // ReSharper disable once InconsistentNaming
-    internal static class CRCTableGenerator {
-
+    internal static class CRCTableGenerator
+    {
         #region CRC16
 
         // ReSharper disable once InconsistentNaming
-        private static readonly ushort[] CRC16Table = {
+        private static readonly ushort[] CRC16Table =
+        {
             0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50A5, 0x60C6, 0x70E7,
             0x8108, 0x9129, 0xA14A, 0xB16B, 0xC18C, 0xD1AD, 0xE1CE, 0xF1EF,
             0x1231, 0x0210, 0x3273, 0x2252, 0x52B5, 0x4294, 0x72F7, 0x62D6,
@@ -52,10 +54,13 @@ namespace Cosmos.Validations.Core {
         // ReSharper disable once InconsistentNaming
         private static readonly uint[] CRC32Table;
 
-        private static class InternalCrc32Helper {
-            public static uint[] MakeTable(uint poly) {
+        private static class InternalCrc32Helper
+        {
+            public static uint[] MakeTable(uint poly)
+            {
                 var ret = new uint[256];
-                for (uint i = 0; i < 256; i++) {
+                for (uint i = 0; i < 256; i++)
+                {
                     var r = i;
                     for (var j = 0; j < 8; j++)
                         if ((r & 1) != 0)
@@ -91,17 +96,22 @@ namespace Cosmos.Validations.Core {
         // ReSharper disable once InconsistentNaming
         private static readonly ulong[][] CRC64ECMATable;
 
-        private static class InternalCrc64Helper {
-            public static ulong[][] MakeTable(ulong poly) {
+        private static class InternalCrc64Helper
+        {
+            public static ulong[][] MakeTable(ulong poly)
+            {
                 return makeSlicingBy8Table(makeTable(poly));
             }
 
             // ReSharper disable once InconsistentNaming
-            private static ulong[] makeTable(ulong poly) {
+            private static ulong[] makeTable(ulong poly)
+            {
                 var t = new ulong[256];
-                for (int i = 0; i < 256; i++) {
+                for (int i = 0; i < 256; i++)
+                {
                     var crc = (ulong) i;
-                    for (int j = 0; j < 8; j++) {
+                    for (int j = 0; j < 8; j++)
+                    {
                         if ((crc & 1) == 1)
                             crc = (crc >> 1) ^ poly;
                         else
@@ -115,12 +125,15 @@ namespace Cosmos.Validations.Core {
             }
 
             // ReSharper disable once InconsistentNaming
-            private static ulong[][] makeSlicingBy8Table(ulong[] t) {
+            private static ulong[][] makeSlicingBy8Table(ulong[] t)
+            {
                 var helperTable = createTables(256, 8);
                 helperTable[0] = t;
-                for (int i = 0; i < 256; i++) {
+                for (int i = 0; i < 256; i++)
+                {
                     var crc = t[i];
-                    for (int j = 1; j < 8; j++) {
+                    for (int j = 1; j < 8; j++)
+                    {
                         crc = t[crc & 0xff] ^ (crc >> 8);
                         helperTable[j][i] = crc;
                     }
@@ -130,9 +143,11 @@ namespace Cosmos.Validations.Core {
             }
 
             // ReSharper disable once InconsistentNaming
-            private static ulong[][] createTables(int sizeInner, int sizeOuter) {
+            private static ulong[][] createTables(int sizeInner, int sizeOuter)
+            {
                 var l = new List<ulong[]>();
-                for (int i = 0; i < sizeOuter; i++) {
+                for (int i = 0; i < sizeOuter; i++)
+                {
                     l.Add(new ulong[sizeInner]);
                 }
 
@@ -142,12 +157,13 @@ namespace Cosmos.Validations.Core {
 
         #endregion
 
-        static CRCTableGenerator() {
+        static CRCTableGenerator()
+        {
             CRC32Table = InternalCrc32Helper.MakeTable(CRC32_POLY);
             CRC64ISOTable = InternalCrc64Helper.MakeTable(CRC64_ISO_POLY);
             CRC64ECMATable = InternalCrc64Helper.MakeTable(CRC64_ECMA_POLY);
         }
-        
+
         private static byte[] _emptyBytes = new byte[0];
 
         public static byte[] EmptyBytes() => _emptyBytes;
@@ -159,8 +175,10 @@ namespace Cosmos.Validations.Core {
         public static uint[] GenerationCRC32Table() => CRC32Table;
 
         // ReSharper disable once InconsistentNaming
-        public static ulong[] GenerationCRC64Table(ulong poly) {
-            return poly switch {
+        public static ulong[] GenerationCRC64Table(ulong poly)
+        {
+            return poly switch
+            {
                 CRC64_ISO_POLY  => CRC64ISOTable[0],
                 CRC64_ECMA_POLY => CRC64ECMATable[0],
                 _               => InternalCrc64Helper.MakeTable(poly)[0]

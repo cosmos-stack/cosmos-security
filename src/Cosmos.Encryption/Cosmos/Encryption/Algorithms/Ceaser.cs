@@ -4,7 +4,8 @@ using System.Text;
 using Cosmos.Encryption.Abstractions;
 using Cosmos.Encryption.Core.Internals;
 
-namespace Cosmos.Encryption.Algorithms {
+namespace Cosmos.Encryption.Algorithms
+{
     /// <summary>
     /// Ceaser encryption algorithm
     /// for more info, please view:
@@ -12,7 +13,8 @@ namespace Cosmos.Encryption.Algorithms {
     /// Author: Omar-Salem
     ///     https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/Ceaser.cs
     /// </summary>
-    public sealed class Ceaser : IEncryptionAlgorithm {
+    public sealed class Ceaser : IEncryptionAlgorithm
+    {
         private int Key { get; }
 
         /// <summary>
@@ -35,12 +37,13 @@ namespace Cosmos.Encryption.Algorithms {
         /// <returns></returns>
         public string Decrypt(string cipher) => ProcessFunc()(Key)(cipher)(EncryptionAlgorithmMode.Decrypt);
 
-
-        private static Func<int, Func<string, Func<EncryptionAlgorithmMode, string>>> ProcessFunc() => key => message => mode => {
+        private static Func<int, Func<string, Func<EncryptionAlgorithmMode, string>>> ProcessFunc() => key => message => mode =>
+        {
             var sbRet = new StringBuilder();
             var alphabet = AlphabetDictionaryGenerator.Generate();
 
-            foreach (var c in message) {
+            foreach (var c in message)
+            {
                 var res = AlgorithmUtils.GetAlphabetPositionFunc()
                     (alphabet[c]) /*char position*/
                     (key)

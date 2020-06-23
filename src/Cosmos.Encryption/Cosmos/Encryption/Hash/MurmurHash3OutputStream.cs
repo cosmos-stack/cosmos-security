@@ -4,7 +4,8 @@ using System.Security.Cryptography;
 using Cosmos.Encryption.Core;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// MurmurHash3 output stream
     /// Reference to:
@@ -12,7 +13,8 @@ namespace Cosmos.Encryption {
     ///     Author: Darren Kopp
     ///     Apache License 2.0
     /// </summary>
-    public class MurmurHash3OutputStream : Stream {
+    public class MurmurHash3OutputStream : Stream
+    {
         // ReSharper disable once InconsistentNaming
         private static readonly byte[] DEFAULT_FINAL_TRANFORM = new byte[0];
         private readonly Stream _underlyingStream;
@@ -22,9 +24,11 @@ namespace Cosmos.Encryption {
         public MurmurHash3OutputStream(Stream underlyingStream, uint seed = 0,
             MurmurHash3Managed managed = MurmurHash3Managed.TRUE,
             MurmurHash3Types types = MurmurHash3Types.L_128,
-            MurmurHash3Preference preference = MurmurHash3Preference.AUTO) {
+            MurmurHash3Preference preference = MurmurHash3Preference.AUTO)
+        {
             _underlyingStream = underlyingStream;
-            _algorithm = types switch {
+            _algorithm = types switch
+            {
                 MurmurHash3Types.L_32  => (HashAlgorithm) MurmurHash3Core.CreateL32(seed, managed),
                 MurmurHash3Types.L_128 => (HashAlgorithm) MurmurHash3Core.CreateL128(seed, managed, preference),
                 _                      => throw new InvalidOperationException("Invalid operation because only support L32 and L128")
@@ -34,8 +38,10 @@ namespace Cosmos.Encryption {
         /// <summary>
         /// Hash
         /// </summary>
-        public byte[] Hash {
-            get {
+        public byte[] Hash
+        {
+            get
+            {
                 _algorithm.TransformFinalBlock(DEFAULT_FINAL_TRANFORM, 0, 0);
                 return _algorithm.Hash;
             }
@@ -54,7 +60,8 @@ namespace Cosmos.Encryption {
         public override long Length => _underlyingStream.Length;
 
         /// <inheritdoc />
-        public override long Position {
+        public override long Position
+        {
             get => _underlyingStream.Position;
             set => throw new NotSupportedException();
         }
@@ -74,13 +81,15 @@ namespace Cosmos.Encryption {
         public override void SetLength(long value) => _underlyingStream.SetLength(value);
 
         /// <inheritdoc />
-        public override void Write(byte[] buffer, int offset, int count) {
+        public override void Write(byte[] buffer, int offset, int count)
+        {
             _algorithm.TransformBlock(buffer, offset, count, null, 0);
             _underlyingStream.Write(buffer, offset, count);
         }
 
         /// <inheritdoc />
-        protected override void Dispose(bool disposing) {
+        protected override void Dispose(bool disposing)
+        {
             if (disposing)
                 _algorithm.Dispose();
             base.Dispose(disposing);

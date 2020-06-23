@@ -1,12 +1,14 @@
 ﻿using System.IO;
 using Cosmos.Validations.Core;
 
-namespace Cosmos.Validations {
+namespace Cosmos.Validations
+{
     /// CRC16 checking provider
     /// Author: X-New-Life
     ///     https://github.com/NewLifeX/X/blob/master/NewLife.Core/Security/Crc16.cs
     // ReSharper disable once InconsistentNaming
-    public sealed class CRC16CheckingProvider : CRCCheckingBase<ushort, short> {
+    public sealed class CRC16CheckingProvider : CRCCheckingBase<ushort, short>
+    {
         /// <summary>
         /// Seed
         /// </summary>
@@ -21,7 +23,8 @@ namespace Cosmos.Validations {
         /// <param name="offset"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public static ushort Compute(byte[] buf, int offset = 0, int count = -1) {
+        public static ushort Compute(byte[] buf, int offset = 0, int count = -1)
+        {
             return Compute<CRC16>(buf, offset, count);
         }
 
@@ -31,7 +34,8 @@ namespace Cosmos.Validations {
         /// <param name="stream"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public static ushort Compute(Stream stream, int count = -1) {
+        public static ushort Compute(Stream stream, int count = -1)
+        {
             return Compute<CRC16>(stream, count);
         }
 
@@ -42,7 +46,8 @@ namespace Cosmos.Validations {
         /// <param name="position"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public static ushort Compute(Stream stream, long position = -1, int count = -1) {
+        public static ushort Compute(Stream stream, long position = -1, int count = -1)
+        {
             return Compute<CRC16>(stream, position, count);
         }
     }

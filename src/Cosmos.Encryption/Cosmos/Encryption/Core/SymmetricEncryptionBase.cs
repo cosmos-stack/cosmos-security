@@ -4,7 +4,8 @@ using System.Security.Cryptography;
 using System.Text;
 using Cosmos.Optionals;
 
-namespace Cosmos.Encryption.Core {
+namespace Cosmos.Encryption.Core
+{
     /// <summary>
     /// Abstrace Symmetric/SymmetricEncryptionBase encryption.
     /// Reference: Seay Xu
@@ -12,13 +13,16 @@ namespace Cosmos.Encryption.Core {
     ///  Editor: AlexLEWIS
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public abstract class SymmetricEncryptionBase {
+    public abstract class SymmetricEncryptionBase
+    {
         /// <summary>
         /// 用于整理获得真实 key / iv 的方法
         /// </summary>
         protected static Func<string, Func<string, Func<Encoding, Func<int, byte[]>>>>
-            ComputeRealValueFunc() => originString => salt => encoding => size => {
-            if (string.IsNullOrWhiteSpace(originString)) {
+            ComputeRealValueFunc() => originString => salt => encoding => size =>
+        {
+            if (string.IsNullOrWhiteSpace(originString))
+            {
                 return new byte[0];
             }
 
@@ -26,7 +30,8 @@ namespace Cosmos.Encryption.Core {
 
             var len = size / 8;
 
-            if (string.IsNullOrWhiteSpace(salt)) {
+            if (string.IsNullOrWhiteSpace(salt))
+            {
                 var retBytes = new byte[len];
                 Array.Copy(encoding.GetBytes(originString.PadRight(len)), retBytes, len);
                 return retBytes;
@@ -46,8 +51,8 @@ namespace Cosmos.Encryption.Core {
         /// <param name="ivBytes"></param>
         /// <returns></returns>
         protected static byte[] NiceEncryptCore<TCryptoServiceProvider>(byte[] sourceBytes, byte[] keyBytes, byte[] ivBytes)
-            where TCryptoServiceProvider : SymmetricAlgorithm, new() {
-
+        where TCryptoServiceProvider : SymmetricAlgorithm, new()
+        {
             using var provider = new TCryptoServiceProvider {Key = keyBytes, IV = ivBytes};
 
             using var ms = new MemoryStream();
@@ -67,7 +72,8 @@ namespace Cosmos.Encryption.Core {
         /// <param name="ivBytes"></param>
         /// <returns></returns>
         protected static byte[] NiceDecryptCore<TCryptoServiceProvider>(byte[] encryptBytes, byte[] keyBytes, byte[] ivBytes)
-            where TCryptoServiceProvider : SymmetricAlgorithm, new() {
+        where TCryptoServiceProvider : SymmetricAlgorithm, new()
+        {
             using var provider = new TCryptoServiceProvider {Key = keyBytes, IV = ivBytes};
 
             using var ms = new MemoryStream();

@@ -1,5 +1,4 @@
 #if NET451
-
 using System.Diagnostics.CodeAnalysis;
 
 namespace System.Security.Cryptography {
@@ -86,6 +85,5 @@ namespace System.Security.Cryptography {
         public static bool operator !=(HashAlgorithmName left, HashAlgorithmName right) => !(left == right);
     }
 }
-
 
 #endif

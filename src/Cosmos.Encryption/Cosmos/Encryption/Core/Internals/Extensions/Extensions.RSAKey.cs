@@ -3,14 +3,15 @@ using System.Security.Cryptography;
 using System.Xml;
 using Newtonsoft.Json;
 
-namespace Cosmos.Encryption.Core.Internals.Extensions {
+namespace Cosmos.Encryption.Core.Internals.Extensions
+{
     /// <summary>
     /// Reference: myloveCc
     ///     https://github.com/myloveCc/NETCore.Encrypt/blob/master/src/NETCore.Encrypt/Extensions/Internal/RsaKeyExtensions.cs
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    internal static partial class RSAKeyExtensions {
-
+    internal static partial class RSAKeyExtensions
+    {
         #region JSON
 
         /// <summary>
@@ -18,14 +19,17 @@ namespace Cosmos.Encryption.Core.Internals.Extensions {
         /// </summary>
         /// <param name="rsa">RSA实例<see cref="RSA"/></param>
         /// <param name="jsonString">RSA的Key序列化JSON字符串</param>
-        internal static void FromJsonString(this RSA rsa, string jsonString) {
-            if (string.IsNullOrEmpty(jsonString)) {
+        internal static void FromJsonString(this RSA rsa, string jsonString)
+        {
+            if (string.IsNullOrEmpty(jsonString))
+            {
                 throw new ArgumentNullException(nameof(jsonString));
             }
 
             var parameters = new RSAParameters();
 
-            try {
+            try
+            {
                 var paramsJson = JsonConvert.DeserializeObject<RSAParametersJson>(jsonString);
 
                 parameters.Modulus = paramsJson.Modulus != null ? Convert.FromBase64String(paramsJson.Modulus) : null;
@@ -39,7 +43,8 @@ namespace Cosmos.Encryption.Core.Internals.Extensions {
                     paramsJson.InverseQ != null ? Convert.FromBase64String(paramsJson.InverseQ) : null;
                 parameters.D = paramsJson.D != null ? Convert.FromBase64String(paramsJson.D) : null;
             }
-            catch {
+            catch
+            {
                 throw new Exception("Invalid Json RSA key.");
             }
 
@@ -52,10 +57,12 @@ namespace Cosmos.Encryption.Core.Internals.Extensions {
         /// <param name="rsa">RSA实例<see cref="RSA"/></param>
         /// <param name="includePrivateParameters">是否包含私钥</param>
         /// <returns></returns>
-        internal static string ToJsonString(this RSA rsa, bool includePrivateParameters) {
+        internal static string ToJsonString(this RSA rsa, bool includePrivateParameters)
+        {
             var parameters = rsa.ExportParameters(includePrivateParameters);
 
-            var parasJson = new RSAParametersJson() {
+            var parasJson = new RSAParametersJson()
+            {
                 Modulus = parameters.Modulus != null ? Convert.ToBase64String(parameters.Modulus) : null,
                 Exponent = parameters.Exponent != null ? Convert.ToBase64String(parameters.Exponent) : null,
                 P = parameters.P != null ? Convert.ToBase64String(parameters.P) : null,
@@ -78,16 +85,20 @@ namespace Cosmos.Encryption.Core.Internals.Extensions {
         /// </summary>
         /// <param name="rsa">RSA实例<see cref="RSA"/></param>
         /// <param name="xmlString">RSA的Key序列化XML字符串</param>
-        public static void FromLvccXmlString(this RSA rsa, string xmlString) {
+        public static void FromLvccXmlString(this RSA rsa, string xmlString)
+        {
             RSAParameters parameters = new RSAParameters();
 
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(xmlString);
 
             // ReSharper disable once PossibleNullReferenceException
-            if (xmlDoc.DocumentElement.Name.Equals("RSAKeyValue")) {
-                foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes) {
-                    switch (node.Name) {
+            if (xmlDoc.DocumentElement.Name.Equals("RSAKeyValue"))
+            {
+                foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
+                {
+                    switch (node.Name)
+                    {
                         case "Modulus":
                             parameters.Modulus = (string.IsNullOrEmpty(node.InnerText)
                                 ? null
@@ -131,7 +142,8 @@ namespace Cosmos.Encryption.Core.Internals.Extensions {
                     }
                 }
             }
-            else {
+            else
+            {
                 throw new Exception("Invalid XML RSA key.");
             }
 
@@ -144,7 +156,8 @@ namespace Cosmos.Encryption.Core.Internals.Extensions {
         /// <param name="rsa">RSA实例<see cref="RSA"/></param>
         /// <param name="includePrivateParameters">是否包含私钥</param>
         /// <returns></returns>
-        public static string ToLvccXmlString(this RSA rsa, bool includePrivateParameters) {
+        public static string ToLvccXmlString(this RSA rsa, bool includePrivateParameters)
+        {
             RSAParameters parameters = rsa.ExportParameters(includePrivateParameters);
 
             // ReSharper disable once UseStringInterpolation
@@ -161,6 +174,5 @@ namespace Cosmos.Encryption.Core.Internals.Extensions {
         }
 
         #endregion
-
     }
 }

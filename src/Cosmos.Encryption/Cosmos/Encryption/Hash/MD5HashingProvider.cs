@@ -5,7 +5,8 @@ using Cosmos.Encryption.Core.Internals.Extensions;
 using Cosmos.Optionals;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// Md5 hashing provider
     /// Reference: Seay Xu
@@ -13,7 +14,8 @@ namespace Cosmos.Encryption {
     /// Editor: AlexLEWIS
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public static class MD5HashingProvider {
+    public static class MD5HashingProvider
+    {
         /// <summary>
         /// MD5 hashing method, default encrypt string is 32 bits.
         /// </summary>
@@ -23,12 +25,14 @@ namespace Cosmos.Encryption {
         /// <param name="isIncludeHyphen"></param>
         /// <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
         /// <returns>Hashed string.</returns>
-        public static string Signature(string data, MD5BitTypes bits = MD5BitTypes.L32, bool isUpper = true, bool isIncludeHyphen = false, Encoding encoding = null) {
+        public static string Signature(string data, MD5BitTypes bits = MD5BitTypes.L32, bool isUpper = true, bool isIncludeHyphen = false, Encoding encoding = null)
+        {
             Checker.Data(data);
 
             encoding = encoding.SafeValue();
 
-            return bits switch {
+            return bits switch
+            {
                 MD5BitTypes.L16 => Encrypt16Func()(data)(encoding).ToFixUpperCase(isUpper).ToFixHyphenChar(isIncludeHyphen),
                 MD5BitTypes.L32 => Encrypt32Func()(data)(encoding).ToFixUpperCase(isUpper).ToFixHyphenChar(isIncludeHyphen),
                 MD5BitTypes.L64 => Encrypt64Func()(data)(encoding).ToFixUpperCase(isUpper).ToFixHyphenChar(isIncludeHyphen),
@@ -45,7 +49,8 @@ namespace Cosmos.Encryption {
         private static Func<string, Func<Encoding, string>> Encrypt64Func() =>
             str => encoding => Convert.ToBase64String(PreencryptFunc()(str)(encoding));
 
-        private static Func<string, Func<Encoding, byte[]>> PreencryptFunc() => str => encoding => {
+        private static Func<string, Func<Encoding, byte[]>> PreencryptFunc() => str => encoding =>
+        {
             using var md5 = MD5.Create();
             return md5.ComputeHash(encoding.GetBytes(str));
         };

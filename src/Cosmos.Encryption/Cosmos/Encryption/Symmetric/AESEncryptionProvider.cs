@@ -6,24 +6,28 @@ using Cosmos.Encryption.Core;
 using Cosmos.Optionals;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// Symmetric/AES encryption.
     /// Reference: Seay Xu
     ///     https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Symmetric/AES.cs
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public sealed class AESEncryptionProvider : SymmetricEncryptionBase, ISymmetricEncryption {
+    public sealed class AESEncryptionProvider : SymmetricEncryptionBase, ISymmetricEncryption
+    {
         private AESEncryptionProvider() { }
 
         /// <summary>
         /// Create an AES key.
         /// </summary>
         /// <returns></returns>
-        public static AESKey CreateKey(AESKeySizeTypes size = AESKeySizeTypes.L256, Encoding encoding = null) {
+        public static AESKey CreateKey(AESKeySizeTypes size = AESKeySizeTypes.L256, Encoding encoding = null)
+        {
             encoding = encoding.SafeValue();
             using var provider = new AesCryptoServiceProvider {KeySize = (int) size};
-            return new AESKey {
+            return new AESKey
+            {
                 Key = encoding.GetString(provider.Key),
                 IV = encoding.GetString(provider.IV),
                 Size = size
@@ -41,7 +45,8 @@ namespace Cosmos.Encryption {
         /// <param name="iv">The initialization iv (IV) to use to derive the key.</param>
         /// <returns>The encrypted string.</returns>
         public static string Encrypt(string data, string pwd, string iv = null, string salt = null, Encoding encoding = null,
-            AESKeySizeTypes keySize = AESKeySizeTypes.L256) {
+            AESKeySizeTypes keySize = AESKeySizeTypes.L256)
+        {
             Checker.Data(data);
             Checker.Password(pwd);
             Checker.IV(iv);
@@ -54,7 +59,6 @@ namespace Cosmos.Encryption {
                 ComputeRealValueFunc()(iv)(salt)(encoding)(128)));
         }
 
-
         /// <summary>
         /// AES encryption.
         /// </summary>
@@ -62,7 +66,8 @@ namespace Cosmos.Encryption {
         /// <param name="key">your key.</param>
         /// <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
         /// <returns></returns>
-        public static string Encrypt(string data, AESKey key, Encoding encoding = null) {
+        public static string Encrypt(string data, AESKey key, Encoding encoding = null)
+        {
             Checker.Key(key);
 
             return Encrypt(data, key.Key, key.IV, encoding: encoding, keySize: key.Size);
@@ -79,7 +84,8 @@ namespace Cosmos.Encryption {
         /// <param name="iv">The initialization iv (IV) to use to derive the key.</param>
         /// <returns>The decryption string.</returns>
         public static string Decrypt(string data, string pwd = null, string iv = null, string salt = null, Encoding encoding = null,
-            AESKeySizeTypes keySize = AESKeySizeTypes.L256) {
+            AESKeySizeTypes keySize = AESKeySizeTypes.L256)
+        {
             Checker.Data(data);
             Checker.Password(pwd);
             Checker.IV(iv);
@@ -99,7 +105,8 @@ namespace Cosmos.Encryption {
         /// <param name="key">your key.</param>
         /// <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
         /// <returns></returns>
-        public static string Decrypt(string data, AESKey key, Encoding encoding = null) {
+        public static string Decrypt(string data, AESKey key, Encoding encoding = null)
+        {
             Checker.Key(key);
             return Decrypt(data, key.Key, key.IV, encoding: encoding, keySize: key.Size);
         }

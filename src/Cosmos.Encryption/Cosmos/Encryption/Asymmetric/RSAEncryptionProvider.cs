@@ -4,12 +4,14 @@ using System.Security.Cryptography;
 using System.Text;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// Asymmetric/RSA encryption.
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public static partial class RSAEncryptionProvider {
+    public static partial class RSAEncryptionProvider
+    {
         /// <summary>
         /// Encrypt string data with xml/json format.
         /// </summary>
@@ -26,7 +28,8 @@ namespace Cosmos.Encryption {
             RSAEncryptionPadding padding,
             Encoding encoding = null,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
-            RSAKeyTypes keyType = RSAKeyTypes.XML) {
+            RSAKeyTypes keyType = RSAKeyTypes.XML)
+        {
             var rsa = TouchRsaUtilFromPublicKey(keyType, encoding, publicKey, sizeType);
             return rsa.EncryptByPublicKey(data, padding);
         }
@@ -45,7 +48,8 @@ namespace Cosmos.Encryption {
             string publicKey,
             RSAEncryptionPadding padding,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
-            RSAKeyTypes keyType = RSAKeyTypes.XML) {
+            RSAKeyTypes keyType = RSAKeyTypes.XML)
+        {
             var rsa = TouchRsaUtilFromPublicKey(keyType, Encoding.UTF8, publicKey, sizeType);
             return rsa.EncryptByPublicKey(dataBytes, padding);
         }
@@ -66,7 +70,8 @@ namespace Cosmos.Encryption {
             RSAEncryptionPadding padding,
             Encoding encoding = null,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
-            RSAKeyTypes keyType = RSAKeyTypes.XML) {
+            RSAKeyTypes keyType = RSAKeyTypes.XML)
+        {
             var rsa = TouchRsaUtilFromPrivateKey(keyType, encoding, privateKey, sizeType);
             return rsa.EncryptByPrivateKey(data, padding);
         }
@@ -85,7 +90,8 @@ namespace Cosmos.Encryption {
             string privateKey,
             RSAEncryptionPadding padding,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
-            RSAKeyTypes keyType = RSAKeyTypes.XML) {
+            RSAKeyTypes keyType = RSAKeyTypes.XML)
+        {
             var rsa = TouchRsaUtilFromPrivateKey(keyType, Encoding.UTF8, privateKey, sizeType);
             return rsa.EncryptByPrivateKey(dataBytes, padding);
         }
@@ -106,7 +112,8 @@ namespace Cosmos.Encryption {
             RSAEncryptionPadding padding,
             Encoding encoding = null,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
-            RSAKeyTypes keyType = RSAKeyTypes.XML) {
+            RSAKeyTypes keyType = RSAKeyTypes.XML)
+        {
             var rsa = TouchRsaUtilFromPrivateKey(keyType, encoding, privateKey, sizeType);
             return rsa.DecryptByPrivateKey(data, padding);
         }
@@ -125,7 +132,8 @@ namespace Cosmos.Encryption {
             string privateKey,
             RSAEncryptionPadding padding,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
-            RSAKeyTypes keyType = RSAKeyTypes.XML) {
+            RSAKeyTypes keyType = RSAKeyTypes.XML)
+        {
             var rsa = TouchRsaUtilFromPrivateKey(keyType, Encoding.UTF8, privateKey, sizeType);
             return rsa.DecryptByPrivateKey(dataBytes, padding);
         }
@@ -148,7 +156,8 @@ namespace Cosmos.Encryption {
             RSASignaturePadding padding,
             Encoding encoding = null,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
-            RSAKeyTypes keyType = RSAKeyTypes.XML) {
+            RSAKeyTypes keyType = RSAKeyTypes.XML)
+        {
             var rsa = TouchRsaUtilFromPublicKey(keyType, encoding, publicKey, sizeType);
             return rsa.SignDataByPublicKey(data, hashAlgorithmName, padding);
         }
@@ -171,7 +180,8 @@ namespace Cosmos.Encryption {
             RSASignaturePadding padding,
             Encoding encoding = null,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
-            RSAKeyTypes keyType = RSAKeyTypes.XML) {
+            RSAKeyTypes keyType = RSAKeyTypes.XML)
+        {
             var rsa = TouchRsaUtilFromPublicKey(keyType, encoding, publicKey, sizeType);
             return rsa.SignDataByPublicKeyToBytes(data, hashAlgorithmName, padding);
         }
@@ -194,7 +204,8 @@ namespace Cosmos.Encryption {
             RSASignaturePadding padding,
             Encoding encoding = null,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
-            RSAKeyTypes keyType = RSAKeyTypes.XML) {
+            RSAKeyTypes keyType = RSAKeyTypes.XML)
+        {
             var rsa = TouchRsaUtilFromPrivateKey(keyType, encoding, privateKey, sizeType);
             return rsa.SignDataByPrivateKey(data, hashAlgorithmName, padding);
         }
@@ -217,7 +228,8 @@ namespace Cosmos.Encryption {
             RSASignaturePadding padding,
             Encoding encoding = null,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
-            RSAKeyTypes keyType = RSAKeyTypes.XML) {
+            RSAKeyTypes keyType = RSAKeyTypes.XML)
+        {
             var rsa = TouchRsaUtilFromPrivateKey(keyType, encoding, privateKey, sizeType);
             return rsa.SignDataByPrivateKeyToBytes(data, hashAlgorithmName, padding);
         }
@@ -242,7 +254,8 @@ namespace Cosmos.Encryption {
             RSASignaturePadding padding,
             Encoding encoding = null,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
-            RSAKeyTypes keyType = RSAKeyTypes.XML) {
+            RSAKeyTypes keyType = RSAKeyTypes.XML)
+        {
             var rsa = TouchRsaUtilFromPublicKey(keyType, encoding, publicKey, sizeType);
             return rsa.VerifyDataByPublicKey(data, signature, hashAlgorithmName, padding);
         }
@@ -267,7 +280,8 @@ namespace Cosmos.Encryption {
             RSASignaturePadding padding,
             Encoding encoding = null,
             RSAKeySizeTypes sizeType = RSAKeySizeTypes.R2048,
-            RSAKeyTypes keyType = RSAKeyTypes.XML) {
+            RSAKeyTypes keyType = RSAKeyTypes.XML)
+        {
             var rsa = TouchRsaUtilFromPrivateKey(keyType, encoding, privateKey, sizeType);
             return rsa.VerifyDataByPrivateKey(data, signature, hashAlgorithmName, padding);
         }

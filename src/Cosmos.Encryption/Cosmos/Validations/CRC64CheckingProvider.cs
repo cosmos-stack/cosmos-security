@@ -2,12 +2,14 @@ using System;
 using System.IO;
 using Cosmos.Validations.Core;
 
-namespace Cosmos.Validations {
+namespace Cosmos.Validations
+{
     /// <summary>
     /// CRC 32 checking provider
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public class CRC64CheckingProvider : CRCCheckingBase<ulong, long> {
+    public class CRC64CheckingProvider : CRCCheckingBase<ulong, long>
+    {
         /// <summary>
         /// The size of CRC64 checksum in bytes.
         /// </summary>
@@ -28,8 +30,10 @@ namespace Cosmos.Validations {
         /// <param name="offset"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public static ulong Compute(CRC64Mode mode, byte[] buf, int offset = 0, int count = -1) {
-            switch (mode) {
+        public static ulong Compute(CRC64Mode mode, byte[] buf, int offset = 0, int count = -1)
+        {
+            switch (mode)
+            {
                 case CRC64Mode.IsoMode:
                     return Compute<ISO_CRC64>(buf, offset, count);
                 case CRC64Mode.EcmaMode:
@@ -46,8 +50,10 @@ namespace Cosmos.Validations {
         /// <param name="stream"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public static ulong Compute(CRC64Mode mode, Stream stream, int count = -1) {
-            switch (mode) {
+        public static ulong Compute(CRC64Mode mode, Stream stream, int count = -1)
+        {
+            switch (mode)
+            {
                 case CRC64Mode.IsoMode:
                     return Compute<ISO_CRC64>(stream, count);
                 case CRC64Mode.EcmaMode:
@@ -65,8 +71,10 @@ namespace Cosmos.Validations {
         /// <param name="position"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public static ulong Compute(CRC64Mode mode, Stream stream, long position = -1, int count = -1) {
-            switch (mode) {
+        public static ulong Compute(CRC64Mode mode, Stream stream, long position = -1, int count = -1)
+        {
+            switch (mode)
+            {
                 case CRC64Mode.IsoMode:
                     return Compute<ISO_CRC64>(stream, position, count);
                 case CRC64Mode.EcmaMode:

@@ -1,11 +1,13 @@
 ﻿// ReSharper disable once CheckNamespace
 
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// Triple des key
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public class TripleDESKey {
+    public class TripleDESKey
+    {
         /// <summary>
         /// Des key
         /// </summary>

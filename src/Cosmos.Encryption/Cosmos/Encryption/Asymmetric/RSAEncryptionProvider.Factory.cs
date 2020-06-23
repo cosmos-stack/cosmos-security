@@ -4,7 +4,8 @@ using System.Security.Cryptography.X509Certificates;
 using Cosmos.Encryption.Core.Internals.Extensions;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// Asymmetric/RSA encryption.
     /// Reference: Seay Xu
@@ -13,7 +14,8 @@ namespace Cosmos.Encryption {
     ///     https://github.com/myloveCc/NETCore.Encrypt/blob/master/src/NETCore.Encrypt/EncryptProvider.cs
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public static partial class RSAEncryptionProvider {
+    public static partial class RSAEncryptionProvider
+    {
         /// <summary>
         /// Create a new <see cref="RSAKey"/>
         /// </summary>
@@ -21,8 +23,10 @@ namespace Cosmos.Encryption {
         /// <param name="keyType"></param>
         /// <param name="format"></param>
         /// <returns></returns>
-        public static RSAKey CreateKey(RSAKeySizeTypes size = RSAKeySizeTypes.R2048, RSAKeyTypes keyType = RSAKeyTypes.XML, bool format = false) {
-            switch (keyType) {
+        public static RSAKey CreateKey(RSAKeySizeTypes size = RSAKeySizeTypes.R2048, RSAKeyTypes keyType = RSAKeyTypes.XML, bool format = false)
+        {
+            switch (keyType)
+            {
                 case RSAKeyTypes.Pkcs1:
                     return Core.RSAKeyGenerator.Pkcs1Key((int) size, format);
 
@@ -48,9 +52,11 @@ namespace Cosmos.Encryption {
 #if NET451
         public static RSACryptoServiceProvider CreateKeyFromXml(string key) {
 #else
-        public static RSA CreateKeyFromXml(string key) {
+        public static RSA CreateKeyFromXml(string key)
+        {
 #endif
-            if (string.IsNullOrWhiteSpace(key)) {
+            if (string.IsNullOrWhiteSpace(key))
+            {
                 throw new ArgumentNullException(nameof(key));
             }
 #if NET451
@@ -70,7 +76,8 @@ namespace Cosmos.Encryption {
 #if NET451
         public static RSACryptoServiceProvider CreateKeyFromJson(string key) {
 #else
-        public static RSA CreateKeyFromJson(string key) {
+        public static RSA CreateKeyFromJson(string key)
+        {
 #endif
             Checker.Key(key);
 #if NET451
@@ -90,7 +97,8 @@ namespace Cosmos.Encryption {
 #if NET451
         public static RSACryptoServiceProvider CreatePublicKeyFromPkcs1(string key) {
 #else
-        public static RSA CreatePublicKeyFromPkcs1(string key) {
+        public static RSA CreatePublicKeyFromPkcs1(string key)
+        {
 #endif
             Checker.Key(key);
 #if NET451
@@ -110,7 +118,8 @@ namespace Cosmos.Encryption {
 #if NET451
         public static RSACryptoServiceProvider CreatePrivateKeyFromPkcs1(string key) {
 #else
-        public static RSA CreatePrivateKeyFromPkcs1(string key) {
+        public static RSA CreatePrivateKeyFromPkcs1(string key)
+        {
 #endif
             Checker.Key(key);
 #if NET451
@@ -130,7 +139,8 @@ namespace Cosmos.Encryption {
 #if NET451
         public static RSACryptoServiceProvider CreatePublicKeyFromPkcs8(string key) {
 #else
-        public static RSA CreatePublicKeyFromPkcs8(string key) {
+        public static RSA CreatePublicKeyFromPkcs8(string key)
+        {
 #endif
             Checker.Key(key);
 #if NET451
@@ -150,7 +160,8 @@ namespace Cosmos.Encryption {
 #if NET451
         public static RSACryptoServiceProvider CreatePrivateKeyFromPkcs8(string key) {
 #else
-        public static RSA CreatePrivateKeyFromPkcs8(string key) {
+        public static RSA CreatePrivateKeyFromPkcs8(string key)
+        {
 #endif
             Checker.Key(key);
 #if NET451
@@ -168,7 +179,8 @@ namespace Cosmos.Encryption {
         /// <param name="certFile">The string path of certificate file.</param>
         /// <param name="password">The string password of certificate file.</param>
         /// <returns>String private key of xml format.</returns>
-        public static string GetPrivateKey(string certFile, string password) {
+        public static string GetPrivateKey(string certFile, string password)
+        {
             Checker.File(certFile, nameof(certFile));
             var cert = new X509Certificate2(certFile, password, X509KeyStorageFlags.Exportable);
             return cert.PrivateKey.ToXmlString(true);
@@ -179,7 +191,8 @@ namespace Cosmos.Encryption {
         /// </summary>
         /// <param name="certFile">The string path of certificate file.</param>
         /// <returns>String public key of xml format.</returns>
-        public static string GetPublicKey(string certFile) {
+        public static string GetPublicKey(string certFile)
+        {
             Checker.File(certFile, nameof(certFile));
             var cert = new X509Certificate2(certFile);
             return cert.PublicKey.Key.ToXmlString(false);

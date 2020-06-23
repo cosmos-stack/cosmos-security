@@ -3,22 +3,26 @@ using System.Text;
 using Cosmos.Optionals;
 
 // ReSharper disable once CheckNamespace
-namespace Cosmos.Encryption {
+namespace Cosmos.Encryption
+{
     /// <summary>
     /// Asymmetric/DSA encryption.
     /// Reference: X-New-Life
     ///     https://github.com/NewLifeX/X/blob/master/NewLife.Core/Security/DSAHelper.cs
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public static class DSAEncryptionProvider {
+    public static class DSAEncryptionProvider
+    {
         /// <summary>
         /// Create a new <see cref="DSAKey"/>
         /// </summary>
         /// <param name="keySize"></param>
         /// <returns></returns>
-        public static DSAKey CreateKey(int keySize = 1024) {
+        public static DSAKey CreateKey(int keySize = 1024)
+        {
             using var provider = new DSACryptoServiceProvider(keySize);
-            var key = new DSAKey {
+            var key = new DSAKey
+            {
                 PrivateKey = provider.ToXmlString(true),
                 PublicKey = provider.ToXmlString(false)
             };
@@ -31,7 +35,8 @@ namespace Cosmos.Encryption {
         /// <param name="buffer"></param>
         /// <param name="privateKey"></param>
         /// <returns></returns>
-        public static byte[] Signature(byte[] buffer, string privateKey) {
+        public static byte[] Signature(byte[] buffer, string privateKey)
+        {
             using var provider = new DSACryptoServiceProvider();
             provider.FromXmlString(privateKey);
             return provider.SignData(buffer);
@@ -43,7 +48,8 @@ namespace Cosmos.Encryption {
         /// <param name="buffer"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static byte[] Signature(byte[] buffer, DSAKey key) {
+        public static byte[] Signature(byte[] buffer, DSAKey key)
+        {
             Checker.Key(key);
             return Signature(buffer, key.PrivateKey);
         }
@@ -55,7 +61,8 @@ namespace Cosmos.Encryption {
         /// <param name="privateKey"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static byte[] Signature(string data, string privateKey, Encoding encoding = null) {
+        public static byte[] Signature(string data, string privateKey, Encoding encoding = null)
+        {
             return Signature(encoding.SafeValue().GetBytes(data), privateKey);
         }
 
@@ -66,7 +73,8 @@ namespace Cosmos.Encryption {
         /// <param name="key"></param>
         /// <param name="encoding"></param>
         /// <returns></returns>
-        public static byte[] Signature(string data, DSAKey key, Encoding encoding = null) {
+        public static byte[] Signature(string data, DSAKey key, Encoding encoding = null)
+        {
             return Signature(encoding.SafeValue().GetBytes(data), key);
         }
 
@@ -77,7 +85,8 @@ namespace Cosmos.Encryption {
         /// <param name="publicKey"></param>
         /// <param name="rgbSignature"></param>
         /// <returns></returns>
-        public static bool Verify(byte[] buffer, string publicKey, byte[] rgbSignature) {
+        public static bool Verify(byte[] buffer, string publicKey, byte[] rgbSignature)
+        {
             using var provider = new DSACryptoServiceProvider();
             provider.FromXmlString(publicKey);
             return provider.VerifyData(buffer, rgbSignature);
@@ -90,7 +99,8 @@ namespace Cosmos.Encryption {
         /// <param name="key"></param>
         /// <param name="rgbSignature"></param>
         /// <returns></returns>
-        public static bool Verify(byte[] buffer, DSAKey key, byte[] rgbSignature) {
+        public static bool Verify(byte[] buffer, DSAKey key, byte[] rgbSignature)
+        {
             Checker.Key(key);
             return Verify(buffer, key.PublicKey, rgbSignature);
         }

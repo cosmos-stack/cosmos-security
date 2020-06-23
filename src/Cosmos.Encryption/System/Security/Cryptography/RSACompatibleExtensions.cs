@@ -2,7 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 using Cosmos.Encryption.Core.Internals.Extensions;
 
 #if !NETCOREAPP3_1 && !NETSTANDARD2_1
-
 namespace System.Security.Cryptography {
     /// <summary>
     /// Compatible extensions for RSA
@@ -91,6 +90,5 @@ namespace System.Security.Cryptography {
         }
     }
 }
-
 
 #endif
