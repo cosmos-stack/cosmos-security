@@ -11,25 +11,43 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FAB7E90F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cosmos.Encryption.Tests", "tests\Cosmos.Encryption.Tests\Cosmos.Encryption.Tests.csproj", "{A630520D-F1C3-46C4-92C7-3AB184A26105}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{ACACF492-6B6B-44B7-B5EE-33A18A1C18EF}"
-	ProjectSection(SolutionItems) = preProject
-		build\common.props = build\common.props
-		build\version.props = build\version.props
-		build\misc.props = build\misc.props
-		build\package.props = build\package.props
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosmos.Encryption.Tests.TestingConsole", "tests\Cosmos.Encryption.Tests.TestingConsole\Cosmos.Encryption.Tests.TestingConsole.csproj", "{68D978D8-7EA7-4C9B-B4F7-B107A68D558B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Append Solution Folder", "Append Solution Folder", "{216BCB4D-E925-4925-8DF6-96719C2DDDAC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{E098E701-0632-4453-8E2C-4E0AEBAB0A90}"
+ProjectSection(SolutionItems) = preProject
+	README.md = README.md
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{446E10FA-023C-41D4-952D-A77B7BD27441}"
+ProjectSection(SolutionItems) = preProject
+	build\Publish.bat = build\Publish.bat
+	build\PublishToAlexinea.bat = build\PublishToAlexinea.bat
+	build\PublishToMyGet.bat = build\PublishToMyGet.bat
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "asset", "asset", "{0E935A79-5C01-41F8-A665-D56A67958F45}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{9F80D410-BE69-4F0B-B1B8-EC751450A0A7}"
+ProjectSection(SolutionItems) = preProject
+	asset\images\icon.back.png = asset\images\icon.back.png
+	asset\images\icon.png = asset\images\icon.png
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "props", "props", "{66D68C53-893F-403C-9DC9-9C3E1B7F2323}"
+ProjectSection(SolutionItems) = preProject
+	asset\props\misc.props = asset\props\misc.props
+	asset\props\package.props = asset\props\package.props
+	asset\props\version.props = asset\props\version.props
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{BD704EBC-4110-4717-B7FB-F6D815589EC8}"
 ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
+	common.props = common.props
+	common.tests.props = common.tests.props
 	LICENSE = LICENSE
+	logo.png = logo.png
 	NuGet.config = NuGet.config
-	Publish.bat = Publish.bat
-	PublishToMyGet.bat = PublishToMyGet.bat
-	README.md = README.md
-	PublishToAlexinea.bat = PublishToAlexinea.bat
 EndProjectSection
 EndProject
 Global
@@ -58,7 +76,8 @@ Global
 		{27C23A57-2C63-4C51-A102-A20A7A4D2016} = {FCC067FE-90F6-4E55-8169-7D6982B52A8A}
 		{A630520D-F1C3-46C4-92C7-3AB184A26105} = {FAB7E90F-6BA0-4305-96C1-B71EB1BBEEC3}
 		{68D978D8-7EA7-4C9B-B4F7-B107A68D558B} = {FAB7E90F-6BA0-4305-96C1-B71EB1BBEEC3}
-		{ACACF492-6B6B-44B7-B5EE-33A18A1C18EF} = {216BCB4D-E925-4925-8DF6-96719C2DDDAC}
+		{9F80D410-BE69-4F0B-B1B8-EC751450A0A7} = {0E935A79-5C01-41F8-A665-D56A67958F45}
+		{66D68C53-893F-403C-9DC9-9C3E1B7F2323} = {0E935A79-5C01-41F8-A665-D56A67958F45}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D59A7B73-5F98-4002-9551-304D243E4B48}

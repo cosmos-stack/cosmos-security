@@ -1,10 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <Import Project="..\..\build\common.props" />
-
-    <PropertyGroup>
-        <TargetFrameworks>netcoreapp3.1;netstandard2.1;netstandard2.0;net461;net451</TargetFrameworks>
-    </PropertyGroup>
+    <Import Project="..\..\common.props" />
 
     <PropertyGroup>
         <AssemblyName>Cosmos.Encryption</AssemblyName>
@@ -14,7 +10,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Cosmos.Serialization.NewtonsoftJson" Version="0.1.4.4-alpha2-201012" />
+        <PackageReference Include="Cosmos.Serialization.NewtonsoftJson" Version="0.1.4.5" />
         <PackageReference Include="Portable.BouncyCastle" Version="1.8.6.7" />
         <PackageReference Include="System.Memory" Version="4.5.4" />
     </ItemGroup>

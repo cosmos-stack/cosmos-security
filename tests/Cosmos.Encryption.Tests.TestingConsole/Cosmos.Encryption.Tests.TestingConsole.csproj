@@ -1,14 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-    <ApplicationIcon />
-    <OutputType>Exe</OutputType>
-    <StartupObject />
-  </PropertyGroup>
+    <Import Project="..\..\common.tests.props" />
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Cosmos.Encryption\Cosmos.Encryption.csproj" />
-  </ItemGroup>
+    <PropertyGroup>
+      <ApplicationIcon />
+      <OutputType>Exe</OutputType>
+      <StartupObject />
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Cosmos.Encryption\Cosmos.Encryption.csproj" />
+    </ItemGroup>
 
 </Project>
