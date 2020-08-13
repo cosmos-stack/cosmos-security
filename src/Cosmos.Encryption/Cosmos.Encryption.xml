@@ -28,6 +28,11 @@
             Interface for symmetric encryption
             </summary>
         </member>
+        <member name="T:Cosmos.Encryption.Abstractions.IFastSymmetricEncryption">
+            <summary>
+            Interface for fast symmetric encryption
+            </summary>
+        </member>
         <member name="T:Cosmos.Encryption.Algorithms.AutoKey">
             <summary>
             AutoKey encryption algorithm
@@ -2406,6 +2411,49 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:Cosmos.Encryption.Core.SymmetricAlgorithmHelper">
+            <summary>
+            The high-performance encapsulation of the symmetric encryption algorithm supports high concurrency
+            and high resource reuse rate. The unused resources in 5 minutes are automatically released,
+            which is about 8 times faster than the official instance.<br />
+            对称加密算法的高性能封装，支持高并发，资源重复利用率高，5 分钟未使用的资源自动释放，比官方实例快 8 倍左右。
+            </summary>
+        </member>
+        <member name="F:Cosmos.Encryption.Core.SymmetricAlgorithmHelper.DisposeInterval">
+            <summary>
+            Indicates how long the object has not been used and needs to be released.
+            The unit is milliseconds. <br />
+            指示对象多长时间未使用需要释放。单位毫秒。
+            </summary>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SymmetricAlgorithmHelper.Encrypt``1(System.ArraySegment{System.Byte},System.Byte[])">
+            <summary>
+            Use the specified symmetric algorithm and key for encryption.<br />
+            使用指定对称算法和密钥进行加密。
+            </summary>
+            <typeparam name="TSymmetricAlgorithm">对称算法</typeparam>
+            <param name="source">原文</param>
+            <param name="key">密钥</param>
+            <returns>返回密文</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SymmetricAlgorithmHelper.Decrypt``1(System.ArraySegment{System.Byte},System.Byte[])">
+            <summary>
+            Use the specified symmetric algorithm and key for decryption.<br />
+            使用指定的对称算法和密钥进行解密。
+            </summary>
+            <typeparam name="TSymmetricAlgorithm">对称算法</typeparam>
+            <param name="source">密文</param>
+            <param name="key">密钥</param>
+            <returns>返回原文</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SymmetricAlgorithmHelper.CreateKey``1">
+            <summary>
+            Create a key that specifies a symmetric algorithm.<br />
+            创建一个指定对称算法的密钥。
+            </summary>
+            <typeparam name="TSymmetricAlgorithm">对称算法</typeparam>
+            <returns>返回密钥</returns>
+        </member>
         <member name="T:Cosmos.Encryption.Core.SymmetricEncryptionBase">
             <summary>
             Abstrace Symmetric/SymmetricEncryptionBase encryption.
@@ -2643,13 +2691,24 @@
         </member>
         <member name="M:Cosmos.Encryption.MD2HashingProvider.Signature(System.String,System.Boolean,System.Boolean,System.Text.Encoding)">
             <summary>
-            MD5 hashing method, default encrypt string is 32 bits.
+            MD2 hashing method
             </summary>
             <param name="data">The string you want to hash.</param>
             <param name="isUpper"></param>
             <param name="isIncludeHyphen"></param>
             <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
             <returns>Hashed string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.MD2HashingProvider.Verify(System.String,System.String,System.Boolean,System.Boolean,System.Text.Encoding)">
+            <summary>
+            Verify 
+            </summary>
+            <param name="comparison"></param>
+            <param name="data">The string of encrypt.</param>
+            <param name="isUpper"></param>
+            <param name="isIncludeHyphen"></param>
+            <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
+            <returns></returns>
         </member>
         <member name="T:Cosmos.Encryption.MD4HashingProvider">
             <summary>
@@ -3343,6 +3402,28 @@
             <param name="encoding">The <see cref="T:System.Text.Encoding"/>,default is Encoding.UTF8.</param>
             <returns></returns>
         </member>
+        <member name="M:Cosmos.Encryption.AESEncryptionProvider.FastCreateKey">
+            <summary>
+            Create an AES key.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.AESEncryptionProvider.FastEncrypt(System.ArraySegment{System.Byte},System.Byte[])">
+            <summary>
+            AES encryption.
+            </summary>
+            <param name="source"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.AESEncryptionProvider.FastDecrypt(System.ArraySegment{System.Byte},System.Byte[])">
+            <summary>
+            AES decryption.
+            </summary>
+            <param name="source"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
         <member name="T:Cosmos.Encryption.AESKey">
             <summary>
             Aes key
@@ -3417,6 +3498,28 @@
             <param name="salt">The key salt to use to derive the key.</param>
             <param name="iv">The initialization vector (IV) to use to derive the key.</param>
             <returns>The decryption string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.DESEncryptionProvider.FastCreateKey">
+            <summary>
+            Create a DES key.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.DESEncryptionProvider.FastEncrypt(System.ArraySegment{System.Byte},System.Byte[])">
+            <summary>
+            DES encryption.
+            </summary>
+            <param name="source"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.DESEncryptionProvider.FastDecrypt(System.ArraySegment{System.Byte},System.Byte[])">
+            <summary>
+            DES decryption.
+            </summary>
+            <param name="source"></param>
+            <param name="key"></param>
+            <returns></returns>
         </member>
         <member name="T:Cosmos.Encryption.DESKey">
             <summary>
@@ -4079,6 +4182,28 @@
             <param name="keySize">The size only can be 128, 192.</param>
             <param name="iv">The initialization vector (IV) to use to derive the key.</param>
             <returns>The decryption string.</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.TripleDESEncryptionProvider.FastCreateKey">
+            <summary>
+            Create a TripleDES key.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.TripleDESEncryptionProvider.FastEncrypt(System.ArraySegment{System.Byte},System.Byte[])">
+            <summary>
+            TripleDES encryption.
+            </summary>
+            <param name="source"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.TripleDESEncryptionProvider.FastDecrypt(System.ArraySegment{System.Byte},System.Byte[])">
+            <summary>
+            TripleDES decryption.
+            </summary>
+            <param name="source"></param>
+            <param name="key"></param>
+            <returns></returns>
         </member>
         <member name="T:Cosmos.Encryption.TripleDESKey">
             <summary>

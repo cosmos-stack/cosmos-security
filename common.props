@@ -1,7 +1,7 @@
 <Project>
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFrameworks>netstandard2.1;netstandard2.0;netcoreapp3.1;netcoreapp3.0</TargetFrameworks>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -9,8 +9,6 @@
         <LangVersion>latest</LangVersion>
         <NoWarn>$(NoWarn);CS1591</NoWarn>
     </PropertyGroup>
-
-    <Import Project="asset/props/version.props"/>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <DocumentationFile>$(AssemblyName).xml</DocumentationFile>
@@ -23,6 +21,10 @@
     <Import Project="asset/props/package.props"/>
 
     <Import Project="asset/props/misc.props"/>
+
+    <Import Project="../version.props"/>
+
+    <Import Project="../version.dev.props"/>
 
     <ItemGroup>
         <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All"/>

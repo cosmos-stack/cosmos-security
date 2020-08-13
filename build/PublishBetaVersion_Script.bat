@@ -1,5 +1,9 @@
 @echo off
 
+echo =======================================================================
+echo Cosmos.Encryption
+echo =======================================================================
+
 ::go to parent folder
 cd ..
 
@@ -16,11 +20,8 @@ for /R "nuget_packages" %%s in (*) do (
 echo Cleaned up all nuget packages.
 echo.
 
-::get nuget key
-set /p key=input key:
-
 ::start to package all projects
-dotnet pack src/Cosmos.Encryption -c Release -o nuget_packages
+dotnet pack src/Cosmos.Encryption/Cosmos.Encryption._build.csproj -c Release -o nuget_packages --no-restore
 
 for /R "nuget_packages" %%s in (*symbols.nupkg) do (
     del "%%s"
@@ -29,16 +30,11 @@ for /R "nuget_packages" %%s in (*symbols.nupkg) do (
 echo.
 echo.
 
-::set target nuget server url
-set source=https://api.nuget.org/v3/index.json
-
 ::push nuget packages to server
 for /R "nuget_packages" %%s in (*.nupkg) do ( 	
-    dotnet nuget push "%%s" -k %key% -s %source% --skip-duplicate
+    dotnet nuget push "%%s" -s "Beta" --skip-duplicate
 	echo.
 )
 
 ::get back to build folder
 cd build
-
-pause

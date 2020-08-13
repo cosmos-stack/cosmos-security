@@ -1,0 +1,15 @@
+﻿<Project>
+
+    <PropertyGroup>
+        <AssemblyName>Cosmos.Encryption</AssemblyName>
+        <PackageId>Cosmos.Encryption</PackageId>
+        <Description>Cosmos encryption library</Description>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Portable.BouncyCastle" Version="1.8.6.7" />
+        <PackageReference Include="System.Memory" Version="4.5.4" />
+    </ItemGroup>
+
+</Project>
