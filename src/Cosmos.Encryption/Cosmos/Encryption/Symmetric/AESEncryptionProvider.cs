@@ -14,7 +14,7 @@ namespace Cosmos.Encryption
     ///     https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Symmetric/AES.cs
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public sealed class AESEncryptionProvider : SymmetricEncryptionBase, ISymmetricEncryption
+    public sealed partial class AESEncryptionProvider : SymmetricEncryptionBase, ISymmetricEncryption
     {
         private AESEncryptionProvider() { }
 
