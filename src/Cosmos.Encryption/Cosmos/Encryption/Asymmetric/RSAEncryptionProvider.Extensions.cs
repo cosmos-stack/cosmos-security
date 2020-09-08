@@ -29,8 +29,8 @@ namespace Cosmos.Encryption
                 RSAKeyTypes.XML  => rsa.ToLvccXmlString(true),
                 RSAKeyTypes.JSON => rsa.ToJsonString(true),
 #if NETCOREAPP3_1 || NETSTANDARD2_1
-                RSAKeyTypes.Pkcs1 => Base64Converter.ToBase64String(rsa.ExportRSAPrivateKey()),
-                RSAKeyTypes.Pkcs8 => Base64Converter.ToBase64String(rsa.ExportPkcs8PrivateKey()),
+                RSAKeyTypes.Pkcs1 => Base64Conv.ToBase64String(rsa.ExportRSAPrivateKey()),
+                RSAKeyTypes.Pkcs8 => Base64Conv.ToBase64String(rsa.ExportPkcs8PrivateKey()),
 #else
                 RSAKeyTypes.Pkcs1 => rsa.ToPkcs1PrivateString(),
                 RSAKeyTypes.Pkcs8 => rsa.ToPkcs8PrivateString(),
@@ -67,8 +67,8 @@ namespace Cosmos.Encryption
                 RSAKeyTypes.XML  => rsa.ToLvccXmlString(false),
                 RSAKeyTypes.JSON => rsa.ToJsonString(false),
 #if NETCOREAPP3_1 || NETSTANDARD2_1
-                RSAKeyTypes.Pkcs1 => Base64Converter.ToBase64String(rsa.ExportRSAPublicKey()),
-                RSAKeyTypes.Pkcs8 => Base64Converter.ToBase64String(rsa.ExportRSAPublicKey()),
+                RSAKeyTypes.Pkcs1 => Base64Conv.ToBase64String(rsa.ExportRSAPublicKey()),
+                RSAKeyTypes.Pkcs8 => Base64Conv.ToBase64String(rsa.ExportRSAPublicKey()),
 #else
                 RSAKeyTypes.Pkcs1 => rsa.ToPkcs1PublicString(),
                 RSAKeyTypes.Pkcs8 => rsa.ToPkcs8PublicString(),
