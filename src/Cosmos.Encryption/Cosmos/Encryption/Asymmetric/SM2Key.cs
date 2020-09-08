@@ -1,5 +1,6 @@
 using System.Text;
 using Cosmos.Optionals;
+using Cosmos.Text;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Math.EC;
 using Org.BouncyCastle.Utilities.Encoders;
