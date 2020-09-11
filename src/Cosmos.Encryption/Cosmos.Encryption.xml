@@ -733,27 +733,12 @@
             <summary>
             SM2 encryption provider.
             </summary>
-        </member>
-        <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.Signature2(System.Byte[],System.Byte[],System.Byte[])">
             <summary>
-            Signature<br />
-            BUG: THERE ARE SEVERAL BUG HERE, DO NOT USE THIS PROVIDER NOW!
+            SM2 encryption provider.
             </summary>
-            <param name="data"></param>
-            <param name="userId"></param>
-            <param name="publicKey"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.Verify2(System.Byte[],System.Byte[],System.Byte[],System.Byte[])">
             <summary>
-            Verify<br />
-            BUG: THERE ARE SEVERAL BUG HERE, DO NOT USE THIS PROVIDER NOW!
+            SM2 encryption provider.
             </summary>
-            <param name="userId"></param>
-            <param name="privateKey"></param>
-            <param name="sourceData"></param>
-            <param name="signData"></param>
-            <returns></returns>
         </member>
         <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.EncryptByPublicKey(System.String,System.String,System.Text.Encoding,Cosmos.Encryption.Asymmetric.SM2Mode)">
             <summary>
@@ -840,6 +825,25 @@
             Create a new <see cref="T:Cosmos.Encryption.RSAKey"/>
             </summary>
             <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.Signature2(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Signature
+            </summary>
+            <param name="data"></param>
+            <param name="userId"></param>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Asymmetric.SM2EncryptionProvider.Verify2(System.Byte[],System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Verify<br />
+            </summary>
+            <param name="userId"></param>
+            <param name="privateKey"></param>
+            <param name="sourceData"></param>
+            <param name="signData"></param>
             <returns></returns>
         </member>
         <member name="P:Cosmos.Encryption.Asymmetric.SM2Key.PublicKey">
@@ -2157,7 +2161,7 @@
             <param name="data"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Encryption.Core.SM2Core.Sm2Sign(System.Byte[],Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.EC.ECPoint,Cosmos.Encryption.Core.SM2Core.SM2Result)">
+        <member name="M:Cosmos.Encryption.Core.SM2Core.Sm2Sign(System.Byte[],Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.EC.ECPoint,Cosmos.Encryption.Asymmetric.SM2Result)">
             <summary>
             
             </summary>
@@ -2166,7 +2170,7 @@
             <param name="userKey">公钥</param>
             <param name="sm2Ret">sm2Ret集合</param>
         </member>
-        <member name="M:Cosmos.Encryption.Core.SM2Core.Sm2Verify(System.Byte[],Org.BouncyCastle.Math.EC.ECPoint,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Cosmos.Encryption.Core.SM2Core.SM2Result)">
+        <member name="M:Cosmos.Encryption.Core.SM2Core.Sm2Verify(System.Byte[],Org.BouncyCastle.Math.EC.ECPoint,Org.BouncyCastle.Math.BigInteger,Org.BouncyCastle.Math.BigInteger,Cosmos.Encryption.Asymmetric.SM2Result)">
             <summary>
             
             </summary>
