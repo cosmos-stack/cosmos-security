@@ -1,4 +1,4 @@
-# COSMOSLOOPS/Cosmos.Encryption <a href="https://www.nuget.org/packages/Cosmos.Encryption/" rel="nofollow"><img src="https://img.shields.io/nuget/v/Cosmos.Encryption.svg?style=flat" alt="NuGet Version" data-canonical-src="https://img.shields.io/nuget/v/Cosmos.Encryption.svg?style=flat" style="max-width:100%;"></a>
+# COSMOSLOOPS/Encryption <a href="https://www.nuget.org/packages/Cosmos.Encryption/" rel="nofollow"><img src="https://img.shields.io/nuget/v/Cosmos.Encryption.svg?style=flat" alt="NuGet Version" data-canonical-src="https://img.shields.io/nuget/v/Cosmos.Encryption.svg?style=flat" style="max-width:100%;"></a>
 
 [Cosmos.Encryption](https://github.com/cosmos-loops/Cosmos.Encryption) is an inline project of [Cosmosloops labs.](https://github.com/cosmos-loops).
 
@@ -12,6 +12,7 @@ Install-Package Cosmos.Encryption
 
 ## Includes
 
+- MD2
 - MD4
 - MD5
 - SHA1/256/384/512

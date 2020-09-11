@@ -15,7 +15,7 @@ namespace Cosmos.Encryption
     ///     https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Symmetric/DES.cs
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public sealed class DESEncryptionProvider : SymmetricEncryptionBase, ISymmetricEncryption
+    public sealed partial class DESEncryptionProvider : SymmetricEncryptionBase, ISymmetricEncryption
     {
         private DESEncryptionProvider() { }
 

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Reference Include="BouncyCastle.Crypto, Version=1.8.7.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+        <HintPath>..\..\asset\packages\BouncyCastle.Crypto.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+</Project>

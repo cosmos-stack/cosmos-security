@@ -156,34 +156,51 @@ namespace Cosmos.Encryption.Tests.TestingConsole
 
         static void Main()
         {
-            Console.WriteLine(Int2Bin(10, 8));
-            Console.WriteLine(Int2Bin(1234, 32));
+            //Console.WriteLine(Int2Bin(10, 8));
+            //Console.WriteLine(Int2Bin(1234, 32));
 
-            var a = LoopLeftShift(1234, 5);
-            Console.WriteLine(Int2Bin(a, 32));
+            //var a = LoopLeftShift(1234, 5);
+            //Console.WriteLine(Int2Bin(a, 32));
 
-            Console.WriteLine("LFSR");
-            var LFSR = KeyLoading(0, 0);
-            foreach (var i in LFSR)
-            {
-                Console.WriteLine("{0:X}", i);
-            }
+            //Console.WriteLine("LFSR");
+            //var LFSR = KeyLoading(0, 0);
+            //foreach (var i in LFSR)
+            //{
+            //    Console.WriteLine("{0:X}", i);
+            //}
 
-            Console.WriteLine("X-BitRec");
-            var X = BitRec(LFSR);
-            foreach (var i in X)
-            {
-                Console.WriteLine("{0:X}", i);
-            }
+            //Console.WriteLine("X-BitRec");
+            //var X = BitRec(LFSR);
+            //foreach (var i in X)
+            //{
+            //    Console.WriteLine("{0:X}", i);
+            //}
 
-            Console.WriteLine("S");
-            var b = S(X[0]);
-            Console.WriteLine(b);
+            //Console.WriteLine("S");
+            //var b = S(X[0]);
+            //Console.WriteLine(b);
 
-            Console.WriteLine("========================");
-            var (LFSR2, R21, R22) = Init(0, 0);
-            var (LFSR3, R31, R32, Z) = Work(LFSR2, R21, R22);
-            Console.WriteLine("{0:X}", Z);
+            //Console.WriteLine("========================");
+            //var (LFSR2, R21, R22) = Init(0, 0);
+            //var (LFSR3, R31, R32, Z) = Work(LFSR2, R21, R22);
+            //Console.WriteLine("{0:X}", Z);
+
+            var o = "实现中华民族伟大复兴的中国梦";
+            var b = Encoding.UTF8.GetBytes(o);
+            var ka = AESEncryptionProvider.FastCreateKey();
+            var kd = DESEncryptionProvider.FastCreateKey();
+            var kt = TripleDESEncryptionProvider.FastCreateKey();
+            var sa = AESEncryptionProvider.FastDecrypt(AESEncryptionProvider.FastEncrypt(b, ka), ka);
+            var sd = DESEncryptionProvider.FastDecrypt(DESEncryptionProvider.FastEncrypt(b, kd), kd);
+            var st = TripleDESEncryptionProvider.FastDecrypt(TripleDESEncryptionProvider.FastEncrypt(b, kt), kt);
+
+            var oa = Encoding.UTF8.GetString(sa);
+            var od = Encoding.UTF8.GetString(sd);
+            var ot = Encoding.UTF8.GetString(st);
+
+            Console.WriteLine(o == oa ? "A=Yes" : "A=No");
+            Console.WriteLine(o == od ? "D=Yes" : "D=No");
+            Console.WriteLine(o == ot ? "T=Yes" : "T=No");
 
             Console.ReadLine();
         }

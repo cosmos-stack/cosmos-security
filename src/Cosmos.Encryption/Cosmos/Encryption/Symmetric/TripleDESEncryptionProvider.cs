@@ -13,9 +13,11 @@ namespace Cosmos.Encryption
     ///     https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Symmetric/TripleDES.cs
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public sealed class TripleDESEncryptionProvider : SymmetricEncryptionBase
+    public sealed partial class TripleDESEncryptionProvider : SymmetricEncryptionBase
     {
-        private TripleDESEncryptionProvider() { }
+        private TripleDESEncryptionProvider()
+        {
+        }
 
         /// <summary>
         /// Create a new instance of <see cref="TripleDESKey"/>

@@ -1,15 +1,8 @@
-using Org.BouncyCastle.Crypto.Generators;
+using Cosmos.Encryption.Asymmetric;
 using Org.BouncyCastle.Math.EC;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Security;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Security.Cryptography.Primitives;
-using System.Text;
-using Org.BouncyCastle.Crypto.Digests;
 
 namespace Cosmos.Encryption.Core
 {
@@ -147,25 +140,5 @@ namespace Cosmos.Encryption.Core
         }
 
         #endregion
-
-        // internal class FixedBytesGenerator : BlockDeriveBytes {
-        //     private readonly byte[] _d;
-        //     public FixedBytesGenerator(byte[] d) => _d = d;
-        //     public override int BlockSize => _d.Length;
-        //     public override void NextBlock(Span<byte> buf) => _d.CopyTo(buf);
-        // }
-
-        // internal class SM2_Signer {
-        //     public byte[] SignData(byte[] message, string privateKey, byte[] id) {
-        //         var d = System.Numerics.BigInteger.Parse(privateKey, NumberStyles.HexNumber);
-        //         var sm2 = System.Security.Cryptography.SM2.Create();
-        //
-        //         sm2.Ident = id;
-        //         sm2.ImportPrivateKey(d);
-        //         sm2.ImportPublicKey(sm2.ExportKey().Q);
-        //         return sm2.SignData(message);
-        //     }
-        //
-        //     public byte[] VerifyData(byte[] signature, byte[] message, string publicKey, byte[] id) { }
     }
 }

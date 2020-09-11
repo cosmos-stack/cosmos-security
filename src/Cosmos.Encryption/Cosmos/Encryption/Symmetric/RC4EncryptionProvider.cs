@@ -14,7 +14,9 @@ namespace Cosmos.Encryption
     // ReSharper disable once InconsistentNaming
     public sealed class RC4EncryptionProvider : ISymmetricEncryption
     {
-        private RC4EncryptionProvider() { }
+        private RC4EncryptionProvider()
+        {
+        }
 
         /// <summary>
         /// Encrypt

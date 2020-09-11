@@ -1,5 +1,6 @@
 using System.Text;
 using Cosmos.Optionals;
+using Cosmos.Text;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Math.EC;
 using Org.BouncyCastle.Utilities.Encoders;
@@ -8,10 +9,10 @@ namespace Cosmos.Encryption.Asymmetric
 {
     public class SM2Key
     {
-        internal SM2Key(ECPoint publicKey, BigInteger prvateKey, Encoding encoding = default)
+        internal SM2Key(ECPoint publicKey, BigInteger privateKey, Encoding encoding = default)
         {
             PublicKey = Hex.Encode(publicKey.GetEncoded()).GetString(encoding.SafeValue()).ToUpper();
-            PrivateKey = Hex.Encode(prvateKey.ToByteArray()).GetString(encoding.SafeValue()).ToUpper();
+            PrivateKey = Hex.Encode(privateKey.ToByteArray()).GetString(encoding.SafeValue()).ToUpper();
         }
 
         /// <summary>
