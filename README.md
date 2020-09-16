@@ -31,7 +31,6 @@ Install-Package Cosmos.Encryption
 - DSA
 - RSA
 - SM2 ***(partially implement)***
-- CRC16/32
 
 ## Usage
 
