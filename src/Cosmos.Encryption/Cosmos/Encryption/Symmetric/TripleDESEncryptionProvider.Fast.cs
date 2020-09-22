@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
-using System.Text;
 using Cosmos.Encryption.Abstractions;
 using Cosmos.Encryption.Core;
-using Cosmos.Optionals;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption

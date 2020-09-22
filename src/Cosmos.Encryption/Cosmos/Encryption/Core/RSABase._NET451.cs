@@ -1,4 +1,4 @@
-#if NET451
+#if NET451 || NET452
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;

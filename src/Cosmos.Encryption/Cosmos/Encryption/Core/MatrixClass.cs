@@ -1,5 +1,13 @@
 ﻿using System;
 
+// ReSharper disable SpecifyACultureInStringConversionExplicitly
+// ReSharper disable RedundantNameQualifier
+// ReSharper disable StringIndexOfIsCultureSpecific.1
+// ReSharper disable ArrangeStaticMemberQualifier
+// ReSharper disable RedundantBaseConstructorCall
+// ReSharper disable InconsistentNaming
+// ReSharper disable EmptyStatement
+
 namespace Cosmos.Encryption.Core
 {
     /// <summary>

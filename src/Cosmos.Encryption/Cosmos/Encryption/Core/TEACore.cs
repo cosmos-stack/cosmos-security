@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Text;
+// ReSharper disable InconsistentNaming
+// ReSharper disable RedundantCast
+// ReSharper disable RedundantExplicitArraySize
 
 /*
  * Reference to:

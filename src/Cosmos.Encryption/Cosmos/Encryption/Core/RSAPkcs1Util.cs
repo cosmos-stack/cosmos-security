@@ -46,7 +46,7 @@ namespace Cosmos.Encryption.Core
 
             if (!string.IsNullOrEmpty(privateKey))
             {
-#if NET451
+#if NET451 || NET452
                 PrivateRsa = new RSACryptoServiceProvider {KeySize = keySize};
 #else
                 PrivateRsa = RSA.Create();
@@ -54,13 +54,13 @@ namespace Cosmos.Encryption.Core
 #endif
                 PrivateRsa.FromPkcs1PrivateString(privateKey, out var priRsap);
 
-#if NET451
+#if NET451 || NET452
                 PrivateRsaKeyParameter = GetPrivateKeyParameter(privateKey);
 #endif
 
                 if (string.IsNullOrEmpty(publicKey))
                 {
-#if NET451
+#if NET451 || NET452
                     PublicRsa = new RSACryptoServiceProvider {KeySize = keySize};
 #else
                     PublicRsa = RSA.Create();
@@ -73,7 +73,7 @@ namespace Cosmos.Encryption.Core
                     };
                     PublicRsa.ImportParameters(pubRasp);
 
-#if NET451
+#if NET451 || NET452
                     PublicRsaKeyParameter = GetPublicKeyParameter(publicKey);
 #endif
                 }
@@ -81,7 +81,7 @@ namespace Cosmos.Encryption.Core
 
             if (!string.IsNullOrEmpty(publicKey))
             {
-#if NET451
+#if NET451 || NET452
                 PublicRsa = new RSACryptoServiceProvider {KeySize = keySize};
 #else
                 PublicRsa = RSA.Create();
@@ -89,7 +89,7 @@ namespace Cosmos.Encryption.Core
 #endif
                 PublicRsa.FromPkcs1PublicString(publicKey, out _);
 
-#if NET451
+#if NET451 || NET452
                 PublicRsaKeyParameter = GetPublicKeyParameter(publicKey);
 #endif
             }

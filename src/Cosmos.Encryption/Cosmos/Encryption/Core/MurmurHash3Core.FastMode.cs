@@ -1,5 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
+// ReSharper disable RedundantCast
+// ReSharper disable MemberHidesStaticFromOuterClass
 
 namespace Cosmos.Encryption.Core
 {
@@ -22,7 +24,7 @@ namespace Cosmos.Encryption.Core
                 var remainder = length & 3;
                 var position = length - remainder;
                 for (var start = 0; start < position; start += 4)
-#if NET451 || NET461 || NETSTANDARD2_0
+#if NETFRAMEWORK || NETSTANDARD2_0
                     h1 = (uint) ((int) RotateLeft(h1 ^ RotateLeft(BitConverter.ToUInt32(bytes.Slice(start, 4).ToArray(), 0) * 3432918353U, 15) * 461845907U, 13) * 5 - 430675100);
 #else
                     h1 = (uint) ((int) RotateLeft(h1 ^ RotateLeft(BitConverter.ToUInt32(bytes.Slice(start, 4)) * 3432918353U, 15) * 461845907U, 13) * 5 - 430675100);

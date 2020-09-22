@@ -9,6 +9,7 @@ using System;
 using System.Text;
 using Cosmos.Encryption.Abstractions;
 using Cosmos.Optionals;
+// ReSharper disable InconsistentNaming
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption

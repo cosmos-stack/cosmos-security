@@ -3,6 +3,8 @@ using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Parameters;
 using System;
+// ReSharper disable InconsistentNaming
+// ReSharper disable LocalVariableHidesMember
 
 namespace Cosmos.Encryption.Core
 {

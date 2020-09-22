@@ -1,5 +1,7 @@
 ﻿namespace Cosmos.Encryption.Core.Internals
 {
+    // ReSharper disable InconsistentNaming
+    
     /// <summary>
     /// Author:myloveCc
     ///     https://github.com/myloveCc/NETCore.Encrypt/blob/master/src/NETCore.Encrypt/Internal/RSAParametersJson.cs

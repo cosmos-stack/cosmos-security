@@ -29,9 +29,9 @@ namespace Cosmos.Encryption
             _underlyingStream = underlyingStream;
             _algorithm = types switch
             {
-                MurmurHash3Types.L_32  => (HashAlgorithm) MurmurHash3Core.CreateL32(seed, managed),
-                MurmurHash3Types.L_128 => (HashAlgorithm) MurmurHash3Core.CreateL128(seed, managed, preference),
-                _                      => throw new InvalidOperationException("Invalid operation because only support L32 and L128")
+                MurmurHash3Types.L_32 => MurmurHash3Core.CreateL32(seed, managed),
+                MurmurHash3Types.L_128 => MurmurHash3Core.CreateL128(seed, managed, preference),
+                _ => throw new InvalidOperationException("Invalid operation because only support L32 and L128")
             };
         }
 

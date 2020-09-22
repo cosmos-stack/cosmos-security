@@ -9,6 +9,7 @@ using System;
 using System.Text;
 using Cosmos.Encryption.Abstractions;
 using Cosmos.Optionals;
+// ReSharper disable InconsistentNaming
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Encryption
@@ -127,6 +128,7 @@ namespace Cosmos.Encryption
                     fixed (byte* _data = &data[0])
                         fixed (byte* _output = &output[0])
                         {
+                            // ReSharper disable once UnusedVariable
                             var length = data.Length;
                             int i = 0, j = 0;
                             for (int offset = data.Length - 1; offset >= 0; offset--)
