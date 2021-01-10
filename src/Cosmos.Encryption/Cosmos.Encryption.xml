@@ -2180,10 +2180,38 @@
             <param name="s">由数字签名得到的大数s</param>
             <param name="sm2Ret"></param>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:Cosmos.Encryption.Core.SM2Core.SM2_SupportClass.URShift(System.Int32,System.Int32)" -->
-        <!-- Badly formed XML comment ignored for member "M:Cosmos.Encryption.Core.SM2Core.SM2_SupportClass.URShift(System.Int32,System.Int64)" -->
-        <!-- Badly formed XML comment ignored for member "M:Cosmos.Encryption.Core.SM2Core.SM2_SupportClass.URShift(System.Int64,System.Int32)" -->
-        <!-- Badly formed XML comment ignored for member "M:Cosmos.Encryption.Core.SM2Core.SM2_SupportClass.URShift(System.Int64,System.Int64)" -->
+        <member name="M:Cosmos.Encryption.Core.SM2Core.SM2_SupportClass.URShift(System.Int32,System.Int32)">
+             <summary>
+             Performs an unsigned bitwise right shift with the specified number
+             </summary>
+            <param name="number">Number to operate on</param>
+            <param name="bits">Ammount of bits to shift</param>
+             <returns>The resulting number from the shift operation</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM2Core.SM2_SupportClass.URShift(System.Int32,System.Int64)">
+             <summary>
+             Performs an unsigned bitwise right shift with the specified number
+             </summary>
+            <param name="number">Number to operate on</param>
+            <param name="bits">Amount of bits to shift</param>
+             <returns>The resulting number from the shift operation</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM2Core.SM2_SupportClass.URShift(System.Int64,System.Int32)">
+             <summary>
+             Performs an unsigned bitwise right shift with the specified number
+             </summary>
+            <param name="number">Number to operate on</param>
+            <param name="bits">Amount of bits to shift</param>
+             <returns>The resulting number from the shift operation</returns>
+        </member>
+        <member name="M:Cosmos.Encryption.Core.SM2Core.SM2_SupportClass.URShift(System.Int64,System.Int64)">
+             <summary>
+             Performs an unsigned bitwise right shift with the specified number
+             </summary>
+            <param name="number">Number to operate on</param>
+            <param name="bits">Amount of bits to shift</param>
+             <returns>The resulting number from the shift operation</returns>
+        </member>
         <member name="F:Cosmos.Encryption.Core.SM3Core.HashSizeInBytes">
             <summary>
                 哈希值大小（以字节数为单位）
@@ -4419,6 +4447,62 @@
             Hash final
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:System.Security.Cryptography.RSACompatibleExtensions">
+            <summary>
+            Compatible extensions for RSA
+            </summary>
+        </member>
+        <member name="M:System.Security.Cryptography.RSACompatibleExtensions.ExportRSAPrivateKey(System.Security.Cryptography.RSA)">
+            <summary>
+            Export RSA private key
+            </summary>
+            <param name="rsa"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.Security.Cryptography.RSACompatibleExtensions.ExportPkcs8PrivateKey(System.Security.Cryptography.RSA)">
+            <summary>
+            Export RSA private key
+            </summary>
+            <param name="rsa"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.Security.Cryptography.RSACompatibleExtensions.ExportRSAPublicKey(System.Security.Cryptography.RSA)">
+            <summary>
+            Export RSA public key
+            </summary>
+            <param name="rsa"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.Security.Cryptography.RSACompatibleExtensions.ImportRSAPrivateKey(System.Security.Cryptography.RSA,System.ReadOnlySpan{System.Byte},System.Int32@)">
+            <summary>
+            Import RSA private key
+            </summary>
+            <param name="rsa"></param>
+            <param name="privateKey"></param>
+            <param name="bytesRead"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.Security.Cryptography.RSACompatibleExtensions.ImportPkcs8PrivateKey(System.Security.Cryptography.RSA,System.ReadOnlySpan{System.Byte},System.Int32@)">
+            <summary>
+            Import pkcs8 RSA private key
+            </summary>
+            <param name="rsa"></param>
+            <param name="privateKey"></param>
+            <param name="bytesRead"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.Security.Cryptography.RSACompatibleExtensions.ImportRSAPublicKey(System.Security.Cryptography.RSA,System.ReadOnlySpan{System.Byte},System.Int32@)">
+            <summary>
+            Import RSA public key
+            </summary>
+            <param name="rsa"></param>
+            <param name="publicKey"></param>
+            <param name="bytesRead"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
     </members>
 </doc>

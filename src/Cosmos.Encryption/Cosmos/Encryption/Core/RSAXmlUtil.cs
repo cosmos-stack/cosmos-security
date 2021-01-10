@@ -45,7 +45,7 @@ namespace Cosmos.Encryption.Core
 
             if (!string.IsNullOrEmpty(privateKey))
             {
-#if NET451
+#if NET451 || NET452
                 PrivateRsa = new RSACryptoServiceProvider {KeySize = keySize};
 #else
                 PrivateRsa = RSA.Create();
@@ -56,7 +56,7 @@ namespace Cosmos.Encryption.Core
 
             if (!string.IsNullOrEmpty(publicKey))
             {
-#if NET451
+#if NET451 || NET452
                 PublicRsa = new RSACryptoServiceProvider {KeySize = keySize};
 #else
                 PublicRsa = RSA.Create();

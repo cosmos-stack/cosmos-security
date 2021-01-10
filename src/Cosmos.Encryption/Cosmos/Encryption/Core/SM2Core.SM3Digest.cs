@@ -1,9 +1,13 @@
 using Org.BouncyCastle.Crypto;
 using System;
+// ReSharper disable InconsistentNaming
+// ReSharper disable RedundantOverflowCheckingContext
+// ReSharper disable ParameterHidesMember
+// ReSharper disable VirtualMemberCallInConstructor
+// ReSharper disable RedundantCast
 
 namespace Cosmos.Encryption.Core
 {
-    // ReSharper disable once InconsistentNaming
     internal partial class SM2Core
     {
         public abstract class SM2_GeneralDigest : IDigest
@@ -120,8 +124,8 @@ namespace Cosmos.Encryption.Core
             /// <summary>
             /// Performs an unsigned bitwise right shift with the specified number
             /// </summary>
-            ///<param name="number">Number to operate on
-            ///<param name="bits">Ammount of bits to shift
+            ///<param name="number">Number to operate on</param>
+            ///<param name="bits">Ammount of bits to shift</param>
             /// <returns>The resulting number from the shift operation</returns>
             public static int URShift(int number, int bits)
             {
@@ -133,8 +137,8 @@ namespace Cosmos.Encryption.Core
             /// <summary>
             /// Performs an unsigned bitwise right shift with the specified number
             /// </summary>
-            ///<param name="number">Number to operate on
-            ///<param name="bits">Ammount of bits to shift
+            ///<param name="number">Number to operate on</param>
+            ///<param name="bits">Amount of bits to shift</param>
             /// <returns>The resulting number from the shift operation</returns>
             public static int URShift(int number, long bits)
             {
@@ -144,8 +148,8 @@ namespace Cosmos.Encryption.Core
             /// <summary>
             /// Performs an unsigned bitwise right shift with the specified number
             /// </summary>
-            ///<param name="number">Number to operate on
-            ///<param name="bits">Ammount of bits to shift
+            ///<param name="number">Number to operate on</param>
+            ///<param name="bits">Amount of bits to shift</param>
             /// <returns>The resulting number from the shift operation</returns>
             public static long URShift(long number, int bits)
             {
@@ -158,8 +162,8 @@ namespace Cosmos.Encryption.Core
             /// <summary>
             /// Performs an unsigned bitwise right shift with the specified number
             /// </summary>
-            ///<param name="number">Number to operate on
-            ///<param name="bits">Ammount of bits to shift
+            ///<param name="number">Number to operate on</param>
+            ///<param name="bits">Amount of bits to shift</param>
             /// <returns>The resulting number from the shift operation</returns>
             public static long URShift(long number, long bits)
             {

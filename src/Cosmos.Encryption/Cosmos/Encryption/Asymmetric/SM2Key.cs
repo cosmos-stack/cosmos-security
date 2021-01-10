@@ -7,6 +7,7 @@ using Org.BouncyCastle.Utilities.Encoders;
 
 namespace Cosmos.Encryption.Asymmetric
 {
+    // ReSharper disable once InconsistentNaming
     public class SM2Key
     {
         internal SM2Key(ECPoint publicKey, BigInteger privateKey, Encoding encoding = default)

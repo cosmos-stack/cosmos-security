@@ -3,6 +3,7 @@ using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Math.EC;
 using Org.BouncyCastle.Utilities.Encoders;
+// ReSharper disable InconsistentNaming
 
 namespace Cosmos.Encryption.Asymmetric
 {

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+// ReSharper disable RedundantCast
+// ReSharper disable NotAccessedVariable
 
 /*
  * Reference to:

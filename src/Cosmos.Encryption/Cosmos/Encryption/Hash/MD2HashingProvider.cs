@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Cosmos.Collections;
@@ -53,7 +52,7 @@ namespace Cosmos.Encryption
                     __c = 16;
                     var useless = new byte[array.Length + 1];
                     array.Copy(0, useless, 0, array.Length);
-#if NETSTANDARD2_0
+#if NETFRAMEWORK || NETSTANDARD2_0
                     useless[useless.Length - 1] = __c;
 #else
                     useless[^1] = __c;
@@ -65,7 +64,7 @@ namespace Cosmos.Encryption
                 {
                     var useless = new byte[array.Length + 1];
                     array.Copy(0, useless, 0, array.Length);
-#if NETSTANDARD2_0
+#if NETFRAMEWORK || NETSTANDARD2_0
                     useless[useless.Length - 1] = __c;
 #else
                     useless[^1] = __c;

@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 
-#if !NETSTANDARD2_0
+#if !NETFRAMEWORK && !NETSTANDARD2_0
 using System.Diagnostics.CodeAnalysis;
 #endif
 
@@ -200,7 +200,7 @@ namespace Cosmos.Encryption.Core
                 Key = key;
             }
 
-#if NETSTANDARD2_0
+#if NETFRAMEWORK || NETSTANDARD2_0
             public bool Equals(AlgorithmInfo other)
 #else
             public bool Equals([AllowNull] AlgorithmInfo other)
