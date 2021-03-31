@@ -1,0 +1,9 @@
+﻿<Project>
+
+    <PropertyGroup>
+        <AssemblyName>Cosmos.Security.Verification</AssemblyName>
+        <PackageId>Cosmos.Security.Verification</PackageId>
+        <Description>Cosmos Security Verification library</Description>
+    </PropertyGroup>
+
+</Project>
