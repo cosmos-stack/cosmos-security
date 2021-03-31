@@ -1,7 +1,7 @@
 @echo off
 
 echo =======================================================================
-echo Cosmos.Encryption
+echo Cosmos.Security
 echo =======================================================================
 
 ::go to parent folder
@@ -21,7 +21,9 @@ echo Cleaned up all nuget packages.
 echo.
 
 ::start to package all projects
-dotnet pack src/Cosmos.Encryption/Cosmos.Encryption._build.csproj -c Release -o nuget_packages --no-restore
+dotnet pack src/Cosmos.Security/Cosmos.Security.csproj -c Release -o nuget_packages --no-restore
+dotnet pack src/Cosmos.Security.Encryption/Cosmos.Security.Encryption.csproj -c Release -o nuget_packages --no-restore
+dotnet pack src/Cosmos.Security.Verification/Cosmos.Security.Verification.csproj -c Release -o nuget_packages --no-restore
 
 for /R "nuget_packages" %%s in (*symbols.nupkg) do (
     del "%%s"
