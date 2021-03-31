@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cosmos.Encryption", "src\Cosmos.Encryption\Cosmos.Encryption.csproj", "{27C23A57-2C63-4C51-A102-A20A7A4D2016}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cosmos.Security.Encryption", "src\Cosmos.Security.Encryption\Cosmos.Security.Encryption.csproj", "{27C23A57-2C63-4C51-A102-A20A7A4D2016}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FCC067FE-90F6-4E55-8169-7D6982B52A8A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FAB7E90F-6BA0-4305-96C1-B71EB1BBEEC3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cosmos.Encryption.Tests", "tests\Cosmos.Encryption.Tests\Cosmos.Encryption.Tests.csproj", "{A630520D-F1C3-46C4-92C7-3AB184A26105}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cosmos.Security.Encryption.Tests", "tests\Cosmos.Security.Encryption.Tests\Cosmos.Security.Encryption.Tests.csproj", "{A630520D-F1C3-46C4-92C7-3AB184A26105}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosmos.Encryption.Tests.TestingConsole", "tests\Cosmos.Encryption.Tests.TestingConsole\Cosmos.Encryption.Tests.TestingConsole.csproj", "{68D978D8-7EA7-4C9B-B4F7-B107A68D558B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosmos.Security.Encryption.Tests.TestingConsole", "tests\Cosmos.Security.Encryption.Tests.TestingConsole\Cosmos.Security.Encryption.Tests.TestingConsole.csproj", "{68D978D8-7EA7-4C9B-B4F7-B107A68D558B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{E098E701-0632-4453-8E2C-4E0AEBAB0A90}"
 ProjectSection(SolutionItems) = preProject
@@ -46,9 +46,17 @@ ProjectSection(SolutionItems) = preProject
 	common.tests.props = common.tests.props
 	LICENSE = LICENSE
 	logo.png = logo.png
+	asset\version.dev.props = asset\version.dev.props
+	asset\version.props = asset\version.props
 EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoloTest", "tests\SoloTest\SoloTest.csproj", "{8D976C56-1715-4C14-90F8-FAEBAF153009}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosmos.Security", "src\Cosmos.Security\Cosmos.Security.csproj", "{D35FE8DE-9326-4E02-A8E9-E6609941B159}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cosmos.Security.Verification", "src\Cosmos.Security.Verification\Cosmos.Security.Verification.csproj", "{03FA029C-44FD-4F7F-8E7D-3B20F6C0E09B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CosmosVerificationUT", "tests\CosmosVerificationUT\CosmosVerificationUT.csproj", "{B5F70F4C-82A1-470C-8C56-6266383F70C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +80,18 @@ Global
 		{8D976C56-1715-4C14-90F8-FAEBAF153009}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D976C56-1715-4C14-90F8-FAEBAF153009}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D976C56-1715-4C14-90F8-FAEBAF153009}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D35FE8DE-9326-4E02-A8E9-E6609941B159}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D35FE8DE-9326-4E02-A8E9-E6609941B159}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D35FE8DE-9326-4E02-A8E9-E6609941B159}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D35FE8DE-9326-4E02-A8E9-E6609941B159}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03FA029C-44FD-4F7F-8E7D-3B20F6C0E09B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03FA029C-44FD-4F7F-8E7D-3B20F6C0E09B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03FA029C-44FD-4F7F-8E7D-3B20F6C0E09B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03FA029C-44FD-4F7F-8E7D-3B20F6C0E09B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5F70F4C-82A1-470C-8C56-6266383F70C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5F70F4C-82A1-470C-8C56-6266383F70C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5F70F4C-82A1-470C-8C56-6266383F70C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5F70F4C-82A1-470C-8C56-6266383F70C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +103,9 @@ Global
 		{9F80D410-BE69-4F0B-B1B8-EC751450A0A7} = {0E935A79-5C01-41F8-A665-D56A67958F45}
 		{66D68C53-893F-403C-9DC9-9C3E1B7F2323} = {0E935A79-5C01-41F8-A665-D56A67958F45}
 		{8D976C56-1715-4C14-90F8-FAEBAF153009} = {FAB7E90F-6BA0-4305-96C1-B71EB1BBEEC3}
+		{D35FE8DE-9326-4E02-A8E9-E6609941B159} = {FCC067FE-90F6-4E55-8169-7D6982B52A8A}
+		{03FA029C-44FD-4F7F-8E7D-3B20F6C0E09B} = {FCC067FE-90F6-4E55-8169-7D6982B52A8A}
+		{B5F70F4C-82A1-470C-8C56-6266383F70C2} = {FAB7E90F-6BA0-4305-96C1-B71EB1BBEEC3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D59A7B73-5F98-4002-9551-304D243E4B48}

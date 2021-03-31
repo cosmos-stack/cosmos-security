@@ -1,0 +1,8 @@
+<Project>
+
+    <PropertyGroup>
+        <Standard-PkgVersion>0.1.7.2</Standard-PkgVersion>
+        <Serialization-PkgVersion>0.1.6</Serialization-PkgVersion>
+    </PropertyGroup>
+
+</Project>

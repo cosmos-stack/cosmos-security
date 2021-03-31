@@ -1,13 +1,13 @@
-# COSMOSLOOPS/Encryption <a href="https://www.nuget.org/packages/Cosmos.Encryption/" rel="nofollow"><img src="https://img.shields.io/nuget/v/Cosmos.Encryption.svg?style=flat" alt="NuGet Version" data-canonical-src="https://img.shields.io/nuget/v/Cosmos.Encryption.svg?style=flat" style="max-width:100%;"></a>
+# COSMOSLOOPS/Security <a href="https://www.nuget.org/packages/Cosmos.Security/" rel="nofollow"><img src="https://img.shields.io/nuget/v/Cosmos.Security.svg?style=flat" alt="NuGet Version" data-canonical-src="https://img.shields.io/nuget/v/Cosmos.Security.svg?style=flat" style="max-width:100%;"></a>
 
-[Cosmos.Encryption](https://github.com/cosmos-loops/Cosmos.Encryption) is an inline project of [Cosmosloops labs.](https://github.com/cosmos-loops).
+[Cosmos.Security](https://github.com/cosmos-loops/Cosmos.Security) is an inline project of [Cosmosloops labs.](https://github.com/cosmos-loops).
 
 ## Install
 
 From NuGet:
 
 ```
-Install-Package Cosmos.Encryption
+Install-Package Cosmos.Security.Encryption
 ```
 
 ## Includes

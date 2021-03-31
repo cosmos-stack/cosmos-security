@@ -1,7 +1,7 @@
 <Project>
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.1;netstandard2.0;netcoreapp3.1;netcoreapp3.0;net48;net472;net462;net452</TargetFrameworks>
+        <TargetFrameworks>net5.0;netcoreapp3.1;net48;net472;net462;net452</TargetFrameworks>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -14,5 +14,26 @@
         <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
         <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.0-preview-20210106-01" />
+        <PackageReference Include="Shouldly">
+            <Version Condition=" '$(TargetFramework)' == 'net452' ">3.0.2</Version>
+            <Version Condition=" '$(TargetFramework)' != 'net452' ">4.0.3</Version>
+        </PackageReference>
+        <PackageReference Include="xunit" Version="2.4.1" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="coverlet.collector" Version="3.0.3">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+    </ItemGroup>
+    
+    <ItemGroup>
+        <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+    </ItemGroup>
 
 </Project>
