@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <RootNamespace/>
+        <LangVersion>latest</LangVersion>
+        <NoWarn>$(NoWarn);CS1591</NoWarn>
+        <IsPackable>false</IsPackable>
+        <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+        <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+        <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+        <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <ApplicationIcon />
+      <OutputType>Exe</OutputType>
+      <StartupObject />
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Cosmos.Security.Encryption\Cosmos.Security.Encryption.csproj" />
+    </ItemGroup>
+
+</Project>

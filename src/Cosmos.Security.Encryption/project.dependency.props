@@ -1,0 +1,13 @@
+<Project>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Cosmos.Security.Verification\Cosmos.Security.Verification.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Cosmos.Serialization.NewtonsoftJson" Version="$(Serialization-PkgVersion)" />
+        <PackageReference Include="Portable.BouncyCastle" Version="1.8.8" />
+        <PackageReference Include="System.Memory" Version="4.5.4" />
+    </ItemGroup>
+
+</Project>
