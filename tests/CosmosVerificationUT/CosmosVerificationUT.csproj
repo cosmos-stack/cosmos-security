@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <Import Project="..\..\common.tests.props" />
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Cosmos.Security.Verification\Cosmos.Security.Verification.csproj" />
+    </ItemGroup>
+
+</Project>
