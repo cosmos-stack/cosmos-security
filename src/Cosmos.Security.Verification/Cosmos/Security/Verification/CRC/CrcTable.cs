@@ -4,7 +4,7 @@ namespace Cosmos.Security.Verification.CRC
 {
     internal static class CrcTable
     {
-        public static (int, ulong, ulong, bool, bool, ulong) Dict(CrcTypes type)
+        private static (int, ulong, ulong, bool, bool, ulong) Dict(CrcTypes type)
         {
             return type switch
             {

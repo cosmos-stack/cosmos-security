@@ -1,11 +1,14 @@
 ﻿namespace Cosmos.Security.Verification.CRC
 {
+    /// <summary>
+    /// CRC Hash Config
+    /// </summary>
     public class CrcConfig
     {
         /// <summary>
         /// Length of the produced CRC value, in bits.
         /// </summary>
-        public int HashSizeInBits { get; set; }
+        public int HashSizeInBits { get; internal set; }
 
         /// <summary>
         /// Divisor to use when calculating the CRC.

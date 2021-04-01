@@ -1,5 +1,8 @@
 ﻿namespace Cosmos.Security.Verification.CRC
 {
+    /// <summary>
+    /// CRC Hash Types
+    /// </summary>
     public enum CrcTypes
     {
         //CRC-3

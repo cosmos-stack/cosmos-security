@@ -6,27 +6,29 @@ using Cosmos.Security.Verification.Core;
 
 namespace Cosmos.Security.Verification.CRC
 {
+    /// <summary>
+    /// CRC Hash Function
+    /// </summary>
     public class CrcFunction : StreamableHashFunctionBase
     {
-        private readonly CrcTypes _crcType;
         private readonly CrcConfig _crcConfig;
-        private static readonly ConcurrentDictionary<(int, UInt64, bool), IReadOnlyList<UInt64>> DataDivisionTableCache = new();
+        private static readonly ConcurrentDictionary<(int, ulong, bool), IReadOnlyList<UInt64>> DataDivisionTableCache = new();
 
         internal CrcFunction(CrcTypes type)
         {
-            _crcType = type;
+            HashType = type;
             _crcConfig = CrcTable.Map(type);
         }
 
         public override int HashSizeInBits => _crcConfig.HashSizeInBits;
 
-        public CrcTypes CrcType => _crcType;
+        public CrcTypes HashType { get; }
 
         public override IBlockTransformer CreateBlockTransformer() => new CrcBlockTransformer(_crcConfig);
 
         #region Internal Implementation of BlockTransformer
 
-        internal class CrcBlockTransformer : BlockTransformerBase<CrcBlockTransformer>
+        private class CrcBlockTransformer : BlockTransformerBase<CrcBlockTransformer>
         {
             private int _hashSizeInBits;
             private IReadOnlyList<ulong> _crcTable;
@@ -68,8 +70,7 @@ namespace Cosmos.Security.Verification.CRC
                     _hashValue = initialValue;
                 }
             }
-
-
+            
             protected override void CopyStateTo(CrcBlockTransformer other)
             {
                 base.CopyStateTo(other);
@@ -195,13 +196,11 @@ namespace Cosmos.Security.Verification.CRC
 
                 return crcTable;
             }
-
-
+            
             private static byte[] ToBytes(ulong value, int bitLength)
             {
                 value &= (ulong.MaxValue >> (64 - bitLength));
-
-
+                
                 var valueBytes = new byte[(bitLength + 7) / 8];
 
                 for (var x = 0; x < valueBytes.Length; ++x)
