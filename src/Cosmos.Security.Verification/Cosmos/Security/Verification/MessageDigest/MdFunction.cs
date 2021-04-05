@@ -14,6 +14,12 @@ namespace Cosmos.Security.Verification.MessageDigest
             _mdConfig = MdTable.Map(type);
         }
 
+        internal MdFunction(Md6Options options)
+        {
+            HashType = MdTypes.Md6Custom;
+            _mdConfig = options;
+        }
+
         public override int HashSizeInBits => _mdConfig.HashSizeInBits;
 
         public MdTypes HashType { get; }
@@ -46,6 +52,11 @@ namespace Cosmos.Security.Verification.MessageDigest
                     MdTypes.Md5Bit16 => _worker = new Md5Worker(_mdType),
                     MdTypes.Md5Bit32 => _worker = new Md5Worker(_mdType),
                     MdTypes.Md5Bit64 => _worker = new Md5Worker(_mdType),
+                    MdTypes.Md6 => _worker = new Md6Worker(config),
+                    MdTypes.Md6Bit128 => _worker = new Md6Worker(config),
+                    MdTypes.Md6Bit256 => _worker = new Md6Worker(config),
+                    MdTypes.Md6Bit512 => _worker = new Md6Worker(config),
+                    MdTypes.Md6Custom => _worker = new Md6Worker(config),
                     _ => null
                 };
             }
