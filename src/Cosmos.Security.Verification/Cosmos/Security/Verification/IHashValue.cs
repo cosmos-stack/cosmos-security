@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Text;
 
 namespace Cosmos.Security.Verification
 {
@@ -20,5 +21,9 @@ namespace Cosmos.Security.Verification
         string AsBinString(bool complementZero);
 
         string AsBase64String();
+
+        string AsString();
+
+        string AsString(Encoding encoding);
     }
 }

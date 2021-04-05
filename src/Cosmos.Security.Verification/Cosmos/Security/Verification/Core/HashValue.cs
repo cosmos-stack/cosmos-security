@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Cosmos.Conversions;
+using Cosmos.Optionals;
 
 namespace Cosmos.Security.Verification.Core
 {
     /// <summary>
     /// Hash value
     /// </summary>
-    public sealed class HashValue : IHashValue
+    public class HashValue : IHashValue
     {
         public HashValue(IEnumerable<byte> hash, int bitLength)
         {
@@ -27,7 +29,7 @@ namespace Cosmos.Security.Verification.Core
 
         public BitArray AsBitArray()
         {
-            return new BitArray(Hash)
+            return new(Hash)
             {
                 Length = BitLength
             };
@@ -66,7 +68,17 @@ namespace Cosmos.Security.Verification.Core
 
         public string AsBase64String()
         {
-            return Convert.ToBase64String(Hash);
+            return BaseConv.ToBase64(Hash);
+        }
+
+        public string AsString()
+        {
+            return AsString(Encoding.UTF8);
+        }
+
+        public string AsString(Encoding encoding)
+        {
+            return encoding.SafeEncodingValue().GetString(Hash);
         }
 
         public override int GetHashCode()

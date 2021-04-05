@@ -1,13 +1,14 @@
 #if NET451 || NET452
 using System.Diagnostics.CodeAnalysis;
 
-namespace System.Security.Cryptography {
+namespace System.Security.Cryptography
+{
     /// <summary>
     /// Specifies the name of a cryptographic hash algorithm.
     /// </summary>
     [SuppressMessage("ReSharper", "InconsistentNaming")]
-    public struct HashAlgorithmName : IEquatable<HashAlgorithmName> {
-
+    public struct HashAlgorithmName : IEquatable<HashAlgorithmName>
+    {
         private readonly string _name;
 
         /// <summary>Gets a hash algorithm name that represents "MD5".</summary>
@@ -32,7 +33,8 @@ namespace System.Security.Cryptography {
 
         /// <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.HashAlgorithmName" /> structure with a custom name. </summary>
         /// <param name="name">The custom hash algorithm name. </param>
-        public HashAlgorithmName(string name) {
+        public HashAlgorithmName(string name)
+        {
             _name = name;
         }
 
