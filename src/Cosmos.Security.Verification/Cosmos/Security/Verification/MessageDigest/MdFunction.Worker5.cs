@@ -11,17 +11,15 @@ namespace Cosmos.Security.Verification.MessageDigest
         {
             private readonly MdTypes _type;
 
+            /// <summary>
+            /// MD5 Worker
+            /// </summary>
+            /// <param name="type"></param>
             public Md5Worker(MdTypes type)
             {
                 _type = type;
             }
 
-            /// <summary>
-            /// MD5 Worker
-            /// </summary>
-            /// <param name="buff"></param>
-            /// <returns></returns>
-            /// <exception cref="NotImplementedException"></exception>
             public byte[] Hash(ReadOnlySpan<byte> buff)
             {
                 using var algorithm = MD5.Create();
