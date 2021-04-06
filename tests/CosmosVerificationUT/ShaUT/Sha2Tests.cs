@@ -54,7 +54,7 @@ namespace ShaUT
         [InlineData("The quick brown fox jumps over the lazy dog", "944CD2847FB54558D4775DB0485A50003111C8E5DAA63FE722C6AA37")]
         public void Sha512L244Test(string data, string hex)
         {
-            var function = ShaFactory.Create(ShaTypes.Sha512_224);
+            var function = ShaFactory.Create(ShaTypes.Sha512Bit224);
             var hashVal = function.ComputeHash(data);
             hashVal.AsHexString(true).ShouldBe(hex);
         }
@@ -65,7 +65,7 @@ namespace ShaUT
         [InlineData("The quick brown fox jumps over the lazy dog", "DD9D67B371519C339ED8DBD25AF90E976A1EEEFD4AD3D889005E532FC5BEF04D")]
         public void Sha512L256Test(string data, string hex)
         {
-            var function = ShaFactory.Create(ShaTypes.Sha512_256);
+            var function = ShaFactory.Create(ShaTypes.Sha512Bit256);
             var hashVal = function.ComputeHash(data);
             hashVal.AsHexString(true).ShouldBe(hex);
         }

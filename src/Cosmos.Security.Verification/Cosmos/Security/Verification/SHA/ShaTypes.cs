@@ -7,7 +7,11 @@
         Sha256,
         Sha384,
         Sha512,
-        Sha512_224,
-        Sha512_256
+        Sha512Bit224,
+        Sha512Bit256,
+        Sha3Bit224,
+        Sha3Bit256,
+        Sha3Bit384,
+        Sha3Bit512,
     }
 }

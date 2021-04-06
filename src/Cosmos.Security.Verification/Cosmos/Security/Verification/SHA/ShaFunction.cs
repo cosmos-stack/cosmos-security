@@ -36,7 +36,7 @@ namespace Cosmos.Security.Verification.SHA
             public ShaBlockTransformer(ShaConfig config)
             {
                 _hashSizeInBits = config.HashSizeInBits;
-                _internalAlgorithmFactory = GetHashAlgorithm(config.Type);
+                _internalAlgorithmFactory = GetHashAlgorithm(config);
             }
 
             protected override void CopyStateTo(ShaBlockTransformer other)
@@ -60,18 +60,22 @@ namespace Cosmos.Security.Verification.SHA
                 return new HashValue(_hashValue, _hashSizeInBits);
             }
 
-            private static Func<HashAlgorithm> GetHashAlgorithm(ShaTypes type)
+            private static Func<HashAlgorithm> GetHashAlgorithm(ShaConfig config)
             {
-                return type switch
+                return config.Type switch
                 {
                     ShaTypes.Sha1 => () => new SHA1CryptoServiceProvider(),
                     ShaTypes.Sha224 => () => new SHA224CryptoServiceProvider(),
                     ShaTypes.Sha256 => () => new SHA256CryptoServiceProvider(),
                     ShaTypes.Sha384 => () => new SHA384CryptoServiceProvider(),
                     ShaTypes.Sha512 => () => new SHA512CryptoServiceProvider(),
-                    ShaTypes.Sha512_224 => () => new SHA512L224CryptoServiceProvider(),
-                    ShaTypes.Sha512_256 => () => new SHA512L256CryptoServiceProvider(),
-                    _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+                    ShaTypes.Sha512Bit224 => () => new SHA512tCryptoServiceProvider(config.HashSizeInBits),
+                    ShaTypes.Sha512Bit256 => () => new SHA512tCryptoServiceProvider(config.HashSizeInBits),
+                    ShaTypes.Sha3Bit224 => () => new SHA3CryptoServiceProvider(config.HashSizeInBits),
+                    ShaTypes.Sha3Bit256 => () => new SHA3CryptoServiceProvider(config.HashSizeInBits),
+                    ShaTypes.Sha3Bit384 => () => new SHA3CryptoServiceProvider(config.HashSizeInBits),
+                    ShaTypes.Sha3Bit512 => () => new SHA3CryptoServiceProvider(config.HashSizeInBits),
+                    _ => throw new ArgumentOutOfRangeException(nameof(config.Type), config.Type, null)
                 };
             }
         }
