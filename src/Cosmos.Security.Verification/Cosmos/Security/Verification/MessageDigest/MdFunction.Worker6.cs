@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Text;
 
+// ReSharper disable RedundantAssignment
+// ReSharper disable InconsistentNaming
+// ReSharper disable RedundantCast
+
 namespace Cosmos.Security.Verification.MessageDigest
 {
     public partial class MdFunction
@@ -25,8 +29,6 @@ namespace Cosmos.Security.Verification.MessageDigest
                 _isHex = config.IsHexString;
             }
 
-            public Md6Worker(Md6Options options) : this((MdConfig) options) { }
-
             public byte[] Hash(ReadOnlySpan<byte> buff)
             {
                 ulong len = (ulong) buff.Length * 8;
@@ -35,7 +37,11 @@ namespace Cosmos.Security.Verification.MessageDigest
 
                 var (key, keyLen, newR) = GetKey(ref message, _d, _r, _key, _isHex);
 
-                return GetHashValue(ref message, ref len, _d, newR, _L, key, keyLen);
+                var hashVal = GetHashValue(ref message, ref len, _d, newR, _L, key, keyLen);
+
+                FixHashValue(ref hashVal, _d);
+
+                return hashVal;
             }
 
             private static ulong[] GetMessage(ReadOnlySpan<byte> buff, ulong len)
@@ -112,14 +118,14 @@ namespace Cosmos.Security.Verification.MessageDigest
                     Array.Copy(stringArray, (int) k * 8, buf, 0, copySize);
                     if (BitConverter.IsLittleEndian)
                     {
-                        _key[k] |= (UInt64) buf[0] << 56;
-                        _key[k] |= (UInt64) buf[1] << 48;
-                        _key[k] |= (UInt64) buf[2] << 40;
-                        _key[k] |= (UInt64) buf[3] << 32;
-                        _key[k] |= (UInt64) buf[4] << 24;
-                        _key[k] |= (UInt64) buf[5] << 16;
-                        _key[k] |= (UInt64) buf[6] << 8;
-                        _key[k] |= (UInt64) buf[7];
+                        _key[k] |= (ulong) buf[0] << 56;
+                        _key[k] |= (ulong) buf[1] << 48;
+                        _key[k] |= (ulong) buf[2] << 40;
+                        _key[k] |= (ulong) buf[3] << 32;
+                        _key[k] |= (ulong) buf[4] << 24;
+                        _key[k] |= (ulong) buf[5] << 16;
+                        _key[k] |= (ulong) buf[6] << 8;
+                        _key[k] |= (ulong) buf[7];
                     }
                     else
                     {
@@ -151,7 +157,7 @@ namespace Cosmos.Security.Verification.MessageDigest
                 int i = 0;
                 while (i < hashValue.Length)
                 {
-                    UInt64 val = res[res.Length - 1 - i / 8];
+                    ulong val = res[res.Length - 1 - i / 8];
                     int k = 0;
                     while ((i < hashValue.Length) && (k < 8))
                     {
@@ -194,8 +200,31 @@ namespace Cosmos.Security.Verification.MessageDigest
                             return message;
                         }
 
-                        messageLen = (UInt64) message.LongLength * 64;
+                        messageLen = (ulong) message.LongLength * 64;
+
+                        // ReSharper disable once RedundantNameQualifier
                         System.GC.Collect();
+                    }
+                }
+            }
+
+            private static void FixHashValue(ref byte[] hashVal, uint d)
+            {
+                if ((d % 8 < 5) && (d % 8 > 0))
+                {
+                    for (var i = hashVal.Length - 1; i >= 0; --i)
+                    {
+                        var l = hashVal[i];
+                        l = (byte) (l >> 4);
+
+                        if (i > 0)
+                        {
+                            var h = (byte) (hashVal[i - 1] & 15);
+                            h = (byte) (h << 4);
+                            l = (byte) (h + l);
+                        }
+
+                        hashVal[i] = l;
                     }
                 }
             }
@@ -224,13 +253,13 @@ namespace Cosmos.Security.Verification.MessageDigest
                 0x0d6f3522631effcb
             }; // 960 bits of √6 as a sequence of 15 64-bit words
 
-            private static UInt64[] PAR(ref ulong[] message, ulong messageLen, uint d, uint r, uint L, ulong[] key, uint keyLen, uint l)
+            private static ulong[] PAR(ref ulong[] message, ulong messageLen, uint d, uint r, uint L, ulong[] key, uint keyLen, uint l)
             {
-                UInt64 p = (UInt64) message.LongLength * 64 - messageLen + ((message.LongLength % bw) > 0 ? (((UInt64) bw - (UInt64) message.LongLength % bw) * 64) : 0);
+                ulong p = (ulong) message.LongLength * 64 - messageLen + ((message.LongLength % bw) > 0 ? (((ulong) bw - (ulong) message.LongLength % bw) * 64) : 0);
 
-                UInt64 j = (UInt64) (message.Length / bw) + (UInt64) (message.LongLength % bw > 0 ? 1 : 0);
+                ulong j = (ulong) (message.Length / bw) + (ulong) (message.LongLength % bw > 0 ? 1 : 0);
                 uint z = (uint) (j == 1 ? 1 : 0);
-                UInt64 V = 0;
+                ulong V = 0;
                 V |= r;
                 V = V << 8;
                 V |= L;
@@ -242,19 +271,19 @@ namespace Cosmos.Security.Verification.MessageDigest
                 V |= keyLen;
                 V = V << 12;
                 V |= d;
-                UInt64 noPadding = 0xFFFFFFF0000FFFFF;
-                UInt64[] Ci = new UInt64[cw];
-                UInt64[] Res = new UInt64[cw * j];
-                UInt64[] fVal = new UInt64[n];
+                ulong noPadding = 0xFFFFFFF0000FFFFF;
+                ulong[] Ci = new ulong[cw];
+                ulong[] Res = new ulong[cw * j];
+                ulong[] fVal = new ulong[n];
                 Array.Copy(Q, 0, fVal, 0, Q.Length);
                 Array.Copy(key, 0, fVal, Q.Length, key.Length);
-                for (UInt64 i = 0; i < j; ++i)
+                for (ulong i = 0; i < j; ++i)
                 {
-                    UInt64 localV = V;
+                    ulong localV = V;
                     if (i < j - 1)
                         localV &= noPadding;
 
-                    UInt64 U = l;
+                    ulong U = l;
                     U = U << 56;
                     U |= i;
 
@@ -294,13 +323,13 @@ namespace Cosmos.Security.Verification.MessageDigest
 
             private const uint n = 89; //words
 
-            private static UInt64[] SEQ(ulong[] message, ulong messageLen, uint d, uint r, uint L, ulong[] key, uint keyLen)
+            private static ulong[] SEQ(ulong[] message, ulong messageLen, uint d, uint r, uint L, ulong[] key, uint keyLen)
             {
-                UInt64 p = (UInt64) message.LongLength * 64 - messageLen + ((message.LongLength % (bw - cw)) > 0 ? (((UInt64) (bw - cw) - (UInt64) message.LongLength % (bw - cw)) * 64) : 0);
+                ulong p = (ulong) message.LongLength * 64 - messageLen + ((message.LongLength % (bw - cw)) > 0 ? (((ulong) (bw - cw) - (ulong) message.LongLength % (bw - cw)) * 64) : 0);
 
-                UInt64 j = (UInt64) (message.Length / (bw - cw)) + (UInt64) (message.LongLength % (bw - cw) > 0 ? 1 : 0);
+                ulong j = (ulong) (message.Length / (bw - cw)) + (ulong) (message.LongLength % (bw - cw) > 0 ? 1 : 0);
 
-                UInt64 V = 0;
+                ulong V = 0;
                 V |= r;
                 V = V << 8;
                 V |= L;
@@ -313,16 +342,16 @@ namespace Cosmos.Security.Verification.MessageDigest
                 V = V << 12;
                 V |= d;
 
-                UInt64 noPadding = 0xFFFFFFF0000FFFFF;
-                UInt64 z = 0x0000001000000000;
+                ulong noPadding = 0xFFFFFFF0000FFFFF;
+                ulong z = 0x0000001000000000;
 
-                UInt64[] C = new UInt64[cw];
-                UInt64[] fVal = new UInt64[n];
+                ulong[] C = new ulong[cw];
+                ulong[] fVal = new ulong[n];
                 Array.Copy(Q, 0, fVal, 0, Q.Length);
                 Array.Copy(key, 0, fVal, Q.Length, key.Length);
-                for (UInt64 i = 0; i < j; ++i)
+                for (ulong i = 0; i < j; ++i)
                 {
-                    UInt64 localV = V;
+                    ulong localV = V;
                     if (i < j - 1)
                     {
                         localV &= noPadding;
@@ -332,7 +361,7 @@ namespace Cosmos.Security.Verification.MessageDigest
                         localV |= z;
                     }
 
-                    UInt64 U = (L + 1);
+                    ulong U = (L + 1);
                     U = U << 56;
                     U |= i;
 
@@ -380,24 +409,24 @@ namespace Cosmos.Security.Verification.MessageDigest
             private static int[] ri = {10, 5, 13, 10, 11, 12, 2, 7, 14, 15, 7, 13, 11, 7, 6, 12};
             private static int[] li = {11, 24, 9, 16, 15, 9, 27, 15, 6, 2, 29, 8, 15, 5, 31, 9};
 
-            private const UInt64 S0 = 0x0123456789abcdef;
-            private const UInt64 Sdot = 0x7311c2812425cfa0;
+            private const ulong S0 = 0x0123456789abcdef;
+            private const ulong Sdot = 0x7311c2812425cfa0;
 
-            private static UInt64[] Compress(ref UInt64[] N, uint r)
+            private static ulong[] Compress(ref ulong[] N, uint r)
             {
-                UInt64[] C = new UInt64[cw];
+                ulong[] C = new ulong[cw];
 
                 uint t = r * cw;
 
-                UInt64[] A = new UInt64[t + n];
+                ulong[] A = new ulong[t + n];
                 Array.Copy(N, 0, A, 0, n);
 
-                UInt64 Si = S0;
+                ulong Si = S0;
                 for (uint i = n, j = 0; j < r; ++j)
                 {
                     for (uint k = 0; k < 16; ++k, ++i)
                     {
-                        UInt64 x = Si ^ A[i - n] ^ A[i - t0];
+                        ulong x = Si ^ A[i - n] ^ A[i - t0];
                         x ^= (A[i - t1] & A[i - t2]) ^ (A[i - t3] & A[i - t4]);
                         x ^= (x >> ri[(i - n) % 16]);
                         A[i] = x ^ (x << li[(i - n) % 16]);
@@ -412,10 +441,10 @@ namespace Cosmos.Security.Verification.MessageDigest
 
             #endregion
 
-            private static byte[] StringToByteArray(String hex)
+            private static byte[] StringToByteArray(string hex)
             {
                 var numberChars = hex.Length;
-                var bytes = new byte[numberChars / 2];
+                var bytes = new byte[numberChars];
                 for (var i = 0; i < numberChars; i += 2)
                     bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
                 return bytes;

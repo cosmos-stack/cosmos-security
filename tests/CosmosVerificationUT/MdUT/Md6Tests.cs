@@ -46,5 +46,80 @@ namespace MdUT
             var hashVal = function.ComputeHash(data);
             hashVal.AsHexString(true).ShouldBe(hex);
         }
+
+        [Theory(DisplayName = "Md6-bit64-ModeControl24")]
+        [InlineData("image", "A0917900646B701A")]
+        [InlineData("Den boer and Bosselaers found pseudo-collisions in MD5", "D535F28FD9806E53")]
+        public void Md6Bit64L24Test(string data, string hex)
+        {
+            var function = MdFactory.Create(o =>
+            {
+                o.HashSizeInBits = 64;
+                o.ModeControl = 24;
+            });
+
+            var hashVal = function.ComputeHash(data);
+            hashVal.AsHexString(true).ShouldBe(hex);
+        }
+
+        [Theory(DisplayName = "Md6-bit192-ModeControl33")]
+        [InlineData("image", "DB751B84793AF0F2CBFFFD45C68BD67C5C5977D32A409AC2")]
+        [InlineData("Den boer and Bosselaers found pseudo-collisions in MD5", "66E92AEE34160715A62BB67795A80544A3162284AD53DCD9")]
+        public void Md6Bit192L33Test(string data, string hex)
+        {
+            var function = MdFactory.Create(o =>
+            {
+                o.HashSizeInBits = 192;
+                o.ModeControl = 33;
+            });
+
+            var hashVal = function.ComputeHash(data);
+            hashVal.AsHexString(true).ShouldBe(hex);
+        }
+
+        [Theory(DisplayName = "Md6-bit255-ModeControl64")]
+        [InlineData("image", "9E14924D67ECB7C57DC0957617F78C937226D377BC98B0C56C5268E2AA2AC1A6")]
+        [InlineData("Den boer and Bosselaers found pseudo-collisions in MD5", "FDFADBD68BD59BC6DE4DD35A9971C81BCC9F737A72A1770E9E8E52419E8AF676")]
+        public void Md6Bit255L64Test(string data, string hex)
+        {
+            var function = MdFactory.Create(o =>
+            {
+                o.HashSizeInBits = 255;
+                o.ModeControl = 64;
+            });
+
+            var hashVal = function.ComputeHash(data);
+            hashVal.AsHexString(true).ShouldBe(hex);
+        }
+
+        [Theory(DisplayName = "Md6-bit8-ModeControl64")]
+        [InlineData("image", "DC")]
+        [InlineData("Den boer and Bosselaers found pseudo-collisions in MD5", "63")]
+        public void Md6Bit8L64Test(string data, string hex)
+        {
+            var function = MdFactory.Create(o =>
+            {
+                o.HashSizeInBits = 8;
+                o.ModeControl = 64;
+            });
+
+            var hashVal = function.ComputeHash(data);
+            hashVal.AsHexString(true).ShouldBe(hex);
+        }
+
+        [Theory(DisplayName = "Md6-bit17-ModeControl64")]
+        [InlineData("image", "98100")]
+        [InlineData("Den boer and Bosselaers found pseudo-collisions in MD5", "53258")]
+        public void Md6Bit17L64Test(string data, string hex)
+        {
+            var function = MdFactory.Create(o =>
+            {
+                o.HashSizeInBits = 17;
+                o.ModeControl = 64;
+            });
+
+            var hashVal = function.ComputeHash(data);
+            hashVal.AsHexString(true).ShouldBe(hex);
+        }
     }
 }

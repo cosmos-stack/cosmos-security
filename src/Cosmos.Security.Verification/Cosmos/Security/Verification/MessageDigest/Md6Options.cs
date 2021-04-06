@@ -5,18 +5,18 @@
         /// <summary>
         /// Length of the produced Message Digest value, in bits.
         /// </summary>
-        public int HashSizeInBits { get; internal set; }
+        public int HashSizeInBits { get; set; }
 
         /// <summary>
         /// Mode control, [0, 64], be used for MD6
         /// </summary>
-        public uint ModeControl { get; internal set; }
+        public uint ModeControl { get; set; }
 
         /// <summary>
         /// Number of Round, be used for MD6 <br />
         /// default value: <br /> without key = 40 + d/4 <br /> with key = max(80, 40 + d/4)
         /// </summary>
-        public uint NumberOfRound { get; internal set; }
+        public uint NumberOfRound { get; set; }
 
         /// <summary>
         /// Key, be used for MD6
@@ -53,6 +53,8 @@
                 NumberOfRound = options.NumberOfRound,
                 Key = options.Key,
                 IsHexString = options.IsHexString,
+                SkipForceConvert = true,
+                HexTrimLeadingZeroAsDefault = true
             };
         }
 

@@ -1,4 +1,6 @@
-﻿namespace Cosmos.Security.Verification.MessageDigest
+﻿using Cosmos.Security.Verification.Core;
+
+namespace Cosmos.Security.Verification.MessageDigest
 {
     public class MdConfig
     {
@@ -32,5 +34,16 @@
         /// To flag the value of key is HEX string or not, be used for MD6
         /// </summary>
         public bool IsHexString { get; set; } = false;
+
+        public bool SkipForceConvert { get; internal set; } = false;
+
+        public bool HexTrimLeadingZeroAsDefault { get; internal set; } = false;
+
+        internal TrimOptions GetTrimOptions()
+        {
+            return SkipForceConvert || HexTrimLeadingZeroAsDefault
+                ? new() {SkipForceConvert = SkipForceConvert, HexTrimLeadingZeroAsDefault = HexTrimLeadingZeroAsDefault}
+                : TrimOptions.Instance;
+        }
     }
 }

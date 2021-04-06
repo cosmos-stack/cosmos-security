@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Cosmos.Reflection;
 using Cosmos.Security.Verification.Core;
 
 namespace Cosmos.Security.Verification.MessageDigest
@@ -32,6 +33,7 @@ namespace Cosmos.Security.Verification.MessageDigest
         {
             private int _hashSizeInBits;
             private MdTypes _mdType;
+            private TrimOptions _trimOptions;
 
             private IMessageDigestWorker _worker;
 
@@ -59,6 +61,8 @@ namespace Cosmos.Security.Verification.MessageDigest
                     MdTypes.Md6Custom => _worker = new Md6Worker(config),
                     _ => null
                 };
+                
+                _trimOptions = config.GetTrimOptions();
             }
 
             protected override void CopyStateTo(MdBlockTransformer other)
@@ -67,6 +71,7 @@ namespace Cosmos.Security.Verification.MessageDigest
 
                 other._hashSizeInBits = _hashSizeInBits;
                 other._mdType = _mdType;
+                other._trimOptions = _trimOptions.DeepCopy();
 
                 other._hashValue = _hashValue;
             }
@@ -78,7 +83,7 @@ namespace Cosmos.Security.Verification.MessageDigest
 
             protected override IHashValue FinalizeHashValueInternal(CancellationToken cancellationToken)
             {
-                return new HashValue(_hashValue, _hashSizeInBits);
+                return new HashValue(_hashValue, _hashSizeInBits, _trimOptions);
             }
         }
 
