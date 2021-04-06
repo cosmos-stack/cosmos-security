@@ -1,4 +1,5 @@
-﻿using Cosmos.Security.Verification.Core;
+﻿using System;
+using Cosmos.Security.Verification.Core;
 
 namespace Cosmos.Security.Verification.MessageDigest
 {
@@ -38,6 +39,16 @@ namespace Cosmos.Security.Verification.MessageDigest
         public bool SkipForceConvert { get; internal set; } = false;
 
         public bool HexTrimLeadingZeroAsDefault { get; internal set; } = false;
+
+        internal void CheckParams()
+        {
+            if (HashSizeInBits <= 0 || HashSizeInBits > 512)
+                throw new ArgumentException("Wrong message digest length (d). It should be in the interval (0, 512].");
+            if (ModeControl > 64)
+                throw new ArgumentException("Wrong mode control (L). It should be in the interval (0, 64].");
+            if (NumberOfRound < 1)
+                throw new ArgumentException("Wrong number of rounds (r). It should be in the interval [1, +∞).");
+        }
 
         internal TrimOptions GetTrimOptions()
         {

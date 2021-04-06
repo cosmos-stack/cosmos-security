@@ -21,6 +21,8 @@ namespace Cosmos.Security.Verification.MessageDigest
 
             public Md6Worker(MdConfig config)
             {
+                config.CheckParams();
+                
                 _d = (uint) config.HashSizeInBits;
                 _L = config.ModeControl;
                 _r = config.NumberOfRound;
