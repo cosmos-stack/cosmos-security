@@ -6,18 +6,20 @@ namespace Cosmos.Security.Verification.SHA
     public partial class ShaFunction
     {
         /// <summary>
-        /// SHA224 Crypto Service Provider
+        /// SHA512/t Crypto Service Provider
         /// </summary>
-        private class SHA224CryptoServiceProvider : HashAlgorithm
+        private class SHA512tCryptoServiceProvider : HashAlgorithm
         {
-            private readonly Sha224Digest _digest;
+            private readonly Sha512tDigest _digest;
+            private readonly int _hashSize;
 
-            public SHA224CryptoServiceProvider()
+            public SHA512tCryptoServiceProvider(int hashSize)
             {
-                _digest = new Sha224Digest();
+                _hashSize = hashSize;
+                _digest = new Sha512tDigest(hashSize);
             }
 
-            public override int HashSize => 224;
+            public override int HashSize => _hashSize;
 
             public override void Initialize()
             {
