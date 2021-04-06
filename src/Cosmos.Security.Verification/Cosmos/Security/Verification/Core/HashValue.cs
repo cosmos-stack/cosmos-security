@@ -11,15 +11,20 @@ namespace Cosmos.Security.Verification.Core
     /// <summary>
     /// Hash value
     /// </summary>
-    public class HashValue : IHashValue
+    internal class HashValue : IHashValue
     {
-        public HashValue(IEnumerable<byte> hash, int bitLength)
+        private readonly TrimOptions _options;
+
+        public HashValue(IEnumerable<byte> hash, int bitLength, TrimOptions options = null)
         {
             if (hash is null)
                 throw new ArgumentNullException(nameof(hash));
             if (bitLength < 1)
                 throw new ArgumentOutOfRangeException(nameof(bitLength), $"{nameof(bitLength)} must be greater than or equal to 1.");
-            Hash = ForceConvertToArray(hash, bitLength);
+            _options = options ?? TrimOptions.Instance;
+            Hash = _options.SkipForceConvert
+                ? hash.ToArray()
+                : ForceConvertToArray(hash, bitLength);
             BitLength = bitLength;
         }
 
@@ -48,7 +53,12 @@ namespace Cosmos.Security.Verification.Core
             foreach (var byteValue in Hash)
                 stringBuilder.Append(byteValue.ToString(formatString));
 
-            return stringBuilder.ToString();
+            var result = stringBuilder.ToString();
+
+            if (_options.HexTrimLeadingZeroAsDefault)
+                result = result.TrimStart('0');
+
+            return result;
         }
 
         public string AsBinString()
