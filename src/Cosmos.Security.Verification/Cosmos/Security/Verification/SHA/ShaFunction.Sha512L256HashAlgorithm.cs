@@ -7,16 +7,16 @@ namespace Cosmos.Security.Verification.SHA
     public partial class ShaFunction
     {
         /// <summary>
-        /// SHA 224 Crypto Service Provider
+        /// SHA512/256 Crypto Service Provider
         /// </summary>
-        private class SHA224CryptoServiceProvider : HashAlgorithm
+        private class SHA512L256CryptoServiceProvider : HashAlgorithm
         {
-            private const int numberBits = 224;
+            private const int numberBits = 256;
 
-            private Block512[] blocks;
+            private Block1024[] blocks;
 
             private byte[] hashValue;
-
+            
             public override void Initialize()
             {
                 blocks.Clear();
@@ -25,30 +25,30 @@ namespace Cosmos.Security.Verification.SHA
 
             protected override void HashCore(byte[] array, int ibStart, int cbSize)
             {
-                blocks = ConvertPaddedTextToBlock512Array(PadPlainText512(array));
+                blocks = ConvertPaddedMessageToBlock1024Array(PadPlainText1024(array));
 
                 // Define the hash variables and set their initial values.
-                var H = new uint[8];
-                Array.Copy(H0Sha224, 0, H, 0, 8);
+                var H = new ulong[8];
+                Array.Copy(H0Sha512_256, 0, H, 0, 8);
 
-                for (var i = 0; i < blocks.Length; i++)
+                for (int i = 0; i < blocks.Length; i++)
                 {
-                    var W = CreateMessageScheduleSha256(blocks[i]);
+                    ulong[] W = CreateMessageScheduleSha512(blocks[i]);
 
                     // Set the working variables a,...,h to the current hash values.
-                    uint a = H[0];
-                    uint b = H[1];
-                    uint c = H[2];
-                    uint d = H[3];
-                    uint e = H[4];
-                    uint f = H[5];
-                    uint g = H[6];
-                    uint h = H[7];
+                    ulong a = H[0];
+                    ulong b = H[1];
+                    ulong c = H[2];
+                    ulong d = H[3];
+                    ulong e = H[4];
+                    ulong f = H[5];
+                    ulong g = H[6];
+                    ulong h = H[7];
 
-                    for (var t = 0; t < 64; t++)
+                    for (int t = 0; t < 80; t++)
                     {
-                        uint T1 = h + Sigma1_256(e) + Ch(e, f, g) + K256[t] + W[t];
-                        uint T2 = Sigma0_256(a) + Maj(a, b, c);
+                        ulong T1 = h + Sigma1_512(e) + Ch(e, f, g) + K512[t] + W[t];
+                        ulong T2 = Sigma0_512(a) + Maj(a, b, c);
                         h = g;
                         g = f;
                         f = e;
@@ -70,8 +70,8 @@ namespace Cosmos.Security.Verification.SHA
                     H[7] += h;
                 }
 
-                // Concatenate all the uint Hash Values
-                hashValue = ShaUtilities.Word32ArrayToByteArray(H);
+                // Concatenate all the ulong Hash Values
+                hashValue = ShaUtilities.Word64ArrayToByteArray(H);
             }
 
             protected override byte[] HashFinal()

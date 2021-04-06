@@ -47,5 +47,27 @@ namespace ShaUT
             var hashVal = function.ComputeHash(data);
             hashVal.AsHexString(true).ShouldBe(hex);
         }
+
+        [Theory(DisplayName = "Sha2/512-224")]
+        [InlineData("image", "408CC2B579A2AD383DD49409AFCFF74675428F28D4169CD4B0B48EC9")]
+        [InlineData("Hello World!", "BA0702DD8DD23280B617EF288BCC7E276060B8EBCDDF28F8E4356EAE")]
+        [InlineData("The quick brown fox jumps over the lazy dog", "944CD2847FB54558D4775DB0485A50003111C8E5DAA63FE722C6AA37")]
+        public void Sha512L244Test(string data, string hex)
+        {
+            var function = ShaFactory.Create(ShaTypes.Sha512_224);
+            var hashVal = function.ComputeHash(data);
+            hashVal.AsHexString(true).ShouldBe(hex);
+        }
+
+        [Theory(DisplayName = "Sha2/512-245")]
+        [InlineData("image", "639DDE9DE221036552784437884FD8436D8CBC29602865C9797E997714BF5B59")]
+        [InlineData("Hello World!", "F371319EEE6B39B058EC262D4E723A26710E46761301C8B54C56FA722267581A")]
+        [InlineData("The quick brown fox jumps over the lazy dog", "DD9D67B371519C339ED8DBD25AF90E976A1EEEFD4AD3D889005E532FC5BEF04D")]
+        public void Sha512L256Test(string data, string hex)
+        {
+            var function = ShaFactory.Create(ShaTypes.Sha512_256);
+            var hashVal = function.ComputeHash(data);
+            hashVal.AsHexString(true).ShouldBe(hex);
+        }
     }
 }

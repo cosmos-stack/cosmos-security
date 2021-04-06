@@ -13,6 +13,8 @@ namespace Cosmos.Security.Verification.SHA
                 ShaTypes.Sha256 => (256, 0),
                 ShaTypes.Sha384 => (384, 0),
                 ShaTypes.Sha512 => (512, 0),
+                ShaTypes.Sha512_224 => (224, 0),
+                ShaTypes.Sha512_256 => (256, 0),
                 _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
             };
         }

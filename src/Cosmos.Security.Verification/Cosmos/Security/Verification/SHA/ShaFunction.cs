@@ -69,6 +69,8 @@ namespace Cosmos.Security.Verification.SHA
                     ShaTypes.Sha256 => () => new SHA256CryptoServiceProvider(),
                     ShaTypes.Sha384 => () => new SHA384CryptoServiceProvider(),
                     ShaTypes.Sha512 => () => new SHA512CryptoServiceProvider(),
+                    ShaTypes.Sha512_224 => () => new SHA512L224CryptoServiceProvider(),
+                    ShaTypes.Sha512_256 => () => new SHA512L256CryptoServiceProvider(),
                     _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
                 };
             }
