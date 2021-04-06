@@ -3,7 +3,7 @@
 namespace Cosmos.Security.Verification.MessageDigest
 {
     /// <summary>
-    /// CRC Hash Function Factory
+    /// Message Digest Hash Function Factory
     /// </summary>
     public static class MdFactory
     {

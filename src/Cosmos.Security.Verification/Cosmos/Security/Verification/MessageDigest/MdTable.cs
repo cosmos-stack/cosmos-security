@@ -2,7 +2,7 @@
 
 namespace Cosmos.Security.Verification.MessageDigest
 {
-    public static class MdTable
+    internal static class MdTable
     {
         private static (int, uint, uint, bool, bool) Dict(MdTypes type)
         {
