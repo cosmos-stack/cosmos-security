@@ -1,5 +1,7 @@
 ﻿using System;
+#if NETFRAMEWORK
 using System.Linq;
+#endif
 using System.Security.Cryptography;
 using System.Threading;
 using Cosmos.Security.Verification.Core;

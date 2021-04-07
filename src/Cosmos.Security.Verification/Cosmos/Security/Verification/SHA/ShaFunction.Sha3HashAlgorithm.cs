@@ -1,5 +1,4 @@
-﻿using System;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using Org.BouncyCastle.Crypto.Digests;
 
 namespace Cosmos.Security.Verification.SHA
