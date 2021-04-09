@@ -17,5 +17,10 @@ namespace Cosmos.Security.Verification.MessageDigest
             optionsAct?.Invoke(options);
             return Create(options);
         }
+
+        public static MdFunction Md2 => Create(MdTypes.Md2);
+        public static MdFunction Md4 => Create(MdTypes.Md4);
+        public static MdFunction Md5 => Create(MdTypes.Md5);
+        public static MdFunction Md6 => Create(MdTypes.Md6);
     }
 }

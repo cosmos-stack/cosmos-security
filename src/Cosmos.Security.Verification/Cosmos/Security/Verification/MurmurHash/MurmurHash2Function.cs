@@ -16,7 +16,7 @@ namespace Cosmos.Security.Verification.MurmurHash
 
         private readonly MurmurHash2Config _config;
 
-        public MurmurHash2Function(MurmurHash2Config config)
+        internal MurmurHash2Function(MurmurHash2Config config)
         {
             _config = config ?? throw new ArgumentNullException(nameof(config));
 
