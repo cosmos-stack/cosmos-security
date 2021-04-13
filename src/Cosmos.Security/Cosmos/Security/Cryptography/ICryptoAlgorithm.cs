@@ -1,9 +1,9 @@
-﻿namespace Cosmos.Security.Encryption.Abstractions
+﻿namespace Cosmos.Security.Cryptography
 {
     /// <summary>
-    /// Interface for encryption algorithm
+    /// Interface for Cryptography Algorithm
     /// </summary>
-    public interface IEncryptionAlgorithm
+    public interface ICryptoAlgorithm
     {
         /// <summary>
         /// Encrypt

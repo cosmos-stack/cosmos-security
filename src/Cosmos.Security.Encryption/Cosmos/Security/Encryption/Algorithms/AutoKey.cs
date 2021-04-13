@@ -1,5 +1,5 @@
 ﻿using System;
-using Cosmos.Security.Encryption.Abstractions;
+using Cosmos.Security.Cryptography;
 using Cosmos.Security.Encryption.Core.Internals;
 
 namespace Cosmos.Security.Encryption.Algorithms
@@ -11,7 +11,7 @@ namespace Cosmos.Security.Encryption.Algorithms
     /// Author: Omar-Salem
     ///     https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/AutoKey.cs
     /// </summary>
-    public sealed class AutoKey : IEncryptionAlgorithm
+    public sealed class AutoKey : ICryptoAlgorithm
     {
         private string Key { get; }
 

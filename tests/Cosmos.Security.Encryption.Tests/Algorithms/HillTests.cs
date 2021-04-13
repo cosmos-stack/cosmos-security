@@ -1,4 +1,5 @@
-﻿using Cosmos.Security.Encryption.Abstractions;
+﻿using Cosmos.Security.Cryptography;
+using Cosmos.Security.Encryption.Abstractions;
 using Cosmos.Security.Encryption.Algorithms;
 using Xunit;
 
@@ -7,7 +8,7 @@ namespace Algorithms
     public class HillTests
     {
         readonly int[,] matrix;
-        readonly IEncryptionAlgorithm _target;
+        readonly ICryptoAlgorithm _target;
 
         public HillTests()
         {

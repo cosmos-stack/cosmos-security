@@ -1,4 +1,5 @@
-﻿using Cosmos.Security.Encryption.Abstractions;
+﻿using Cosmos.Security.Cryptography;
+using Cosmos.Security.Encryption.Abstractions;
 using Cosmos.Security.Encryption.Algorithms;
 using Xunit;
 
@@ -10,7 +11,7 @@ namespace Algorithms
         public void Vigenere_EncryptTest()
         {
             //Arrange
-            IEncryptionAlgorithm target = new Vigenere("lemon");
+            ICryptoAlgorithm target = new Vigenere("lemon");
             string plain = "attackatdawn";
             string cypher = "lxfopvefrnhr";
 
@@ -25,7 +26,7 @@ namespace Algorithms
         public void DecryptTest()
         {
             //Arrange
-            IEncryptionAlgorithm target = new Vigenere("lemon");
+            ICryptoAlgorithm target = new Vigenere("lemon");
             string plain = "attackatdawn";
             string cypher = "lxfopvefrnhr";
 

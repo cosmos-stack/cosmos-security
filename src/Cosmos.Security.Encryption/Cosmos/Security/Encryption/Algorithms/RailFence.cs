@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using Cosmos.Security.Cryptography;
 using Cosmos.Security.Encryption.Abstractions;
 using Cosmos.Security.Encryption.Core.Internals;
 
@@ -12,7 +13,7 @@ namespace Cosmos.Security.Encryption.Algorithms
     /// Author: Omar-Salem
     ///     https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/RailFence.cs
     /// </summary>
-    public sealed class RailFence : IEncryptionAlgorithm
+    public sealed class RailFence : ICryptoAlgorithm
     {
         private int Key { get; }
 

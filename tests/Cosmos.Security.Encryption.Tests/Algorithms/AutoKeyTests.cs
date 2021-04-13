@@ -1,4 +1,5 @@
-﻿using Cosmos.Security.Encryption.Abstractions;
+﻿using Cosmos.Security.Cryptography;
+using Cosmos.Security.Encryption.Abstractions;
 using Cosmos.Security.Encryption.Algorithms;
 using Xunit;
 
@@ -10,7 +11,7 @@ namespace Algorithms
         public void AutoKey_EncryptTest()
         {
             //Arrange
-            IEncryptionAlgorithm target = new AutoKey("deceptive");
+            ICryptoAlgorithm target = new AutoKey("deceptive");
             string plain = "wearediscoveredsaveyourself";
             string cypher = "zicvtwqngkzeiigasxstslvvwla";
 
@@ -25,7 +26,7 @@ namespace Algorithms
         public void AutoKey_DecryptTest()
         {
             //Arrange
-            IEncryptionAlgorithm target = new AutoKey("deceptivewearediscoveredsav");
+            ICryptoAlgorithm target = new AutoKey("deceptivewearediscoveredsav");
             string plain = "wearediscoveredsaveyourself";
             string cypher = "zicvtwqngkzeiigasxstslvvwla";
 

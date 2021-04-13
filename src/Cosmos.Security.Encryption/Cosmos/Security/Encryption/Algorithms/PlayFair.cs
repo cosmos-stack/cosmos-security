@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Cosmos.Security.Cryptography;
 using Cosmos.Security.Encryption.Abstractions;
 using Cosmos.Security.Encryption.Core.Internals;
 
@@ -14,7 +15,7 @@ namespace Cosmos.Security.Encryption.Algorithms
     /// Author: Omar-Salem
     ///     https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/PlayFair.cs
     /// </summary>
-    public sealed class PlayFair : IEncryptionAlgorithm
+    public sealed class PlayFair : ICryptoAlgorithm
     {
         private string Key { get; }
 

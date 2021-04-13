@@ -1,4 +1,5 @@
 ﻿using System;
+using Cosmos.Security.Cryptography;
 using Cosmos.Security.Encryption.Abstractions;
 using Cosmos.Security.Encryption.Core.Internals;
 
@@ -11,7 +12,7 @@ namespace Cosmos.Security.Encryption.Algorithms
     /// Author: Omar-Salem
     ///     https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/Vigenere.cs
     /// </summary>
-    public sealed class Vigenere : IEncryptionAlgorithm
+    public sealed class Vigenere : ICryptoAlgorithm
     {
         private string Key { get; }
 

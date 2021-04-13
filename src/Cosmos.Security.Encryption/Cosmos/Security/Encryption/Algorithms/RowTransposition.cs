@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Cosmos.Security.Cryptography;
 using Cosmos.Security.Encryption.Abstractions;
 
 namespace Cosmos.Security.Encryption.Algorithms
@@ -12,7 +13,7 @@ namespace Cosmos.Security.Encryption.Algorithms
     /// Author: Omar-Salem
     ///     https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/RowTransposition.cs
     /// </summary>
-    public sealed class RowTransposition : IEncryptionAlgorithm
+    public sealed class RowTransposition : ICryptoAlgorithm
     {
         private int[] Key { get; }
 

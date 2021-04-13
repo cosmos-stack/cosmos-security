@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Cosmos.Security.Cryptography;
 using Cosmos.Security.Encryption.Abstractions;
 using Cosmos.Security.Encryption.Core.Internals;
 
@@ -15,7 +16,7 @@ namespace Cosmos.Security.Encryption.Algorithms
     ///     https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/Monoalphabetic.cs
     /// </summary>
     // ReSharper disable once IdentifierTypo
-    public sealed class Monoalphabetic : IEncryptionAlgorithm
+    public sealed class Monoalphabetic : ICryptoAlgorithm
     {
         private Dictionary<char, char> AlphabetShuffled { get; }
         private Dictionary<char, char> AlphabetShuffledReverse { get; }

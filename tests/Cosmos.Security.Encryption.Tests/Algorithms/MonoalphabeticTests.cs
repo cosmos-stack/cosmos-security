@@ -1,4 +1,5 @@
-﻿using Cosmos.Security.Encryption.Abstractions;
+﻿using Cosmos.Security.Cryptography;
+using Cosmos.Security.Encryption.Abstractions;
 using Cosmos.Security.Encryption.Algorithms;
 using Xunit;
 
@@ -6,7 +7,7 @@ namespace Algorithms
 {
     public class MonoalphabeticTests
     {
-        readonly IEncryptionAlgorithm _target = new Monoalphabetic();
+        readonly ICryptoAlgorithm _target = new Monoalphabetic();
 
         [Fact]
         public void EncryptTest()

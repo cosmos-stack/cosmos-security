@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using Cosmos.Security.Cryptography;
 using Cosmos.Security.Encryption.Core;
 using Cosmos.Security.Encryption.Core.Internals;
 using Cosmos.Security.Encryption.Abstractions;
@@ -14,7 +15,7 @@ namespace Cosmos.Security.Encryption.Algorithms
     /// Author: Omar-Salem
     ///     https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/Hill.cs
     /// </summary>
-    public sealed class Hill : IEncryptionAlgorithm
+    public sealed class Hill : ICryptoAlgorithm
     {
         private int[,] Key { get; }
 
