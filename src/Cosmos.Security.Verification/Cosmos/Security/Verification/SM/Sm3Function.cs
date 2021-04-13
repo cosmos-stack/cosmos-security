@@ -1,11 +1,14 @@
 ﻿using System;
+#if NETFRAMEWORK
 using System.Linq;
+#endif
 using System.Security.Cryptography;
 using System.Threading;
 using Cosmos.Security.Verification.Core;
 using Org.BouncyCastle.Crypto.Digests;
 
-namespace Cosmos.Security.Verification.SM
+// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     public class Sm3Function : StreamableHashFunctionBase
     {

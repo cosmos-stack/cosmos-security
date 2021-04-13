@@ -1,6 +1,6 @@
 ﻿using System;
-
-namespace Cosmos.Security.Verification.MessageDigest
+// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     /// <summary>
     /// Message Digest Hash Function Factory

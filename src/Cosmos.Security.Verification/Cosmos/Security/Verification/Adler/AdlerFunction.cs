@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
 using Cosmos.Security.Verification.Core;
-
-namespace Cosmos.Security.Verification.Adler
+// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     /// <summary>
     /// ADLER Hash Function

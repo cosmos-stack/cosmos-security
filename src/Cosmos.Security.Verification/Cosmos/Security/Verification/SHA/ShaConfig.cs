@@ -1,4 +1,5 @@
-﻿namespace Cosmos.Security.Verification.SHA
+﻿// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     public class ShaConfig
     {

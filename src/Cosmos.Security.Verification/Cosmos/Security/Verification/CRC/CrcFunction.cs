@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Threading;
 using Cosmos.Security.Verification.Core;
 
-namespace Cosmos.Security.Verification.CRC
+// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     /// <summary>
     /// CRC Hash Function

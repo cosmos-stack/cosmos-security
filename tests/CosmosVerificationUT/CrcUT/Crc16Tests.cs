@@ -1,4 +1,4 @@
-﻿using Cosmos.Security.Verification.CRC;
+﻿using Cosmos.Security.Verification;
 using Shouldly;
 using Xunit;
 

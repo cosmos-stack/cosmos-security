@@ -1,4 +1,5 @@
-﻿namespace Cosmos.Security.Verification.SM
+﻿// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     public static class Sm3Factory
     {

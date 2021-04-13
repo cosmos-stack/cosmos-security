@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
 using Cosmos.Security.Verification.Core;
-
-namespace Cosmos.Security.Verification.MurmurHash
+// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     public partial class MurmurHash2Function
     {

@@ -1,4 +1,5 @@
-﻿namespace Cosmos.Security.Verification.MurmurHash
+﻿// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     public interface IMurmurHash<out TConfig> : IHashFunction
     {

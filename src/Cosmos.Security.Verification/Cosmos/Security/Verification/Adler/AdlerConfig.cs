@@ -1,4 +1,5 @@
-﻿namespace Cosmos.Security.Verification.Adler
+﻿// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     /// <summary>
     /// ADLER Hash Config

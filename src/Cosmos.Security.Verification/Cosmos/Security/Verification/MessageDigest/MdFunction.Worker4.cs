@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
-
-namespace Cosmos.Security.Verification.MessageDigest
+// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     public partial class MdFunction
     {

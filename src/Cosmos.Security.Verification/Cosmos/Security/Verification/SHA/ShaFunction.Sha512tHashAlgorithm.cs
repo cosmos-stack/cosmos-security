@@ -1,7 +1,8 @@
 ﻿using System.Security.Cryptography;
 using Org.BouncyCastle.Crypto.Digests;
 
-namespace Cosmos.Security.Verification.SHA
+// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     public partial class ShaFunction
     {

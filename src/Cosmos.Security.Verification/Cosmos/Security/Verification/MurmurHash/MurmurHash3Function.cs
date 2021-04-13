@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Cosmos.Reflection;
 using Cosmos.Security.Verification.Core;
-
-namespace Cosmos.Security.Verification.MurmurHash
+// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     public partial class MurmurHash3Function : StreamableHashFunctionBase, IStreamableMurmurHah<MurmurHash3Config>
     {

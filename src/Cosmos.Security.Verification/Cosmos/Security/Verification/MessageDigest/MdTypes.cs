@@ -1,4 +1,5 @@
-﻿namespace Cosmos.Security.Verification.MessageDigest
+﻿// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     public enum MdTypes
     {

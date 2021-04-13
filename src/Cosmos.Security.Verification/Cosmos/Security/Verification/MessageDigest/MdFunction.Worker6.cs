@@ -4,8 +4,8 @@ using System.Text;
 // ReSharper disable RedundantAssignment
 // ReSharper disable InconsistentNaming
 // ReSharper disable RedundantCast
-
-namespace Cosmos.Security.Verification.MessageDigest
+// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     public partial class MdFunction
     {

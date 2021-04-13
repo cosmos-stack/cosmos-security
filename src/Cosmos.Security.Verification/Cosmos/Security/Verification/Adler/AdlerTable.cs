@@ -1,6 +1,6 @@
 ﻿using System;
-
-namespace Cosmos.Security.Verification.Adler
+// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     internal static class AdlerTable
     {

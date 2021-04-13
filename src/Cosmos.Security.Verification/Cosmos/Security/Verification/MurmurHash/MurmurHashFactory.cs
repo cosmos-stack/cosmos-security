@@ -1,6 +1,6 @@
 ﻿using System;
-
-namespace Cosmos.Security.Verification.MurmurHash
+// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     public static class MurmurHashFactory
     {

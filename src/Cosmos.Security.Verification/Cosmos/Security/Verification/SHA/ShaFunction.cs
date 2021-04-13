@@ -6,7 +6,8 @@ using System.Security.Cryptography;
 using System.Threading;
 using Cosmos.Security.Verification.Core;
 
-namespace Cosmos.Security.Verification.SHA
+// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     public partial class ShaFunction : StreamableHashFunctionBase
     {

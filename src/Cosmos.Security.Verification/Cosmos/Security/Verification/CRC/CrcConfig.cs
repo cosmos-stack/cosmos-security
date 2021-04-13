@@ -1,4 +1,5 @@
-﻿namespace Cosmos.Security.Verification.CRC
+﻿// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     /// <summary>
     /// CRC Hash Config

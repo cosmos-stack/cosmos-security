@@ -1,7 +1,7 @@
 ﻿using System;
 using Cosmos.Security.Verification.Core;
-
-namespace Cosmos.Security.Verification.MessageDigest
+// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Verification
 {
     public class MdConfig
     {
