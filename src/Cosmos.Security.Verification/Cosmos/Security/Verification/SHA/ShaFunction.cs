@@ -5,25 +5,24 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Threading;
 using Cosmos.Security.Verification.Core;
+using Org.BouncyCastle.Crypto.Digests;
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public partial class ShaFunction : StreamableHashFunctionBase
+    public class ShaFunction : StreamableHashFunctionBase
     {
-        private readonly ShaConfig _shaConfig;
-
         internal ShaFunction(ShaTypes type)
         {
             HashType = type;
-            _shaConfig = ShaTable.Map(type);
+            HashSizeInBits = (int) type % 1000;
         }
 
-        public override int HashSizeInBits => _shaConfig.HashSizeInBits;
+        public override int HashSizeInBits { get; }
 
         public ShaTypes HashType { get; }
 
-        public override IBlockTransformer CreateBlockTransformer() => new ShaBlockTransformer(_shaConfig);
+        public override IBlockTransformer CreateBlockTransformer() => new ShaBlockTransformer(HashType);
 
         #region Internal Implementation of BlockTransformer
 
@@ -36,10 +35,10 @@ namespace Cosmos.Security.Verification
 
             public ShaBlockTransformer() { }
 
-            public ShaBlockTransformer(ShaConfig config)
+            public ShaBlockTransformer(ShaTypes type)
             {
-                _hashSizeInBits = config.HashSizeInBits;
-                _internalAlgorithmFactory = GetHashAlgorithm(config);
+                _hashSizeInBits = (int) type % 1000;
+                _internalAlgorithmFactory = GetHashAlgorithm(type, _hashSizeInBits);
             }
 
             protected override void CopyStateTo(ShaBlockTransformer other)
@@ -63,23 +62,130 @@ namespace Cosmos.Security.Verification
                 return new HashValue(_hashValue, _hashSizeInBits);
             }
 
-            private static Func<HashAlgorithm> GetHashAlgorithm(ShaConfig config)
+            private static Func<HashAlgorithm> GetHashAlgorithm(ShaTypes type, int hashSizeInBits)
             {
-                return config.Type switch
+                return type switch
                 {
                     ShaTypes.Sha1 => () => new SHA1CryptoServiceProvider(),
                     ShaTypes.Sha224 => () => new SHA224CryptoServiceProvider(),
                     ShaTypes.Sha256 => () => new SHA256CryptoServiceProvider(),
                     ShaTypes.Sha384 => () => new SHA384CryptoServiceProvider(),
                     ShaTypes.Sha512 => () => new SHA512CryptoServiceProvider(),
-                    ShaTypes.Sha512Bit224 => () => new SHA512tCryptoServiceProvider(config.HashSizeInBits),
-                    ShaTypes.Sha512Bit256 => () => new SHA512tCryptoServiceProvider(config.HashSizeInBits),
-                    ShaTypes.Sha3Bit224 => () => new SHA3CryptoServiceProvider(config.HashSizeInBits),
-                    ShaTypes.Sha3Bit256 => () => new SHA3CryptoServiceProvider(config.HashSizeInBits),
-                    ShaTypes.Sha3Bit384 => () => new SHA3CryptoServiceProvider(config.HashSizeInBits),
-                    ShaTypes.Sha3Bit512 => () => new SHA3CryptoServiceProvider(config.HashSizeInBits),
-                    _ => throw new ArgumentOutOfRangeException(nameof(config.Type), config.Type, null)
+                    ShaTypes.Sha512Bit224 => () => new SHA512tCryptoServiceProvider(hashSizeInBits),
+                    ShaTypes.Sha512Bit256 => () => new SHA512tCryptoServiceProvider(hashSizeInBits),
+                    ShaTypes.Sha3Bit224 => () => new SHA3CryptoServiceProvider(hashSizeInBits),
+                    ShaTypes.Sha3Bit256 => () => new SHA3CryptoServiceProvider(hashSizeInBits),
+                    ShaTypes.Sha3Bit384 => () => new SHA3CryptoServiceProvider(hashSizeInBits),
+                    ShaTypes.Sha3Bit512 => () => new SHA3CryptoServiceProvider(hashSizeInBits),
+                    _ => () => new SHA1CryptoServiceProvider()
                 };
+            }
+        }
+
+        #endregion
+
+        #region Internal HashAlgorithm Implementation
+
+        /// <summary>
+        /// SHA224 Crypto Service Provider
+        /// </summary>
+        private class SHA224CryptoServiceProvider : HashAlgorithm
+        {
+            private readonly Sha224Digest _digest;
+
+            public SHA224CryptoServiceProvider()
+            {
+                _digest = new Sha224Digest();
+            }
+
+            public override int HashSize => 224;
+
+            public override void Initialize()
+            {
+                HashValue = new byte[_digest.GetDigestSize()];
+            }
+
+            protected override void HashCore(byte[] array, int ibStart, int cbSize)
+            {
+                if (HashValue is null)
+                    Initialize();
+                _digest.BlockUpdate(array, ibStart, cbSize);
+            }
+
+            protected override byte[] HashFinal()
+            {
+                _digest.DoFinal(HashValue, 0);
+                return HashValue;
+            }
+        }
+
+        /// <summary>
+        /// SHA512/t Crypto Service Provider
+        /// </summary>
+        private class SHA512tCryptoServiceProvider : HashAlgorithm
+        {
+            private readonly Sha512tDigest _digest;
+            private readonly int _hashSize;
+
+            public SHA512tCryptoServiceProvider(int hashSize)
+            {
+                _hashSize = hashSize;
+                _digest = new Sha512tDigest(hashSize);
+            }
+
+            public override int HashSize => _hashSize;
+
+            public override void Initialize()
+            {
+                HashValue = new byte[_digest.GetDigestSize()];
+            }
+
+            protected override void HashCore(byte[] array, int ibStart, int cbSize)
+            {
+                if (HashValue is null)
+                    Initialize();
+                _digest.BlockUpdate(array, ibStart, cbSize);
+            }
+
+            protected override byte[] HashFinal()
+            {
+                _digest.DoFinal(HashValue, 0);
+                return HashValue;
+            }
+        }
+
+        /// <summary>
+        /// SHA3 Crypto Service Provider
+        /// </summary>
+        private class SHA3CryptoServiceProvider : HashAlgorithm
+        {
+            private readonly Sha3Digest _digest;
+            private readonly int _hashSize;
+
+            public SHA3CryptoServiceProvider(int hashSize)
+            {
+                _hashSize = hashSize;
+                _digest = new Sha3Digest(hashSize);
+            }
+
+            public override int HashSize => _hashSize;
+
+            public override void Initialize()
+            {
+                HashValue = new byte[_digest.GetDigestSize()];
+            }
+
+            protected override void HashCore(byte[] array, int ibStart, int cbSize)
+            {
+                if (HashValue is null)
+                    Initialize();
+                _digest.BlockUpdate(array, ibStart, cbSize);
+            }
+
+            protected override byte[] HashFinal()
+            {
+                _digest.DoFinal(HashValue, 0);
+                return HashValue;
             }
         }
 
