@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public partial class MdFunction
+    internal partial class MdFunction
     {
         /// <summary>
         /// MD4 Worker

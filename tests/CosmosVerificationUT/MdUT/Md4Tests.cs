@@ -14,7 +14,7 @@ namespace MdUT
         {
             var function = MdFactory.Create(MdTypes.Md4);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
     }
 }

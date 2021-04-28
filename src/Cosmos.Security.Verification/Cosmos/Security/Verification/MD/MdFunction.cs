@@ -2,10 +2,11 @@
 using System.Threading;
 using Cosmos.Reflection;
 using Cosmos.Security.Verification.Core;
+
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public partial class MdFunction : StreamableHashFunctionBase
+    internal partial class MdFunction : StreamableHashFunctionBase, IMD
     {
         private readonly MdConfig _mdConfig;
 
@@ -61,7 +62,7 @@ namespace Cosmos.Security.Verification
                     MdTypes.Md6Custom => _worker = new Md6Worker(config),
                     _ => null
                 };
-                
+
                 _trimOptions = config.GetTrimOptions();
             }
 

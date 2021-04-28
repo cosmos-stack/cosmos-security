@@ -14,7 +14,7 @@ namespace MdUT
         {
             var function = MdFactory.Create(MdTypes.Md6);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "Md6-bit128")]
@@ -24,7 +24,7 @@ namespace MdUT
         {
             var function = MdFactory.Create(MdTypes.Md6Bit128);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "Md6-bit256")]
@@ -34,7 +34,7 @@ namespace MdUT
         {
             var function = MdFactory.Create(MdTypes.Md6Bit256);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "Md6-bit512")]
@@ -44,7 +44,7 @@ namespace MdUT
         {
             var function = MdFactory.Create(MdTypes.Md6Bit512);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "Md6-bit64-ModeControl24")]
@@ -59,7 +59,7 @@ namespace MdUT
             });
 
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "Md6-bit192-ModeControl33")]
@@ -74,7 +74,7 @@ namespace MdUT
             });
 
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "Md6-bit255-ModeControl64")]
@@ -89,7 +89,7 @@ namespace MdUT
             });
 
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "Md6-bit8-ModeControl64")]
@@ -104,7 +104,7 @@ namespace MdUT
             });
 
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "Md6-bit17-ModeControl64")]
@@ -119,7 +119,7 @@ namespace MdUT
             });
 
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
     }
 }

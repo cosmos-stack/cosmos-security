@@ -7,7 +7,7 @@ using System.Text;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public partial class MdFunction
+    internal partial class MdFunction
     {
         private class Md6Worker : IMessageDigestWorker
         {

@@ -3,7 +3,7 @@ using Cosmos.Collections;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public partial class MdFunction
+    internal partial class MdFunction
     {
         /// <summary>
         /// MD2 Worker

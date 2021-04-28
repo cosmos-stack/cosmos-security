@@ -14,7 +14,7 @@ namespace MdUT
         {
             var function = MdFactory.Create(MdTypes.Md5);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "Md5_bit16")]
@@ -24,7 +24,7 @@ namespace MdUT
         {
             var function = MdFactory.Create(MdTypes.Md5Bit16);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "Md5_bit32")]
@@ -34,7 +34,7 @@ namespace MdUT
         {
             var function = MdFactory.Create(MdTypes.Md5Bit32);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "Md5_bit64")]
@@ -45,8 +45,8 @@ namespace MdUT
         {
             var function = MdFactory.Create(MdTypes.Md5Bit64);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsString().ShouldBe(base64Val);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetString().ShouldBe(base64Val);
         }
     }
 }
