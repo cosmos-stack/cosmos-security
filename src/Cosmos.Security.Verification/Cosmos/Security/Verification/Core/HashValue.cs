@@ -32,7 +32,7 @@ namespace Cosmos.Security.Verification.Core
 
         public byte[] Hash { get; }
 
-        public BitArray AsBitArray()
+        public BitArray GetBitArray()
         {
             return new(Hash)
             {
@@ -40,12 +40,19 @@ namespace Cosmos.Security.Verification.Core
             };
         }
 
-        public string AsHexString()
+        public byte[] AsByteArray()
         {
-            return AsHexString(false);
+            var hash = new byte[BitLength];
+            Array.Copy(Hash, 0, hash, 0, BitLength);
+            return hash;
         }
 
-        public string AsHexString(bool uppercase)
+        public string GetHexString()
+        {
+            return GetHexString(false);
+        }
+
+        public string GetHexString(bool uppercase)
         {
             var stringBuilder = new StringBuilder(Hash.Length);
             var formatString = uppercase ? "X2" : "x2";
@@ -61,14 +68,14 @@ namespace Cosmos.Security.Verification.Core
             return result;
         }
 
-        public string AsBinString()
+        public string GetBinString()
         {
-            return AsBinString(false);
+            return GetBinString(false);
         }
 
-        public string AsBinString(bool complementZero)
+        public string GetBinString(bool complementZero)
         {
-            var result = Conversions.ScaleConv.HexToBin(AsHexString());
+            var result = Conversions.ScaleConv.HexToBin(GetHexString());
 
             if (complementZero == false || result.Length == BitLength)
                 return result;
@@ -76,17 +83,17 @@ namespace Cosmos.Security.Verification.Core
             return result.PadLeft(BitLength, '0');
         }
 
-        public string AsBase64String()
+        public string GetBase64String()
         {
             return BaseConv.ToBase64(Hash);
         }
 
-        public string AsString()
+        public string GetString()
         {
-            return AsString(Encoding.UTF8);
+            return GetString(Encoding.UTF8);
         }
 
-        public string AsString(Encoding encoding)
+        public string GetString(Encoding encoding)
         {
             return encoding.SafeEncodingValue().GetString(Hash);
         }
