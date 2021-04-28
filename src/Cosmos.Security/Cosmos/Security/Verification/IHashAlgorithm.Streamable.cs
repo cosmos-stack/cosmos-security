@@ -4,10 +4,8 @@ using System.Threading.Tasks;
 
 namespace Cosmos.Security.Verification
 {
-    public interface IStreamableHashFunction : IHashFunction
+    public interface IStreamableHashAlgorithm: IHashAlgorithm
     {
-        IBlockTransformer CreateBlockTransformer();
-
         IHashValue ComputeHash(Stream data);
 
         IHashValue ComputeHash(Stream data, CancellationToken cancellationToken);
