@@ -15,7 +15,7 @@ namespace HmacUT
         {
             var function = HmacFactory.Create(HmacTypes.HmacMd5, key);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "HMAC/SHA1")]
@@ -26,7 +26,7 @@ namespace HmacUT
         {
             var function = HmacFactory.Create(HmacTypes.HmacSha1, key);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "HMAC/Sha256")]
@@ -37,7 +37,7 @@ namespace HmacUT
         {
             var function = HmacFactory.Create(HmacTypes.HmacSha256, key);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "HMAC/Sha384")]
@@ -48,7 +48,7 @@ namespace HmacUT
         {
             var function = HmacFactory.Create(HmacTypes.HmacSha384, key);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "HMAC/Sha512")]
@@ -59,7 +59,7 @@ namespace HmacUT
         {
             var function = HmacFactory.Create(HmacTypes.HmacSha512, key);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
     }
 }

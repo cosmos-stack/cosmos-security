@@ -9,7 +9,7 @@ using Cosmos.Security.Verification.Core;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public class HmacFunction : StreamableHashFunctionBase
+    internal class HmacFunction : StreamableHashFunctionBase, IHMAC
     {
         private readonly HmacConfig _hmacConfig;
 
