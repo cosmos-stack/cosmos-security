@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Cosmos.Reflection;
 using Cosmos.Security.Verification.Core;
+
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public partial class MurmurHash3Function : StreamableHashFunctionBase, IStreamableMurmurHah<MurmurHash3Config>
+    internal partial class MurmurHash3Function : StreamableHashFunctionBase, IStreamableMurmurHahFunction<MurmurHash3Config>, IStreamableMurmurHash
     {
         private const UInt32 c1_32 = 0xcc9e2d51;
         private const UInt32 c2_32 = 0x1b873593;
@@ -35,7 +36,7 @@ namespace Cosmos.Security.Verification
             switch (_config.HashSizeInBits)
             {
                 case 32:
-                    return new BlockTransformer32((UInt32) _config.Seed);
+                    return new BlockTransformer32((uint) _config.Seed);
 
                 case 128:
                     return new BlockTransformer128(_config.Seed);

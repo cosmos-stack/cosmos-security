@@ -5,7 +5,7 @@ using Cosmos.Security.Verification.Core;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public partial class MurmurHash3Function
+    internal partial class MurmurHash3Function
     {
         private class BlockTransformer128 : BlockTransformerBase<BlockTransformer128>
         {

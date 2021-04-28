@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Threading;
 using Cosmos.Security.Verification.Core;
+
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public partial class MurmurHash2Function
+    internal partial class MurmurHash2Function
     {
         protected IHashValue ComputeHash64(ArraySegment<byte> data, CancellationToken cancellationToken)
         {
@@ -15,7 +16,7 @@ namespace Cosmos.Security.Verification
             var endOffset = dataOffset + dataCount;
             var remainderCount = dataCount % 8;
 
-            UInt64 hashValue = _config.Seed ^ ((UInt64) dataCount * _mixConstant64);
+            ulong hashValue = _config.Seed ^ ((ulong) dataCount * _mixConstant64);
 
             // Process 8-byte groups
             {
@@ -23,7 +24,7 @@ namespace Cosmos.Security.Verification
 
                 for (var currentOffset = dataOffset; currentOffset < groupEndOffset; currentOffset += 8)
                 {
-                    UInt64 k = BitConverter.ToUInt64(dataArray, currentOffset);
+                    ulong k = BitConverter.ToUInt64(dataArray, currentOffset);
 
                     k *= _mixConstant64;
                     k ^= k >> 47;
@@ -42,26 +43,26 @@ namespace Cosmos.Security.Verification
                 switch (remainderCount)
                 {
                     case 7:
-                        hashValue ^= (UInt64) dataArray[remainderOffset + 6] << 48;
+                        hashValue ^= (ulong) dataArray[remainderOffset + 6] << 48;
                         goto case 6;
                     case 6:
-                        hashValue ^= (UInt64) dataArray[remainderOffset + 5] << 40;
+                        hashValue ^= (ulong) dataArray[remainderOffset + 5] << 40;
                         goto case 5;
                     case 5:
-                        hashValue ^= (UInt64) dataArray[remainderOffset + 4] << 32;
+                        hashValue ^= (ulong) dataArray[remainderOffset + 4] << 32;
                         goto case 4;
                     case 4:
-                        hashValue ^= (UInt64) BitConverter.ToUInt32(dataArray, remainderOffset);
+                        hashValue ^= (ulong) BitConverter.ToUInt32(dataArray, remainderOffset);
                         break;
 
                     case 3:
-                        hashValue ^= (UInt64) dataArray[remainderOffset + 2] << 16;
+                        hashValue ^= (ulong) dataArray[remainderOffset + 2] << 16;
                         goto case 2;
                     case 2:
-                        hashValue ^= (UInt64) dataArray[remainderOffset + 1] << 8;
+                        hashValue ^= (ulong) dataArray[remainderOffset + 1] << 8;
                         goto case 1;
                     case 1:
-                        hashValue ^= (UInt64) dataArray[remainderOffset];
+                        hashValue ^= (ulong) dataArray[remainderOffset];
                         break;
                 }
 

@@ -1,10 +1,8 @@
 ﻿// ReSharper disable once CheckNamespace
+
 namespace Cosmos.Security.Verification
 {
-    public interface IMurmurHash<out TConfig> : IHashFunction
-    {
-        TConfig Config { get; }
-    }
+    public interface IMurmurHash : IHashAlgorithm { }
 
-    public interface IStreamableMurmurHah<out TConfig> : IMurmurHash<TConfig>, IStreamableHashFunction { }
+    public interface IStreamableMurmurHash : IMurmurHash, IStreamableHashAlgorithm, IHashAlgorithm { }
 }

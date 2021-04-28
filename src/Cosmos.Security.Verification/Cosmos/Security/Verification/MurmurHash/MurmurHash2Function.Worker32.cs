@@ -4,7 +4,7 @@ using Cosmos.Security.Verification.Core;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public partial class MurmurHash2Function
+    internal partial class MurmurHash2Function
     {
         protected IHashValue ComputeHash32(ArraySegment<byte> data, CancellationToken cancellationToken)
         {
@@ -15,7 +15,7 @@ namespace Cosmos.Security.Verification
             var endOffset = dataOffset + dataCount;
             var remainderCount = dataCount % 4;
 
-            UInt32 hashValue = (UInt32) _config.Seed ^ (UInt32) dataCount;
+            uint hashValue = (uint) _config.Seed ^ (uint) dataCount;
 
             // Process 4-byte groups
             {
@@ -23,7 +23,7 @@ namespace Cosmos.Security.Verification
 
                 for (var currentOffset = dataOffset; currentOffset < groupEndOffset; currentOffset += 4)
                 {
-                    UInt32 k = BitConverter.ToUInt32(dataArray, currentOffset);
+                    uint k = BitConverter.ToUInt32(dataArray, currentOffset);
 
                     k *= _mixConstant32;
                     k ^= k >> 24;
@@ -42,13 +42,13 @@ namespace Cosmos.Security.Verification
                 switch (remainderCount)
                 {
                     case 3:
-                        hashValue ^= (UInt32) dataArray[remainderOffset + 2] << 16;
+                        hashValue ^= (uint) dataArray[remainderOffset + 2] << 16;
                         goto case 2;
                     case 2:
-                        hashValue ^= (UInt32) dataArray[remainderOffset + 1] << 8;
+                        hashValue ^= (uint) dataArray[remainderOffset + 1] << 8;
                         goto case 1;
                     case 1:
-                        hashValue ^= (UInt32) dataArray[remainderOffset];
+                        hashValue ^= (uint) dataArray[remainderOffset];
                         break;
                 }
 

@@ -14,7 +14,7 @@ namespace MurmurHashUT
         {
             var function = MurmurHashFactory.Create(MurmurHashTypes.MurmurHash3);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "MurmurHash3/32")]
@@ -24,7 +24,7 @@ namespace MurmurHashUT
         {
             var function = MurmurHashFactory.Create(MurmurHashTypes.MurmurHash3Bit32);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "MurmurHash3/128")]
@@ -34,7 +34,7 @@ namespace MurmurHashUT
         {
             var function = MurmurHashFactory.Create(MurmurHashTypes.MurmurHash3Bit128);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
     }
 }

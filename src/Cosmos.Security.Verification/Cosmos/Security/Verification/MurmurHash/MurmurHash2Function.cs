@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading;
 using Cosmos.Reflection;
 using Cosmos.Security.Verification.Core;
+
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public partial class MurmurHash2Function : HashFunctionBase, IMurmurHash<MurmurHash2Config>
+    internal partial class MurmurHash2Function : HashFunctionBase, IMurmurHashFunction<MurmurHash2Config>, IMurmurHash
     {
         private const UInt32 _mixConstant32 = 0x5bd1e995;
         private const UInt64 _mixConstant64 = 0xc6a4a7935bd1e995;

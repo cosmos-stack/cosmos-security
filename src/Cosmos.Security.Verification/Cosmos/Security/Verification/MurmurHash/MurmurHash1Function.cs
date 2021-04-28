@@ -6,7 +6,7 @@ using Cosmos.Security.Verification.Core;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public class MurmurHash1Function : HashFunctionBase, IMurmurHash<MurmurHash1Config>
+    internal class MurmurHash1Function : HashFunctionBase, IMurmurHashFunction<MurmurHash1Config>, IMurmurHash
     {
         private const UInt32 _m = 0XC6A4A793;
 
