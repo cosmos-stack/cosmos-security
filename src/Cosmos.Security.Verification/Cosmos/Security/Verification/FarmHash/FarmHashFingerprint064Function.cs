@@ -2,9 +2,10 @@
 using System.Threading;
 using Cosmos.Security.Verification.Core;
 
+// ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public class FarmHashFingerprint064Function : HashFunctionBase
+    internal class FarmHashFingerprint064Function : HashFunctionBase, IFarmHash
     {
         private const UInt64 _k0 = 0xc3a5c85c97cb3127UL;
         private const UInt64 _k1 = 0xb492b66fbe98f273UL;

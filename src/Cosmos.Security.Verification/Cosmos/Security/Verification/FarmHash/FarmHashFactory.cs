@@ -5,7 +5,7 @@ namespace Cosmos.Security.Verification
 {
     public static class FarmHashFactory
     {
-        public static HashFunctionBase Create(FarmHashTypes type = FarmHashTypes.Fingerprint64)
+        public static IFarmHash Create(FarmHashTypes type = FarmHashTypes.Fingerprint64)
         {
             return type switch
             {

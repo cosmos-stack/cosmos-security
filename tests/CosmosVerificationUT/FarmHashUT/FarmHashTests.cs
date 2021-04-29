@@ -13,7 +13,7 @@ namespace FarmHashUT
         {
             var function = FarmHashFactory.Create(FarmHashTypes.Fingerprint32);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory]
@@ -22,7 +22,7 @@ namespace FarmHashUT
         {
             var function = FarmHashFactory.Create(FarmHashTypes.Fingerprint64);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory]
@@ -31,7 +31,7 @@ namespace FarmHashUT
         {
             var function = FarmHashFactory.Create(FarmHashTypes.Fingerprint128);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
     }
 }
