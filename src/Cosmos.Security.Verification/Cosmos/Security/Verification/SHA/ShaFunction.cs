@@ -10,7 +10,7 @@ using Org.BouncyCastle.Crypto.Digests;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public class ShaFunction : StreamableHashFunctionBase
+    internal class ShaFunction : StreamableHashFunctionBase, ISHA
     {
         internal ShaFunction(ShaTypes type)
         {

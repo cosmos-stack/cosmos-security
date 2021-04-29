@@ -1,5 +1,7 @@
 ﻿using Factory = Cosmos.Security.Verification.ShaFactory;
 
+// ReSharper disable InconsistentNaming
+
 namespace Cosmos.Security.Verification
 {
     /// <summary>
@@ -7,7 +9,7 @@ namespace Cosmos.Security.Verification
     /// </summary>
     public static class SHA
     {
-        public static ShaFunction Create(ShaTypes type = ShaTypes.Sha1) => Factory.Create(type);
+        public static ISHA Create(ShaTypes type = ShaTypes.Sha1) => Factory.Create(type);
     }
 
     /// <summary>
@@ -15,7 +17,7 @@ namespace Cosmos.Security.Verification
     /// </summary>
     public static class SHA1
     {
-        public static ShaFunction Create() => Factory.Create(ShaTypes.Sha1);
+        public static ISHA Create() => Factory.Create(ShaTypes.Sha1);
     }
 
     /// <summary>
@@ -23,7 +25,7 @@ namespace Cosmos.Security.Verification
     /// </summary>
     public static class SHA256
     {
-        public static ShaFunction Create() => Factory.Create(ShaTypes.Sha256);
+        public static ISHA Create() => Factory.Create(ShaTypes.Sha256);
     }
 
     /// <summary>
@@ -31,6 +33,6 @@ namespace Cosmos.Security.Verification
     /// </summary>
     public static class SHA512
     {
-        public static ShaFunction Create() => Factory.Create(ShaTypes.Sha512);
+        public static ISHA Create() => Factory.Create(ShaTypes.Sha512);
     }
 }

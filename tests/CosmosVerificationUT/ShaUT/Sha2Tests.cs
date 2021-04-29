@@ -14,7 +14,7 @@ namespace ShaUT
         {
             var function = ShaFactory.Create(ShaTypes.Sha256);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "Sha2/224")]
@@ -25,7 +25,7 @@ namespace ShaUT
         {
             var function = ShaFactory.Create(ShaTypes.Sha224);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "Sha2/384")]
@@ -35,7 +35,7 @@ namespace ShaUT
         {
             var function = ShaFactory.Create(ShaTypes.Sha384);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "Sha2/512")]
@@ -45,7 +45,7 @@ namespace ShaUT
         {
             var function = ShaFactory.Create(ShaTypes.Sha512);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "Sha2/512-224")]
@@ -56,7 +56,7 @@ namespace ShaUT
         {
             var function = ShaFactory.Create(ShaTypes.Sha512Bit224);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory(DisplayName = "Sha2/512-245")]
@@ -67,7 +67,7 @@ namespace ShaUT
         {
             var function = ShaFactory.Create(ShaTypes.Sha512Bit256);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
     }
 }
