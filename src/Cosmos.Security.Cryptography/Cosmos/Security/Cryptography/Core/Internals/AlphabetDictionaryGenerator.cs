@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Cosmos.Security.Encryption.Core.Internals
+namespace Cosmos.Security.Cryptography.Core.Internals
 {
     internal static class AlphabetDictionaryGenerator
     {
@@ -18,13 +18,11 @@ namespace Cosmos.Security.Encryption.Core.Internals
 
         private static Func<Dictionary<char, int>> GenerateFunc() => () =>
         {
-            var alphabet = new Dictionary<char, int>();
+            var alphabet = new Dictionary<char, int>(26);
             var c = 'a';
 
             for (var i = 0; i < 26; c++, i++)
-            {
                 alphabet.Add(c, i);
-            }
 
             return alphabet;
         };

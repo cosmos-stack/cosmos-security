@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Cosmos.Security.Encryption.Core.Internals
+namespace Cosmos.Security.Cryptography.Core.Internals
 {
     /// <summary>
     /// Algorithm Utils
@@ -16,14 +16,14 @@ namespace Cosmos.Security.Encryption.Core.Internals
         /// Author: Omar-Salem
         /// </summary>
         /// <returns></returns>
-        internal static Func<int, Func<int, Func<EncryptionAlgorithmMode, int>>> GetAlphabetPositionFunc() => textPosition => keyPosition => mode =>
+        internal static Func<int, Func<int, Func<CryptoMode, int>>> GetAlphabetPositionFunc() => textPosition => keyPosition => mode =>
         {
             switch (mode)
             {
-                case EncryptionAlgorithmMode.Encrypt:
+                case CryptoMode.Encrypt:
                     return (textPosition + keyPosition) % 26;
 
-                case EncryptionAlgorithmMode.Decrypt:
+                case CryptoMode.Decrypt:
                     var result = textPosition - keyPosition;
                     return result < 0 ? result + 26 : result;
 
@@ -41,7 +41,7 @@ namespace Cosmos.Security.Encryption.Core.Internals
         /// <param name="mode"></param>
         /// <param name="alphabetSortedDict"></param>
         /// <returns></returns>
-        internal static string Shift(string token, string key, EncryptionAlgorithmMode mode, Dictionary<char, int> alphabetSortedDict)
+        internal static string Shift(string token, string key, CryptoMode mode, Dictionary<char, int> alphabetSortedDict)
         {
             var sbRet = new StringBuilder();
 

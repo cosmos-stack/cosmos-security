@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Cosmos.Security.Encryption.Core.Internals
+namespace Cosmos.Security.Cryptography.Core.Internals
 {
     /// <summary>
     /// Random string generator

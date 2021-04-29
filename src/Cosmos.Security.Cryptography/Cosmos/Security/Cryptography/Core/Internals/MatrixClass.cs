@@ -8,7 +8,7 @@
 // ReSharper disable InconsistentNaming
 // ReSharper disable EmptyStatement
 
-namespace Cosmos.Security.Encryption.Core
+namespace Cosmos.Security.Cryptography.Core.Internals
 {
     /// <summary>
     /// A copy from GitHub project:
