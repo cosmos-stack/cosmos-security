@@ -14,8 +14,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc8);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
 
         [Theory(DisplayName = "CRC-8/CDMA2000")]
@@ -25,8 +25,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc8Cdma2000);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
 
         [Theory(DisplayName = "CRC-8/DARC")]
@@ -36,8 +36,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc8Darc);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
 
         [Theory(DisplayName = "CRC-8/DVB-S2")]
@@ -47,8 +47,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc8DvbS2);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
 
         [Theory(DisplayName = "CRC-8/EUB")]
@@ -58,8 +58,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc8Ebu);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
 
         [Theory(DisplayName = "CRC-8/I-CODE")]
@@ -69,8 +69,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc8ICode);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
 
         [Theory(DisplayName = "CRC-8/Itu")]
@@ -80,8 +80,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc8Itu);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
 
         [Theory(DisplayName = "CRC-8/MAXIM")]
@@ -91,8 +91,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc8Maxim);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
 
         [Theory(DisplayName = "CRC-8/ROHC")]
@@ -102,8 +102,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc8Rohc);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
 
         [Theory(DisplayName = "CRC-8/WCDMA")]
@@ -113,8 +113,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc8Wcdma);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
     }
 }

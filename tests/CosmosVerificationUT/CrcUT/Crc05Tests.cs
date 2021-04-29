@@ -21,8 +21,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc5Epc);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
         
         [Theory(DisplayName = "CRC-5/ITU")]
@@ -39,8 +39,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc5Itu);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
         
         [Theory(DisplayName = "CRC-5/USB")]
@@ -57,8 +57,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc5Usb);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
     }
 }

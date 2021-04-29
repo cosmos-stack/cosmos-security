@@ -10,7 +10,7 @@ namespace Cosmos.Security.Verification
     /// <summary>
     /// CRC Hash Function
     /// </summary>
-    public class CrcFunction : StreamableHashFunctionBase
+    internal class CrcFunction : StreamableHashFunctionBase, ICRC
     {
         private readonly CrcConfig _crcConfig;
         private static readonly ConcurrentDictionary<(int, ulong, bool), IReadOnlyList<UInt64>> DataDivisionTableCache = new();
@@ -71,7 +71,7 @@ namespace Cosmos.Security.Verification
                     _hashValue = initialValue;
                 }
             }
-            
+
             protected override void CopyStateTo(CrcBlockTransformer other)
             {
                 base.CopyStateTo(other);
@@ -197,11 +197,11 @@ namespace Cosmos.Security.Verification
 
                 return crcTable;
             }
-            
+
             private static byte[] ToBytes(ulong value, int bitLength)
             {
                 value &= (ulong.MaxValue >> (64 - bitLength));
-                
+
                 var valueBytes = new byte[(bitLength + 7) / 8];
 
                 for (var x = 0; x < valueBytes.Length; ++x)

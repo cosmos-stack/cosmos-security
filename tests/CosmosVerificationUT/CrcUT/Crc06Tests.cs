@@ -21,8 +21,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc6Cdma2000A);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
         
         [Theory(DisplayName = "CRC-6/CDMA2000-B")]
@@ -39,8 +39,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc6Cdma2000B);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
         
         [Theory(DisplayName = "CRC-6/DARC")]
@@ -57,8 +57,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc6Darc);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
         
         [Theory(DisplayName = "CRC-6/ITU")]
@@ -75,8 +75,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc6Itu);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
     }
 }

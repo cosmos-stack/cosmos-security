@@ -14,9 +14,9 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc64);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString().ShouldBe(bin);
-            hashVal.AsBinString(true).ShouldBe(binWithZero);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString().ShouldBe(bin);
+            hashVal.GetBinString(true).ShouldBe(binWithZero);
         }
         
         [Theory(DisplayName = "CRC-64/WE")]
@@ -26,9 +26,9 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc64We);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString().ShouldBe(bin);
-            hashVal.AsBinString(true).ShouldBe(binWithZero);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString().ShouldBe(bin);
+            hashVal.GetBinString(true).ShouldBe(binWithZero);
         }   
         
         [Theory(DisplayName = "CRC-64/XZ")]
@@ -38,9 +38,9 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc64Xz);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString().ShouldBe(bin);
-            hashVal.AsBinString(true).ShouldBe(binWithZero);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString().ShouldBe(bin);
+            hashVal.GetBinString(true).ShouldBe(binWithZero);
         }
     }
 }

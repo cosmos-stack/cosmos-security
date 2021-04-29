@@ -16,8 +16,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc4Itu);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
     }
 }

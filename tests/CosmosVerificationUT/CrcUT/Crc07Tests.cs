@@ -21,8 +21,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc7);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
         
         [Theory(DisplayName = "CRC-7/ROHC")]
@@ -39,8 +39,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc7Rohc);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
         
         [Theory(DisplayName = "CRC-7/MMC")]
@@ -57,8 +57,8 @@ namespace CrcUT
         {
             var function = CrcFactory.Create(CrcTypes.Crc7Mmc);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
-            hashVal.AsBinString(true).ShouldBe(bin);
+            hashVal.GetHexString(true).ShouldBe(hex);
+            hashVal.GetBinString(true).ShouldBe(bin);
         }
     }
 }

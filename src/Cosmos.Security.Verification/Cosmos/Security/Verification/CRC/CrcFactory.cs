@@ -1,4 +1,5 @@
 ﻿// ReSharper disable once CheckNamespace
+
 namespace Cosmos.Security.Verification
 {
     /// <summary>
@@ -6,10 +7,10 @@ namespace Cosmos.Security.Verification
     /// </summary>
     public static class CrcFactory
     {
-        public static CrcFunction Create(CrcTypes type = CrcTypes.Crc32) => new(type);
+        public static ICRC Create(CrcTypes type = CrcTypes.Crc32) => new CrcFunction(type);
 
-        public static CrcFunction Crc32 => Create(CrcTypes.Crc32);
+        public static ICRC Crc32 => Create(CrcTypes.Crc32);
 
-        public static CrcFunction Crc64 => Create(CrcTypes.Crc64);
+        public static ICRC Crc64 => Create(CrcTypes.Crc64);
     }
 }
