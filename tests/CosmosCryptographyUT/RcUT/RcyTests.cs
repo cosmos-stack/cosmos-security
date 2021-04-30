@@ -11,7 +11,7 @@ namespace Symmetric
         [Fact]
         public void Encrypt()
         {
-            var key = RcFactory.GenerateKey(RcTypes.RCY, "alexinea", Encoding.UTF8);
+            var key = RcFactory.GenerateKey("alexinea", Encoding.UTF8);
             var function = RcFactory.Create(RcTypes.RCY, key);
             var cryptoVal0 = function.Encrypt("ABCDDDDDDDDDDDDDDDDDDDDDD");
 
@@ -21,7 +21,7 @@ namespace Symmetric
         [Fact]
         public void Encrypt_ThreeRCY()
         {
-            var key = RcFactory.GenerateKey(RcTypes.ThreeRCY, "alexinea", Encoding.UTF8);
+            var key = RcFactory.GenerateKey("alexinea", Encoding.UTF8);
             var function = RcFactory.Create(RcTypes.ThreeRCY, key);
             var cryptoVal0 = function.Encrypt("ABCDDDDDDDDDDDDDDDDDDDDDD");
 
@@ -31,7 +31,7 @@ namespace Symmetric
         [Fact]
         public void Decrypt()
         {
-            var key = RcFactory.GenerateKey(RcTypes.RCY, "alexinea", Encoding.UTF8);
+            var key = RcFactory.GenerateKey("alexinea", Encoding.UTF8);
             var function = RcFactory.Create(RcTypes.RCY, key);
             var cryptoVal0 = function.Encrypt("ABCDDDDDDDDDDDDDDDDDDDDDD");
 
@@ -45,7 +45,7 @@ namespace Symmetric
         [Fact]
         public void Decrypt_ThreeRCY()
         {
-            var key = RcFactory.GenerateKey(RcTypes.ThreeRCY, "alexinea", Encoding.UTF8);
+            var key = RcFactory.GenerateKey("alexinea", Encoding.UTF8);
             var function = RcFactory.Create(RcTypes.ThreeRCY, key);
             var cryptoVal0 = function.Encrypt("ABCDDDDDDDDDDDDDDDDDDDDDD");
 

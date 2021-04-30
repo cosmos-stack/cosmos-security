@@ -11,7 +11,7 @@ namespace RcUT
         [Fact]
         public void Encrypt()
         {
-            var key = RcFactory.GenerateKey(RcTypes.RC4, "alexinea", Encoding.UTF8);
+            var key = RcFactory.GenerateKey("alexinea", Encoding.UTF8);
             var function = RcFactory.Create(RcTypes.RC4, key);
             var cryptoVal0 = function.Encrypt("image");
 
@@ -21,7 +21,7 @@ namespace RcUT
         [Fact]
         public void Decrypt()
         {
-            var key = RcFactory.GenerateKey(RcTypes.RC4, "alexinea", Encoding.UTF8);
+            var key = RcFactory.GenerateKey("alexinea", Encoding.UTF8);
             var function = RcFactory.Create(RcTypes.RC4, key);
             var cryptoVal0 = function.Encrypt("image");
 
