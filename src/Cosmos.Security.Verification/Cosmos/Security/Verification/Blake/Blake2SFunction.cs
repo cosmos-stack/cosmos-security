@@ -8,7 +8,7 @@ using Org.BouncyCastle.Crypto.Digests;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public partial class Blake2SFunction : StreamableHashFunctionBase
+    internal class Blake2SFunction : StreamableHashFunctionBase, IBlake
     {
         private readonly BlakeConfig _config;
 

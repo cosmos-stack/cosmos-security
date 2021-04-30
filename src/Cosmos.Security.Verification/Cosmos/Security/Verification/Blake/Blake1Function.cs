@@ -4,9 +4,10 @@ using System.Security.Cryptography;
 using System.Threading;
 using Cosmos.Security.Verification.Core;
 
+// ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public class Blake1Function : StreamableHashFunctionBase
+    internal class Blake1Function : StreamableHashFunctionBase, IBlake
     {
         private readonly BlakeConfig _config;
 
@@ -311,11 +312,11 @@ namespace Cosmos.Security.Verification
                 return pbDigest;
             }
         }
-        
+
         #endregion
 
         #region Blake-512
-        
+
         internal sealed class Blake512 : HashAlgorithm
         {
             private const int _roundCount = 16;

@@ -24,7 +24,7 @@ namespace BlakeUT
         {
             var function = BlakeFactory.Create(BlakeTypes.Blake512);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
     }
 }

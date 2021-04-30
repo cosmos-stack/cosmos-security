@@ -13,7 +13,7 @@ namespace BlakeUT
         {
             var function = BlakeFactory.Create(BlakeTypes.Blake2B);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
         
         [Theory]
@@ -22,7 +22,7 @@ namespace BlakeUT
         {
             var function = BlakeFactory.Create(BlakeTypes.Blake2S);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
     }
 }
