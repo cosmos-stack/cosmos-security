@@ -2,7 +2,7 @@
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public partial class AdlerFunction
+    internal partial class AdlerFunction
     {
         private class Adler64Worker : IAdlerWorker
         {

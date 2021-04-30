@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Threading;
 using Cosmos.Security.Verification.Core;
+
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
     /// <summary>
     /// ADLER Hash Function
     /// </summary>
-    public partial class AdlerFunction : StreamableHashFunctionBase
+    internal partial class AdlerFunction : StreamableHashFunctionBase, IAdler
     {
         private readonly AdlerConfig _adlerConfig;
 

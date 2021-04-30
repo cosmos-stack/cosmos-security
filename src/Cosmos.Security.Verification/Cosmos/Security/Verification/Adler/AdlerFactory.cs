@@ -1,4 +1,6 @@
-﻿// ReSharper disable once CheckNamespace
+﻿using Factory = Cosmos.Security.Verification.AdlerFactory;
+
+// ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
     /// <summary>
@@ -6,10 +8,10 @@ namespace Cosmos.Security.Verification
     /// </summary>
     public static class AdlerFactory
     {
-        public static AdlerFunction Create(AdlerTypes type = AdlerTypes.Adler32) => new(type);
+        public static IAdler Create(AdlerTypes type = AdlerTypes.Adler32) => new AdlerFunction(type);
 
-        public static AdlerFunction Adler32 => Create(AdlerTypes.Adler32);
+        public static IAdler Adler32 => Create(AdlerTypes.Adler32);
 
-        public static AdlerFunction Adler64 => Create(AdlerTypes.Adler64);
+        public static IAdler Adler64 => Create(AdlerTypes.Adler64);
     }
 }
