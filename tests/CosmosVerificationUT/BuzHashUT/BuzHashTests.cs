@@ -13,7 +13,7 @@ namespace BuzHashUT
         {
             var function = BuzHash.Create(BuzHashTypes.BuzHashBit8);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory]
@@ -22,7 +22,7 @@ namespace BuzHashUT
         {
             var function = BuzHash.Create(BuzHashTypes.BuzHashBit16);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory]
@@ -31,7 +31,7 @@ namespace BuzHashUT
         {
             var function = BuzHash.Create(BuzHashTypes.BuzHashBit32);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory]
@@ -40,7 +40,7 @@ namespace BuzHashUT
         {
             var function = BuzHash.Create(BuzHashTypes.BuzHashBit64);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
     }
 }

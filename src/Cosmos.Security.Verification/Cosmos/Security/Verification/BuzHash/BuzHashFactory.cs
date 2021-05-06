@@ -22,17 +22,17 @@ namespace Cosmos.Security.Verification
 
     public static class BuzHashFactory
     {
-        public static BuzHashFunction Create(BuzHashTypes type = BuzHashTypes.BuzHashBit64)
+        public static IBuzHash Create(BuzHashTypes type = BuzHashTypes.BuzHashBit64)
         {
             return Create(type, BuzHashConfig.Default);
         }
 
-        public static BuzHashFunction Create(BuzHashTypes type, BuzHashConfig config)
+        public static IBuzHash Create(BuzHashTypes type, BuzHashConfig config)
         {
             config.CheckNull(nameof(config));
             config = config.Clone();
             config.HashSizeInBits = (int) type;
-            return new(config);
+            return new BuzHashFunction(config);
         }
     }
 }

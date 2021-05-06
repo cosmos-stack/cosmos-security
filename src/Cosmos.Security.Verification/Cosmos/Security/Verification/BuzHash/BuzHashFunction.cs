@@ -7,7 +7,7 @@ using Cosmos.Security.Verification.Core;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public class BuzHashFunction : StreamableHashFunctionBase
+    internal class BuzHashFunction : StreamableHashFunctionBase, IBuzHash
     {
         private readonly BuzHashConfig _config;
         private static readonly IEnumerable<int> _validHashSizes = new HashSet<int>() {8, 16, 32, 64};
@@ -34,23 +34,14 @@ namespace Cosmos.Security.Verification
 
         public override IBlockTransformer CreateBlockTransformer()
         {
-            switch (_config.HashSizeInBits)
+            return _config.HashSizeInBits switch
             {
-                case 8:
-                    return new BlockTransformer_8Bit(_config);
-
-                case 16:
-                    return new BlockTransformer_16Bit(_config);
-
-                case 32:
-                    return new BlockTransformer_32Bit(_config);
-
-                case 64:
-                    return new BlockTransformer_64Bit(_config);
-
-                default:
-                    throw new NotImplementedException();
-            }
+                8 => new BlockTransformer_8Bit(_config),
+                16 => new BlockTransformer_16Bit(_config),
+                32 => new BlockTransformer_32Bit(_config),
+                64 => new BlockTransformer_64Bit(_config),
+                _ => throw new NotImplementedException()
+            };
         }
 
         #region Internal Implementation of BlockTransformer
