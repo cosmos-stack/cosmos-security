@@ -6,9 +6,11 @@ using System.Numerics;
 using System.Threading;
 using Cosmos.Security.Verification.Core;
 
+// ReSharper disable CheckNamespace
+
 namespace Cosmos.Security.Verification
 {
-    public abstract class Fnv1Base : StreamableHashFunctionBase
+    internal abstract class Fnv1Base : StreamableHashFunctionBase, IFNV
     {
         protected readonly FnvConfig _config;
 

@@ -1,16 +1,15 @@
-﻿using Cosmos.Security.Verification.Core;
+﻿// ReSharper disable once CheckNamespace
 
-// ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
     public static class FnvFactory
     {
-        public static StreamableHashFunctionBase Create(FnvTypes type = FnvTypes.Fnv1aBit64)
+        public static IFNV Create(FnvTypes type = FnvTypes.Fnv1aBit64)
         {
             return Create(type, FnvConfig.GetPredefinedConfig((int) type % 10000));
         }
 
-        public static StreamableHashFunctionBase Create(FnvTypes type, FnvConfig config)
+        public static IFNV Create(FnvTypes type, FnvConfig config)
         {
             config.CheckNull(nameof(config));
             config = config.Clone();

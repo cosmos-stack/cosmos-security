@@ -13,7 +13,7 @@ namespace FnvUT
         {
             var function = FnvFactory.Create(FnvTypes.Fnv1aBit32);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory]
@@ -22,7 +22,7 @@ namespace FnvUT
         {
             var function = FnvFactory.Create(FnvTypes.Fnv1aBit64);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory]
@@ -31,7 +31,7 @@ namespace FnvUT
         {
             var function = FnvFactory.Create(FnvTypes.Fnv1aBit128);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory]
@@ -40,7 +40,7 @@ namespace FnvUT
         {
             var function = FnvFactory.Create(FnvTypes.Fnv1aBit256);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory]
@@ -49,7 +49,7 @@ namespace FnvUT
         {
             var function = FnvFactory.Create(FnvTypes.Fnv1aBit512);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory]
@@ -58,7 +58,7 @@ namespace FnvUT
         {
             var function = FnvFactory.Create(FnvTypes.Fnv1aBit1024);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
     }
 }

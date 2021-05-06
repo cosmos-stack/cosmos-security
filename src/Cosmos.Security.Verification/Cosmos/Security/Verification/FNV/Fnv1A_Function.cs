@@ -1,24 +1,21 @@
 ﻿using System;
 
+// ReSharper disable CheckNamespace
+
 namespace Cosmos.Security.Verification
 {
-    public class Fnv1AFunction : Fnv1Base
+    internal class Fnv1AFunction : Fnv1Base
     {
         public Fnv1AFunction(FnvConfig config) : base(config) { }
 
         public override IBlockTransformer CreateBlockTransformer()
         {
-            switch (_config.HashSizeInBits)
+            return _config.HashSizeInBits switch
             {
-                case 32:
-                    return new BlockTransformer_32Bit(_fnvPrimeOffset);
-
-                case 64:
-                    return new BlockTransformer_64Bit(_fnvPrimeOffset);
-
-                default:
-                    return new BlockTransformer_Extended(_fnvPrimeOffset);
-            }
+                32 => new BlockTransformer_32Bit(_fnvPrimeOffset),
+                64 => new BlockTransformer_64Bit(_fnvPrimeOffset),
+                _ => new BlockTransformer_Extended(_fnvPrimeOffset)
+            };
         }
 
         #region Internal Implementation of BlockTransformer
