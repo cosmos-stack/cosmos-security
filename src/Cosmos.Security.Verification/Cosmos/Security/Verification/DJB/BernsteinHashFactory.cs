@@ -1,11 +1,11 @@
-﻿using Cosmos.Security.Verification.Core;
+﻿
 
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
     public static class BernsteinHashFactory
     {
-        public static StreamableHashFunctionBase Create(BernsteinHashTypes type = BernsteinHashTypes.Time33)
+        public static IBernsteinHash Create(BernsteinHashTypes type = BernsteinHashTypes.Time33)
         {
             return type switch
             {

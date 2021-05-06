@@ -7,7 +7,7 @@ using Cosmos.Security.Verification.Core;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public class Time33Function : StreamableHashFunctionBase
+    internal class Time33Function : StreamableHashFunctionBase, IBernsteinHash
     {
         public override int HashSizeInBits => 32;
 
@@ -45,7 +45,7 @@ namespace Cosmos.Security.Verification
                 return new HashValue(_hashValue, 32);
             }
         }
-        
+
         #endregion
     }
 }

@@ -5,7 +5,7 @@ using Cosmos.Security.Verification.Core;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public class ModifiedBernsteinHashFunction : StreamableHashFunctionBase
+    internal class ModifiedBernsteinHashFunction : StreamableHashFunctionBase, IBernsteinHash
     {
         public override int HashSizeInBits => 32;
 
