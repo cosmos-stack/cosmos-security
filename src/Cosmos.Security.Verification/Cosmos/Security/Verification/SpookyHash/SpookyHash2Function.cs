@@ -8,7 +8,7 @@ using Cosmos.Security.Verification.Core;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public class SpookyHash2Function : StreamableHashFunctionBase
+    internal class SpookyHash2Function : StreamableHashFunctionBase, ISpookyHash
     {
         private readonly SpookyHashConfig _config;
         private readonly UInt64 _seed1;

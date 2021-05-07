@@ -8,7 +8,7 @@ using Cosmos.Security.Verification.Core;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public class SpookyHash1Function : StreamableHashFunctionBase
+    internal class SpookyHash1Function : StreamableHashFunctionBase, ISpookyHash
     {
         private readonly SpookyHashConfig _config;
 
@@ -190,7 +190,7 @@ namespace Cosmos.Security.Verification
                         throw new NotImplementedException();
                 }
             }
-            
+
             private IHashValue ComputeShortHashInternal(CancellationToken cancellationToken)
             {
                 var tempHashValue = new UInt64[4]
@@ -313,7 +313,7 @@ namespace Cosmos.Security.Verification
                         throw new NotImplementedException();
                 }
             }
-            
+
             private static void Mix(UInt64[] hashValue, ArraySegment<byte> data)
             {
                 Debug.Assert(data.Count % 96 == 0);
@@ -351,7 +351,7 @@ namespace Cosmos.Security.Verification
                     hashValue[(i + 1) % 12] = RotateLeft(hashValue[(i + 1) % 12], _EndPartialRotationParameters[i]);
                 }
             }
-            
+
             private static void ShortMix(UInt64[] hashValue)
             {
                 for (var i = 0; i < 12; ++i)
@@ -371,7 +371,7 @@ namespace Cosmos.Security.Verification
                     hashValue[(i + 3) % 4] += hashValue[(i + 2) % 4];
                 }
             }
-            
+
             private static UInt64 RotateLeft(UInt64 operand, int shiftCount)
             {
                 shiftCount &= 0x3f;
