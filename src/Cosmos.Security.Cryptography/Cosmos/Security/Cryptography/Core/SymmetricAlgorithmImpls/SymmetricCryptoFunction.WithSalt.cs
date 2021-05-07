@@ -217,16 +217,7 @@ namespace Cosmos.Security.Cryptography.Core.SymmetricAlgorithmImpls
         {
             encoding = encoding.SafeEncodingValue();
 
-            var finalCipherText = cipherTextType switch
-            {
-                CipherTextTypes.PlainText => encoding.GetBytes(cipherText),
-                CipherTextTypes.Base32Text => BaseConv.FromBase32(cipherText),
-                CipherTextTypes.Base64Text => BaseConv.FromBase64(cipherText),
-                CipherTextTypes.Base91Text => BaseConv.FromBase91(cipherText),
-                CipherTextTypes.Base256Text => BaseConv.FromBase256(cipherText),
-                CipherTextTypes.ZBase32Text => BaseConv.FromZBase32(cipherText),
-                _ => customCipherTextConverter is null ? encoding.GetBytes(cipherText) : customCipherTextConverter(cipherText)
-            };
+            var finalCipherText = cipherTextType.GetBytes(cipherText, encoding, customCipherTextConverter);
 
             var saltBytes = string.IsNullOrWhiteSpace(salt) ? new byte[0] : encoding.GetBytes(salt);
 

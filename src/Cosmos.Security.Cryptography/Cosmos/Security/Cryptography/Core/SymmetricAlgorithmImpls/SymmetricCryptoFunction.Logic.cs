@@ -20,7 +20,7 @@ namespace Cosmos.Security.Cryptography.Core.SymmetricAlgorithmImpls
             where TCryptoServiceProvider : SymmetricAlgorithm, new()
         {
             using var provider = new TCryptoServiceProvider {Key = keyBytes, IV = ivBytes};
-
+            
             using var ms = new MemoryStream();
             using var cs = new CryptoStream(ms, provider.CreateEncryptor(), CryptoStreamMode.Write);
             cs.Write(sourceBytes, offset, count);
