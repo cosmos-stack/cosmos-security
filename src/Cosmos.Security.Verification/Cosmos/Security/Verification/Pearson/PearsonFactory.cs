@@ -1,4 +1,5 @@
 ﻿// ReSharper disable once CheckNamespace
+
 namespace Cosmos.Security.Verification
 {
     /// <summary>
@@ -6,14 +7,8 @@ namespace Cosmos.Security.Verification
     /// </summary>
     public static class PearsonFactory
     {
-        public static PearsonFunction Create()
-        {
-            return Create(PearsonConfig.Default);
-        }
+        public static IPearson Create() => Create(PearsonConfig.Default);
 
-        public static PearsonFunction Create(PearsonConfig config)
-        {
-            return new(config);
-        }
+        public static IPearson Create(PearsonConfig config) => new PearsonFunction(config);
     }
 }

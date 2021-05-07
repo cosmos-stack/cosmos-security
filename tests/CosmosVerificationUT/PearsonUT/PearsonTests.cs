@@ -15,7 +15,7 @@ namespace PearsonUT
         {
             var function = PearsonFactory.Create();
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
     }
 }

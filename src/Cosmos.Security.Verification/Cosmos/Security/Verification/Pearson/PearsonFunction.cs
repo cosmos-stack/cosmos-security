@@ -7,7 +7,7 @@ using Cosmos.Security.Verification.Core;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public class PearsonFunction : StreamableHashFunctionBase
+    internal class PearsonFunction : StreamableHashFunctionBase, IPearson
     {
         private readonly PearsonConfig _config;
 
