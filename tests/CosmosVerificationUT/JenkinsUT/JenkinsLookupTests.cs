@@ -13,7 +13,7 @@ namespace JenkinsUT
         {
             var function = JenkinsFactory.Create(JenkinsTypes.Lookup2);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory]
@@ -22,7 +22,7 @@ namespace JenkinsUT
         {
             var function = JenkinsFactory.Create(JenkinsTypes.Lookup3Bit32);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory]
@@ -31,7 +31,7 @@ namespace JenkinsUT
         {
             var function = JenkinsFactory.Create(JenkinsTypes.Lookup3Bit64);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
     }
 }

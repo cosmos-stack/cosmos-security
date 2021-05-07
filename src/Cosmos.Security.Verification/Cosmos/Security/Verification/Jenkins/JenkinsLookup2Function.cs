@@ -5,7 +5,7 @@ using Cosmos.Security.Verification.Core;
 
 namespace Cosmos.Security.Verification
 {
-    public class JenkinsLookup2Function : StreamableHashFunctionBase
+    internal class JenkinsLookup2Function : StreamableHashFunctionBase, IStreamableJenkins
     {
         private JenkinsConfig _config;
 
@@ -32,7 +32,7 @@ namespace Cosmos.Security.Verification
             private UInt32 _c;
 
             private UInt32 _bytesProcessed;
-            
+
             public BlockTransformer() : base(inputBlockSize: 12) { }
 
             public BlockTransformer(JenkinsConfig config) : this()

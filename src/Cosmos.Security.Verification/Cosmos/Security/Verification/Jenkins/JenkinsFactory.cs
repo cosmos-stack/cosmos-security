@@ -1,6 +1,5 @@
-﻿using Cosmos.Security.Verification.Core;
+﻿// ReSharper disable once CheckNamespace
 
-// ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
     /// <summary>
@@ -8,12 +7,12 @@ namespace Cosmos.Security.Verification
     /// </summary>
     public class JenkinsFactory
     {
-        public static HashFunctionBase Create(JenkinsTypes type = JenkinsTypes.OneAtTime)
+        public static IJenkins Create(JenkinsTypes type = JenkinsTypes.OneAtTime)
         {
             return Create(type, new JenkinsConfig());
         }
 
-        public static HashFunctionBase Create(JenkinsTypes type, JenkinsConfig config)
+        public static IJenkins Create(JenkinsTypes type, JenkinsConfig config)
         {
             if (type is not JenkinsTypes.OneAtTime)
             {
@@ -37,6 +36,38 @@ namespace Cosmos.Security.Verification
                 JenkinsTypes.OneAtTime => new JenkinsOneAtTimeFunction(),
                 _ => new JenkinsOneAtTimeFunction()
             };
+        }
+
+        public static IStreamableJenkins Lookup2() => Lookup2(new JenkinsConfig());
+
+        public static IStreamableJenkins Lookup2(JenkinsConfig config)
+        {
+            config ??= new JenkinsConfig();
+            config.HashSizeInBits = 32;
+            return new JenkinsLookup2Function(config);
+        }
+
+        public static IJenkins Lookup3Bit32() => Lookup3Bit32(new JenkinsConfig());
+
+        public static IJenkins Lookup3Bit32(JenkinsConfig config)
+        {
+            config ??= new JenkinsConfig();
+            config.HashSizeInBits = 32;
+            return new JenkinsLookup3Function(config);
+        }
+
+        public static IJenkins Lookup3Bit64() => Lookup3Bit64(new JenkinsConfig());
+
+        public static IJenkins Lookup3Bit64(JenkinsConfig config)
+        {
+            config ??= new JenkinsConfig();
+            config.HashSizeInBits = 64;
+            return new JenkinsLookup3Function(config);
+        }
+
+        public static IStreamableJenkins OneAtTime()
+        {
+            return new JenkinsOneAtTimeFunction();
         }
     }
 }

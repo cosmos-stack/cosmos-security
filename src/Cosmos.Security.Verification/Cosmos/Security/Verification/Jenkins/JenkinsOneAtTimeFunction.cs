@@ -4,7 +4,7 @@ using Cosmos.Security.Verification.Core;
 
 namespace Cosmos.Security.Verification
 {
-    public class JenkinsOneAtTimeFunction : StreamableHashFunctionBase
+    internal class JenkinsOneAtTimeFunction : StreamableHashFunctionBase, IStreamableJenkins
     {
         public override int HashSizeInBits => 32;
 
@@ -15,7 +15,7 @@ namespace Cosmos.Security.Verification
         private class BlockTransformer : BlockTransformerBase<BlockTransformer>
         {
             private UInt32 _hashValue;
-            
+
             protected override void CopyStateTo(BlockTransformer other)
             {
                 base.CopyStateTo(other);

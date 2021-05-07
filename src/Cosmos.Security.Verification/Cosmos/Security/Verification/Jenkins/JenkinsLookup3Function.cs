@@ -7,7 +7,7 @@ using Cosmos.Security.Verification.Core;
 
 namespace Cosmos.Security.Verification
 {
-    public class JenkinsLookup3Function : HashFunctionBase
+    internal class JenkinsLookup3Function : HashFunctionBase, IJenkins
     {
         private readonly JenkinsConfig _config;
 
