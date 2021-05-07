@@ -13,7 +13,7 @@ namespace BuzHashUT
         {
             var function = CityHashFactory.Create(CityHashTypes.CityHashBit32);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory]
@@ -22,7 +22,7 @@ namespace BuzHashUT
         {
             var function = CityHashFactory.Create(CityHashTypes.CityHashBit64);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory]
@@ -31,7 +31,7 @@ namespace BuzHashUT
         {
             var function = CityHashFactory.Create(CityHashTypes.CityHashBit128);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
     }
 }

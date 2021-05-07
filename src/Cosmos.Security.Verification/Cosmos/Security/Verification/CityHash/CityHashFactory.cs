@@ -4,6 +4,6 @@ namespace Cosmos.Security.Verification
 {
     public static class CityHashFactory
     {
-        public static CityHashFunction Create(CityHashTypes type = CityHashTypes.CityHashBit32) => new(type);
+        public static ICityHash Create(CityHashTypes type = CityHashTypes.CityHashBit32) => new CityHashFunction(type);
     }
 }

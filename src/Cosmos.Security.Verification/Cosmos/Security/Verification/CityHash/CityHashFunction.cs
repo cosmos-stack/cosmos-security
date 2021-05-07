@@ -6,7 +6,7 @@ using Cosmos.Security.Verification.Core;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public class CityHashFunction : HashFunctionBase
+    internal class CityHashFunction : HashFunctionBase, ICityHash
     {
         private const UInt64 K0 = 0xc3a5c85c97cb3127;
         private const UInt64 K1 = 0xb492b66fbe98f273;
