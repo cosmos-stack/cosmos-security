@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <Import Project="..\..\common.tests.props" />
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Cosmos.Security.Cryptography\Cosmos.Security.Cryptography.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="DsaUT" />
+      <Folder Include="ZucUT" />
+    </ItemGroup>
+
+</Project>

@@ -4,8 +4,4 @@
         <ProjectReference Include="..\Cosmos.Security\Cosmos.Security.csproj" />
     </ItemGroup>
     
-<!--    <ItemGroup>-->
-<!--        <PackageReference Include="Cosmos.Standard" Version="$(Standard-PkgVersion)" />-->
-<!--    </ItemGroup>-->
-
 </Project>

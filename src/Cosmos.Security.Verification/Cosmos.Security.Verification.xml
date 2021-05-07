@@ -1,0 +1,797 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cosmos.Security.Verification</name>
+    </assembly>
+    <members>
+        <member name="T:Cosmos.Security.Verification.Adler">
+            <summary>
+            ADLER Hash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.Adler32">
+            <summary>
+            ADLER-32 Hash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.Adler64">
+            <summary>
+            ADLER-64 Hash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.AdlerConfig">
+            <summary>
+            ADLER Hash Config
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.AdlerConfig.HashSizeInBits">
+            <summary>
+            Length of the produced Adler value, in bits.
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.AdlerFactory">
+            <summary>
+            ADLER Hash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.AdlerFunction">
+            <summary>
+            ADLER Hash Function
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.AdlerTypes">
+            <summary>
+            ADLER Hash Types
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Verification.Blake1Function.Blake256.BytesToUInt32(System.Byte[],System.Int32)">
+            <summary>
+            Convert 4 bytes to an <c>UInt32</c> using big-endian.
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Verification.Blake1Function.Blake256.UInt32ToBytes(System.UInt32,System.Byte[],System.Int32)">
+            <summary>
+            Convert an <c>UInt32</c> to 4 bytes using big-endian.
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Verification.BuzHashConfig.Clone">
+            <summary>
+            Makes a deep clone of current instance.
+            </summary>
+            <returns>A deep clone of the current instance.</returns>
+        </member>
+        <member name="P:Cosmos.Security.Verification.BuzHashConfig.Default">
+            <summary>
+            Getting default BuzHash config
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.CircularShiftDirection">
+            <summary>
+            Enumeration of possible directions a circular shift can be defined for.
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CircularShiftDirection.Left">
+            <summary>
+            Shift bits left.
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CircularShiftDirection.Right">
+            <summary>
+            Shift bits right.
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.Core.HashValue">
+            <summary>
+            Hash value
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.Core.TrimOptions">
+            <summary>
+            The entry used to trim the result of the Hash operation.
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.Core.TrimOptions.SkipForceConvert">
+            <summary>
+            跳过强制转换
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.Core.TrimOptions.HexTrimLeadingZeroAsDefault">
+            <summary>
+            十六进制数，输出时移除首位的 0，默认为 false
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.CRC">
+            <summary>
+            CRC Hash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.CRC32">
+            <summary>
+            CRC32 Hash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.CRC64">
+            <summary>
+            CRC64 Hash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.CrcConfig">
+            <summary>
+            CRC Hash Config
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.CrcConfig.HashSizeInBits">
+            <summary>
+            Length of the produced CRC value, in bits.
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.CrcConfig.Polynomial">
+            <summary>
+            Divisor to use when calculating the CRC.
+            </summary>
+            <value>
+            The divisor that will be used when calculating the CRC value.
+            </value>
+        </member>
+        <member name="P:Cosmos.Security.Verification.CrcConfig.InitialValue">
+            <summary>
+            Value to initialize the CRC register to before calculating the CRC.
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.CrcConfig.ReflectIn">
+            <summary>
+            If true, the CRC calculation processes input as big endian bit order.
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.CrcConfig.ReflectOut">
+            <summary>
+            If true, the CRC calculation processes the output as big endian bit order.
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.CrcConfig.XOrOut">
+            <summary>
+            Value to xor with the final CRC value.
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.CrcFactory">
+            <summary>
+            CRC Hash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.CrcFunction">
+            <summary>
+            CRC Hash Function
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.CrcTypes">
+            <summary>
+            CRC Hash Types
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc3Rohc">
+            <summary>
+            CRC-3/ROHC
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc4Itu">
+            <summary>
+            CRC-4/ITU
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc5Epc">
+            <summary>
+            CRC-5/EPC
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc5Itu">
+            <summary>
+            CRC-5/ITU
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc5Usb">
+            <summary>
+            CRC-5/USB
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc6Cdma2000A">
+            <summary>
+            CRC-6/CDMA2000-A
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc6Cdma2000B">
+            <summary>
+            CRC-6/CDMA2000-B
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc6Darc">
+            <summary>
+            CRC-6/DARC
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc6Itu">
+            <summary>
+            CRC-6/ITU
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc7">
+            <summary>
+            CRC-7
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc7Rohc">
+            <summary>
+            CRC-7/ROHC
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc7Mmc">
+            <summary>
+            CRC-7/MMC
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc8">
+            <summary>
+            CRC-8
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc8Cdma2000">
+            <summary>
+            CRC-8/CDMA2000
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc8Darc">
+            <summary>
+            CRC-8/DARC
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc8DvbS2">
+            <summary>
+            CRC-8/DVB-S2
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc8Ebu">
+            <summary>
+            CRC-8/EUB
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc8ICode">
+            <summary>
+            CRC-8/I-CODE
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc8Itu">
+            <summary>
+            CRC-8/ITU
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc8Maxim">
+            <summary>
+            CRC-8/MAXIM
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc8Rohc">
+            <summary>
+            CRC-8/ROHC
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc8Wcdma">
+            <summary>
+            CRC-8/WCDMA
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc10">
+            <summary>
+            CRC-10
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc10Cdma2000">
+            <summary>
+            CRC-10/CDMA2000
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc11">
+            <summary>
+            CRC-11
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc123Gpp">
+            <summary>
+            CRC-12/3GPP
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc12Cdma2000">
+            <summary>
+            CRC-12/CDMA2000
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc12Dect">
+            <summary>
+            CRC-12/DECT
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc13Bbc">
+            <summary>
+            CRC-13/BBC
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc14Darc">
+            <summary>
+            CRC-14/DARC
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc15">
+            <summary>
+            CRC-15
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc15Mpt1327">
+            <summary>
+            CRC-15/MPT1327
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16Ccitt">
+            <summary>
+            CRC-16/CCITT
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16CcittFalse">
+            <summary>
+            CRC-16/CCITT-FALSE
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16Arc">
+            <summary>
+            CRC-16/ARC
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16AugCcitt">
+            <summary>
+            CRC-16/AUG-CCITT
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16Buypass">
+            <summary>
+            CRC-16/BUYPASS
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16Cdma2000">
+            <summary>
+            CRC-16/CDMA2000
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16Dds110">
+            <summary>
+            CRC-16/DDS-110
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16DectR">
+            <summary>
+            CRC-16/DECT-R
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16DectX">
+            <summary>
+            CRC-16/DECT-X
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16Dnp">
+            <summary>
+            CRC-16/DNP
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16En13757">
+            <summary>
+            CRC-16/EN-13757
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16Genibus">
+            <summary>
+            CRC-16/GENIBUS
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16Maxim">
+            <summary>
+            CRC-16/MAXIM
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16Mcrf4Xx">
+            <summary>
+            CRC-16/MCRF4XX
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16Riello">
+            <summary>
+            CRC-16/RIELLO
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16T10Dif">
+            <summary>
+            CRC-16/T10-DIF
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16Teledisk">
+            <summary>
+            CRC-16/TELEDISK
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16Tms37157">
+            <summary>
+            CRC-16/TMS37157
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16Usb">
+            <summary>
+            CRC-16/USB
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.CrcA">
+            <summary>
+            CRC-A
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16Kermit">
+            <summary>
+            CRC-16/KERMIT
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16Modbus">
+            <summary>
+            CRC-16/MODBUS
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16X25">
+            <summary>
+            CRC-16/X-25
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16Xmodem">
+            <summary>
+            CRC-16/XMODEM
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc16Ibm">
+            <summary>
+            CRC-16/IBM
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc24">
+            <summary>
+            CRC-24
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc24FlexrayA">
+            <summary>
+            CRC24/FLEXRAY-A
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc24FlexrayB">
+            <summary>
+            CRC-24/FLEXRAY-B
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc31Philips">
+            <summary>
+            CRC-31/PHILIPS
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc32">
+            <summary>
+            CRC-32
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc32Bzip2">
+            <summary>
+            CTC-32/BZIP2
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc32C">
+            <summary>
+            CRC-32C
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc32D">
+            <summary>
+            CRC-32D
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc32Jamcrc">
+            <summary>
+            CRC-32/JAMCRC
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc32Mpeg2">
+            <summary>
+            CRC32-MPEG-2
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc32Posix">
+            <summary>
+            CRC-32/POSIX
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc32Q">
+            <summary>
+            CRC32Q
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc32Xfer">
+            <summary>
+            CRC-32/XFER
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc40Gsm">
+            <summary>
+            CRC-40/GSM
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc64">
+            <summary>
+            CRC-64
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc64We">
+            <summary>
+            CRC-64/WE
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Verification.CrcTypes.Crc64Xz">
+            <summary>
+            CRC-64/XZ
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.ELF64">
+            <summary>
+            ELF-64 Hash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.Elf64Factory">
+            <summary>
+            ELF-64 Hash Function Factory
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Verification.FnvConfig.GetPredefinedConfig(System.Int32)">
+            <summary>
+            Gets one of the predefined configurations as defined at http://www.isthe.com/chongo/tech/comp/fnv/index.html.
+            </summary>
+            <param name="hashSizeInBits">The desired hash length, in bits.</param>
+            <returns>The predefined configuration instance.</returns>
+        </member>
+        <member name="P:Cosmos.Security.Verification.HmacConfig.HashSizeInBits">
+            <summary>
+            Length of the produced HMAC value, in bits.
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.HmacConfig.Type">
+            <summary>
+            Type of HMAC
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.HmacConfig.HashAlgorithmFactory">
+            <summary>
+            Internal HashAlgorithm Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.JenkinsFactory">
+            <summary>
+            Jenkins Hash Function Factory
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.Md6Options.HashSizeInBits">
+            <summary>
+            Length of the produced Message Digest value, in bits.
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.Md6Options.ModeControl">
+            <summary>
+            Mode control, [0, 64], be used for MD6
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.Md6Options.NumberOfRound">
+            <summary>
+            Number of Round, be used for MD6 <br />
+            default value: <br /> without key = 40 + d/4 <br /> with key = max(80, 40 + d/4)
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.Md6Options.Key">
+            <summary>
+            Key, be used for MD6
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.Md6Options.IsHexString">
+            <summary>
+            To flag the value of key is HEX string or not, be used for MD6
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.MdConfig.HashSizeInBits">
+            <summary>
+            Length of the produced Message Digest value, in bits.
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.MdConfig.Type">
+            <summary>
+            Message Digest Algorithm type of the value.
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.MdConfig.ModeControl">
+            <summary>
+            Mode control, [0, 64], be used for MD6
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.MdConfig.NumberOfRound">
+            <summary>
+            Number of Round, be used for MD6 <br />
+            default value: <br /> without key = 40 + d/4 <br /> with key = max(80, 40 + d/4)
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.MdConfig.Key">
+            <summary>
+            Key, be used for MD6
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Verification.MdConfig.IsHexString">
+            <summary>
+            To flag the value of key is HEX string or not, be used for MD6
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.MdFactory">
+            <summary>
+            Message Digest Hash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.MdFunction.Md2Worker">
+            <summary>
+            MD2 Worker
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.MdFunction.Md4Worker">
+            <summary>
+            MD4 Worker
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Verification.MdFunction.Md4Worker.Initialize">
+            <summary>
+            Initialize
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Verification.MdFunction.Md4Worker.HashCore(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Hash code
+            </summary>
+            <param name="array"></param>
+            <param name="offset"></param>
+            <param name="length"></param>
+        </member>
+        <member name="M:Cosmos.Security.Verification.MdFunction.Md4Worker.HashFinal">
+            <summary>
+            Hash final
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Verification.MdFunction.Md5Worker.#ctor(Cosmos.Security.Verification.MdTypes)">
+            <summary>
+            MD5 Worker
+            </summary>
+            <param name="type"></param>
+        </member>
+        <member name="P:Cosmos.Security.Verification.MurmurHash1Config.Seed">
+            <summary>
+            Gets the seed.
+            </summary>
+            <value>
+            The seed.
+            </value>
+        </member>
+        <member name="P:Cosmos.Security.Verification.MurmurHash2Config.HashSizeInBits">
+            <summary>
+            Gets the desired hash size, in bits.
+            </summary>
+            <value>
+            The desired hash size, in bits.
+            </value>
+        </member>
+        <member name="P:Cosmos.Security.Verification.MurmurHash2Config.Seed">
+            <summary>
+            Gets the seed.
+            </summary>
+            <value>
+            The seed.
+            </value>
+        </member>
+        <member name="P:Cosmos.Security.Verification.MurmurHash3Config.HashSizeInBits">
+            <summary>
+            Gets the desired hash size, in bits.
+            </summary>
+            <value>
+            The desired hash size, in bits.
+            </value>
+        </member>
+        <member name="P:Cosmos.Security.Verification.MurmurHash3Config.Seed">
+            <summary>
+            Gets the seed.
+            </summary>
+            <value>
+            The seed.
+            </value>
+        </member>
+        <member name="T:Cosmos.Security.Verification.Pearson">
+            <summary>
+            Pearson Hash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.PearsonFactory">
+            <summary>
+            Pearson Hash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.SHA">
+            <summary>
+            SHA Hash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.SHA1">
+            <summary>
+            SHA1 Hash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.SHA256">
+            <summary>
+            SHA2/256 Hash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.SHA512">
+            <summary>
+            SHA2/512 Hash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.ShaFactory">
+            <summary>
+            SHA Hash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.ShaFunction.SHA224CryptoServiceProvider">
+            <summary>
+            SHA224 Crypto Service Provider
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.ShaFunction.SHA512tCryptoServiceProvider">
+            <summary>
+            SHA512/t Crypto Service Provider
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.ShaFunction.SHA3CryptoServiceProvider">
+            <summary>
+            SHA3 Crypto Service Provider
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.Sm3Function.SM3CryptoServiceProvider">
+            <summary>
+            SM3 Crypto Service Provider
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.SpookyHash">
+            <summary>
+            SpookyHash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.SpookyHashFactory">
+            <summary>
+            SpookyHash Function Factory
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Verification.xxHash">
+            <summary>
+            xxHash Hash Function Factory
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Verification.xxHashConfig.Clone">
+            <summary>
+            Makes a deep clone of current instance.
+            </summary>
+            <returns>A deep clone of the current instance.</returns>
+        </member>
+        <member name="T:Cosmos.Security.Verification.xxHashFactory">
+            <summary>
+            xxHash Hash Function Factory
+            </summary>
+        </member>
+    </members>
+</doc>

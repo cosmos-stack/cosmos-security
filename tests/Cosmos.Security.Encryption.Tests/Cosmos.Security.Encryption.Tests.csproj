@@ -3,7 +3,11 @@
     <Import Project="..\..\common.tests.props" />
     
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Cosmos.Security.Encryption\Cosmos.Security.Encryption.csproj" />
+      <ProjectReference Include="..\..\src\Cosmos.Security.Cryptography\Cosmos.Security.Cryptography.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="Asymmetric" />
     </ItemGroup>
 
 </Project>

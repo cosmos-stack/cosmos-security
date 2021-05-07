@@ -16,12 +16,12 @@
     </PropertyGroup>
 
     <Import Project="asset/props/package.props"/>
-
+    
     <Import Project="asset/props/misc.props"/>
 
-    <Import Project="../version.props"/>
+    <Import Project="asset/version.props"/>
 
-    <Import Project="../version.dev.props"/>
+    <Import Project="asset/version.dev.props"/>
 
     <ItemGroup>
         <PackageReference Include="DotNetCore.SourceLink.Environment" Version="2.2.0" />

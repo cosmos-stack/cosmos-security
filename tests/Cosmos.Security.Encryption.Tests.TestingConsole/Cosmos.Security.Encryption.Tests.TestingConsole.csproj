@@ -22,7 +22,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Cosmos.Security.Encryption\Cosmos.Security.Encryption.csproj" />
+      <ProjectReference Include="..\..\src\Cosmos.Security.Cryptography\Cosmos.Security.Cryptography.csproj" />
     </ItemGroup>
 
 </Project>

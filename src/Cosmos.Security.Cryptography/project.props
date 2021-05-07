@@ -1,0 +1,9 @@
+<Project>
+
+    <PropertyGroup>
+        <AssemblyName>Cosmos.Security.Cryptography</AssemblyName>
+        <PackageId>Cosmos.Security.Cryptography</PackageId>
+        <Description>Cosmos Security Cryptography library</Description>
+    </PropertyGroup>
+
+</Project>
