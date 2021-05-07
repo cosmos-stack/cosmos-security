@@ -10,7 +10,7 @@ using Org.BouncyCastle.Crypto.Digests;
 // ReSharper disable once CheckNamespace
 namespace Cosmos.Security.Verification
 {
-    public class Sm3Function : StreamableHashFunctionBase
+    internal class Sm3Function : StreamableHashFunctionBase, ISM3
     {
         public override int HashSizeInBits => 256;
 
