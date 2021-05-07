@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
-using Cosmos.Security.Cryptography.Core;
 using Cosmos.Security.Cryptography.Core.SymmetricAlgorithmImpls;
 
 // ReSharper disable CheckNamespace
