@@ -4,10 +4,10 @@ using Cosmos.Security.Verification.Core;
 
 namespace Cosmos.Security.Verification
 {
-    public class MetroHash064Function : StreamableHashFunctionBase
+    internal class MetroHash064Function : StreamableHashFunctionBase, IMetroHash
     {
         private readonly MetroHashConfig _config;
-        
+
         private const UInt64 _k0 = 0xD6D018F5;
         private const UInt64 _k1 = 0xA2AA033B;
         private const UInt64 _k2 = 0x62992FC1;
@@ -39,7 +39,7 @@ namespace Cosmos.Security.Verification
             private UInt64 _d;
 
             private UInt64 _bytesProcessed;
-            
+
             public BlockTransformer() : base(inputBlockSize: 32) { }
 
             public BlockTransformer(UInt64 seed) : this()

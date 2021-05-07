@@ -13,7 +13,7 @@ namespace MetroHashUT
         {
             var function = MetroHash.Create(MetroHashTypes.MetroHashBit64);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
 
         [Theory]
@@ -22,7 +22,7 @@ namespace MetroHashUT
         {
             var function = MetroHash.Create(MetroHashTypes.MetroHashBit128);
             var hashVal = function.ComputeHash(data);
-            hashVal.AsHexString(true).ShouldBe(hex);
+            hashVal.GetHexString(true).ShouldBe(hex);
         }
     }
 }

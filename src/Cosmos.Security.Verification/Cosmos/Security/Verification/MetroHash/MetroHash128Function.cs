@@ -4,7 +4,7 @@ using Cosmos.Security.Verification.Core;
 
 namespace Cosmos.Security.Verification
 {
-    public class MetroHash128Function : StreamableHashFunctionBase
+    internal class MetroHash128Function : StreamableHashFunctionBase, IMetroHash
     {
         private readonly MetroHashConfig _config;
 
@@ -37,7 +37,7 @@ namespace Cosmos.Security.Verification
             private UInt64 _d;
 
             private UInt64 _bytesProcessed;
-            
+
             public BlockTransformer() : base(inputBlockSize: 32) { }
 
             public BlockTransformer(UInt64 seed) : this()
@@ -61,7 +61,7 @@ namespace Cosmos.Security.Verification
 
                 other._bytesProcessed = _bytesProcessed;
             }
-            
+
             protected override void TransformByteGroupsInternal(ArraySegment<byte> data)
             {
                 var dataArray = data.Array;
