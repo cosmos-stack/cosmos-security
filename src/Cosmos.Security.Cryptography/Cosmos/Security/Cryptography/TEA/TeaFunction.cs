@@ -1,80 +1,62 @@
 ﻿using System;
 using System.Text;
+using System.Threading;
+using Cosmos.Security.Cryptography.Core;
+using Cosmos.Security.Cryptography.Core.SymmetricAlgorithmImpls;
+using Cosmos.Security.Encryption.Core;
+
 // ReSharper disable InconsistentNaming
-// ReSharper disable RedundantCast
-// ReSharper disable RedundantExplicitArraySize
+// ReSharper disable CheckNamespace
 
-/*
- * Reference to:
- *      https://github.com/amos74/TEACrypt
- *      Author: amos74
- *      MIT
- */
-
-namespace Cosmos.Security.Encryption.Core
+namespace Cosmos.Security.Cryptography
 {
-    internal class TeaCore
+    internal class TEAFunction : SymmetricCryptoFunction<TeaKey>, ITEA
     {
         private const uint DELTA = 0x9E3779B9;
 
-        private string teakey;
-        private uint[] teakeyArr;
-
-        public static string GenerateTeaKey()
+        public TEAFunction(TeaKey key)
         {
-            DateTimeOffset now = DateTime.Now;
-            //long time = now.ToUnixTimeMilliseconds();  // for above .NET Ver 3.6
-            long time = (long) ((now - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds);
-            long random = (long) (new Random().NextDouble() * 65536);
-            long keyValue = time * random;
-            return $"{keyValue:D16}";
+            Key = key ?? throw new ArgumentNullException(nameof(key));
         }
 
-        /**
-         * sum = 0 
-         */
-        public uint Encrypt(uint[] v, uint[] k, uint sum)
-        {
-            uint v0 = v[0], v1 = v[1];
-            uint k0 = k[0], k1 = k[1], k2 = k[2], k3 = k[3];
-            for (int i = 0; i < 32; i++)
-            {
-                sum += DELTA;
-                v0 += ((v1 << 4) + k0) ^ (v1 + sum) ^ ((v1 >> 5) + k1);
-                v1 += ((v0 << 4) + k2) ^ (v0 + sum) ^ ((v0 >> 5) + k3);
-            }
+        public override TeaKey Key { get; }
 
-            v[0] = v0;
-            v[1] = v1;
-            return sum;
+        public override int KeySize => Key.Size;
+
+        protected override ICryptoValue EncryptInternal(ArraySegment<byte> originalBytes, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            var data = GetBytes(originalBytes);
+            if (data.Length == 0)
+                return CreateCryptoValue(data, data, CryptoMode.Encrypt);
+
+            var v = StrConvert.StrToLongs(data, 0, 0);
+            var k = StrConvert.StrToLongs(Key.GetKey(), 0, 16);
+
+            var cipher = EncryptBlock(v, k);
+            return CreateCryptoValue(data, cipher, CryptoMode.Encrypt);
         }
 
-        /**
-         * sum = 0xC6EF3720 
-         */
-        public uint Decrypt(uint[] v, uint[] k, uint sum)
+        protected override ICryptoValue DecryptInternal(ArraySegment<byte> cipherBytes, CancellationToken cancellationToken)
         {
-            uint v0 = v[0], v1 = v[1];
-            uint k0 = k[0], k1 = k[1], k2 = k[2], k3 = k[3];
-            for (int i = 0; i < 32; i++)
-            {
-                v1 -= ((v0 << 4) + k2) ^ (v0 + sum) ^ ((v0 >> 5) + k3);
-                v0 -= ((v1 << 4) + k0) ^ (v1 + sum) ^ ((v1 >> 5) + k1);
-                sum -= DELTA;
-            }
+            cancellationToken.ThrowIfCancellationRequested();
+            var cipher = GetBytes(cipherBytes);
+            if (cipher.Length == 0)
+                return CreateCryptoValue(cipher, cipher, CryptoMode.Decrypt);
+            var v = StrConvert.StrToLongs(cipher, 0, 0);
+            var k = StrConvert.StrToLongs(Key.GetKey(), 0, 16);
 
-            v[0] = v0;
-            v[1] = v1;
-            return sum;
+            var original = DecryptBlock(v, k);
+            return CreateCryptoValue(original, cipher, CryptoMode.Decrypt,o=>o.TrimTerminatorWhenDecrypting=true);
         }
 
-        public static byte[] EncryptBlock(uint[] v, uint[] k)
+        private static byte[] EncryptBlock(uint[] v, uint[] k)
         {
             if (v == null || k == null) return null;
 
             int n = v.Length;
             if (n == 0) return null;
-            if (n <= 1) return new byte[1] {0}; // algorithm doesn't work for n<2 so fudge by adding a null
+            if (n <= 1) return new byte[] {0}; // algorithm doesn't work for n<2 so fudge by adding a null
 
             uint q = (uint) (6 + 52 / n);
 
@@ -103,7 +85,7 @@ namespace Cosmos.Security.Encryption.Core
             return StrConvert.LongsToStr(v);
         }
 
-        public static byte[] DecryptBlock(uint[] v, uint[] k)
+        private static byte[] DecryptBlock(uint[] v, uint[] k)
         {
             if (v == null || k == null) return null;
 
@@ -139,78 +121,7 @@ namespace Cosmos.Security.Encryption.Core
             return StrConvert.LongsToStr(v);
         }
 
-        public static string Encrypt(string plainText, string teaKey, Encoding encoding = null)
-        {
-            if (string.IsNullOrEmpty(plainText)) return null;
-            if (string.IsNullOrEmpty(teaKey)) return null;
-            if (encoding == null) encoding = Encoding.UTF8;
-
-            byte[] x = Encoding.UTF8.GetBytes(plainText);
-            uint[] v = StrConvert.StrToLongs(x, 0, 0);
-            // simply convert first 16 chars of password as key
-            x = encoding.GetBytes(teaKey);
-            uint[] k = StrConvert.StrToLongs(x, 0, 16);
-
-            byte[] encryptText = EncryptBlock(v, k);
-
-            return Convert.ToBase64String(encryptText);
-        }
-
-        public static string Decrypt(string cipherText, string teaKey, Encoding encoding = null)
-        {
-            if (string.IsNullOrEmpty(cipherText)) return null;
-            if (string.IsNullOrEmpty(teaKey)) return null;
-            if (encoding == null) encoding = Encoding.UTF8;
-
-            byte[] x = Convert.FromBase64String(cipherText);
-            uint[] v = StrConvert.StrToLongs(x, 0, 0);
-            // simply convert first 16 chars of password as key
-            x = encoding.GetBytes(teaKey);
-            uint[] k = StrConvert.StrToLongs(x, 0, 16);
-
-            byte[] decryptText = DecryptBlock(v, k);
-
-            return encoding.GetString(decryptText);
-        }
-
-        public TeaCore(string teaKey)
-        {
-            SetTeaKey(teaKey);
-        }
-
-        public string GetTeaKey()
-        {
-            return teakey;
-        }
-
-        public void SetTeaKey(string teaKey)
-        {
-            this.teakey = teaKey;
-            byte[] x = Encoding.UTF8.GetBytes(teaKey);
-            this.teakeyArr = StrConvert.StrToLongs(x, 0, 16);
-        }
-
-        public string Encrypt(string plainText)
-        {
-            if (String.IsNullOrEmpty(plainText)) return null;
-
-            byte[] x = Encoding.UTF8.GetBytes(plainText);
-            uint[] v = StrConvert.StrToLongs(x, 0, 0);
-
-            return Convert.ToBase64String(EncryptBlock(v, teakeyArr));
-        }
-
-        public string Decrypt(string cipherText)
-        {
-            if (String.IsNullOrEmpty(cipherText)) return null;
-
-            byte[] x = Convert.FromBase64String(cipherText);
-            uint[] v = StrConvert.StrToLongs(x, 0, 0);
-
-            return Encoding.UTF8.GetString(DecryptBlock(v, teakeyArr));
-        }
-
-        public sealed class StrConvert
+        private sealed class StrConvert
         {
             public static byte HexToByte(char ch)
             {
@@ -243,7 +154,7 @@ namespace Cosmos.Security.Encryption.Core
 
             public static string ByteArrayToHex(byte[] byteArray)
             {
-                StringBuilder sb = new StringBuilder(byteArray.Length * 2);
+                var sb = new StringBuilder(byteArray.Length * 2);
                 const string HexLit = "0123456789abcdef";
 
                 foreach (byte b in byteArray)

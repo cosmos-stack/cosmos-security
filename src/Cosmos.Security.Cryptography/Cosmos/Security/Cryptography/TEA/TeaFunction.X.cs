@@ -1,16 +1,46 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
+using Cosmos.Security.Cryptography.Core;
+using Cosmos.Security.Cryptography.Core.SymmetricAlgorithmImpls;
 
-namespace Cosmos.Security.Encryption.Core
+// ReSharper disable InconsistentNaming
+// ReSharper disable CheckNamespace
+// ReSharper disable IdentifierTypo
+
+namespace Cosmos.Security.Cryptography
 {
-    // ReSharper disable once IdentifierTypo
-    // ReSharper disable once InconsistentNaming
-    internal static class XTEACore
+    internal class XTEAFunction : SymmetricCryptoFunction<TeaKey>, ITEA
     {
         /// <summary>
         /// The recommended number of rounds is 32 and not 64, because each iteration performs two Feistel-cipher rounds.
         /// </summary>
-        private const uint Rounds = 32;
+        private const uint ROUNDS = 32;
+
+        public XTEAFunction(TeaKey key)
+        {
+            Key = key ?? throw new ArgumentNullException(nameof(key));
+        }
+
+        public override TeaKey Key { get; }
+
+        public override int KeySize => Key.Size;
+
+        protected override ICryptoValue EncryptInternal(ArraySegment<byte> originalBytes, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            var data = GetBytes(originalBytes);
+            var cipher = EncryptCoreEntry(data, Key.GetKey());
+            return CreateCryptoValue(data, cipher, CryptoMode.Encrypt);
+        }
+
+        protected override ICryptoValue DecryptInternal(ArraySegment<byte> cipherBytes, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            var cipher = GetBytes(cipherBytes);
+            var original = DecryptCoreEntry(cipher, Key.GetKey());
+            return CreateCryptoValue(original, cipher, CryptoMode.Decrypt,o=>o.TrimTerminatorWhenDecrypting=true);
+        }
 
         /// <summary>
         /// Encrypts the given data with the provided key.
@@ -18,9 +48,9 @@ namespace Cosmos.Security.Encryption.Core
         /// <param name="data">The data to encrypt.</param>
         /// <param name="key">The key used for encryption.</param>
         /// <returns></returns>
-        public static byte[] Encrypt(byte[] data, byte[] key)
+        private static byte[] EncryptCoreEntry(byte[] data, byte[] key)
         {
-            var keyBuffer = CreateKey(key);
+            var keyBuffer = GetKeyBuff(key);
             var blockBuffer = new uint[2];
             var result = new byte[NextMultipleOf8(data.Length + 4)];
             var lengthBuffer = BitConverter.GetBytes(data.Length);
@@ -34,7 +64,7 @@ namespace Cosmos.Security.Encryption.Core
                     {
                         blockBuffer[0] = BitConverter.ToUInt32(result, i);
                         blockBuffer[1] = BitConverter.ToUInt32(result, i + 4);
-                        Encrypt(Rounds, blockBuffer, keyBuffer);
+                        RoundEncryptCore(ROUNDS, blockBuffer, keyBuffer);
                         writer.Write(blockBuffer[0]);
                         writer.Write(blockBuffer[1]);
                     }
@@ -52,10 +82,10 @@ namespace Cosmos.Security.Encryption.Core
         /// <param name="data">The encrypted data.</param>
         /// <param name="key">The key used for decryption.</param>
         /// <returns></returns>
-        public static byte[] Decrypt(byte[] data, byte[] key)
+        private static byte[] DecryptCoreEntry(byte[] data, byte[] key)
         {
             if (data.Length % 8 != 0) throw new ArgumentException("Encrypted data length must be a multiple of 8 bytes.");
-            var keyBuffer = CreateKey(key);
+            var keyBuffer = GetKeyBuff(key);
             var blockBuffer = new uint[2];
             var buffer = new byte[data.Length];
             Array.Copy(data, buffer, data.Length);
@@ -67,7 +97,7 @@ namespace Cosmos.Security.Encryption.Core
                     {
                         blockBuffer[0] = BitConverter.ToUInt32(buffer, i);
                         blockBuffer[1] = BitConverter.ToUInt32(buffer, i + 4);
-                        Decrypt(Rounds, blockBuffer, keyBuffer);
+                        RoundDecryptCore(ROUNDS, blockBuffer, keyBuffer);
                         writer.Write(blockBuffer[0]);
                         writer.Write(blockBuffer[1]);
                     }
@@ -82,6 +112,46 @@ namespace Cosmos.Security.Encryption.Core
             return result;
         }
 
+        /// <summary>
+        /// Performs an inplace encryption of the provided data array.
+        /// </summary>
+        /// <param name="rounds">The number of encryption rounds, the recommend value is 32.</param>
+        /// <param name="v">Data array containing two values.</param>
+        /// <param name="key">Key array containing 4 values.</param>
+        private static void RoundEncryptCore(uint rounds, uint[] v, uint[] key)
+        {
+            uint v0 = v[0], v1 = v[1], sum = 0, delta = 0x9E3779B9;
+            for (uint i = 0; i < rounds; i++)
+            {
+                v0 += (((v1 << 4) ^ (v1 >> 5)) + v1) ^ (sum + key[sum & 3]);
+                sum += delta;
+                v1 += (((v0 << 4) ^ (v0 >> 5)) + v0) ^ (sum + key[(sum >> 11) & 3]);
+            }
+
+            v[0] = v0;
+            v[1] = v1;
+        }
+
+        /// <summary>
+        /// Performs an inplace decryption of the provided data array.
+        /// </summary>
+        /// <param name="rounds">The number of encryption rounds, the recommend value is 32.</param>
+        /// <param name="v">Data array containing two values.</param>
+        /// <param name="key">Key array containing 4 values.</param>
+        private static void RoundDecryptCore(uint rounds, uint[] v, uint[] key)
+        {
+            uint v0 = v[0], v1 = v[1], delta = 0x9E3779B9, sum = delta * rounds;
+            for (uint i = 0; i < rounds; i++)
+            {
+                v1 -= (((v0 << 4) ^ (v0 >> 5)) + v0) ^ (sum + key[(sum >> 11) & 3]);
+                sum -= delta;
+                v0 -= (((v1 << 4) ^ (v1 >> 5)) + v1) ^ (sum + key[sum & 3]);
+            }
+
+            v[0] = v0;
+            v[1] = v1;
+        }
+
         private static int NextMultipleOf8(int length)
         {
             // XTEA is a 64-bit block chiffre, therefore our data must be a multiple of 64 bit
@@ -93,7 +163,7 @@ namespace Cosmos.Security.Encryption.Core
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        private static uint[] CreateKey(byte[] key)
+        private static uint[] GetKeyBuff(byte[] key)
         {
             // It might be a better idea to just calculate the MD5 hash of the key: var hash = MD5.Create().ComputeHash(key);
             // But we don't want to depend on the Cryptography namespace, because it would increase the build size for some Unity3d platforms.
@@ -115,49 +185,5 @@ namespace Cosmos.Security.Encryption.Core
                 BitConverter.ToUInt32(hash, 8), BitConverter.ToUInt32(hash, 12)
             };
         }
-
-        #region Block Operations
-
-        /// <summary>
-        /// Performs an inplace encryption of the provided data array.
-        /// </summary>
-        /// <param name="rounds">The number of encryption rounds, the recommend value is 32.</param>
-        /// <param name="v">Data array containing two values.</param>
-        /// <param name="key">Key array containing 4 values.</param>
-        private static void Encrypt(uint rounds, uint[] v, uint[] key)
-        {
-            uint v0 = v[0], v1 = v[1], sum = 0, delta = 0x9E3779B9;
-            for (uint i = 0; i < rounds; i++)
-            {
-                v0 += (((v1 << 4) ^ (v1 >> 5)) + v1) ^ (sum + key[sum & 3]);
-                sum += delta;
-                v1 += (((v0 << 4) ^ (v0 >> 5)) + v0) ^ (sum + key[(sum >> 11) & 3]);
-            }
-
-            v[0] = v0;
-            v[1] = v1;
-        }
-
-        /// <summary>
-        /// Performs an inplace decryption of the provided data array.
-        /// </summary>
-        /// <param name="rounds">The number of encryption rounds, the recommend value is 32.</param>
-        /// <param name="v">Data array containing two values.</param>
-        /// <param name="key">Key array containing 4 values.</param>
-        private static void Decrypt(uint rounds, uint[] v, uint[] key)
-        {
-            uint v0 = v[0], v1 = v[1], delta = 0x9E3779B9, sum = delta * rounds;
-            for (uint i = 0; i < rounds; i++)
-            {
-                v1 -= (((v0 << 4) ^ (v0 >> 5)) + v0) ^ (sum + key[(sum >> 11) & 3]);
-                sum -= delta;
-                v0 -= (((v1 << 4) ^ (v1 >> 5)) + v1) ^ (sum + key[sum & 3]);
-            }
-
-            v[0] = v0;
-            v[1] = v1;
-        }
-
-        #endregion
     }
 }
