@@ -1,14 +1,13 @@
 ﻿using Cosmos.Security.Cryptography;
-using Cosmos.Security.Encryption.Abstractions;
-using Cosmos.Security.Encryption.Algorithms;
 using Xunit;
 
-namespace Algorithms
+namespace HillUT
 {
+    [Trait("HillUT", "HillTests")]
     public class HillTests
     {
         readonly int[,] matrix;
-        readonly ICryptoAlgorithm _target;
+        readonly IHill function;
 
         public HillTests()
         {
@@ -26,7 +25,7 @@ namespace Algorithms
             matrix[2, 1] = 21;
             matrix[2, 2] = 19;
 
-            _target = new Hill(matrix);
+            function = HillFactory.Create(matrix);
         }
 
         [Fact]
@@ -37,10 +36,10 @@ namespace Algorithms
             string cypher = "lnshdlewmtrw";
 
             //Act
-            string actual = _target.Encrypt(plain);
+            var cryptoVal = function.Encrypt(plain);
 
             //Assert
-            Assert.Equal(cypher, actual);
+            Assert.Equal(cypher, cryptoVal.GetCipherDataDescriptor().GetString());
         }
 
         [Fact]
@@ -51,10 +50,10 @@ namespace Algorithms
             string cypher = "lnshdlewmtrw";
 
             //Act
-            string actual = _target.Decrypt(cypher);
+            var cryptoVal = function.Decrypt(cypher);
 
             //Assert
-            Assert.Equal(plain, actual);
+            Assert.Equal(plain, cryptoVal.GetOriginalDataDescriptor().GetString());
         }
     }
 }
