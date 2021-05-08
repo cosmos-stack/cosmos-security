@@ -3,13 +3,15 @@
  *      https://www.2cto.com/kf/201603/496248.html
  */
 
-namespace Cosmos.Security.Encryption.Core
+// ReSharper disable once CheckNamespace
+
+namespace Cosmos.Security.Cryptography
 {
     /// <summary>
     /// SM4 Context
     /// </summary>
     // ReSharper disable InconsistentNaming
-    public class SM4Context
+    internal class SM4Context
     {
         /// <summary>
         /// Mode

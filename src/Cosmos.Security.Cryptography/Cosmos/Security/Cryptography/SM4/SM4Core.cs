@@ -8,13 +8,13 @@ using System.Collections.Generic;
  *      https://www.2cto.com/kf/201603/496248.html
  */
 
-namespace Cosmos.Security.Encryption.Core
+namespace Cosmos.Security.Cryptography
 {
     /// <summary>
     /// SM4 core
     /// </summary>
     // ReSharper disable InconsistentNaming
-    public class SM4Core
+    internal class SM4Core
     {
         /// <summary>
         /// SM4 ENCRYPT
