@@ -1,37 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Cosmos.Security.Cryptography;
-using Cosmos.Security.Encryption.Abstractions;
+using System.Threading;
+using Cosmos.Security.Cryptography.Core;
+using Cosmos.Security.Cryptography.Core.SymmetricAlgorithmImpls;
 
-namespace Cosmos.Security.Encryption.Algorithms
+// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Cryptography
 {
-    /// <summary>
-    /// RowTransposition encryption algorithm
-    /// for more info, please view:
-    ///     https://www.codeproject.com/Articles/63432/Classical-Encryption-Techniques
-    /// Author: Omar-Salem
-    ///     https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/RowTransposition.cs
-    /// </summary>
-    public sealed class RowTransposition : ICryptoAlgorithm
+    internal class RowTranspositionFunction : SymmetricCryptoFunction<int[]>, IRowTransposition
     {
-        private int[] Key { get; }
-
-        /// <summary>
-        /// Create a new instance of <see cref="RowTransposition"/>
-        /// </summary>
-        /// <param name="key"></param>
-        public RowTransposition(int[] key) => Key = key;
-
-        /// <summary>
-        /// Encrypt
-        /// </summary>
-        /// <param name="plainText"></param>
-        /// <returns></returns>
-        public string Encrypt(string plainText)
+        public RowTranspositionFunction(int[] key)
         {
+            Key = key;
+        }
+
+        public override int[] Key { get; }
+
+        public override int KeySize => Key.Length * 32;
+
+        protected override ICryptoValue EncryptInternal(ArraySegment<byte> originalBytes, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            var original = GetString(originalBytes, Encoding.UTF8);
+          
             int columns = 0, rows = 0;
-            var rowsPositions = FillPositionsDictionary(Key, plainText, ref columns, ref rows);
+            var rowsPositions = FillPositionsDictionary(Key, original, ref columns, ref rows);
             var matrix2 = new char[rows, columns];
 
             //Fill Mareix
@@ -40,8 +34,8 @@ namespace Cosmos.Security.Encryption.Algorithms
             {
                 for (var j = 0; j < columns; j++)
                 {
-                    matrix2[i, j] = charPosition < plainText.Length
-                        ? plainText[charPosition]
+                    matrix2[i, j] = charPosition < original.Length
+                        ? original[charPosition]
                         : '*';
                     charPosition++;
                 }
@@ -59,28 +53,26 @@ namespace Cosmos.Security.Encryption.Algorithms
                 sbStr.Append(" ");
             }
 
-            return sbStr.ToString();
+            return CreateCryptoValue(original, sbStr.ToString(), CryptoMode.Encrypt);
         }
 
-        /// <summary>
-        /// Decrypt
-        /// </summary>
-        /// <param name="cipher"></param>
-        /// <returns></returns>
-        public string Decrypt(string cipher)
+        protected override ICryptoValue DecryptInternal(ArraySegment<byte> cipherBytes, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+            var cipher = GetString(cipherBytes, Encoding.UTF8);
+          
             int columns = 0, rows = 0;
             var rowsPositions = FillPositionsDictionary(Key, cipher, ref columns, ref rows);
             var matrix = new char[rows, columns];
 
             //Fill Matrix
-            var charPositon = 0;
+            var charPosition = 0;
             for (var i = 0; i < columns; i++)
             {
                 for (var j = 0; j < rows; j++)
                 {
-                    matrix[j, rowsPositions[i + 1]] = cipher[charPositon];
-                    charPositon++;
+                    matrix[j, rowsPositions[i + 1]] = cipher[charPosition];
+                    charPosition++;
                 }
             }
 
@@ -94,7 +86,7 @@ namespace Cosmos.Security.Encryption.Algorithms
                 }
             }
 
-            return sbStr.ToString();
+            return CreateCryptoValue(sbStr.ToString(), cipher, CryptoMode.Decrypt);
         }
 
         private static Dictionary<int, int> FillPositionsDictionary(int[] key, string token, ref int columns, ref int rows)
