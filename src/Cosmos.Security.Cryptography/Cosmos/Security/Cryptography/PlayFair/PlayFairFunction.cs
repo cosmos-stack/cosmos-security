@@ -2,44 +2,45 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Cosmos.Security.Cryptography;
-using Cosmos.Security.Encryption.Abstractions;
-using Cosmos.Security.Encryption.Core.Internals;
+using System.Threading;
+using Cosmos.Security.Cryptography.Core;
+using Cosmos.Security.Cryptography.Core.Internals;
+using Cosmos.Security.Cryptography.Core.SymmetricAlgorithmImpls;
 
-namespace Cosmos.Security.Encryption.Algorithms
+// ReSharper disable once CheckNamespace
+namespace Cosmos.Security.Cryptography
 {
-    /// <summary>
-    /// PlayFair encryption algorithm
-    /// for more info, please view:
-    ///     https://www.codeproject.com/Articles/63432/Classical-Encryption-Techniques
-    /// Author: Omar-Salem
-    ///     https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Concrete/PlayFair.cs
-    /// </summary>
-    public sealed class PlayFair : ICryptoAlgorithm
+    internal class PlayFairFunction : SymmetricCryptoFunction<string>, IPlayFair
     {
-        private string Key { get; }
+        public PlayFairFunction(string key)
+        {
+            Key = key;
+        }
 
-        /// <summary>
-        /// Create a new instance of <see cref="PlayFair"/>
-        /// </summary>
-        /// <param name="key"></param>
-        public PlayFair(string key) => Key = key;
+        public override string Key { get; }
 
-        /// <summary>
-        /// Encrypt
-        /// </summary>
-        /// <param name="plainText"></param>
-        /// <returns></returns>
-        public string Encrypt(string plainText) => ProcessFunc()(Key)(plainText)(EncryptionAlgorithmMode.Encrypt);
+        public override int KeySize => Key.Length;
 
-        /// <summary>
-        /// Decrypt
-        /// </summary>
-        /// <param name="cipher"></param>
-        /// <returns></returns>
-        public string Decrypt(string cipher) => ProcessFunc()(Key)(cipher)(EncryptionAlgorithmMode.Decrypt);
+        protected override ICryptoValue EncryptInternal(ArraySegment<byte> originalBytes, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            var original = GetString(originalBytes, Encoding.UTF8);
+            return CreateCryptoValue(original,
+                ProcessFunc()(Key)(original)(CryptoMode.Encrypt),
+                CryptoMode.Encrypt);
+        }
 
-        private static Func<string, Func<string, Func<EncryptionAlgorithmMode, string>>> ProcessFunc() => key => message => mode =>
+        protected override ICryptoValue DecryptInternal(ArraySegment<byte> cipherBytes, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            var cipher = GetString(cipherBytes, Encoding.UTF8);
+            return CreateCryptoValue(
+                ProcessFunc()(Key)(cipher)(CryptoMode.Decrypt),
+                cipher,
+                CryptoMode.Decrypt);
+        }
+
+        private static Func<string, Func<string, Func<CryptoMode, string>>> ProcessFunc() => key => message => mode =>
         {
             //Key:Charcater
             //Value:Position
@@ -51,7 +52,7 @@ namespace Cosmos.Security.Encryption.Algorithms
 
             FillMatrixFunc()(key.Distinct().ToArray())(characterPositionsInMatrix)(positionCharacterInMatrix);
 
-            if (mode == EncryptionAlgorithmMode.Encrypt)
+            if (mode == CryptoMode.Encrypt)
             {
                 message = RepairWordFunc()(message);
             }
@@ -71,11 +72,11 @@ namespace Cosmos.Security.Encryption.Algorithms
 
                     switch (mode)
                     {
-                        case EncryptionAlgorithmMode.Encrypt: //Increment Columns
+                        case CryptoMode.Encrypt: //Increment Columns
                             newC1 = (int.Parse(rc1[1].ToString()) + 1) % 5;
                             newC2 = (int.Parse(rc2[1].ToString()) + 1) % 5;
                             break;
-                        case EncryptionAlgorithmMode.Decrypt: //Decrement Columns
+                        case CryptoMode.Decrypt: //Decrement Columns
                             newC1 = (int.Parse(rc1[1].ToString()) - 1) % 5;
                             newC2 = (int.Parse(rc2[1].ToString()) - 1) % 5;
                             break;
@@ -95,11 +96,11 @@ namespace Cosmos.Security.Encryption.Algorithms
 
                     switch (mode)
                     {
-                        case EncryptionAlgorithmMode.Encrypt: //Increment Rows
+                        case CryptoMode.Encrypt: //Increment Rows
                             newR1 = (int.Parse(rc1[0].ToString()) + 1) % 5;
                             newR2 = (int.Parse(rc2[0].ToString()) + 1) % 5;
                             break;
-                        case EncryptionAlgorithmMode.Decrypt: //Decrement Rows
+                        case CryptoMode.Decrypt: //Decrement Rows
                             newR1 = (int.Parse(rc1[0].ToString()) - 1) % 5;
                             newR2 = (int.Parse(rc2[0].ToString()) - 1) % 5;
                             break;
@@ -155,8 +156,8 @@ namespace Cosmos.Security.Encryption.Algorithms
                 var keyPosition = 0;
                 var charPosition = 0;
 
-                var alphabetPlayFiar = AlphabetDictionaryGenerator.Generate().Keys.ToList();
-                alphabetPlayFiar.Remove('j');
+                var alphabetPlayFair = AlphabetDictionaryGenerator.Generate().Keys.ToList();
+                alphabetPlayFair.Remove('j');
 
                 for (var i = 0; i < 5; i++)
                 {
@@ -165,13 +166,13 @@ namespace Cosmos.Security.Encryption.Algorithms
                         if (charPosition < key.Count)
                         {
                             matrix[i, j] = key[charPosition]; //fill matrix with key
-                            alphabetPlayFiar.Remove(key[charPosition]);
+                            alphabetPlayFair.Remove(key[charPosition]);
                             charPosition++;
                         }
                         else
                         {
                             //key finished...fill with rest of alphabet
-                            matrix[i, j] = alphabetPlayFiar[keyPosition];
+                            matrix[i, j] = alphabetPlayFair[keyPosition];
                             keyPosition++;
                         }
 
