@@ -8,7 +8,7 @@ namespace Cosmos.Security.Encryption
     /// ZUC encryption provider. BUG: THERE ARE SEVERAL BUG HERE, DO NOT USE THIS PROVIDER NOW!
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public static class ZUCEncryptionProvider
+    internal static class ZUCEncryptionProvider
     {
         /// <summary>
         /// Encrypt

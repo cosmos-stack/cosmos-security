@@ -2,7 +2,6 @@
 using System.Text;
 using Cosmos.Conversions;
 using Cosmos.Optionals;
-using Org.BouncyCastle.Utilities.Encoders;
 
 namespace Cosmos.Security.Cryptography
 {
@@ -32,7 +31,7 @@ namespace Cosmos.Security.Cryptography
                 CipherTextTypes.Base91Text => BaseConv.FromBase91(signature),
                 CipherTextTypes.Base256Text => BaseConv.FromBase256(signature),
                 CipherTextTypes.ZBase32Text => BaseConv.FromZBase32(signature),
-                CipherTextTypes.Hex => Hex.Decode(signature),
+                CipherTextTypes.Hex => Org.BouncyCastle.Utilities.Encoders.Hex.Decode(signature),
                 _ => customCipherTextConverter is null ? encoding.GetBytes(signature) : customCipherTextConverter(signature)
             };
         }

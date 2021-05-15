@@ -7,7 +7,7 @@ namespace Cosmos.Security.Verification
     {
         public static IHashValue ToHashValue(this HashCode32 hash)
         {
-            return new HashValue(hash.AsByteArray(), hash.HashSizeInBits);
+            return new HashValue(hash.GetByteArray(), hash.BitLength);
         }
 
         public static IHashValue ToHashValue(this HashCode32? hash)
@@ -17,7 +17,7 @@ namespace Cosmos.Security.Verification
         
         public static IHashValue ToHashValue(this HashCode64 hash)
         {
-            return new HashValue(hash.AsByteArray(), hash.HashSizeInBits);
+            return new HashValue(hash.GetByteArray(), hash.BitLength);
         }
 
         public static IHashValue ToHashValue(this HashCode64? hash)
@@ -27,7 +27,7 @@ namespace Cosmos.Security.Verification
         
         public static IHashValue ToHashValue(this HashCode128 hash)
         {
-            return new HashValue(hash.AsByteArray(), hash.HashSizeInBits);
+            return new HashValue(hash.GetByteArray(), hash.BitLength);
         }
 
         public static IHashValue ToHashValue(this HashCode128? hash)
@@ -37,7 +37,7 @@ namespace Cosmos.Security.Verification
         
         public static IHashValue ToHashValue(this HashCode256 hash)
         {
-            return new HashValue(hash.AsByteArray(), hash.HashSizeInBits);
+            return new HashValue(hash.GetByteArray(), hash.BitLength);
         }
 
         public static IHashValue ToHashValue(this HashCode256? hash)
@@ -47,7 +47,7 @@ namespace Cosmos.Security.Verification
         
         public static IHashValue ToHashValue(this HashCode512 hash)
         {
-            return new HashValue(hash.AsByteArray(), hash.HashSizeInBits);
+            return new HashValue(hash.GetByteArray(), hash.BitLength);
         }
 
         public static IHashValue ToHashValue(this HashCode512? hash)
@@ -57,7 +57,7 @@ namespace Cosmos.Security.Verification
         
         public static IHashValue ToHashValue(this HashCode1024 hash)
         {
-            return new HashValue(hash.AsByteArray(), hash.HashSizeInBits);
+            return new HashValue(hash.GetByteArray(), hash.BitLength);
         }
 
         public static IHashValue ToHashValue(this HashCode1024? hash)

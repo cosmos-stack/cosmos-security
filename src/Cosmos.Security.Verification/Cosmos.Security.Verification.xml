@@ -9,12 +9,12 @@
             ADLER Hash Function Factory
             </summary>
         </member>
-        <member name="T:Cosmos.Security.Verification.Adler32">
+        <member name="T:Cosmos.Security.Verification.TheAdler32">
             <summary>
             ADLER-32 Hash Function Factory
             </summary>
         </member>
-        <member name="T:Cosmos.Security.Verification.Adler64">
+        <member name="T:Cosmos.Security.Verification.TheAdler64">
             <summary>
             ADLER-64 Hash Function Factory
             </summary>

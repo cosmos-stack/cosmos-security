@@ -67,12 +67,5 @@ namespace Cosmos.Security.Cryptography
             s[i] = s[j];
             s[j] = b;
         }
-
-        private static byte[] GetBytes(ArraySegment<byte> bytes)
-        {
-            var ret = new byte[bytes.Count];
-            Array.Copy(bytes.Array!, bytes.Offset, ret, 0, bytes.Count);
-            return ret;
-        }
     }
 }

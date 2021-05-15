@@ -168,7 +168,9 @@ namespace Cosmos.Security.Cryptography.Core.SymmetricAlgorithmImpls
 
         protected static byte[] GetBytes(ArraySegment<byte> data)
         {
-            return data.ToArray();
+            var ret = new byte[data.Count];
+            Array.Copy(data.Array!, data.Offset, ret, 0, data.Count);
+            return ret;
         }
 
         protected static string GetString(ArraySegment<byte> data, Encoding encoding)

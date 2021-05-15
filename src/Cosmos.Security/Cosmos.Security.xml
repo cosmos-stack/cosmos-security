@@ -4,24 +4,5 @@
         <name>Cosmos.Security</name>
     </assembly>
     <members>
-        <member name="T:Cosmos.Security.Cryptography.ICryptoAlgorithm">
-            <summary>
-            Interface for Cryptography Algorithm
-            </summary>
-        </member>
-        <member name="M:Cosmos.Security.Cryptography.ICryptoAlgorithm.Encrypt(System.String)">
-            <summary>
-            Encrypt
-            </summary>
-            <param name="plainText"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Security.Cryptography.ICryptoAlgorithm.Decrypt(System.String)">
-            <summary>
-            Decrypt
-            </summary>
-            <param name="cipher"></param>
-            <returns></returns>
-        </member>
     </members>
 </doc>
