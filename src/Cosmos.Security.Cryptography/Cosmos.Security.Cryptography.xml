@@ -1,0 +1,2992 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cosmos.Security.Cryptography</name>
+    </assembly>
+    <members>
+        <member name="T:Cosmos.Security.Cryptography.AesKey">
+            <summary>
+            Aes key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.AesKey.Key">
+            <summary>
+            Des key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.AesKey.IV">
+            <summary>
+            Des IV
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.AesKey.Size">
+            <summary>
+            Size of Key
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Cryptography.Core.Internals.AlgorithmUtils">
+            <summary>
+            Algorithm Utils
+            Author: Omar-Salem
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.AlgorithmUtils.GetAlphabetPositionFunc">
+            <summary>
+            Get alphabet position
+            Author: Omar-Salem
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.AlgorithmUtils.Shift(System.String,System.String,Cosmos.Security.Cryptography.CryptoMode,System.Collections.Generic.Dictionary{System.Char,System.Int32})">
+            <summary>
+            Shift
+            Author: Omar-Salem
+            </summary>
+            <param name="token"></param>
+            <param name="key"></param>
+            <param name="mode"></param>
+            <param name="alphabetSortedDict"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Hex.ToString(System.Byte[])">
+            <summary>
+            byte to hex string extension
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Hex.ToBytes(System.String)">
+            <summary>
+            hex string to byte extension
+            </summary>
+            <param name="hex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.HexExtensions.ToHexString(System.Byte[])">
+            <summary>
+            byte to hex string extension
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.HexExtensions.ToBytes(System.String)">
+            <summary>
+            hex string to byte extension
+            </summary>
+            <param name="hex"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Security.Cryptography.Core.Internals.MatrixClass">
+            <summary>
+            A copy from GitHub project:
+                https://github.com/Omar-Salem/Classical-Encryption-Techniques/blob/master/EncryptionAlgorithms/Entities/MatrixClass.cs#L83:20
+            
+            Classes Contained:
+            	MatrixClass (version 1.1)
+            	MatrixClassException
+            	Fraction (Version 2.0)
+            	FractionException
+            Class name: MatrixClass
+            Version: 1.1
+            Class used: Fraction
+            Developed by: Syed Mehroz Alam
+            Email: smehrozalam@yahoo.com
+            URL: Programming Home "http://www.geocities.com/smehrozalam/"
+            
+            What's New in version 1.1
+            	*	Added DeterminentFast() method
+            	*	Added InverseFast() method
+            	*	renamed ConvertToString to (override) ToString()
+            	*	some minor bugs fixed
+            
+            Constructors:
+            	( Fraction[,] ):	takes 2D Fractions array	
+            	( int[,] ):	takes 2D integer array, convert them to fractions	
+            	( double[,] ):	takes 2D double array, convert them to fractions
+            	( int Rows, int Cols )	initializes the dimensions, indexers may be used 
+            							to set individual elements' values
+            
+            Properties:
+            	Rows: read only property to get the no. of rows in the current MatrixClass
+            	Cols: read only property to get the no. of columns in the current MatrixClass
+            
+            Indexers:
+            	[i,j] = used to set/get elements in the form of a Fraction object
+            
+            Public Methods (Description is given with respective methods' definitions)
+            	string ToString()
+            	MatrixClass Minor(MatrixClass, Row,Col)
+            	MultiplyRow( Row, Fraction )
+            	MultiplyRow( Row, integer )
+            	MultiplyRow( Row, double )
+            	AddRow( TargetRow, SecondRow, Multiple)
+            	InterchangeRow( Row1, Row2)
+            	MatrixClass Concatenate(MatrixClass1, MatrixClass2)
+            	Fraction Determinent()
+            	Fraction DeterminentFast()
+            	MatrixClass EchelonForm()
+            	MatrixClass ReducedEchelonForm()
+            	MatrixClass Inverse()
+            	MatrixClass InverseFast()
+            	MatrixClass Adjoint()
+            	MatrixClass Transpose()
+            	MatrixClass Duplicate()
+            	MatrixClass ScalarMatrixClass( Rows, Cols, K )
+            	MatrixClass IdentityMatrixClass( Rows, Cols )
+            	MatrixClass UnitMatrixClass(Rows, Cols)
+            	MatrixClass NullMatrixClass(Rows, Cols)
+            
+            Private Methods
+            	Fraction GetElement(int iRow, int iCol)
+            	SetElement(int iRow, int iCol, Fraction value)
+            	Negate(MatrixClass)
+            	Add(MatrixClass1, MatrixClass2)
+            	Multiply(MatrixClass1, MatrixClass2)
+            	Multiply(MatrixClass1, Fraction)
+            	Multiply(MatrixClass1, integer)
+            
+            Operators Overloaded Overloaded
+            	Unary: - (negate MatrixClass)
+            	Binary: 
+            		+,- for two matrices
+            		* for two matrices or one MatrixClass with integer or fraction or double
+            		/ for MatrixClass with integer or fraction or double
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.m_iRows">
+            <summary>
+            Class attributes/members
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.#ctor(Cosmos.Security.Cryptography.Core.Internals.Fraction[0:,0:])">
+            <summary>
+            Constructors
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.Rows">
+            <summary>
+            Properites
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.Item(System.Int32,System.Int32)">
+            <summary>
+            Indexer
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.GetElement(System.Int32,System.Int32)">
+            <summary>
+            Internal functions for getting/setting values
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.ToString">
+            <summary>
+            The function returns the current MatrixClass object as a string
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.Minor(Cosmos.Security.Cryptography.Core.Internals.MatrixClass,System.Int32,System.Int32)">
+            <summary>
+            The function return the Minor of element[Row,Col] of a MatrixClass object 
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.MultiplyRow(System.Int32,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            The function multiplies the given row of the current MatrixClass object by a Fraction 
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.MultiplyRow(System.Int32,System.Int32)">
+            <summary>
+            The function multiplies the given row of the current MatrixClass object by an integer
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.MultiplyRow(System.Int32,System.Double)">
+            <summary>
+            The function multiplies the given row of the current MatrixClass object by a double
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.AddRow(System.Int32,System.Int32,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            The function adds two rows for current MatrixClass object
+            It performs the following calculation:
+            iTargetRow = iTargetRow + iMultiple*iSecondRow
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.InterchangeRow(System.Int32,System.Int32)">
+            <summary>
+            The function interchanges two rows of the current MatrixClass object
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.Concatenate(Cosmos.Security.Cryptography.Core.Internals.MatrixClass,Cosmos.Security.Cryptography.Core.Internals.MatrixClass)">
+            <summary>
+            The function concatenates the two given matrices column-wise
+            it can be helpful in a equation solver class where the augmented MatrixClass is obtained by concatenation
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.DeterminentFast">
+            <summary>
+            The function returns the determinent of the current MatrixClass object as Fraction
+            It computes the determinent by reducing the MatrixClass to reduced echelon form using row operations
+            The function is very fast and efficient but may raise overflow exceptions in some cases.
+            In such cases use the Determinent() function which computes determinent in the traditional 
+            manner(by using minors)
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.Determinent">
+            <summary>
+            The function returns the determinent of the current MatrixClass object as Fraction
+            It computes the determinent in the traditional way (i.e. using minors)
+            It can be much slower(due to recursion) if the given MatrixClass has order greater than 6
+            Try using DeterminentFast() function if the order of MatrixClass is greater than 6
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.Determinent(Cosmos.Security.Cryptography.Core.Internals.MatrixClass)">
+            <summary>
+            The helper function for the above Determinent() method
+            it calls itself recursively and computes determinent using minors
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.EchelonForm">
+            <summary>
+            The function returns the Echelon form of the current MatrixClass
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.ReducedEchelonForm">
+            <summary>
+            The function returns the reduced echelon form of the current MatrixClass
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.InverseFast">
+            <summary>
+            The function returns the inverse of the current MatrixClass using Reduced Echelon Form method
+            The function is very fast and efficient but may raise overflow exceptions in some cases.
+            In such cases use the Inverse() method which computes inverse in the traditional way(using adjoint).
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.Inverse">
+            <summary>
+            The function returns the inverse of the current MatrixClass in the traditional way(by adjoint method)
+            It can be much slower if the given MatrixClass has order greater than 6
+            Try using InverseFast() function if the order of MatrixClass is greater than 6
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.Adjoint(System.Int32)">
+            <summary>
+            The function returns the adjoint of the current MatrixClass
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.Transpose">
+            <summary>
+            The function returns the transpose of the current MatrixClass
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.Duplicate">
+            <summary>
+            The function duplicates the current MatrixClass object
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.ScalarMatrixClass(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            The function returns a Scalar MatrixClass of dimension ( Row x Col ) and scalar K
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.IdentityMatrixClass(System.Int32,System.Int32)">
+            <summary>
+            The function returns an identity MatrixClass of dimensions ( Row x Col )
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.UnitMatrixClass(System.Int32,System.Int32)">
+            <summary>
+            The function returns a Unit MatrixClass of dimension ( Row x Col )
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.NullMatrixClass(System.Int32,System.Int32)">
+            <summary>
+            The function returns a Null MatrixClass of dimension ( Row x Col )
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.op_UnaryNegation(Cosmos.Security.Cryptography.Core.Internals.MatrixClass)">
+            <summary>
+            Operators for the MatrixClass object
+            includes -(unary), and binary opertors such as +,-,*,/
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClass.Negate(Cosmos.Security.Cryptography.Core.Internals.MatrixClass)">
+            <summary>
+            Internal Fucntions for the above operators
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Cryptography.Core.Internals.MatrixClassException">
+            <summary>
+            Exception class for MatrixClass class, derived from System.Exception
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClassException.#ctor">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Security.Cryptography.Core.Internals.MatrixClassException"/>
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClassException.#ctor(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Security.Cryptography.Core.Internals.MatrixClassException"/>
+            </summary>
+            <param name="Message"></param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.MatrixClassException.#ctor(System.String,System.Exception)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Security.Cryptography.Core.Internals.MatrixClassException"/>
+            </summary>
+            <param name="Message"></param>
+            <param name="InnerException"></param>
+        </member>
+        <member name="T:Cosmos.Security.Cryptography.Core.Internals.Fraction">
+            <summary>
+            Class name: Fraction
+            Developed by: Syed Mehroz Alam
+            Email: smehrozalam@yahoo.com
+            URL: Programming Home "http://www.geocities.com/smehrozalam/"
+            Version: 2.0
+            
+            What's new in version 2.0:
+            	*	Changed Numerator and Denominator from Int32(integer) to Int64(long) for increased range
+            	*	renamed ConvertToString() to (overloaded) ToString()
+            	*	added the capability of detecting/raising overflow exceptions
+            	*	Fixed the bug that very small numbers e.g. 0.00000001 could not be converted to fraction
+            	*	Other minor bugs fixed
+            
+            Properties:
+            	Numerator: Set/Get value for Numerator
+            	Denominator:  Set/Get value for Numerator
+            	Value:  Set an integer value for the fraction
+            
+            Constructors:
+            	no arguments:	initializes fraction as 0/1
+            	(Numerator, Denominator): initializes fraction with the given numerator and denominator values
+            	(integer):	initializes fraction with the given integer value
+            	(long):	initializes fraction with the given long value
+            	(double):	initializes fraction with the given double value
+            	(string):	initializes fraction with the given string value
+            				the string can be an in the form of and integer, double or fraction.
+            				e.g it can be like "123" or "123.321" or "123/456"
+            
+            Public Methods (Description is given with respective methods' definitions)
+            	(override) string ToString(Fraction)
+            	Fraction ToFraction(string)
+            	Fraction ToFraction(double)
+            	double ToDouble(Fraction)
+            	Fraction Duplicate()
+            	Fraction Inverse(integer)
+            	Fraction Inverse(Fraction)
+            	ReduceFraction(Fraction)
+            	Equals(object)
+            	GetHashCode()
+            
+            Private Methods (Description is given with respective methods' definitions)
+            	Initialize(Numerator, Denominator)
+            	Fraction Negate(Fraction)
+            	Fraction Add(Fraction1, Fraction2)
+            
+            Overloaded Operators (overloaded for Fractions, Integers and Doubles)
+            	Unary: -
+            	Binary: +,-,*,/ 
+            	Relational and Logical Operators: ==, !=, &lt;, &gt;, &lt;=, &gt;=
+            
+            Overloaded user-defined conversions
+            	Implicit:	From double/long/string to Fraction
+            	Explicit:	From Fraction to double/string
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.Core.Internals.Fraction.m_iNumerator">
+            <summary>
+            Class attributes/members
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.#ctor">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Security.Cryptography.Core.Internals.Fraction"/>
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.#ctor(System.Int64)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Security.Cryptography.Core.Internals.Fraction"/>
+            </summary>
+            <param name="iWholeNumber"></param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.#ctor(System.Double)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Security.Cryptography.Core.Internals.Fraction"/>
+            </summary>
+            <param name="dDecimalValue"></param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.#ctor(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Security.Cryptography.Core.Internals.Fraction"/>
+            </summary>
+            <param name="strValue"></param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.#ctor(System.Int64,System.Int64)">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Security.Cryptography.Core.Internals.Fraction"/>
+            </summary>
+            <param name="iNumerator"></param>
+            <param name="iDenominator"></param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.Initialize(System.Int64,System.Int64)">
+            <summary>
+            Internal function for constructors
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.Core.Internals.Fraction.Denominator">
+            <summary>
+            Denominator
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.Core.Internals.Fraction.Numerator">
+            <summary>
+            Numerator
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.Core.Internals.Fraction.Value">
+            <summary>
+            Gets or sets value
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.ToDouble(Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            The function takes a Fraction object and returns its value as double
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.ToDouble">
+            <summary>
+            The function returns the current Fraction object as double
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.ToString">
+            <summary>
+            The function returns the current Fraction object as a string
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.ToFraction(System.String)">
+            <summary>
+            The function takes an string as an argument and returns its corresponding reduced fraction
+            the string can be an in the form of and integer, double or fraction.
+            e.g it can be like "123" or "123.321" or "123/456"
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.ToFraction(System.Double)">
+            <summary>
+            The function takes a floating point number as an argument 
+            and returns its corresponding reduced fraction
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.Duplicate">
+            <summary>
+            The function replicates current Fraction object
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.Inverse(Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            The function returns the inverse of a Fraction object
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_UnaryNegation(Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            Operators for the Fraction object
+            includes -(unary), and binary opertors such as +, -, *, /
+            also includes relational and logical operators such as ==, !=, &lt;, &gt;, &lt;=, &gt;=
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Addition(Cosmos.Security.Cryptography.Core.Internals.Fraction,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            +
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Addition(System.Int32,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            +
+            </summary>
+            <param name="iNo"></param>
+            <param name="frac1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Addition(Cosmos.Security.Cryptography.Core.Internals.Fraction,System.Int32)">
+            <summary>
+            +
+            </summary>
+            <param name="frac1"></param>
+            <param name="iNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Addition(System.Double,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            +
+            </summary>
+            <param name="dbl"></param>
+            <param name="frac1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Addition(Cosmos.Security.Cryptography.Core.Internals.Fraction,System.Double)">
+            <summary>
+            +
+            </summary>
+            <param name="frac1"></param>
+            <param name="dbl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Subtraction(Cosmos.Security.Cryptography.Core.Internals.Fraction,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            -
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Subtraction(System.Int32,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            -
+            </summary>
+            <param name="iNo"></param>
+            <param name="frac1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Subtraction(Cosmos.Security.Cryptography.Core.Internals.Fraction,System.Int32)">
+            <summary>
+            -
+            </summary>
+            <param name="frac1"></param>
+            <param name="iNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Subtraction(System.Double,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            -
+            </summary>
+            <param name="dbl"></param>
+            <param name="frac1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Subtraction(Cosmos.Security.Cryptography.Core.Internals.Fraction,System.Double)">
+            <summary>
+            -
+            </summary>
+            <param name="frac1"></param>
+            <param name="dbl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Multiply(Cosmos.Security.Cryptography.Core.Internals.Fraction,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            *
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Multiply(System.Int32,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            *
+            </summary>
+            <param name="iNo"></param>
+            <param name="frac1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Multiply(Cosmos.Security.Cryptography.Core.Internals.Fraction,System.Int32)">
+            <summary>
+            *
+            </summary>
+            <param name="frac1"></param>
+            <param name="iNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Multiply(System.Double,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            *
+            </summary>
+            <param name="dbl"></param>
+            <param name="frac1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Multiply(Cosmos.Security.Cryptography.Core.Internals.Fraction,System.Double)">
+            <summary>
+            *
+            </summary>
+            <param name="frac1"></param>
+            <param name="dbl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Division(Cosmos.Security.Cryptography.Core.Internals.Fraction,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            /
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Division(System.Int32,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            /
+            </summary>
+            <param name="iNo"></param>
+            <param name="frac1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Division(Cosmos.Security.Cryptography.Core.Internals.Fraction,System.Int32)">
+            <summary>
+            /
+            </summary>
+            <param name="frac1"></param>
+            <param name="iNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Division(System.Double,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            /
+            </summary>
+            <param name="dbl"></param>
+            <param name="frac1"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Division(Cosmos.Security.Cryptography.Core.Internals.Fraction,System.Double)">
+            <summary>
+            /
+            </summary>
+            <param name="frac1"></param>
+            <param name="dbl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Equality(Cosmos.Security.Cryptography.Core.Internals.Fraction,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            ==
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Inequality(Cosmos.Security.Cryptography.Core.Internals.Fraction,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            !=
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Equality(Cosmos.Security.Cryptography.Core.Internals.Fraction,System.Int32)">
+            <summary>
+            ==
+            </summary>
+            <param name="frac1"></param>
+            <param name="iNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Inequality(Cosmos.Security.Cryptography.Core.Internals.Fraction,System.Int32)">
+            <summary>
+            !=
+            </summary>
+            <param name="frac1"></param>
+            <param name="iNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Equality(Cosmos.Security.Cryptography.Core.Internals.Fraction,System.Double)">
+            <summary>
+            ==
+            </summary>
+            <param name="frac1"></param>
+            <param name="dbl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_Inequality(Cosmos.Security.Cryptography.Core.Internals.Fraction,System.Double)">
+            <summary>
+            !=
+            </summary>
+            <param name="frac1"></param>
+            <param name="dbl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_LessThan(Cosmos.Security.Cryptography.Core.Internals.Fraction,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            &lt;
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_GreaterThan(Cosmos.Security.Cryptography.Core.Internals.Fraction,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            &gt;
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_LessThanOrEqual(Cosmos.Security.Cryptography.Core.Internals.Fraction,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            &lt;=
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.op_GreaterThanOrEqual(Cosmos.Security.Cryptography.Core.Internals.Fraction,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            &gt;=
+            </summary>
+            <param name="frac1"></param>
+            <param name="frac2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.Equals(System.Object)">
+            <summary>
+            checks whether two fractions are equal
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.GetHashCode">
+            <summary>
+            returns a hash code for this fraction
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.Negate(Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            internal function for negation
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.Add(Cosmos.Security.Cryptography.Core.Internals.Fraction,Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            internal functions for binary operations
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.GCD(System.Int64,System.Int64)">
+            <summary>
+            The function returns GCD of two numbers (used for reducing a Fraction)
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.Fraction.ReduceFraction(Cosmos.Security.Cryptography.Core.Internals.Fraction)">
+            <summary>
+            The function reduces(simplifies) a Fraction object by dividing both its numerator 
+            and denominator by their GCD
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Cryptography.Core.Internals.FractionException">
+            <summary>
+            Exception class for Fraction, derived from System.Exception
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.FractionException.#ctor">
+            <summary>
+            Create a new instance of <see cref="T:Cosmos.Security.Cryptography.Core.Internals.FractionException"/>
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.FractionException.#ctor(System.String)">
+            <summary>
+            reate a new instance of <see cref="T:Cosmos.Security.Cryptography.Core.Internals.FractionException"/>
+            </summary>
+            <param name="Message"></param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.Internals.FractionException.#ctor(System.String,System.Exception)">
+            <summary>
+            reate a new instance of <see cref="T:Cosmos.Security.Cryptography.Core.Internals.FractionException"/>
+            </summary>
+            <param name="Message"></param>
+            <param name="InnerException"></param>
+        </member>
+        <member name="T:Cosmos.Security.Cryptography.Core.Internals.RandomStringGenerator">
+            <summary>
+            Random string generator
+            Author: Seay Xu
+                https://github.com/godsharp/GodSharp.Encryption/blob/master/src/GodSharp.Shared/Encryption/Util/Util.cs
+            Editor: AlexLEWIS
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.SymmetricAlgorithmImpls.LogicSymmetricCryptoFunction`1.EncryptCore``1(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Byte[])">
+            <summary>
+            Nice encryption code
+            </summary>
+            <typeparam name="TCryptoServiceProvider"></typeparam>
+            <param name="sourceBytes"></param>
+            <param name="count"></param>
+            <param name="offset"></param>
+            <param name="keyBytes"></param>
+            <param name="ivBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.SymmetricAlgorithmImpls.LogicSymmetricCryptoFunction`1.EncryptCore``1(System.ArraySegment{System.Byte},System.Byte[],System.Byte[])">
+            <summary>
+            Nice encryption code
+            </summary>
+            <typeparam name="TCryptoServiceProvider"></typeparam>
+            <param name="originalBytes"></param>
+            <param name="keyBytes"></param>
+            <param name="ivBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.SymmetricAlgorithmImpls.LogicSymmetricCryptoFunction`1.DecryptCore``1(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Byte[])">
+            <summary>
+            Nice decryption core
+            </summary>
+            <typeparam name="TCryptoServiceProvider"></typeparam>
+            <param name="encryptBytes"></param>
+            <param name="count"></param>
+            <param name="offset"></param>
+            <param name="keyBytes"></param>
+            <param name="ivBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Core.SymmetricAlgorithmImpls.LogicSymmetricCryptoFunction`1.DecryptCore``1(System.ArraySegment{System.Byte},System.Byte[],System.Byte[])">
+            <summary>
+            Nice decryption core
+            </summary>
+            <typeparam name="TCryptoServiceProvider"></typeparam>
+            <param name="encryptBytes"></param>
+            <param name="keyBytes"></param>
+            <param name="ivBytes"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Security.Cryptography.Core.TrimOptions">
+            <summary>
+            The entry used to trim the result of the Hash operation.
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.Core.TrimOptions.TrimTerminatorWhenDecrypting">
+            <summary>
+            Trim the ending character when decrypting
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.Core.TrimOptions.HexTrimLeadingZeroAsDefault">
+            <summary>
+            十六进制数，输出时移除首位的 0，默认为 false
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.DesKey.Key">
+            <summary>
+            Des key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.DesKey.IV">
+            <summary>
+            Des IV
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.DesKey.Size">
+            <summary>
+            Size of Key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.ISymmetricCryptoKey.Key">
+            <summary>
+            Key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.ISymmetricCryptoKey.Size">
+            <summary>
+            Size of key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.ISymmetricCryptoKeyWithInitializationVector.IV">
+            <summary>
+            Initialization Vector
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.RcKey.Key">
+            <summary>
+            Des key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.RcKey.Size">
+            <summary>
+            Size of Key
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.RcOrder.ASC">
+            <summary>
+            ASC
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.RcOrder.DESC">
+            <summary>
+            DESC
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GenerateKey(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Int32,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Generate RSA key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize"></param>
+            <param name="keyFormat"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GenerateKey(Cosmos.Security.Cryptography.AsymmetricKeyMode,Cosmos.Security.Cryptography.RsaKeySize,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Generate RSA key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize"></param>
+            <param name="keyFormat"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKey(System.Int32,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Generate RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keyFormat"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKey(Cosmos.Security.Cryptography.RsaKeySize,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Generate RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keyFormat"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKey(System.Int32,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Generate RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keyFormat"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKey(Cosmos.Security.Cryptography.RsaKeySize,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Generate RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keyFormat"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKey(System.String,Cosmos.Security.Cryptography.RsaKeyFormat)">
+            <summary>
+            Generate RSA private key.
+            </summary>
+            <param name="key"></param>
+            <param name="keyFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKey(System.String,Cosmos.Security.Cryptography.RsaKeyFormat)">
+            <summary>
+            Generate RSA private key.
+            </summary>
+            <param name="key"></param>
+            <param name="keyFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GenerateKeyInXml(Cosmos.Security.Cryptography.AsymmetricKeyMode)">
+            <summary>
+            Generate XML Format RSA Key.
+            </summary>
+            <param name="mode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GenerateKeyInXml(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Int32)">
+            <summary>
+            Generate XML Format RSA Key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GenerateKeyInXml(Cosmos.Security.Cryptography.AsymmetricKeyMode,Cosmos.Security.Cryptography.RsaKeySize)">
+            <summary>
+            Generate XML Format RSA Key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKeyInXml">
+            <summary>
+            Generate XML Format RSA public key.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKeyInXml(System.Int32)">
+            <summary>
+            Generate XML Format RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKeyInXml(Cosmos.Security.Cryptography.RsaKeySize)">
+            <summary>
+            Generate XML Format RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKeyInXml(System.String)">
+            <summary>
+            Generate XML Format RSA public key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKeyInXml">
+            <summary>
+            Generate XML Format RSA private key.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKeyInXml(System.Int32)">
+            <summary>
+            Generate XML Format RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKeyInXml(Cosmos.Security.Cryptography.RsaKeySize)">
+            <summary>
+            Generate XML Format RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKeyInXml(System.String)">
+            <summary>
+            Generate XML Format RSA private key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GenerateKeyInJson(Cosmos.Security.Cryptography.AsymmetricKeyMode)">
+            <summary>
+            Generate JSON Format RSA Key.
+            </summary>
+            <param name="mode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GenerateKeyInJson(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Int32)">
+            <summary>
+            Generate JSON Format RSA Key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GenerateKeyInJson(Cosmos.Security.Cryptography.AsymmetricKeyMode,Cosmos.Security.Cryptography.RsaKeySize)">
+            <summary>
+            Generate JSON Format RSA Key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKeyInJson">
+            <summary>
+            Generate JSON Format RSA public key.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKeyInJson(System.Int32)">
+            <summary>
+            Generate JSON Format RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKeyInJson(Cosmos.Security.Cryptography.RsaKeySize)">
+            <summary>
+            Generate JSON Format RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKeyInJson(System.String)">
+            <summary>
+            Generate JSON Format RSA public key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKeyInJson">
+            <summary>
+            Generate JSON Format RSA private key.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKeyInJson(System.Int32)">
+            <summary>
+            Generate JSON Format RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKeyInJson(Cosmos.Security.Cryptography.RsaKeySize)">
+            <summary>
+            Generate JSON Format RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKeyInJson(System.String)">
+            <summary>
+            Generate JSON Format RSA private key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GenerateKeyInPkcs1(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Boolean)">
+            <summary>
+            Generate RSA key in Pkcs1 format.
+            </summary>
+            <param name="mode"></param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GenerateKeyInPkcs1(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Int32,System.Boolean)">
+            <summary>
+            Generate RSA key in Pkcs1 format.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GenerateKeyInPkcs1(Cosmos.Security.Cryptography.AsymmetricKeyMode,Cosmos.Security.Cryptography.RsaKeySize,System.Boolean)">
+            <summary>
+            Generate RSA key in Pkcs1 format.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKeyInPkcs1(System.Boolean)">
+            <summary>
+            Generate Pkcs1 format RSA public key.
+            </summary>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKeyInPkcs1(System.Int32,System.Boolean)">
+            <summary>
+            Generate Pkcs1 format RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKeyInPkcs1(Cosmos.Security.Cryptography.RsaKeySize,System.Boolean)">
+            <summary>
+            Generate Pkcs1 format RSA public key.
+            </summary>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKeyInPkcs1(System.String)">
+            <summary>
+            Generate Pkcs1 format RSA public key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKeyInPkcs1(System.Boolean)">
+            <summary>
+            Generate Pkcs1 format RSA private key.
+            </summary>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKeyInPkcs1(System.Int32,System.Boolean)">
+            <summary>
+            Generate Pkcs1 format RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKeyInPkcs1(Cosmos.Security.Cryptography.RsaKeySize,System.Boolean)">
+            <summary>
+            Generate Pkcs1 format RSA private key.
+            </summary>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKeyInPkcs1(System.String)">
+            <summary>
+            Generate Pkcs1 format RSA private key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GenerateKeyInPkcs8(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GenerateKeyInPkcs8(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Int32,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GenerateKeyInPkcs8(Cosmos.Security.Cryptography.AsymmetricKeyMode,Cosmos.Security.Cryptography.RsaKeySize,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKeyInPkcs8(System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA public key.
+            </summary>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKeyInPkcs8(System.Int32,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKeyInPkcs8(Cosmos.Security.Cryptography.RsaKeySize,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA public key.
+            </summary>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKeyInPkcs8(System.String)">
+            <summary>
+            Generate Pkcs8 format RSA public key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKeyInPkcs8(System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA private key.
+            </summary>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKeyInPkcs8(System.Int32,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKeyInPkcs8(Cosmos.Security.Cryptography.RsaKeySize,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA private key.
+            </summary>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKeyInPkcs8(System.String)">
+            <summary>
+            Generate Pkcs8 format RSA private key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePrivateKeyFromFile(System.String,System.String)">
+            <summary>
+            Get private key of xml format from certificate file.
+            </summary>
+            <param name="certFile">The string path of certificate file.</param>
+            <param name="password">The string password of certificate file.</param>
+            <returns>String private key of xml format.</returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RSA.GeneratePublicKeyFromFile(System.String)">
+            <summary>
+            Get public key of xml format from certificate file.
+            </summary>
+            <param name="certFile">The string path of certificate file.</param>
+            <returns>String public key of xml format.</returns>
+        </member>
+        <member name="T:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaUtilBase">
+            <summary>
+            RsaUtilBase
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaUtilBase.PrivateRsa">
+            <summary>
+            Private rsa
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaUtilBase.PublicRsa">
+            <summary>
+            Public rsa
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaUtilBase.DataEncoding">
+            <summary>
+            Data encoding
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaUtilBase.EncryptByPublicKey(System.Byte[],System.Security.Cryptography.RSAEncryptionPadding)">
+            <summary>
+            Encrypt data by public key
+            </summary>
+            <param name="dataBytes">Need to encrypt data</param>
+            <param name="padding">Padding algorithm</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaUtilBase.EncryptByPrivateKey(System.Byte[],System.Security.Cryptography.RSAEncryptionPadding)">
+            <summary>
+            Encrypt data by private key
+            </summary>
+            <param name="dataBytes">Need to encrypt data</param>
+            <param name="padding">Padding algorithm</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaUtilBase.DecryptByPublicKey(System.Byte[],System.Security.Cryptography.RSAEncryptionPadding)">
+            <summary>
+            Decrypt cipher by public key
+            </summary>
+            <param name="dataBytes">Need to decrypt the data</param>
+            <param name="padding">Padding algorithm</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaUtilBase.DecryptByPrivateKey(System.Byte[],System.Security.Cryptography.RSAEncryptionPadding)">
+            <summary>
+            Decrypt cipher by private key
+            </summary>
+            <param name="dataBytes">Need to decrypt the data</param>
+            <param name="padding">Padding algorithm</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaUtilBase.SignByPublicKey(System.Byte[],System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+            <summary>
+            Sign data by PublicKey
+            </summary>
+            <param name="dataBytes">Need to sign data</param>
+            <param name="hashAlgorithmName">Signed hash algorithm name</param>
+            <param name="padding">Signature padding algorithm</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaUtilBase.SignByPrivateKey(System.Byte[],System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+            <summary>
+            Sign data by PrivateKey
+            </summary>
+            <param name="dataBytes">Need to sign data</param>
+            <param name="hashAlgorithmName">Signed hash algorithm name</param>
+            <param name="padding">Signature padding algorithm</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaUtilBase.VerifyByPublicKey(System.Byte[],System.Byte[],System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+            <summary>
+            Verify data by PublicKey
+            </summary>
+            <param name="dataBytes">Need to verify the signature data</param>
+            <param name="signBytes">sign</param>
+            <param name="hashAlgorithmName">Signed hash algorithm name</param>
+            <param name="padding">Signature padding algorithm</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaUtilBase.VerifyByPrivateKey(System.Byte[],System.Byte[],System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.RSASignaturePadding)">
+            <summary>
+            Verify data by PrivateKey
+            </summary>
+            <param name="dataBytes">Need to verify the signature data</param>
+            <param name="signBytes">sign</param>
+            <param name="hashAlgorithmName">Signed hash algorithm name</param>
+            <param name="padding">Signature padding algorithm</param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaXmlUtil">
+            <summary>
+            RSA Xml util
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaXmlUtil.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            RSA encryption
+            SHA256 hash algorithm to use the key length of at least 2048
+            </summary>
+            <param name="keySize">Key length in bits:</param>
+            <param name="privateKey">private Key</param>
+            <param name="publicKey">public Key</param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaXmlUtil.#ctor(System.Text.Encoding,System.String,System.String,System.Int32)">
+            <summary>
+            RSA encryption
+            SHA256 hash algorithm to use the key length of at least 2048
+            </summary>
+            <param name="encoding">Data coding</param>
+            <param name="keySize">Key length in bits:</param>
+            <param name="privateKey">private Key</param>
+            <param name="publicKey">public Key</param>
+        </member>
+        <member name="T:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaJsonUtil">
+            <summary>
+            RSAJsonUtil
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaJsonUtil.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            RSA encryption
+            SHA256 hash algorithm to use the key length of at least 2048
+            </summary>
+            <param name="keySize">Key length in bits:</param>
+            <param name="privateKey">private Key</param>
+            <param name="publicKey">public Key</param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaJsonUtil.#ctor(System.Text.Encoding,System.String,System.String,System.Int32)">
+            <summary>
+            RSA encryption
+            SHA256 hash algorithm to use the key length of at least 2048
+            </summary>
+            <param name="dataEncoding">Data coding</param>
+            <param name="keySize">Key length in bits:</param>
+            <param name="privateKey">private Key</param>
+            <param name="publicKey">public Key</param>
+        </member>
+        <member name="T:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaPkcs1Util">
+            <summary>
+            RSAPkcs1Util
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaPkcs1Util.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            RSAPkcs1Util
+            </summary>
+            <param name="publicKey"></param>
+            <param name="privateKey"></param>
+            <param name="keySize"></param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaPkcs1Util.#ctor(System.Text.Encoding,System.String,System.String,System.Int32)">
+            <summary>
+            RSAPkcs1Util
+            </summary>
+            <param name="encoding"></param>
+            <param name="publicKey"></param>
+            <param name="privateKey"></param>
+            <param name="keySize"></param>
+        </member>
+        <member name="T:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaPkcs8Util">
+            <summary>
+            RSAPkcs8Util
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaPkcs8Util.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            RSAPkcs8Util
+            </summary>
+            <param name="publicKey"></param>
+            <param name="privateKey"></param>
+            <param name="keySize"></param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaCryptoFunction.RsaPkcs8Util.#ctor(System.Text.Encoding,System.String,System.String,System.Int32)">
+            <summary>
+            RSAPkcs8Util
+            </summary>
+            <param name="dataEncoding"></param>
+            <param name="publicKey"></param>
+            <param name="privateKey"></param>
+            <param name="keySize"></param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaInstanceAccessor.NewAndInitWithKeyInXml(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:System.Security.Cryptography.RSA"/> from xml key
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaInstanceAccessor.NewAndInitWithKeyInJson(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:System.Security.Cryptography.RSA"/> from json key
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaInstanceAccessor.NewAndInitWithPublicKeyInPkcs1(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:System.Security.Cryptography.RSA"/> from Pkcs1 public key
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaInstanceAccessor.NewAndInitWithPrivateKeyInPkcs1(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:System.Security.Cryptography.RSA"/> from Pkcs1 private key
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaInstanceAccessor.NewAndInitWithPublicKeyInPkcs8(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:System.Security.Cryptography.RSA"/> from Pkcs8 public key
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaInstanceAccessor.NewAndInitWithPrivateKeyInPkcs8(System.String)">
+            <summary>
+            Create a new instance of <see cref="T:System.Security.Cryptography.RSA"/> from Pkcs8 private key
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaPemFormatExtensions.AppendPkcs8PrivateKeyFormat(System.String)">
+            <summary>
+            Format Pkcs8 format private key
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaPemFormatExtensions.AppendPkcs8PublicKeyFormat(System.String)">
+            <summary>
+            Format pkcs8 public key
+            </summary>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaPemFormatExtensions.RemovePkcs8PublicKeyFormat(System.String)">
+            <summary>
+            Used for Pkcs8
+            </summary>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaPemFormatExtensions.RemovePkcs8PublicKeyFormatIfNeed(System.IO.StringWriter,System.Boolean)">
+            <summary>
+            Used for Pkcs8
+            </summary>
+            <param name="writer"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaPemFormatExtensions.RemovePkcs8PublicKeyFormatIfNeed(System.String,System.Boolean)">
+            <summary>
+            Used for Pkcs8
+            </summary>
+            <param name="publicKey"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaPemFormatExtensions.RemovePkcs8PrivateKeyFormat(System.String)">
+            <summary>
+            Used for Pkcs8
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaPemFormatExtensions.RemovePkcs8PrivateKeyFormatIfNeed(System.IO.StringWriter,System.Boolean)">
+            <summary>
+            Used for Pkcs8
+            </summary>
+            <param name="writer"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaPemFormatExtensions.RemovePkcs8PrivateKeyFormatIfNeed(System.String,System.Boolean)">
+            <summary>
+            Used for Pkcs8
+            </summary>
+            <param name="privateKey"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaPemFormatExtensions.AppendPkcs1PrivateKeyFormat(System.String)">
+            <summary>
+            Format Pkcs1 format private key
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaPemFormatExtensions.AppendPkcs1PublicKeyFormat(System.String)">
+            <summary>
+            Format pkcs1 public key
+            </summary>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaPemFormatExtensions.RemovePkcs1PublicKeyFormat(System.String)">
+            <summary>
+            Used for Pkcs1
+            </summary>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaPemFormatExtensions.RemovePkcs1PublicKeyFormatIfNeed(System.IO.StringWriter,System.Boolean)">
+            <summary>
+            Used for Pkcs1
+            </summary>
+            <param name="writer"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaPemFormatExtensions.RemovePkcs1PublicKeyFormatIfNeed(System.String,System.Boolean)">
+            <summary>
+            Used for Pkcs1
+            </summary>
+            <param name="publicKey"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaPemFormatExtensions.RemovePkcs1PrivateKeyFormat(System.String)">
+            <summary>
+            Used for Pkcs1
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaPemFormatExtensions.RemovePkcs1PrivateKeyFormatIfNeed(System.IO.StringWriter,System.Boolean)">
+            <summary>
+            Used for Pkcs1
+            </summary>
+            <param name="writer"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaPemFormatExtensions.RemovePkcs1PrivateKeyFormatIfNeed(System.String,System.Boolean)">
+            <summary>
+            Used for Pkcs1
+            </summary>
+            <param name="privateKey"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.IRsaKeyConverter.PublicKeyPemPkcs8ToXml(System.String)">
+            <summary>
+            Public Key Convert pem->xml
+            </summary>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.IRsaKeyConverter.PublicKeyXmlToPem(System.String)">
+            <summary>
+            Public Key Convert xml->pem
+            </summary>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.IRsaKeyConverter.PrivateKeyPkcs1ToXml(System.String)">
+            <summary>
+            Private Key Convert Pkcs1->xml
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.IRsaKeyConverter.PrivateKeyXmlToPkcs1(System.String)">
+            <summary>
+            Private Key Convert xml->Pkcs1
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.IRsaKeyConverter.PrivateKeyPkcs8ToXml(System.String)">
+            <summary>
+            Private Key Convert Pkcs8->xml
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.IRsaKeyConverter.PrivateKeyXmlToPkcs8(System.String)">
+            <summary>
+            Private Key Convert xml->Pkcs8
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.IRsaKeyConverter.PrivateKeyPkcs1ToPkcs8(System.String)">
+            <summary>
+            Private Key Convert Pkcs1->Pkcs8
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.IRsaKeyConverter.PrivateKeyPkcs8ToPkcs1(System.String)">
+            <summary>
+            Private Key Convert Pkcs8->Pkcs1
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaExtensions.ExportPrivateKey(System.Security.Cryptography.RSA,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Export RSA private key
+            </summary>
+            <param name="rsa"></param>
+            <param name="format"></param>
+            <param name="usePemFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaExtensions.ExportPublicKey(System.Security.Cryptography.RSA,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Export RSA public key
+            </summary>
+            <param name="rsa"></param>
+            <param name="format"></param>
+            <param name="usePemFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaExtensions.ImportPrivateKey(System.Security.Cryptography.RSA,Cosmos.Security.Cryptography.RsaKeyFormat,System.String,System.Boolean)">
+            <summary>
+            Import RSA private key
+            </summary>
+            <param name="rsa"></param>
+            <param name="format"></param>
+            <param name="privateKey"></param>
+            <param name="isPem"></param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaExtensions.ImportPublicKey(System.Security.Cryptography.RSA,Cosmos.Security.Cryptography.RsaKeyFormat,System.String,System.Boolean)">
+            <summary>
+            Import RSA public key
+            </summary>
+            <param name="rsa"></param>
+            <param name="format"></param>
+            <param name="publicKey"></param>
+            <param name="isPem"></param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GenerateKey(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Int32,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Generate RSA key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize"></param>
+            <param name="keyFormat"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GenerateKey(Cosmos.Security.Cryptography.AsymmetricKeyMode,Cosmos.Security.Cryptography.RsaKeySize,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Generate RSA key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize"></param>
+            <param name="keyFormat"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKey(System.Int32,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Generate RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keyFormat"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKey(Cosmos.Security.Cryptography.RsaKeySize,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Generate RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keyFormat"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKey(System.Int32,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Generate RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keyFormat"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKey(Cosmos.Security.Cryptography.RsaKeySize,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Generate RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keyFormat"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKey(System.String,Cosmos.Security.Cryptography.RsaKeyFormat)">
+            <summary>
+            Generate RSA private key.
+            </summary>
+            <param name="key"></param>
+            <param name="keyFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKey(System.String,Cosmos.Security.Cryptography.RsaKeyFormat)">
+            <summary>
+            Generate RSA private key.
+            </summary>
+            <param name="key"></param>
+            <param name="keyFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GenerateKeyInXml(Cosmos.Security.Cryptography.AsymmetricKeyMode)">
+            <summary>
+            Generate XML Format RSA Key.
+            </summary>
+            <param name="mode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GenerateKeyInXml(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Int32)">
+            <summary>
+            Generate XML Format RSA Key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GenerateKeyInXml(Cosmos.Security.Cryptography.AsymmetricKeyMode,Cosmos.Security.Cryptography.RsaKeySize)">
+            <summary>
+            Generate XML Format RSA Key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKeyInXml">
+            <summary>
+            Generate XML Format RSA public key.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKeyInXml(System.Int32)">
+            <summary>
+            Generate XML Format RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKeyInXml(Cosmos.Security.Cryptography.RsaKeySize)">
+            <summary>
+            Generate XML Format RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKeyInXml(System.String)">
+            <summary>
+            Generate XML Format RSA public key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKeyInXml">
+            <summary>
+            Generate XML Format RSA private key.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKeyInXml(System.Int32)">
+            <summary>
+            Generate XML Format RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKeyInXml(Cosmos.Security.Cryptography.RsaKeySize)">
+            <summary>
+            Generate XML Format RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKeyInXml(System.String)">
+            <summary>
+            Generate XML Format RSA private key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GenerateKeyInJson(Cosmos.Security.Cryptography.AsymmetricKeyMode)">
+            <summary>
+            Generate JSON Format RSA Key.
+            </summary>
+            <param name="mode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GenerateKeyInJson(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Int32)">
+            <summary>
+            Generate JSON Format RSA Key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GenerateKeyInJson(Cosmos.Security.Cryptography.AsymmetricKeyMode,Cosmos.Security.Cryptography.RsaKeySize)">
+            <summary>
+            Generate JSON Format RSA Key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKeyInJson">
+            <summary>
+            Generate JSON Format RSA public key.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKeyInJson(System.Int32)">
+            <summary>
+            Generate JSON Format RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKeyInJson(Cosmos.Security.Cryptography.RsaKeySize)">
+            <summary>
+            Generate JSON Format RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKeyInJson(System.String)">
+            <summary>
+            Generate JSON Format RSA public key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKeyInJson">
+            <summary>
+            Generate JSON Format RSA private key.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKeyInJson(System.Int32)">
+            <summary>
+            Generate JSON Format RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKeyInJson(Cosmos.Security.Cryptography.RsaKeySize)">
+            <summary>
+            Generate JSON Format RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKeyInJson(System.String)">
+            <summary>
+            Generate JSON Format RSA private key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GenerateKeyInPkcs1(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Boolean)">
+            <summary>
+            Generate RSA key in Pkcs1 format.
+            </summary>
+            <param name="mode"></param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GenerateKeyInPkcs1(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Int32,System.Boolean)">
+            <summary>
+            Generate RSA key in Pkcs1 format.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GenerateKeyInPkcs1(Cosmos.Security.Cryptography.AsymmetricKeyMode,Cosmos.Security.Cryptography.RsaKeySize,System.Boolean)">
+            <summary>
+            Generate RSA key in Pkcs1 format.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKeyInPkcs1(System.Boolean)">
+            <summary>
+            Generate Pkcs1 format RSA public key.
+            </summary>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKeyInPkcs1(System.Int32,System.Boolean)">
+            <summary>
+            Generate Pkcs1 format RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKeyInPkcs1(Cosmos.Security.Cryptography.RsaKeySize,System.Boolean)">
+            <summary>
+            Generate Pkcs1 format RSA public key.
+            </summary>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKeyInPkcs1(System.String)">
+            <summary>
+            Generate Pkcs1 format RSA public key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKeyInPkcs1(System.Boolean)">
+            <summary>
+            Generate Pkcs1 format RSA private key.
+            </summary>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKeyInPkcs1(System.Int32,System.Boolean)">
+            <summary>
+            Generate Pkcs1 format RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKeyInPkcs1(Cosmos.Security.Cryptography.RsaKeySize,System.Boolean)">
+            <summary>
+            Generate Pkcs1 format RSA private key.
+            </summary>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKeyInPkcs1(System.String)">
+            <summary>
+            Generate Pkcs1 format RSA private key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GenerateKeyInPkcs8(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GenerateKeyInPkcs8(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Int32,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GenerateKeyInPkcs8(Cosmos.Security.Cryptography.AsymmetricKeyMode,Cosmos.Security.Cryptography.RsaKeySize,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKeyInPkcs8(System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA public key.
+            </summary>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKeyInPkcs8(System.Int32,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKeyInPkcs8(Cosmos.Security.Cryptography.RsaKeySize,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA public key.
+            </summary>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKeyInPkcs8(System.String)">
+            <summary>
+            Generate Pkcs8 format RSA public key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKeyInPkcs8(System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA private key.
+            </summary>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKeyInPkcs8(System.Int32,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKeyInPkcs8(Cosmos.Security.Cryptography.RsaKeySize,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA private key.
+            </summary>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKeyInPkcs8(System.String)">
+            <summary>
+            Generate Pkcs8 format RSA private key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePrivateKeyFromFile(System.String,System.String)">
+            <summary>
+            Get private key of xml format from certificate file.
+            </summary>
+            <param name="certFile">The string path of certificate file.</param>
+            <param name="password">The string password of certificate file.</param>
+            <returns>String private key of xml format.</returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaFactory.GeneratePublicKeyFromFile(System.String)">
+            <summary>
+            Get public key of xml format from certificate file.
+            </summary>
+            <param name="certFile">The string path of certificate file.</param>
+            <returns>String public key of xml format.</returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyConverter.PublicKeyPemPkcs8ToXml(System.String)">
+            <summary>
+            Public Key Convert pem->xml
+            </summary>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyConverter.PublicKeyXmlToPem(System.String)">
+            <summary>
+            Public Key Convert xml->pem
+            </summary>
+            <param name="publicKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyConverter.PrivateKeyPkcs1ToXml(System.String)">
+            <summary>
+            Private Key Convert Pkcs1->xml
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyConverter.PrivateKeyXmlToPkcs1(System.String)">
+            <summary>
+            Private Key Convert xml->Pkcs1
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyConverter.PrivateKeyPkcs8ToXml(System.String)">
+            <summary>
+            Private Key Convert Pkcs8->xml
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyConverter.PrivateKeyXmlToPkcs8(System.String)">
+            <summary>
+            Private Key Convert xml->Pkcs8
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyConverter.PrivateKeyPkcs1ToPkcs8(System.String)">
+            <summary>
+            Private Key Convert Pkcs1->Pkcs8
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyConverter.PrivateKeyPkcs8ToPkcs1(System.String)">
+            <summary>
+            Private Key Convert Pkcs8->Pkcs1
+            </summary>
+            <param name="privateKey"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Security.Cryptography.RsaKeyFormat">
+            <summary>
+            Rsa key format
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.RsaKeyFormat.XML">
+            <summary>
+            Xml
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.RsaKeyFormat.JSON">
+            <summary>
+            Json
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.RsaKeyFormat.Pkcs1">
+            <summary>
+            Pkcs1
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.RsaKeyFormat.Pkcs8">
+            <summary>
+            Pkcs8
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.Generate(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Int32,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Generate RSA key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize"></param>
+            <param name="keyFormat"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.Generate(Cosmos.Security.Cryptography.AsymmetricKeyMode,Cosmos.Security.Cryptography.RsaKeySize,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Generate RSA key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize"></param>
+            <param name="keyFormat"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKey(System.Int32,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Generate RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keyFormat"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKey(Cosmos.Security.Cryptography.RsaKeySize,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Generate RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keyFormat"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKey(System.Int32,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Generate RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keyFormat"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKey(Cosmos.Security.Cryptography.RsaKeySize,Cosmos.Security.Cryptography.RsaKeyFormat,System.Boolean)">
+            <summary>
+            Generate RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keyFormat"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKey(System.String,Cosmos.Security.Cryptography.RsaKeyFormat)">
+            <summary>
+            Generate RSA private key.
+            </summary>
+            <param name="key"></param>
+            <param name="keyFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKey(System.String,Cosmos.Security.Cryptography.RsaKeyFormat)">
+            <summary>
+            Generate RSA private key.
+            </summary>
+            <param name="key"></param>
+            <param name="keyFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GenerateInXml(Cosmos.Security.Cryptography.AsymmetricKeyMode)">
+            <summary>
+            Generate XML Format RSA Key.
+            </summary>
+            <param name="mode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GenerateInXml(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Int32)">
+            <summary>
+            Generate XML Format RSA Key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GenerateInXml(Cosmos.Security.Cryptography.AsymmetricKeyMode,Cosmos.Security.Cryptography.RsaKeySize)">
+            <summary>
+            Generate XML Format RSA Key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GenerateInXml(System.String)">
+            <summary>
+            Generate XML Format RSA Key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKeyInXml">
+            <summary>
+            Generate XML Format RSA public key.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKeyInXml(System.Int32)">
+            <summary>
+            Generate XML Format RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKeyInXml(Cosmos.Security.Cryptography.RsaKeySize)">
+            <summary>
+            Generate XML Format RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKeyInXml(System.String)">
+            <summary>
+            Generate XML Format RSA public Key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKeyInXml">
+            <summary>
+            Generate XML Format RSA private key.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKeyInXml(System.Int32)">
+            <summary>
+            Generate XML Format RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKeyInXml(Cosmos.Security.Cryptography.RsaKeySize)">
+            <summary>
+            Generate XML Format RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKeyInXml(System.String)">
+            <summary>
+            Generate XML Format RSA private Key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GenerateInJson(Cosmos.Security.Cryptography.AsymmetricKeyMode)">
+            <summary>
+            Generate JSON Format RSA Key.
+            </summary>
+            <param name="mode"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GenerateInJson(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Int32)">
+            <summary>
+            Generate JSON Format RSA Key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GenerateInJson(Cosmos.Security.Cryptography.AsymmetricKeyMode,Cosmos.Security.Cryptography.RsaKeySize)">
+            <summary>
+            Generate JSON Format RSA Key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GenerateInJson(System.String)">
+            <summary>
+            Generate JSON Format RSA Key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKeyInJson">
+            <summary>
+            Generate JSON Format RSA public key.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKeyInJson(System.Int32)">
+            <summary>
+            Generate JSON Format RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKeyInJson(Cosmos.Security.Cryptography.RsaKeySize)">
+            <summary>
+            Generate JSON Format RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKeyInJson(System.String)">
+            <summary>
+            Generate JSON Format RSA Public Key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKeyInJson">
+            <summary>
+            Generate JSON Format RSA private key.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKeyInJson(System.Int32)">
+            <summary>
+            Generate JSON Format RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKeyInJson(Cosmos.Security.Cryptography.RsaKeySize)">
+            <summary>
+            Generate JSON Format RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKeyInJson(System.String)">
+            <summary>
+            Generate JSON Format RSA private Key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GenerateInPkcs1(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Boolean)">
+            <summary>
+            Generate RSA key in Pkcs1 format.
+            </summary>
+            <param name="mode"></param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GenerateInPkcs1(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Int32,System.Boolean)">
+            <summary>
+            Generate RSA key in Pkcs1 format.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GenerateInPkcs1(Cosmos.Security.Cryptography.AsymmetricKeyMode,Cosmos.Security.Cryptography.RsaKeySize,System.Boolean)">
+            <summary>
+            Generate RSA key in Pkcs1 format.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKeyInPkcs1(System.Boolean)">
+            <summary>
+            Generate Pkcs1 format RSA public key.
+            </summary>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKeyInPkcs1(System.Int32,System.Boolean)">
+            <summary>
+            Generate Pkcs1 format RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKeyInPkcs1(Cosmos.Security.Cryptography.RsaKeySize,System.Boolean)">
+            <summary>
+            Generate Pkcs1 format RSA public key.
+            </summary>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKeyInPkcs1(System.String)">
+            <summary>
+            Generate Pkcs1 format RSA public key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKeyInPkcs1(System.Boolean)">
+            <summary>
+            Generate Pkcs1 format RSA private key.
+            </summary>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKeyInPkcs1(System.Int32,System.Boolean)">
+            <summary>
+            Generate Pkcs1 format RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKeyInPkcs1(Cosmos.Security.Cryptography.RsaKeySize,System.Boolean)">
+            <summary>
+            Generate Pkcs1 format RSA private key.
+            </summary>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKeyInPkcs1(System.String)">
+            <summary>
+            Generate Pkcs1 format RSA private key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GenerateInPkcs8(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GenerateInPkcs8(Cosmos.Security.Cryptography.AsymmetricKeyMode,System.Int32,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GenerateInPkcs8(Cosmos.Security.Cryptography.AsymmetricKeyMode,Cosmos.Security.Cryptography.RsaKeySize,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA key.
+            </summary>
+            <param name="mode"></param>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKeyInPkcs8(System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA public key.
+            </summary>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKeyInPkcs8(System.Int32,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA public key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKeyInPkcs8(Cosmos.Security.Cryptography.RsaKeySize,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA public key.
+            </summary>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKeyInPkcs8(System.String)">
+            <summary>
+            Generate Pkcs8 format RSA public key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKeyInPkcs8(System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA private key.
+            </summary>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKeyInPkcs8(System.Int32,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA private key.
+            </summary>
+            <param name="keySize"></param>
+            <param name="keepingFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKeyInPkcs8(Cosmos.Security.Cryptography.RsaKeySize,System.Boolean)">
+            <summary>
+            Generate Pkcs8 format RSA private key.
+            </summary>
+            <param name="keySize">Key Size.Unit: bits</param>
+            <param name="keepingFormat">Whether the format is true If it is standard pem file format</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKeyInPkcs8(System.String)">
+            <summary>
+            Generate Pkcs8 format RSA private key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePrivateKeyFromFile(System.String,System.String)">
+            <summary>
+            Get private key of xml format from certificate file.
+            </summary>
+            <param name="certFile">The string path of certificate file.</param>
+            <param name="password">The string password of certificate file.</param>
+            <returns>String private key of xml format.</returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.RsaKeyGenerator.GeneratePublicKeyFromFile(System.String)">
+            <summary>
+            Get public key of xml format from certificate file.
+            </summary>
+            <param name="certFile">The string path of certificate file.</param>
+            <returns>String public key of xml format.</returns>
+        </member>
+        <member name="T:Cosmos.Security.Cryptography.RsaKeySize">
+            <summary>
+            Rsa key size type
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.RsaKeySize.L1024">
+            <summary>
+            1024, as default
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.RsaKeySize.L2048">
+            <summary>
+            2048
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.RsaKeySize.L3072">
+            <summary>
+            3072
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.RsaKeySize.L4096">
+            <summary>
+            4096
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.Sm2Key.DefaultUserId">
+            <summary>
+            SM2 algorithm default user ID, currently open platform will not use non-default user ID
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Cryptography.SM4Context">
+            <summary>
+            SM4 Context
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.SM4Context.Mode">
+            <summary>
+            Mode
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.SM4Context.SK">
+            <summary>
+            SK
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.SM4Context.IsPadding">
+            <summary>
+            Is padding
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.SM4Context.#ctor">
+            <summary>
+            SM4 Context
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Cryptography.SM4Core">
+            <summary>
+            SM4 core
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.SM4Core.SM4_ENCRYPT">
+            <summary>
+            SM4 ENCRYPT
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.SM4Core.SM4_DECRYPT">
+            <summary>
+            SM4 DECRYPT
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.SM4Core.SboxTable">
+            <summary>
+            Sbox table
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.SM4Core.FK">
+            <summary>
+            Gets FK
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.SM4Core.CK">
+            <summary>
+            Gets CK
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.SM4Core.sm4_setkey_enc(Cosmos.Security.Cryptography.SM4Context,System.Byte[])">
+            <summary>
+            SM4 SetKey ENC
+            </summary>
+            <param name="ctx"></param>
+            <param name="key"></param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.SM4Core.sm4_setkey_dec(Cosmos.Security.Cryptography.SM4Context,System.Byte[])">
+            <summary>
+            SM4 SetKey DEC
+            </summary>
+            <param name="ctx"></param>
+            <param name="key"></param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.SM4Core.sm4_crypt_ecb(Cosmos.Security.Cryptography.SM4Context,System.Byte[])">
+            <summary>
+            SM4 Crypt ECB
+            </summary>
+            <param name="ctx"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.SM4Core.sm4_crypt_cbc(Cosmos.Security.Cryptography.SM4Context,System.Byte[],System.Byte[])">
+            <summary>
+            SM4 Crypt CBC
+            </summary>
+            <param name="ctx"></param>
+            <param name="iv"></param>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Sm4Key.#ctor(System.String,System.Text.Encoding)">
+            <summary>
+            Create a new SmKey instance for SM4 with ECB Mode.
+            </summary>
+            <param name="pwd"></param>
+            <param name="encoding"></param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Sm4Key.#ctor(System.Byte[])">
+            <summary>
+            Create a new SmKey instance for SM4 with ECB Mode.
+            </summary>
+            <param name="pwd"></param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Sm4Key.#ctor(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Create a new SmKey instance for SM4 with CBC Mode.
+            </summary>
+            <param name="pwd"></param>
+            <param name="iv"></param>
+            <param name="encoding"></param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.Sm4Key.#ctor(System.Byte[],System.Byte[])">
+            <summary>
+            Create a new SmKey instance for SM4 with CBC Mode.
+            </summary>
+            <param name="pwd"></param>
+            <param name="iv"></param>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.Sm4Key.Key">
+            <summary>
+            SM4 key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.Sm4Key.IV">
+            <summary>
+            SM4 IV
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.Sm4Key.Size">
+            <summary>
+            Size of Key
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Cryptography.XTEAFunction.ROUNDS">
+            <summary>
+            The recommended number of rounds is 32 and not 64, because each iteration performs two Feistel-cipher rounds.
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.XTEAFunction.EncryptCoreEntry(System.Byte[],System.Byte[])">
+            <summary>
+            Encrypts the given data with the provided key.
+            </summary>
+            <param name="data">The data to encrypt.</param>
+            <param name="key">The key used for encryption.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.XTEAFunction.DecryptCoreEntry(System.Byte[],System.Byte[])">
+            <summary>
+            Decrypts the given data with the provided key.
+            Throws an exception if the length of the data array is not a multiple of 8.
+            Throws an exception if the decrypted length is longer than the actual array.
+            </summary>
+            <param name="data">The encrypted data.</param>
+            <param name="key">The key used for decryption.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.XTEAFunction.RoundEncryptCore(System.UInt32,System.UInt32[],System.UInt32[])">
+            <summary>
+            Performs an inplace encryption of the provided data array.
+            </summary>
+            <param name="rounds">The number of encryption rounds, the recommend value is 32.</param>
+            <param name="v">Data array containing two values.</param>
+            <param name="key">Key array containing 4 values.</param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.XTEAFunction.RoundDecryptCore(System.UInt32,System.UInt32[],System.UInt32[])">
+            <summary>
+            Performs an inplace decryption of the provided data array.
+            </summary>
+            <param name="rounds">The number of encryption rounds, the recommend value is 32.</param>
+            <param name="v">Data array containing two values.</param>
+            <param name="key">Key array containing 4 values.</param>
+        </member>
+        <member name="M:Cosmos.Security.Cryptography.XTEAFunction.GetKeyBuff(System.Byte[])">
+            <summary>
+            Transforms an key of arbitrary length to a 128 bit key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.TeaKey.Key">
+            <summary>
+            TEA key
+            </summary>
+        </member>
+        <member name="P:Cosmos.Security.Cryptography.TeaKey.Size">
+            <summary>
+            Size of Key
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Encryption.Core.ZUCCore.LFSR_S">
+            <summary>
+            state registers LFSR
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Encryption.Core.ZUCCore.F_R1">
+            <summary>
+            registers
+            </summary>
+        </member>
+        <member name="F:Cosmos.Security.Encryption.Core.ZUCCore.BRC_X">
+            <summary>
+            output of BR procedure
+            </summary>
+        </member>
+        <member name="T:Cosmos.Security.Encryption.ZUCEncryptionProvider">
+            <summary>
+            ZUC encryption provider. BUG: THERE ARE SEVERAL BUG HERE, DO NOT USE THIS PROVIDER NOW!
+            </summary>
+        </member>
+        <member name="M:Cosmos.Security.Encryption.ZUCEncryptionProvider.Encrypt(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Encrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="iv"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Security.Encryption.ZUCEncryptionProvider.Decrypt(System.Byte[],System.Byte[],System.Byte[])">
+            <summary>
+            Decrypt
+            </summary>
+            <param name="data"></param>
+            <param name="key"></param>
+            <param name="iv"></param>
+            <returns></returns>
+        </member>
+        <member name="T:System.Security.Cryptography.RSACompatibleExtensions">
+            <summary>
+            Compatible extensions for RSA
+            </summary>
+        </member>
+        <member name="M:System.Security.Cryptography.RSACompatibleExtensions.ExportRSAPrivateKey(System.Security.Cryptography.RSA)">
+            <summary>
+            Export RSA private key
+            </summary>
+            <param name="rsa"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.Security.Cryptography.RSACompatibleExtensions.ExportPkcs8PrivateKey(System.Security.Cryptography.RSA)">
+            <summary>
+            Export RSA private key
+            </summary>
+            <param name="rsa"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.Security.Cryptography.RSACompatibleExtensions.ExportRSAPublicKey(System.Security.Cryptography.RSA)">
+            <summary>
+            Export RSA public key
+            </summary>
+            <param name="rsa"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.Security.Cryptography.RSACompatibleExtensions.ImportRSAPrivateKey(System.Security.Cryptography.RSA,System.ReadOnlySpan{System.Byte},System.Int32@)">
+            <summary>
+            Import RSA private key
+            </summary>
+            <param name="rsa"></param>
+            <param name="privateKey"></param>
+            <param name="bytesRead"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.Security.Cryptography.RSACompatibleExtensions.ImportPkcs8PrivateKey(System.Security.Cryptography.RSA,System.ReadOnlySpan{System.Byte},System.Int32@)">
+            <summary>
+            Import pkcs8 RSA private key
+            </summary>
+            <param name="rsa"></param>
+            <param name="privateKey"></param>
+            <param name="bytesRead"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:System.Security.Cryptography.RSACompatibleExtensions.ImportRSAPublicKey(System.Security.Cryptography.RSA,System.ReadOnlySpan{System.Byte},System.Int32@)">
+            <summary>
+            Import RSA public key
+            </summary>
+            <param name="rsa"></param>
+            <param name="publicKey"></param>
+            <param name="bytesRead"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+    </members>
+</doc>
