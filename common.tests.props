@@ -16,7 +16,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.0-preview-20210106-01" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0-release-20210626-04" />
         <PackageReference Include="Shouldly">
             <Version Condition=" '$(TargetFramework)' == 'net452' ">3.0.2</Version>
             <Version Condition=" '$(TargetFramework)' != 'net452' ">4.0.3</Version>
@@ -26,7 +26,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="coverlet.collector" Version="3.0.3">
+        <PackageReference Include="coverlet.collector" Version="3.1.0">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
