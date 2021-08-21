@@ -142,7 +142,7 @@ namespace Cosmos.Security.Cryptography
         {
             var parameters = rsa.ExportParameters(includePrivateParameters);
 
-            var parasJson = new RsaJsonParameters()
+            var parasJson = new RsaJsonParameters
             {
                 Modulus = parameters.Modulus != null ? Convert.ToBase64String(parameters.Modulus) : null,
                 Exponent = parameters.Exponent != null ? Convert.ToBase64String(parameters.Exponent) : null,
