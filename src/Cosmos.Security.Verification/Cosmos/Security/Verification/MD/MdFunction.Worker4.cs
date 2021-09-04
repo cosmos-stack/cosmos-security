@@ -69,7 +69,7 @@ namespace Cosmos.Security.Verification
                 }
             }
 
-            public byte[] Hash(ReadOnlySpan<byte> buff)
+            public new byte[] Hash(ReadOnlySpan<byte> buff)
             {
                 return ComputeHash(buff.ToArray());
             }
